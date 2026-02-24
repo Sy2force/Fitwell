@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from drf_spectacular.utils import extend_schema_field
 from .models import User, Category, Article, Comment
 
 class UserSerializer(serializers.ModelSerializer):
@@ -54,6 +55,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ('author', 'created_at', 'updated_at', 'likes')
 
+    @extend_schema_field(bool)
     def get_is_liked(self, obj):
         request = self.context.get('request')
         if request and request.user.is_authenticated:
