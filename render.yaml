@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: fitwell-backend
+    env: python
+    buildCommand: ./build.sh
+    startCommand: gunicorn config.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings.prod
+      - key: DEBUG
+        value: "False"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: fitwell-db
+          property: connectionString
+
+databases:
+  - name: fitwell-db
+    plan: free

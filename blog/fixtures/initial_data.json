@@ -1,0 +1,156 @@
+[
+  {
+    "model": "blog.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$test$hash",
+      "last_login": null,
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "Admin",
+      "last_name": "User",
+      "email": "admin@fitwell.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "blog.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$test$hash",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "john_doe",
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john@fitwell.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-02T00:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "blog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Fitness",
+      "slug": "fitness"
+    }
+  },
+  {
+    "model": "blog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Nutrition",
+      "slug": "nutrition"
+    }
+  },
+  {
+    "model": "blog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Santé Mentale",
+      "slug": "sante-mentale"
+    }
+  },
+  {
+    "model": "blog.category",
+    "pk": 4,
+    "fields": {
+      "name": "Yoga",
+      "slug": "yoga"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 1,
+    "fields": {
+      "title": "Les bienfaits du sport sur la santé",
+      "content": "Le sport est essentiel pour maintenir une bonne santé physique et mentale. Il permet de renforcer le système cardiovasculaire, d'améliorer la condition physique et de réduire le stress. Pratiquer une activité physique régulière contribue également à prévenir de nombreuses maladies chroniques.",
+      "author": 1,
+      "category": 1,
+      "image_url": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438",
+      "is_published": true,
+      "created_at": "2024-01-15T10:00:00Z",
+      "updated_at": "2024-01-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 2,
+    "fields": {
+      "title": "Guide complet de la nutrition équilibrée",
+      "content": "Une alimentation équilibrée est la clé d'une bonne santé. Elle doit inclure des protéines, des glucides complexes, des lipides sains, des vitamines et des minéraux. Découvrez comment composer vos repas pour optimiser votre bien-être.",
+      "author": 2,
+      "category": 2,
+      "image_url": "https://images.unsplash.com/photo-1490645935967-10de6ba17061",
+      "is_published": true,
+      "created_at": "2024-01-16T14:30:00Z",
+      "updated_at": "2024-01-16T14:30:00Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 3,
+    "fields": {
+      "title": "Méditation et gestion du stress",
+      "content": "La méditation est une pratique millénaire qui aide à gérer le stress et l'anxiété. En pratiquant quelques minutes par jour, vous pouvez améliorer votre concentration, votre bien-être émotionnel et votre qualité de sommeil.",
+      "author": 1,
+      "category": 3,
+      "image_url": "https://images.unsplash.com/photo-1506126613408-eca07ce68773",
+      "is_published": true,
+      "created_at": "2024-01-17T09:00:00Z",
+      "updated_at": "2024-01-17T09:00:00Z"
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 4,
+    "fields": {
+      "title": "Yoga pour débutants : les postures essentielles",
+      "content": "Le yoga est une discipline complète qui allie postures physiques, respiration et méditation. Découvrez les postures de base pour commencer votre pratique en toute sécurité et profiter de tous ses bienfaits.",
+      "author": 2,
+      "category": 4,
+      "image_url": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b",
+      "is_published": true,
+      "created_at": "2024-01-18T11:00:00Z",
+      "updated_at": "2024-01-18T11:00:00Z"
+    }
+  },
+  {
+    "model": "blog.comment",
+    "pk": 1,
+    "fields": {
+      "article": 1,
+      "user": 2,
+      "content": "Excellent article ! Très motivant pour se mettre au sport.",
+      "created_at": "2024-01-15T12:00:00Z"
+    }
+  },
+  {
+    "model": "blog.comment",
+    "pk": 2,
+    "fields": {
+      "article": 2,
+      "user": 1,
+      "content": "Merci pour ces conseils pratiques sur la nutrition !",
+      "created_at": "2024-01-16T16:00:00Z"
+    }
+  },
+  {
+    "model": "blog.comment",
+    "pk": 3,
+    "fields": {
+      "article": 3,
+      "user": 2,
+      "content": "Je pratique la méditation depuis 6 mois et les résultats sont incroyables.",
+      "created_at": "2024-01-17T10:30:00Z"
+    }
+  }
+]

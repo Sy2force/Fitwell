@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-primary/30 selection:text-primary;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-surface backdrop-blur-md border border-white/5 rounded-none shadow-2xl transition-all duration-500 hover:border-primary/30 hover:bg-surface-highlight;
+  }
+  
+  .glass-button {
+    @apply relative overflow-hidden bg-transparent px-8 py-3 font-display font-bold uppercase tracking-[0.2em] text-xs
+           text-primary border border-primary/30 transition-all duration-500
+           hover:bg-primary hover:text-black hover:shadow-[0_0_30px_rgba(212,175,55,0.3)];
+  }
+  
+  .input-field {
+    @apply w-full bg-surface border-b border-white/10 rounded-none px-4 py-4 text-white placeholder-gray-600
+           focus:outline-none focus:border-primary transition-all duration-500 font-serif;
+  }
+  
+  .page-container {
+    @apply min-h-screen pt-32 pb-20 px-6 max-w-[1400px] mx-auto;
+  }
+  
+  .luxury-border {
+    @apply relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] 
+           after:bg-gradient-to-r after:from-transparent after:via-primary/50 after:to-transparent;
+  }
+}
+
+.gradient-bg {
+  background: 
+    radial-gradient(circle at 0% 0%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+    linear-gradient(to bottom, #0a0a0f, #0f0f16);
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-[#f2d06b] to-primary bg-[200%_auto] animate-gradient-x;
+}
