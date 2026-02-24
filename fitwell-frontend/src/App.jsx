@@ -10,6 +10,8 @@ import ProtectedRoute from './components/ProtectedRoute'
 // Pages
 import Home from './pages/Home'
 import ArticleDetail from './pages/ArticleDetail'
+import CategoryPage from './pages/CategoryPage'
+import Tools from './pages/Tools'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import CreateArticle from './pages/CreateArticle'
@@ -28,6 +30,8 @@ function App() {
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/articles/:id" element={<ArticleDetail />} />
+            <Route path="/category/:slug" element={<CategoryPage />} />
+            <Route path="/tools" element={<Tools />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             

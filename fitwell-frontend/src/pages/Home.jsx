@@ -131,6 +131,35 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Featured Categories Preview */}
+      <div className="py-20 bg-black/20">
+        <div className="max-w-7xl mx-auto px-6">
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Link to="/category/workouts" className="group relative h-96 overflow-hidden border border-white/5">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40" alt="Training" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <h3 className="text-3xl font-serif font-bold text-white mb-2">Training</h3>
+                  <span className="text-primary text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">View Protocols</span>
+                </div>
+              </Link>
+              <Link to="/category/nutrition" className="group relative h-96 overflow-hidden border border-white/5">
+                <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40" alt="Nutrition" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <h3 className="text-3xl font-serif font-bold text-white mb-2">Nutrition</h3>
+                  <span className="text-primary text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">View Fueling</span>
+                </div>
+              </Link>
+              <Link to="/category/mindset" className="group relative h-96 overflow-hidden border border-white/5">
+                <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40" alt="Mindset" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <h3 className="text-3xl font-serif font-bold text-white mb-2">Mindset</h3>
+                  <span className="text-primary text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">View Wisdom</span>
+                </div>
+              </Link>
+           </div>
+        </div>
+      </div>
+
       {/* Content Section */}
       <div id="latest-stories" className="page-container py-32 relative z-30">
         <div className="flex items-end justify-between mb-16 border-b border-white/10 pb-6">

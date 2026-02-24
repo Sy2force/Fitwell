@@ -63,9 +63,15 @@ class ArticleViewSet(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['category', 'is_published', 'author']
-    search_fields = ['title', 'content']
-    ordering_fields = ['created_at', 'title']
+    filterset_fields = {
+        'category': ['exact'],
+        'category__slug': ['exact'],
+        'is_published': ['exact'],
+        'author': ['exact'],
+        'author__username': ['exact']
+    }
+    search_fields = ['title', 'content', 'category__name']
+    ordering_fields = ['created_at', 'title', 'likes']
 
     def get_serializer_class(self):
         if self.action == 'retrieve':

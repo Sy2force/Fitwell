@@ -23,9 +23,9 @@ const Footer = () => {
             <h4 className="text-primary text-xs tracking-[0.2em] uppercase font-bold mb-6">Explore</h4>
             <ul className="space-y-4 text-sm text-gray-400 font-light">
               <li><Link to="/" className="hover:text-white transition-colors">Latest Stories</Link></li>
-              <li><a href="#" className="hover:text-white transition-colors">Elite Training</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Wellness Guide</a></li>
-              <li><Link to="/register" className="hover:text-white transition-colors">Membership</Link></li>
+              <li><Link to="/category/workouts" className="hover:text-white transition-colors">Elite Training</Link></li>
+              <li><Link to="/category/nutrition" className="hover:text-white transition-colors">Nutrition Guide</Link></li>
+              <li><Link to="/category/mindset" className="hover:text-white transition-colors">Mindset</Link></li>
             </ul>
           </div>
 

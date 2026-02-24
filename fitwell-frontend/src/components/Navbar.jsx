@@ -60,8 +60,11 @@ const Navbar = () => {
           <div className="flex items-center space-x-10">
             <div className="hidden lg:flex items-center space-x-8">
               <NavLink to="/">Home</NavLink>
-              <NavLink to="/articles">Discover</NavLink>
-              <NavLink to="/categories">Journals</NavLink>
+              <NavLink to="/category/workouts">Training</NavLink>
+              <NavLink to="/category/nutrition">Nutrition</NavLink>
+              <NavLink to="/category/mindset">Mindset</NavLink>
+              <NavLink to="/category/recovery">Recovery</NavLink>
+              <NavLink to="/tools">Tools</NavLink>
             </div>
             
             <div className="h-8 w-[1px] bg-white/5 hidden lg:block"></div>
