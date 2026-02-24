@@ -4,10 +4,10 @@ from rest_framework import viewsets, permissions, filters, status, generics
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Article, Category, Comment, User
+from .models import Article, Category, Comment, User, UserPlan
 from .serializers import (
     ArticleSerializer, ArticleDetailSerializer, CategorySerializer, 
-    CommentSerializer, UserSerializer, UserProfileSerializer
+    CommentSerializer, UserSerializer, UserProfileSerializer, UserPlanSerializer
 )
 from .permissions import IsAuthorOrReadOnly
 
@@ -145,4 +145,16 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
+
+
+class UserPlanViewSet(viewsets.ModelViewSet):
+    serializer_class = UserPlanSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = UserPlan.objects.all()
+
+    def get_queryset(self):
+        return UserPlan.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 

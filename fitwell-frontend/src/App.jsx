@@ -16,6 +16,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import CreateArticle from './pages/CreateArticle'
 import Profile from './pages/Profile'
+import PlannerPage from './pages/Planner'
 
 function App() {
   const location = useLocation()
@@ -38,6 +39,7 @@ function App() {
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
               <Route path="/create-article" element={<CreateArticle />} />
+              <Route path="/planner" element={<PlannerPage />} />
               <Route path="/profile" element={<Profile />} />
             </Route>
           </Routes>

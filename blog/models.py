@@ -53,3 +53,29 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['created_at']
+
+class UserPlan(models.Model):
+    GOAL_CHOICES = [
+        ('weight_loss', 'Weight Loss'),
+        ('muscle_gain', 'Muscle Gain'),
+        ('endurance', 'Endurance'),
+        ('maintenance', 'Maintenance'),
+    ]
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='plan')
+    age = models.IntegerField()
+    weight = models.FloatField(help_text="Weight in kg")
+    height = models.FloatField(help_text="Height in cm")
+    goal = models.CharField(max_length=20, choices=GOAL_CHOICES)
+    activity_level = models.CharField(max_length=20, default='moderate')
+    dietary_preferences = models.TextField(blank=True, null=True)
+    
+    # Generated Plan Data
+    workout_plan = models.JSONField(default=dict, blank=True)
+    nutrition_plan = models.JSONField(default=dict, blank=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Plan for {self.user.username}"
