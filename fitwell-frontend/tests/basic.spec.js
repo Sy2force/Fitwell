@@ -7,8 +7,35 @@ test.describe('FitWell E2E Tests', () => {
       console.log(`BROWSER ${msg.type().toUpperCase()}: ${msg.text()}`);
     });
 
+    // Capture unhandled exceptions
+    page.on('pageerror', err => {
+      console.log(`BROWSER ERROR: ${err}`);
+    });
+
+    // Capture failed requests
+    page.on('requestfailed', request => {
+      console.log(`REQUEST FAILED: ${request.url()} - ${request.failure().errorText}`);
+    });
+
+    page.on('response', response => {
+      if (response.status() === 404) {
+        console.log(`RESPONSE 404: ${response.url()}`);
+      }
+    });
+
     // Intercepter les appels API pour éviter les erreurs 404
     await page.route('**/api/**', async route => {
+      const url = route.request().url();
+      console.log(`ROUTING: ${url}`);
+      
+      // Ignore requests for source files (which might contain /api/ in the path, e.g. src/api/axios.js)
+      if (url.includes('/src/') || url.match(/\.(js|jsx|ts|tsx|css|png|jpg|jpeg|svg)$/)) {
+        console.log(`  -> CONTINUING (Source/Asset)`);
+        await route.continue();
+        return;
+      }
+      
+      console.log(`  -> MOCKING`);
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
@@ -17,7 +44,7 @@ test.describe('FitWell E2E Tests', () => {
     });
 
     // Augmenter le timeout de navigation et attendre le chargement complet
-    await page.goto('/', { waitUntil: 'networkidle', timeout: 60000 });
+    await page.goto('/', { waitUntil: 'domcontentloaded', timeout: 60000 });
   });
 
   test('debug: check page source', async ({ page }) => {

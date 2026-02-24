@@ -50,6 +50,14 @@ db.sqlite3-journal
 htmlcov/
 .pytest_cache/
 .tox/
+fitwell-frontend/playwright-report/
+fitwell-frontend/test-results/
+fitwell-frontend/tests/*.png
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
 
 # Docker
 *.pid
