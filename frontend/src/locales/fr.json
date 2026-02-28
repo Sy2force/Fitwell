@@ -1,0 +1,36 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "login": "Connexion",
+    "register": "Rejoindre l'Élite",
+    "dashboard": "Centre de Commande",
+    "planner": "Planificateur",
+    "tools": "Outils Intel",
+    "admin": "Panneau Admin"
+  },
+  "home": {
+    "hero_title": "LIBÉREZ VOTRE POTENTIEL",
+    "hero_subtitle": "L'écosystème premier pour l'optimisation biologique. Entraînez. Analysez. Évoluez.",
+    "cta_start": "Commencer la Transformation",
+    "cta_login": "Connexion Membre",
+    "features_title": "L'Écosystème",
+    "feature_planner": "Planificateur Intelligent",
+    "feature_planner_desc": "Protocoles d'entraînement et nutrition basés sur l'IA et vos biométriques.",
+    "feature_gamification": "Croissance Ludifiée",
+    "feature_gamification_desc": "Suivez vos XP, Score Santé et montez de niveau en suivant votre régime.",
+    "feature_community": "Communauté Élite",
+    "feature_community_desc": "Accédez à du contenu curé et connectez-vous avec des performeurs mondiaux."
+  },
+  "dashboard": {
+    "welcome": "Bon retour, Opérateur",
+    "xp": "Points XP",
+    "streak": "Série",
+    "health_score": "Score Santé"
+  },
+  "admin": {
+    "title": "Centre de Commande Admin",
+    "users": "Base Utilisateurs",
+    "leads": "Export Leads",
+    "export_btn": "Exporter CSV"
+  }
+}
