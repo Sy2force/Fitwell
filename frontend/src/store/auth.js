@@ -13,14 +13,14 @@ const useAuthStore = create(
       login: async (email, password) => {
         set({ isLoading: true, error: null })
         try {
-          const response = await axios.post('auth/token/', { email, password })
+          const response = await axios.post('token/', { email, password })
           const { access, refresh } = response.data
           
           localStorage.setItem('access_token', access)
           localStorage.setItem('refresh_token', refresh)
           
           // Fetch full user profile
-          const profileResponse = await axios.get('auth/profile/')
+          const profileResponse = await axios.get('users/me/')
           
           set({ 
             user: profileResponse.data, 
@@ -40,7 +40,7 @@ const useAuthStore = create(
       register: async (userData) => {
         set({ isLoading: true, error: null })
         try {
-          await axios.post('auth/register/', userData)
+          await axios.post('register/', userData)
           set({ isLoading: false })
           return { success: true }
         } catch (error) {

@@ -1,0 +1,27 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "500 - Erreur Système" %}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
+    <!-- Background Elements -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-900/10 blur-[100px] rounded-full -z-10"></div>
+
+    <div class="text-center px-4">
+        <h1 class="text-9xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-red-900 italic mb-4">
+            500
+        </h1>
+        <h2 class="text-2xl md:text-4xl font-bold text-white mb-6 uppercase tracking-widest">
+            {% trans "Échec Critique" %}
+        </h2>
+        <p class="text-gray-400 max-w-md mx-auto mb-12 font-mono text-sm">
+            {% trans "Une erreur interne a compromis le système. Nos ingénieurs sont sur le problème." %}
+        </p>
+        
+        <a href="{% url 'home' %}" class="inline-flex items-center px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-accent text-white rounded-lg transition-all duration-300 uppercase tracking-widest font-bold text-xs group">
+            <span class="mr-2 text-accent">←</span> {% trans "Retour à la Base" %}
+        </a>
+    </div>
+</div>
+{% endblock %}

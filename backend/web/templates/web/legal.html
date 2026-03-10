@@ -1,0 +1,51 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Mentions Légales - FitWell" %}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-background">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-display font-bold italic text-white mb-4">
+                {% trans "PROTOCOLE" %} <span class="text-gray-500">{% trans "LÉGAL" %}</span>
+            </h1>
+            <p class="text-gray-400 font-mono text-sm tracking-widest uppercase">
+                {% trans "Conditions d'utilisation et confidentialité" %}
+            </p>
+        </div>
+
+        <div class="space-y-8 text-gray-300 font-light leading-relaxed">
+            <div id="privacy" class="glass-card p-8 border border-white/10">
+                <h2 class="text-2xl font-display font-bold text-white mb-4 italic">{% trans "1. Confidentialité des Données" %}</h2>
+                <p class="mb-4">
+                    {% trans "Chez FitWell, la sécurité de vos données biométriques est une priorité absolue. Nous utilisons des protocoles de chiffrement avancés pour garantir que vos performances restent confidentielles." %}
+                </p>
+                <p>
+                    {% trans "Vos données ne sont jamais vendues à des tiers. Elles sont utilisées exclusivement pour générer vos plans d'entraînement et optimiser votre expérience sur la plateforme." %}
+                </p>
+            </div>
+
+            <div id="terms" class="glass-card p-8 border border-white/10">
+                <h2 class="text-2xl font-display font-bold text-white mb-4 italic">{% trans "2. Conditions d'Utilisation" %}</h2>
+                <p class="mb-4">
+                    {% trans "L'utilisation de FitWell est réservée aux individus engagés dans une démarche d'optimisation personnelle. En accédant à nos services, vous acceptez de respecter les standards de la communauté." %}
+                </p>
+                <p>
+                    {% trans "FitWell n'est pas un dispositif médical. Consultez toujours un professionnel de santé avant de commencer un nouveau programme d'entraînement ou de nutrition." %}
+                </p>
+            </div>
+
+            <div id="contact" class="glass-card p-8 border border-white/10">
+                <h2 class="text-2xl font-display font-bold text-white mb-4 italic">{% trans "3. Contact Opérationnel" %}</h2>
+                <p>
+                    {% trans "Pour toute requête technique ou administrative, veuillez contacter notre centre de commande :" %}
+                </p>
+                <div class="mt-4 font-mono text-primary">
+                    <a href="mailto:support@fitwell.local" class="hover:text-white transition-colors">support@fitwell.local</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

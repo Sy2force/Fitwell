@@ -1,0 +1,118 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Outils - FitWell" %}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-background transition-colors duration-300">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-display font-bold italic text-gray-900 dark:text-white mb-4">
+                {% trans "OUTILS" %} <span class="text-secondary">{% trans "INTEL" %}</span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 font-mono text-sm tracking-widest uppercase">
+                {% trans "Quantifiez votre rendement biologique" %}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- BMI Calculator -->
+            <div class="glass-card p-8 border-l-4 border-secondary bg-white dark:bg-black/20 border-gray-200 dark:border-white/10 shadow-lg dark:shadow-none">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 font-display italic">{% trans "Calculateur IMC" %}</h3>
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">{% trans "Taille (cm)" %}</label>
+                        <input type="number" id="bmi-height" value="{{ plan.height|default:'' }}" class="w-full bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-white/10 p-3 rounded text-gray-900 dark:text-white placeholder-gray-500 focus:border-secondary focus:outline-none transition-colors" placeholder="180">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">{% trans "Poids (kg)" %}</label>
+                        <input type="number" id="bmi-weight" value="{{ plan.weight|default:'' }}" class="w-full bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-white/10 p-3 rounded text-gray-900 dark:text-white placeholder-gray-500 focus:border-secondary focus:outline-none transition-colors" placeholder="75">
+                    </div>
+                    <button type="button" onclick="calculateBMI()" class="w-full bg-secondary/10 dark:bg-secondary/20 text-secondary border border-secondary hover:bg-secondary hover:text-white transition-all py-3 rounded uppercase tracking-widest font-bold text-xs">
+                        {% trans "Calculer" %}
+                    </button>
+                    <div id="bmi-result" class="hidden mt-4 p-4 bg-secondary/5 dark:bg-secondary/10 border border-secondary/20 rounded text-center">
+                        <span class="block text-sm text-gray-600 dark:text-gray-400">{% trans "Votre IMC" %}</span>
+                        <span id="bmi-value" class="text-3xl font-display font-bold text-gray-900 dark:text-white">--</span>
+                        <span id="bmi-category" class="block text-sm text-secondary font-bold mt-1">--</span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Macros Calculator -->
+            <div class="glass-card p-8 border-l-4 border-primary bg-white dark:bg-black/20 border-gray-200 dark:border-white/10 shadow-lg dark:shadow-none">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 font-display italic">{% trans "Profil Métabolique" %}</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">{% trans "Estimez vos besoins caloriques journaliers (DEJ) et la répartition optimale des macronutriments." %}</p>
+                <form class="space-y-4 mb-6">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">{% trans "Poids (kg)" %}</label>
+                            <input type="number" id="macro-weight" class="w-full bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-white/10 p-3 rounded text-gray-900 dark:text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-colors" placeholder="75">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">{% trans "Activité" %}</label>
+                            <select id="macro-activity" class="w-full bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-white/10 p-3 rounded text-gray-900 dark:text-white focus:border-primary focus:outline-none transition-colors">
+                                <option value="1.2">{% trans "Sédentaire" %}</option>
+                                <option value="1.375">{% trans "Légèrement Actif" %}</option>
+                                <option value="1.55">{% trans "Modérément Actif" %}</option>
+                                <option value="1.725">{% trans "Très Actif" %}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" onclick="calculateMacros()" class="w-full bg-primary/10 dark:bg-primary/20 text-primary border border-primary hover:bg-primary hover:text-white transition-all py-3 rounded uppercase tracking-widest font-bold text-xs">
+                        {% trans "Calculer" %}
+                    </button>
+                </form>
+
+                <div class="space-y-4">
+                    <div class="bg-gray-100 dark:bg-black/20 p-4 rounded border border-gray-200 dark:border-white/5">
+                        <span class="block text-xs text-gray-500 dark:text-gray-500 uppercase tracking-widest">{% trans "Métabolisme de Base (BMR)" %}</span>
+                        <span id="bmr-value" class="text-xl font-mono text-gray-900 dark:text-white">-- kcal</span>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-black/20 p-4 rounded border border-gray-200 dark:border-white/5">
+                        <span class="block text-xs text-gray-500 dark:text-gray-500 uppercase tracking-widest">{% trans "Dépense Totale (TDEE)" %}</span>
+                        <span id="tdee-value" class="text-xl font-mono text-primary font-bold">-- kcal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function calculateBMI() {
+        const height = document.getElementById('bmi-height').value;
+        const weight = document.getElementById('bmi-weight').value;
+        
+        if (height && weight) {
+            const bmi = (weight / ((height / 100) * (height / 100))).toFixed(1);
+            document.getElementById('bmi-value').innerText = bmi;
+            document.getElementById('bmi-result').classList.remove('hidden');
+            
+            let category = '';
+            if (bmi < 18.5) category = '{% trans "Maigreur" %}';
+            else if (bmi < 25) category = '{% trans "Normal" %}';
+            else if (bmi < 30) category = '{% trans "Surpoids" %}';
+            else category = '{% trans "Obésité" %}';
+            
+            document.getElementById('bmi-category').innerText = category;
+        }
+    }
+
+    function calculateMacros() {
+        const weight = document.getElementById('macro-weight').value;
+        const activity = document.getElementById('macro-activity').value;
+        
+        if (weight) {
+            // Formula approx: 22 * weight * activity
+            // More precise (Mifflin-St Jeor simplified for male avg): 10*w + 6.25*h - 5*a + 5. 
+            // We'll use a simple approximation here for UI demo: BMR approx 24 * weight (kg) for men
+            const bmr = Math.round(weight * 24);
+            const tdee = Math.round(bmr * activity);
+            
+            document.getElementById('bmr-value').innerText = bmr + ' kcal';
+            document.getElementById('tdee-value').innerText = tdee + ' kcal';
+        }
+    }
+</script>
+{% endblock %}

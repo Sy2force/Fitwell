@@ -13,7 +13,7 @@ const AdminDashboard = () => {
 
   const fetchUsers = useCallback(async () => {
     try {
-      const response = await axios.get(`auth/admin/users/?search=${searchQuery}`)
+      const response = await axios.get(`users/?search=${searchQuery}`)
       setUsers(response.data.results || response.data)
     } catch (error) {
       toast.error('Failed to load user database')
@@ -34,7 +34,7 @@ const AdminDashboard = () => {
 
   const handleExport = async () => {
     try {
-      const response = await axios.get('auth/admin/export/', {
+      const response = await axios.get('users/export/', {
         responseType: 'blob',
       })
       const url = window.URL.createObjectURL(new Blob([response.data]))

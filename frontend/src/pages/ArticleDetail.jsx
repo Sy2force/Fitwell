@@ -254,14 +254,14 @@ const ArticleDetail = () => {
                       <User className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <span className="font-bold text-sm block text-white tracking-wide">{comment.username}</span>
+                      <span className="font-bold text-sm block text-white tracking-wide">{comment.author_username}</span>
                       <span className="text-[10px] text-primary uppercase tracking-widest">
                         {format(new Date(comment.created_at), 'MMM d, yyyy')}
                       </span>
                     </div>
                   </div>
                   
-                  {user && user.username === comment.username && (
+                  {user && user.username === comment.author_username && (
                     <button 
                       onClick={() => handleDeleteComment(comment.id)}
                       className="text-gray-600 hover:text-red-400 transition-colors p-2"

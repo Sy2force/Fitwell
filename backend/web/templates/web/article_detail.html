@@ -1,0 +1,180 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{{ article.title }} - FitWell{% endblock %}
+
+{% block content %}
+<div class="min-h-screen pb-20 relative bg-gray-50 dark:bg-background transition-colors duration-300">
+    <!-- Hero Header -->
+    <div class="relative h-[60vh] w-full">
+        <div class="absolute inset-0">
+            <img src="{% if article.image %}{{ article.image }}{% else %}https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop{% endif %}" 
+                 alt="{{ article.title }}" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-50 via-white/20 dark:from-background dark:via-background/60 to-transparent"></div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 max-w-5xl mx-auto z-10">
+            <div class="flex items-center space-x-4 text-sm text-primary uppercase tracking-[0.2em] font-bold mb-6">
+                <span class="bg-primary/20 px-3 py-1 rounded border border-primary/50 text-primary">{{ article.category.name }}</span>
+                <span class="text-gray-900 dark:text-white">•</span>
+                <span class="text-gray-900 dark:text-white">{{ article.created_at|date:"d F Y" }}</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-7xl font-display font-bold mb-8 leading-tight text-gray-900 dark:text-white shadow-none dark:shadow-lg italic">
+                {{ article.title }}
+            </h1>
+
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 border border-gray-300 dark:border-white/20 flex items-center justify-center bg-white/80 dark:bg-black/30 backdrop-blur-sm rounded-full">
+                        <span class="text-primary font-bold text-xl">{{ article.author.username|make_list|first|upper }}</span>
+                    </div>
+                    <div>
+                        <p class="text-gray-900 dark:text-white font-display italic text-lg">{% trans "Par" %} {{ article.author.username }}</p>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs uppercase tracking-widest font-mono">{% trans "Contributeur Élite" %}</p>
+                    </div>
+                </div>
+
+                <!-- Like Button -->
+                <div class="flex items-center gap-4">
+                    <a href="{% url 'like_article' article.slug %}" class="group flex items-center gap-3 px-6 py-3 rounded-full backdrop-blur-md border transition-all duration-300 {% if is_liked %}bg-accent/20 border-accent text-accent hover:bg-accent/30{% else %}bg-white/80 dark:bg-white/10 border-gray-300 dark:border-white/20 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/20 hover:border-accent hover:text-accent{% endif %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if is_liked %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 transition-transform group-hover:scale-110">
+                            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                        </svg>
+                        <span class="font-bold uppercase tracking-widest text-xs">
+                            {% if is_liked %}{% trans "Approuvé" %}{% else %}{% trans "Approuver" %}{% endif %}
+                        </span>
+                        <span class="ml-1 text-xs opacity-70 font-mono">({{ article.likes.count }})</span>
+                    </a>
+                    
+                    <button onclick="navigator.clipboard.writeText(window.location.href); alert('{% trans "Lien copié dans le presse-papier !" %}')" class="group flex items-center gap-3 px-4 py-3 rounded-full backdrop-blur-md border border-gray-300 dark:border-white/20 bg-white/80 dark:bg-white/10 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/20 hover:border-primary hover:text-primary transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 transition-transform group-hover:scale-110">
+                            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                            <polyline points="16 6 12 2 8 6" />
+                            <line x1="12" y1="2" x2="12" y2="15" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-6 -mt-10 relative z-20">
+        <!-- Article Content -->
+        <div class="glass-card p-6 md:p-16 mb-16 border-t-4 border-t-primary/50 relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10">
+            <div class="prose prose-lg max-w-none prose-headings:font-display prose-headings:italic prose-headings:text-primary prose-p:font-light prose-p:leading-loose prose-p:text-gray-700 dark:prose-p:text-gray-300 dark:prose-invert">
+                {{ article.content|linebreaks }}
+            </div>
+        </div>
+
+        <!-- Related Articles -->
+        {% if related_articles %}
+        <div class="mb-16 border-t border-gray-200 dark:border-white/10 pt-16">
+            <h3 class="text-3xl font-display font-bold italic text-gray-900 dark:text-white mb-10 flex items-center">
+                <span class="text-primary mr-2">///</span> {% trans "Intel Similaire :" %} <span class="text-primary ml-2">{{ article.category.name }}</span>
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {% for related in related_articles %}
+                <article class="glass-card group hover:border-primary/50 transition-all duration-300 flex flex-col h-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10">
+                    <div class="relative h-48 w-full overflow-hidden rounded-t-lg">
+                        <img src="{% if related.image %}{{ related.image }}{% else %}https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop{% endif %}" 
+                             alt="{{ related.title }}" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-[10px] font-bold text-white/80 uppercase tracking-widest mb-1 block">{{ related.created_at|date:"d M Y" }}</span>
+                            <h4 class="text-lg font-display font-bold text-white leading-tight group-hover:text-primary transition-colors">
+                                <a href="{% url 'article_detail' related.slug %}">
+                                    {{ related.title|truncatechars:50 }}
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Comments Section -->
+        <div class="max-w-3xl mx-auto mb-16">
+            <h3 class="text-2xl font-display font-bold text-gray-900 dark:text-white mb-8 italic border-b border-gray-200 dark:border-white/10 pb-4">
+                {% trans "Transmission de Données" %} ({{ comments.count }})
+            </h3>
+
+            <!-- Comment Form -->
+            {% if user.is_authenticated %}
+            <div class="glass-card p-6 mb-10 border border-gray-200 dark:border-white/10 bg-white dark:bg-gray-900">
+                <form method="post" action=".">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label for="{{ form.content.id_for_label }}" class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">
+                            {% trans "Votre Analyse" %}
+                        </label>
+                        {{ form.content }}
+                        {% if form.content.errors %}
+                            <p class="text-red-600 dark:text-red-500 text-xs mt-1">{{ form.content.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="bg-primary text-white px-6 py-2 rounded-md text-xs font-bold uppercase tracking-widest hover:bg-blue-600 transition-all shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                            {% trans "Transmettre" %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+            {% else %}
+            <div class="bg-gray-100 dark:bg-white/5 p-6 rounded-lg text-center mb-10 border border-gray-200 dark:border-white/10 border-dashed">
+                <p class="text-gray-600 dark:text-gray-400 mb-4">{% trans "Connectez-vous pour rejoindre le canal de communication." %}</p>
+                <a href="{% url 'login' %}?next={{ request.path }}" class="text-primary font-bold uppercase tracking-widest text-xs hover:text-blue-700 dark:hover:text-white transition-colors">
+                    {% trans "Connexion Requise" %}
+                </a>
+            </div>
+            {% endif %}
+
+            <!-- Comments List -->
+            <div class="space-y-6">
+                {% for comment in comments %}
+                <div class="bg-white dark:bg-black/20 p-6 rounded-lg border border-gray-200 dark:border-white/5 shadow-sm dark:shadow-none">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-gray-200 dark:bg-white/10 flex items-center justify-center text-xs font-bold text-gray-700 dark:text-gray-300">
+                                {{ comment.author.username|make_list|first|upper }}
+                            </div>
+                            <div>
+                                <span class="text-sm font-bold text-gray-900 dark:text-white block">{{ comment.author.username }}</span>
+                                <span class="text-[10px] text-gray-500 font-mono uppercase">{{ comment.created_at|date:"d/m/Y H:i" }}</span>
+                            </div>
+                        </div>
+                        
+                        {% if user == comment.author %}
+                        <form action="{% url 'delete_comment' comment.id %}" method="post" onsubmit="return confirm('{% trans "Confirmer la suppression du message ?" %}');">
+                            {% csrf_token %}
+                            <button type="submit" class="text-gray-400 hover:text-red-500 transition-colors p-2" title="{% trans "Supprimer" %}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-400 text-sm leading-relaxed">
+                        {{ comment.content }}
+                    </p>
+                </div>
+                {% empty %}
+                <p class="text-gray-500 text-center italic text-sm">{% trans "Aucune transmission pour le moment." %}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Back Button -->
+        <div class="text-center">
+            <a href="{% url 'blog_list' %}" class="inline-flex items-center text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors uppercase tracking-widest text-xs font-bold">
+                ← {% trans "Retour aux Renseignements" %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

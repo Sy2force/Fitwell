@@ -1,0 +1,70 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Connexion - FitWell" %}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gray-50 dark:bg-background transition-colors duration-300">
+    <!-- Background Elements -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 blur-[150px] rounded-full -z-10"></div>
+
+    <div class="max-w-md w-full space-y-8 glass-card p-8 md:p-12 border-l-4 border-primary relative shadow-lg">
+        <div>
+            <h2 class="mt-6 text-center text-4xl font-display font-bold italic text-gray-900 dark:text-white tracking-tighter transition-colors">
+                {% trans "BON" %} <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">{% trans "RETOUR" %}</span>
+            </h2>
+            <p class="mt-2 text-center text-xs text-gray-500 dark:text-gray-400 font-mono uppercase tracking-[0.3em]">
+                {% trans "Accès Terminal Sécurisé" %}
+            </p>
+        </div>
+        
+        {% if messages %}
+        <div class="bg-red-500/10 border border-red-500/50 text-red-600 dark:text-red-500 px-4 py-3 rounded relative" role="alert">
+            {% for message in messages %}
+                <span class="block sm:inline">{{ message }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form class="mt-8 space-y-6" action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <div class="space-y-4">
+                {% for field in form %}
+                <div>
+                    <label for="{{ field.id_for_label }}" class="sr-only">{{ field.label }}</label>
+                    <div class="relative">
+                        {{ field }}
+                    </div>
+                    {% if field.errors %}
+                        <p class="text-red-600 dark:text-red-500 text-xs mt-1">{{ field.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="flex items-center justify-end">
+                <div class="text-sm">
+                    <a href="{% url 'password_reset' %}" class="font-bold text-[10px] uppercase tracking-widest text-gray-500 hover:text-primary transition-colors">
+                        {% trans "Mot de passe oublié ?" %}
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transition-all uppercase tracking-widest font-display italic">
+                    <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                        <svg class="h-5 w-5 text-blue-300 group-hover:text-blue-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                    {% trans "Initier Session" %}
+                </button>
+            </div>
+        </form>
+        
+        <div class="text-center mt-4">
+            <p class="text-gray-500 dark:text-gray-400 text-sm">{% trans "Pas encore membre ?" %} <a href="{% url 'register' %}" class="text-primary hover:text-blue-400 font-bold">{% trans "Rejoindre l'élite" %}</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

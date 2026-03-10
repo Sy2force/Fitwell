@@ -1,0 +1,1125 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-10 17:10+0000\n"
+"PO-Revision-Date: 2026-03-09 19:40+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: api/models.py:147
+msgid "Homme"
+msgstr "Male"
+
+#: api/models.py:148
+msgid "Femme"
+msgstr "Female"
+
+#: api/models.py:152 api/services.py:105
+msgid "Perte de Poids"
+msgstr "Weight Loss"
+
+#: api/models.py:153 api/services.py:106
+msgid "Prise de Masse"
+msgstr "Muscle Gain"
+
+#: api/models.py:154 api/services.py:107
+msgid "Maintien"
+msgstr "Maintenance"
+
+#: api/models.py:158
+msgid "Sédentaire (Peu ou pas d'exercice)"
+msgstr "Sedentary (Little or no exercise)"
+
+#: api/models.py:159
+msgid "Modéré (1-3 fois par semaine)"
+msgstr "Moderate (1-3 times per week)"
+
+#: api/models.py:160
+msgid "Actif (3-5 fois par semaine)"
+msgstr "Active (3-5 times per week)"
+
+#: api/models.py:161
+msgid "Élite (6-7 fois par semaine)"
+msgstr "Elite (6-7 times per week)"
+
+#: api/services.py:54
+msgid "Flocons d'avoine, whey protéine & fruits rouges"
+msgstr "Oats, whey protein & red fruits"
+
+#: api/services.py:55
+msgid "Blanc de poulet, quinoa, légumes rôtis"
+msgstr "Chicken breast, quinoa, roasted vegetables"
+
+#: api/services.py:56
+msgid "Yaourt grec & amandes"
+msgstr "Greek yogurt & almonds"
+
+#: api/services.py:57
+msgid "Pavé de saumon avec patate douce"
+msgstr "Salmon steak with sweet potato"
+
+#: api/services.py:62
+msgid "4 jours/semaine - Split Haut/Bas"
+msgstr "4 days/week - Upper/Lower Split"
+
+#: api/services.py:64
+msgid "6 jours/semaine - Split PPL (Push/Pull/Legs)"
+msgstr "6 days/week - PPL Split (Push/Pull/Legs)"
+
+#: api/services.py:67
+msgid "Mouvements Composés (Squat, Soulevé de terre, Développé couché)"
+msgstr "Compound Movements (Squat, Deadlift, Bench Press)"
+
+#: api/services.py:68
+msgid "Travail d'Accessoires (Haltères, Poulies)"
+msgstr "Accessory Work (Dumbbells, Cables)"
+
+#: api/services.py:69
+msgid "Mobilité (10 min avant séance)"
+msgstr "Mobility (10 min before session)"
+
+#: api/services.py:70
+msgid "Cardio Zone 2 (2x 30min)"
+msgstr "Zone 2 Cardio (2x 30min)"
+
+#: api/services.py:81
+msgid "Votre profil biométrique est excellent. Maintenez cette fondation."
+msgstr "Your biometric profile is excellent. Maintain this foundation."
+
+#: api/services.py:84
+msgid ""
+"Légère surcharge pondérale détectée. Le plan inclut un déficit calorique "
+"modéré."
+msgstr ""
+"Slight overweight detected. The plan includes a moderate caloric deficit."
+
+#: api/services.py:87
+msgid ""
+"Indice de masse corporelle bas. Focus sur l'hypertrophie et le surplus "
+"calorique."
+msgstr "Low Body Mass Index. Focus on hypertrophy and caloric surplus."
+
+#: api/services.py:90
+msgid ""
+"Optimisation métabolique requise. Priorité à l'activité non-sportive (NEAT)."
+msgstr ""
+"Metabolic optimization required. Priority on non-exercise activity (NEAT)."
+
+#: api/services.py:111
+msgid "Bien-être"
+msgstr "Wellness"
+
+#: web/forms.py:18
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+#: web/forms.py:20
+msgid "adresse@email.com"
+msgstr "address@email.com"
+
+#: web/forms.py:29
+msgid "Nom d'utilisateur / Email"
+msgstr "Username / Email"
+
+#: web/forms.py:30
+msgid "Mot de passe"
+msgstr "Password"
+
+#: web/forms.py:38 web/forms.py:114
+msgid "votre@email.com"
+msgstr "your@email.com"
+
+#: web/forms.py:54 web/templates/web/planner.html:180
+msgid "Âge"
+msgstr "Age"
+
+#: web/forms.py:55 web/templates/web/planner.html:187
+msgid "Genre"
+msgstr "Gender"
+
+#: web/forms.py:56
+msgid "Taille"
+msgstr "Height"
+
+#: web/forms.py:57
+msgid "Poids"
+msgstr "Weight"
+
+#: web/forms.py:58 web/templates/web/planner.html:208
+msgid "Objectif"
+msgstr "Goal"
+
+#: web/forms.py:59
+msgid "Niveau d'activité"
+msgstr "Activity Level"
+
+#: web/forms.py:77
+msgid "La taille doit être supérieure à 0."
+msgstr "Height must be greater than 0."
+
+#: web/forms.py:83
+msgid "Le poids doit être supérieur à 0."
+msgstr "Weight must be greater than 0."
+
+#: web/forms.py:89
+msgid "L'âge doit être supérieur à 0."
+msgstr "Age must be greater than 0."
+
+#: web/forms.py:100
+msgid "Partagez votre analyse..."
+msgstr "Share your analysis..."
+
+#: web/forms.py:104
+msgid "Votre Commentaire"
+msgstr "Your Comment"
+
+#: web/forms.py:119
+msgid "Parlez-nous de vos objectifs..."
+msgstr "Tell us about your goals..."
+
+#: web/forms.py:123
+msgid "URL de votre image"
+msgstr "Your image URL"
+
+#: web/forms.py:127
+msgid "Email"
+msgstr "Email"
+
+#: web/forms.py:128
+msgid "Biographie"
+msgstr "Biography"
+
+#: web/forms.py:129
+msgid "Avatar (URL)"
+msgstr "Avatar (URL)"
+
+#: web/templates/404.html:4
+msgid "404 - Zone Inconnue"
+msgstr "404 - Unknown Zone"
+
+#: web/templates/404.html:16
+msgid "Signal Perdu"
+msgstr "Signal Lost"
+
+#: web/templates/404.html:19
+msgid "L'URL demandée n'existe pas dans le protocole. Recalibrage nécessaire."
+msgstr ""
+"The requested URL does not exist in the protocol. Recalibration required."
+
+#: web/templates/404.html:23 web/templates/500.html:23
+msgid "Retour à la Base"
+msgstr "Return to Base"
+
+#: web/templates/500.html:4
+msgid "500 - Erreur Système"
+msgstr "500 - System Error"
+
+#: web/templates/500.html:16
+msgid "Échec Critique"
+msgstr "Critical Failure"
+
+#: web/templates/500.html:19
+msgid ""
+"Une erreur interne a compromis le système. Nos ingénieurs sont sur le "
+"problème."
+msgstr ""
+"An internal error has compromised the system. Our engineers are on the "
+"problem."
+
+#: web/templates/web/article_detail.html:34
+msgid "Par"
+msgstr "By"
+
+#: web/templates/web/article_detail.html:35
+msgid "Contributeur Élite"
+msgstr "Elite Contributor"
+
+#: web/templates/web/article_detail.html:46
+msgid "Approuvé"
+msgstr "Approved"
+
+#: web/templates/web/article_detail.html:46
+msgid "Approuver"
+msgstr "Approve"
+
+#: web/templates/web/article_detail.html:51
+msgid "Lien copié dans le presse-papier !"
+msgstr "Link copied to clipboard!"
+
+#: web/templates/web/article_detail.html:75
+msgid "Intel Similaire :"
+msgstr "Similar Intel:"
+
+#: web/templates/web/article_detail.html:103
+msgid "Transmission de Données"
+msgstr "Data Transmission"
+
+#: web/templates/web/article_detail.html:113
+msgid "Votre Analyse"
+msgstr "Your Analysis"
+
+#: web/templates/web/article_detail.html:122
+msgid "Transmettre"
+msgstr "Transmit"
+
+#: web/templates/web/article_detail.html:129
+msgid "Connectez-vous pour rejoindre le canal de communication."
+msgstr "Log in to join the comms channel."
+
+#: web/templates/web/article_detail.html:131
+msgid "Connexion Requise"
+msgstr "Login Required"
+
+#: web/templates/web/article_detail.html:152
+msgid "Confirmer la suppression du message ?"
+msgstr "Confirm message deletion?"
+
+#: web/templates/web/article_detail.html:154
+msgid "Supprimer"
+msgstr "Delete"
+
+#: web/templates/web/article_detail.html:167
+msgid "Aucune transmission pour le moment."
+msgstr "No transmission yet."
+
+#: web/templates/web/article_detail.html:175
+msgid "Retour aux Renseignements"
+msgstr "Back to Intel"
+
+#: web/templates/web/base.html:9
+msgid "Performance Humaine"
+msgstr "Human Performance"
+
+#: web/templates/web/base.html:97 web/templates/web/base.html:192
+msgid "Outils"
+msgstr "Tools"
+
+#: web/templates/web/base.html:98
+msgid "Blog"
+msgstr "Blog"
+
+#: web/templates/web/base.html:100 web/templates/web/profile.html:114
+msgid "Planificateur"
+msgstr "Planner"
+
+#: web/templates/web/base.html:134
+msgid "Niveau Actuel"
+msgstr "Current Level"
+
+#: web/templates/web/base.html:138
+msgid "Points d'Expérience"
+msgstr "Experience Points"
+
+#: web/templates/web/base.html:142
+msgid "Série en cours"
+msgstr "Current Streak"
+
+#: web/templates/web/base.html:158
+msgid "Déconnexion"
+msgstr "Logout"
+
+#: web/templates/web/base.html:160 web/templates/web/register.html:70
+msgid "Connexion"
+msgstr "Login"
+
+#: web/templates/web/base.html:161
+msgid "Rejoindre"
+msgstr "Join"
+
+#: web/templates/web/base.html:184
+msgid ""
+"L'écosystème ultime pour l'optimisation de la performance humaine. "
+"Entraînement, nutrition et bio-hacking unifiés dans une interface élite."
+msgstr ""
+"The ultimate ecosystem for human performance optimization. Training, "
+"nutrition, and bio-hacking unified in an elite interface."
+
+#: web/templates/web/base.html:188
+msgid "Plateforme"
+msgstr "Platform"
+
+#: web/templates/web/base.html:190
+msgid "Accueil"
+msgstr "Home"
+
+#: web/templates/web/base.html:191
+msgid "Intel (Blog)"
+msgstr "Intel (Blog)"
+
+#: web/templates/web/base.html:196
+msgid "Légal"
+msgstr "Legal"
+
+#: web/templates/web/base.html:198
+msgid "Confidentialité"
+msgstr "Privacy"
+
+#: web/templates/web/base.html:199
+msgid "Conditions"
+msgstr "Terms"
+
+#: web/templates/web/base.html:200
+msgid "Contact"
+msgstr "Contact"
+
+#: web/templates/web/base.html:205
+msgid "TOUS DROITS RÉSERVÉS."
+msgstr "ALL RIGHTS RESERVED."
+
+#: web/templates/web/base.html:208
+#: web/templates/web/password_reset_email.html:13
+msgid "Systèmes Opérationnels"
+msgstr "Operational Systems"
+
+#: web/templates/web/blog_list.html:4
+msgid "Blog - FitWell"
+msgstr "Blog - FitWell"
+
+#: web/templates/web/blog_list.html:11
+msgid "RENSEIGNEMENTS"
+msgstr "INTELLIGENCE"
+
+#: web/templates/web/blog_list.html:11 web/templates/web/planner.html:11
+msgid "ÉLITE"
+msgstr "ELITE"
+
+#: web/templates/web/blog_list.html:14
+msgid "Base de connaissances pour l'optimisation humaine"
+msgstr "Knowledge base for human optimization"
+
+#: web/templates/web/blog_list.html:22
+msgid "Rechercher dans la base de données..."
+msgstr "Search database..."
+
+#: web/templates/web/blog_list.html:32
+msgid "Tous"
+msgstr "All"
+
+#: web/templates/web/blog_list.html:78
+msgid "Accéder aux Données"
+msgstr "Access Data"
+
+#: web/templates/web/blog_list.html:87
+msgid "Aucun renseignement disponible."
+msgstr "No intelligence available."
+
+#: web/templates/web/blog_list.html:88
+msgid "Revenez plus tard, opérateur."
+msgstr "Check back later, operator."
+
+#: web/templates/web/change_password.html:4
+msgid "Changer Mot de Passe - FitWell"
+msgstr "Change Password - FitWell"
+
+#: web/templates/web/change_password.html:14
+msgid "SÉCURITÉ"
+msgstr "SECURITY"
+
+#: web/templates/web/change_password.html:14
+#: web/templates/web/password_reset_complete.html:14
+#: web/templates/web/password_reset_form.html:14
+msgid "ACCÈS"
+msgstr "ACCESS"
+
+#: web/templates/web/change_password.html:17
+msgid "Modification des Identifiants"
+msgstr "Credential Modification"
+
+#: web/templates/web/change_password.html:50
+msgid "Confirmer"
+msgstr "Confirm"
+
+#: web/templates/web/change_password.html:53
+msgid "Retour"
+msgstr "Back"
+
+#: web/templates/web/edit_profile.html:4
+msgid "Éditer Profil - FitWell"
+msgstr "Edit Profile - FitWell"
+
+#: web/templates/web/edit_profile.html:14
+msgid "MISE À JOUR"
+msgstr "UPDATE"
+
+#: web/templates/web/edit_profile.html:14 web/templates/web/profile.html:13
+msgid "DOSSIER"
+msgstr "DOSSIER"
+
+#: web/templates/web/edit_profile.html:17
+msgid "Paramètres Opérateur"
+msgstr "Operator Parameters"
+
+#: web/templates/web/edit_profile.html:50
+msgid "Sauvegarder"
+msgstr "Save"
+
+#: web/templates/web/edit_profile.html:53 web/templates/web/planner.html:229
+msgid "Annuler"
+msgstr "Cancel"
+
+#: web/templates/web/edit_profile.html:59
+msgid "Modifier le mot de passe"
+msgstr "Change Password"
+
+#: web/templates/web/home.html:16
+msgid "LIBÉREZ"
+msgstr "UNLEASH"
+
+#: web/templates/web/home.html:17
+msgid "VOTRE POTENTIEL"
+msgstr "YOUR POTENTIAL"
+
+#: web/templates/web/home.html:21
+msgid "L'écosystème de référence pour l'optimisation biologique."
+msgstr "The reference ecosystem for biological optimization."
+
+#: web/templates/web/home.html:22
+msgid "Entraînez. Analysez. Évoluez."
+msgstr "Train. Analyze. Evolve."
+
+#: web/templates/web/home.html:29
+msgid "Reprendre le Protocole"
+msgstr "Resume Protocol"
+
+#: web/templates/web/home.html:33
+msgid "Initialiser le Protocole"
+msgstr "Initialize Protocol"
+
+#: web/templates/web/home.html:38
+msgid "Commencer la Transformation"
+msgstr "Start Transformation"
+
+#: web/templates/web/home.html:41
+msgid "Connexion Membre"
+msgstr "Member Login"
+
+#: web/templates/web/home.html:52
+msgid "L'ARSENAL"
+msgstr "THE ARSENAL"
+
+#: web/templates/web/home.html:52
+msgid "COMPLET"
+msgstr "COMPLETE"
+
+#: web/templates/web/home.html:53
+msgid ""
+"Une suite d'outils intégrés pour gérer chaque variable de votre performance."
+msgstr ""
+"A suite of integrated tools to manage every variable of your performance."
+
+#: web/templates/web/home.html:62
+msgid "Planificateur IA"
+msgstr "AI Planner"
+
+#: web/templates/web/home.html:64
+msgid ""
+"Générez des protocoles d'entraînement et de nutrition sur mesure basés sur "
+"vos données biométriques et objectifs spécifiques."
+msgstr ""
+"Generate custom training and nutrition protocols based on your biometric "
+"data and specific goals."
+
+#: web/templates/web/home.html:73
+msgid "Outils Métaboliques"
+msgstr "Metabolic Tools"
+
+#: web/templates/web/home.html:75
+msgid ""
+"Calculateurs de précision pour votre IMC, TDEE et macros. Optimisez votre "
+"carburant pour des résultats maximaux."
+msgstr ""
+"Precision calculators for your BMI, TDEE, and macros. Optimize your fuel for "
+"maximal results."
+
+#: web/templates/web/home.html:84
+msgid "Intel & Savoir"
+msgstr "Intel & Knowledge"
+
+#: web/templates/web/home.html:86
+msgid ""
+"Accédez à une base de connaissances sélectionnée par des experts : Science "
+"du sport, récupération et bio-hacking."
+msgstr ""
+"Access a knowledge base curated by experts: Sports science, recovery, and "
+"bio-hacking."
+
+#: web/templates/web/legal.html:4
+msgid "Mentions Légales - FitWell"
+msgstr "Legal Notice - FitWell"
+
+#: web/templates/web/legal.html:11
+msgid "PROTOCOLE"
+msgstr "PROTOCOL"
+
+#: web/templates/web/legal.html:11
+msgid "LÉGAL"
+msgstr "LEGAL"
+
+#: web/templates/web/legal.html:14
+msgid "Conditions d'utilisation et confidentialité"
+msgstr "Terms of use and privacy"
+
+#: web/templates/web/legal.html:20
+msgid "1. Confidentialité des Données"
+msgstr "1. Data Privacy"
+
+#: web/templates/web/legal.html:22
+msgid ""
+"Chez FitWell, la sécurité de vos données biométriques est une priorité "
+"absolue. Nous utilisons des protocoles de chiffrement avancés pour garantir "
+"que vos performances restent confidentielles."
+msgstr ""
+"At FitWell, the security of your biometric data is an absolute priority. We "
+"use advanced encryption protocols to ensure your performance remains "
+"confidential."
+
+#: web/templates/web/legal.html:25
+msgid ""
+"Vos données ne sont jamais vendues à des tiers. Elles sont utilisées "
+"exclusivement pour générer vos plans d'entraînement et optimiser votre "
+"expérience sur la plateforme."
+msgstr ""
+"Your data is never sold to third parties. It is used exclusively to generate "
+"your training plans and optimize your experience on the platform."
+
+#: web/templates/web/legal.html:30
+msgid "2. Conditions d'Utilisation"
+msgstr "2. Terms of Use"
+
+#: web/templates/web/legal.html:32
+msgid ""
+"L'utilisation de FitWell est réservée aux individus engagés dans une "
+"démarche d'optimisation personnelle. En accédant à nos services, vous "
+"acceptez de respecter les standards de la communauté."
+msgstr ""
+"FitWell usage is reserved for individuals committed to personal "
+"optimization. By accessing our services, you agree to respect community "
+"standards."
+
+#: web/templates/web/legal.html:35
+msgid ""
+"FitWell n'est pas un dispositif médical. Consultez toujours un professionnel "
+"de santé avant de commencer un nouveau programme d'entraînement ou de "
+"nutrition."
+msgstr ""
+"FitWell is not a medical device. Always consult a healthcare professional "
+"before starting a new training or nutrition program."
+
+#: web/templates/web/legal.html:40
+msgid "3. Contact Opérationnel"
+msgstr "3. Operational Contact"
+
+#: web/templates/web/legal.html:42
+msgid ""
+"Pour toute requête technique ou administrative, veuillez contacter notre "
+"centre de commande :"
+msgstr ""
+"For any technical or administrative request, please contact our command "
+"center:"
+
+#: web/templates/web/login.html:4
+msgid "Connexion - FitWell"
+msgstr "Login - FitWell"
+
+#: web/templates/web/login.html:14
+msgid "BON"
+msgstr "WELCOME"
+
+#: web/templates/web/login.html:14
+msgid "RETOUR"
+msgstr "BACK"
+
+#: web/templates/web/login.html:17
+msgid "Accès Terminal Sécurisé"
+msgstr "Secure Terminal Access"
+
+#: web/templates/web/login.html:48
+msgid "Mot de passe oublié ?"
+msgstr "Forgot password?"
+
+#: web/templates/web/login.html:60
+msgid "Initier Session"
+msgstr "Initiate Session"
+
+#: web/templates/web/login.html:66
+msgid "Pas encore membre ?"
+msgstr "Not a member yet?"
+
+#: web/templates/web/login.html:66
+msgid "Rejoindre l'élite"
+msgstr "Join the elite"
+
+#: web/templates/web/password_reset_complete.html:4
+msgid "Mot de Passe Réinitialisé - FitWell"
+msgstr "Password Reset - FitWell"
+
+#: web/templates/web/password_reset_complete.html:14
+msgid "RESTAURÉ"
+msgstr "RESTORED"
+
+#: web/templates/web/password_reset_complete.html:18
+msgid ""
+"Votre mot de passe a été mis à jour avec succès. Vous pouvez maintenant "
+"reprendre vos opérations."
+msgstr ""
+"Your password has been successfully updated. You can now resume your "
+"operations."
+
+#: web/templates/web/password_reset_complete.html:22
+msgid "Accéder au Terminal"
+msgstr "Access Terminal"
+
+#: web/templates/web/password_reset_confirm.html:4
+msgid "Nouveau Mot de Passe - FitWell"
+msgstr "New Password - FitWell"
+
+#: web/templates/web/password_reset_confirm.html:11
+msgid "NOUVEAU"
+msgstr "NEW"
+
+#: web/templates/web/password_reset_confirm.html:11
+msgid "CODE"
+msgstr "CODE"
+
+#: web/templates/web/password_reset_confirm.html:14
+msgid "Sécurisation du Compte"
+msgstr "Account Security"
+
+#: web/templates/web/password_reset_confirm.html:51
+msgid "Confirmer le Mot de Passe"
+msgstr "Confirm Password"
+
+#: web/templates/web/password_reset_done.html:4
+msgid "Email Envoyé - FitWell"
+msgstr "Email Sent - FitWell"
+
+#: web/templates/web/password_reset_done.html:14
+msgid "TRANSMISSION"
+msgstr "TRANSMISSION"
+
+#: web/templates/web/password_reset_done.html:14
+msgid "RÉUSSIE"
+msgstr "SUCCESSFUL"
+
+#: web/templates/web/password_reset_done.html:18
+msgid ""
+"Si un compte existe avec cet email, nous vous avons envoyé les instructions "
+"pour réinitialiser votre mot de passe."
+msgstr ""
+"If an account exists with this email, we have sent instructions to reset "
+"your password."
+
+#: web/templates/web/password_reset_done.html:22
+msgid "Retour à la Connexion"
+msgstr "Back to Login"
+
+#: web/templates/web/password_reset_email.html:1
+msgid "Bonjour,"
+msgstr "Hello,"
+
+#: web/templates/web/password_reset_email.html:3
+#, python-format
+msgid ""
+"Une demande de réinitialisation de mot de passe a été reçue pour votre "
+"compte FitWell associé à l'adresse %(email)s."
+msgstr ""
+"A password reset request has been received for your FitWell account "
+"associated with address %(email)s."
+
+#: web/templates/web/password_reset_email.html:5
+msgid ""
+"Pour initier la procédure de réinitialisation, veuillez accéder au terminal "
+"sécurisé via le lien suivant :"
+msgstr ""
+"To initiate the reset procedure, please access the secure terminal via the "
+"following link:"
+
+#: web/templates/web/password_reset_email.html:9
+msgid ""
+"Si vous n'êtes pas à l'origine de cette demande, ignorez ce message. Votre "
+"compte reste sécurisé."
+msgstr ""
+"If you did not request this, ignore this message. Your account remains "
+"secure."
+
+#: web/templates/web/password_reset_email.html:12
+msgid "CENTRE DE COMMANDE FITWELL"
+msgstr "FITWELL COMMAND CENTER"
+
+#: web/templates/web/password_reset_form.html:4
+msgid "Réinitialisation Mot de Passe - FitWell"
+msgstr "Password Reset - FitWell"
+
+#: web/templates/web/password_reset_form.html:14
+msgid "RÉCUPÉRATION"
+msgstr "RECOVERY"
+
+#: web/templates/web/password_reset_form.html:17
+msgid "Protocole de Sécurité"
+msgstr "Security Protocol"
+
+#: web/templates/web/password_reset_form.html:22
+msgid ""
+"Entrez votre identifiant email pour initier la procédure de réinitialisation "
+"du mot de passe."
+msgstr "Enter your email identifier to initiate the password reset procedure."
+
+#: web/templates/web/password_reset_form.html:41
+msgid "Envoyer le Lien"
+msgstr "Send Link"
+
+#: web/templates/web/password_reset_form.html:47
+msgid "← Retour à la Connexion"
+msgstr "← Back to Login"
+
+#: web/templates/web/planner.html:4
+msgid "Planificateur - FitWell"
+msgstr "Planner - FitWell"
+
+#: web/templates/web/planner.html:11
+msgid "PLANIFICATEUR"
+msgstr "PLANNER"
+
+#: web/templates/web/planner.html:14
+msgid "Concevez votre feuille de route vers l'excellence"
+msgstr "Design your roadmap to excellence"
+
+#: web/templates/web/planner.html:33
+msgid "Votre Plan Actuel"
+msgstr "Your Current Plan"
+
+#: web/templates/web/planner.html:34
+msgid "Généré le"
+msgstr "Generated on"
+
+#: web/templates/web/planner.html:40
+msgid "Protocole d'Entraînement"
+msgstr "Training Protocol"
+
+#: web/templates/web/planner.html:44
+msgid "Focus"
+msgstr "Focus"
+
+#: web/templates/web/planner.html:48
+msgid "Programme"
+msgstr "Schedule"
+
+#: web/templates/web/planner.html:53
+msgid "Exercices Clés"
+msgstr "Key Exercises"
+
+#: web/templates/web/planner.html:65
+msgid "Carburant Nutritionnel"
+msgstr "Nutritional Fuel"
+
+#: web/templates/web/planner.html:68
+msgid "Calories Cibles"
+msgstr "Target Calories"
+
+#: web/templates/web/planner.html:74
+msgid "Protéines"
+msgstr "Proteins"
+
+#: web/templates/web/planner.html:78
+msgid "Glucides"
+msgstr "Carbs"
+
+#: web/templates/web/planner.html:82
+msgid "Lipides"
+msgstr "Fats"
+
+#: web/templates/web/planner.html:87
+msgid "Exemple de Repas"
+msgstr "Meal Example"
+
+#: web/templates/web/planner.html:90
+msgid "Petit Déjeuner"
+msgstr "Breakfast"
+
+#: web/templates/web/planner.html:94
+msgid "Déjeuner"
+msgstr "Lunch"
+
+#: web/templates/web/planner.html:98
+msgid "Dîner"
+msgstr "Dinner"
+
+#: web/templates/web/planner.html:108
+msgid "Analyse du Protocole IA"
+msgstr "AI Protocol Analysis"
+
+#: web/templates/web/planner.html:113 web/templates/web/profile.html:55
+msgid "Score Santé"
+msgstr "Health Score"
+
+#: web/templates/web/planner.html:117 web/templates/web/profile.html:67
+msgid "Fitness"
+msgstr "Fitness"
+
+#: web/templates/web/planner.html:121
+msgid "Récup"
+msgstr "Recovery"
+
+#: web/templates/web/planner.html:125
+msgid "Vie"
+msgstr "Life"
+
+#: web/templates/web/planner.html:129
+msgid "IMC"
+msgstr "BMI"
+
+#: web/templates/web/planner.html:138
+msgid "Générer un Nouveau Plan"
+msgstr "Generate New Plan"
+
+#: web/templates/web/planner.html:145
+msgid "Archives du Protocole"
+msgstr "Protocol Archives"
+
+#: web/templates/web/planner.html:155
+msgid "Score Santé:"
+msgstr "Health Score:"
+
+#: web/templates/web/planner.html:172
+msgid "Initialisation du Protocole"
+msgstr "Protocol Initialization"
+
+#: web/templates/web/planner.html:173
+msgid ""
+"Entrez vos données biométriques pour permettre à l'algorithme de générer "
+"votre programme optimal."
+msgstr ""
+"Enter your biometric data to allow the algorithm to generate your optimal "
+"program."
+
+#: web/templates/web/planner.html:194 web/templates/web/tools.html:24
+msgid "Taille (cm)"
+msgstr "Height (cm)"
+
+#: web/templates/web/planner.html:201 web/templates/web/tools.html:28
+#: web/templates/web/tools.html:49
+msgid "Poids (kg)"
+msgstr "Weight (kg)"
+
+#: web/templates/web/planner.html:215
+msgid "Niveau d'Activité"
+msgstr "Activity Level"
+
+#: web/templates/web/planner.html:225
+msgid "Générer le Programme"
+msgstr "Generate Program"
+
+#: web/templates/web/profile.html:4
+msgid "Profil - FitWell"
+msgstr "Profile - FitWell"
+
+#: web/templates/web/profile.html:13
+msgid "OPÉRATEUR"
+msgstr "OPERATOR"
+
+#: web/templates/web/profile.html:16
+msgid "INDICATIF:"
+msgstr "CALLSIGN:"
+
+#: web/templates/web/profile.html:16
+msgid "NIVEAU"
+msgstr "LEVEL"
+
+#: web/templates/web/profile.html:20
+msgid "Éditer Dossier"
+msgstr "Edit Dossier"
+
+#: web/templates/web/profile.html:24
+msgid "Objectif:"
+msgstr "Goal:"
+
+#: web/templates/web/profile.html:28
+msgid "Focus:"
+msgstr "Focus:"
+
+#: web/templates/web/profile.html:42
+msgid "Points XP"
+msgstr "XP Points"
+
+#: web/templates/web/profile.html:46
+msgid "Jours Série"
+msgstr "Day Streak"
+
+#: web/templates/web/profile.html:58
+msgid "OPTIMAL"
+msgstr "OPTIMAL"
+
+#: web/templates/web/profile.html:78
+msgid "Récupération"
+msgstr "Recovery"
+
+#: web/templates/web/profile.html:89
+msgid "Lifestyle"
+msgstr "Lifestyle"
+
+#: web/templates/web/profile.html:100
+msgid "Constance"
+msgstr "Consistency"
+
+#: web/templates/web/profile.html:115
+msgid "Gérez votre protocole d'entraînement et de nutrition."
+msgstr "Manage your protocol."
+
+#: web/templates/web/profile.html:124
+msgid "Outils Intel"
+msgstr "Intel Tools"
+
+#: web/templates/web/profile.html:125
+msgid "Calculateurs IMC, DEJ et métriques avancées."
+msgstr "BMI, TDEE calculators and advanced metrics."
+
+#: web/templates/web/register.html:4
+msgid "Inscription - FitWell"
+msgstr "Registration - FitWell"
+
+#: web/templates/web/register.html:14
+msgid "INSCRIPTION"
+msgstr "REGISTRATION"
+
+#: web/templates/web/register.html:14
+msgid "ATHLÈTE"
+msgstr "ATHLETE"
+
+#: web/templates/web/register.html:17
+msgid "Commencez Votre Héritage"
+msgstr "Begin Your Legacy"
+
+#: web/templates/web/register.html:55
+msgid "Initialiser Profil"
+msgstr "Initialize Profile"
+
+#: web/templates/web/register.html:64
+msgid "En vous inscrivant, vous vous engagez à l'excellence."
+msgstr "By registering, you commit to excellence."
+
+#: web/templates/web/register.html:70
+msgid "Déjà un compte ?"
+msgstr "Already have an account?"
+
+#: web/templates/web/tools.html:4
+msgid "Outils - FitWell"
+msgstr "Tools - FitWell"
+
+#: web/templates/web/tools.html:11
+msgid "OUTILS"
+msgstr "TOOLS"
+
+#: web/templates/web/tools.html:11
+msgid "INTEL"
+msgstr "INTEL"
+
+#: web/templates/web/tools.html:14
+msgid "Quantifiez votre rendement biologique"
+msgstr "Quantify your biological yield"
+
+#: web/templates/web/tools.html:21
+msgid "Calculateur IMC"
+msgstr "BMI Calculator"
+
+#: web/templates/web/tools.html:32 web/templates/web/tools.html:63
+msgid "Calculer"
+msgstr "Calculate"
+
+#: web/templates/web/tools.html:35
+msgid "Votre IMC"
+msgstr "Your BMI"
+
+#: web/templates/web/tools.html:44
+msgid "Profil Métabolique"
+msgstr "Metabolic Profile"
+
+#: web/templates/web/tools.html:45
+msgid ""
+"Estimez vos besoins caloriques journaliers (DEJ) et la répartition optimale "
+"des macronutriments."
+msgstr ""
+"Estimate your daily caloric needs (TDEE) and optimal macronutrient "
+"distribution."
+
+#: web/templates/web/tools.html:53
+msgid "Activité"
+msgstr "Activity"
+
+#: web/templates/web/tools.html:55
+msgid "Sédentaire"
+msgstr "Sedentary"
+
+#: web/templates/web/tools.html:56
+msgid "Légèrement Actif"
+msgstr "Lightly Active"
+
+#: web/templates/web/tools.html:57
+msgid "Modérément Actif"
+msgstr "Moderately Active"
+
+#: web/templates/web/tools.html:58
+msgid "Très Actif"
+msgstr "Very Active"
+
+#: web/templates/web/tools.html:69
+msgid "Métabolisme de Base (BMR)"
+msgstr "Basal Metabolic Rate (BMR)"
+
+#: web/templates/web/tools.html:73
+msgid "Dépense Totale (TDEE)"
+msgstr "Total Expenditure (TDEE)"
+
+#: web/templates/web/tools.html:93
+msgid "Maigreur"
+msgstr "Underweight"
+
+#: web/templates/web/tools.html:94
+msgid "Normal"
+msgstr "Normal"
+
+#: web/templates/web/tools.html:95
+msgid "Surpoids"
+msgstr "Overweight"
+
+#: web/templates/web/tools.html:96
+msgid "Obésité"
+msgstr "Obesity"
+
+#: web/views.py:27
+msgid "Identifiants invalides."
+msgstr "Invalid credentials."
+
+#: web/views.py:99
+msgid "Commentaire ajouté."
+msgstr "Comment added."
+
+#: web/views.py:131
+msgid "Commentaire supprimé."
+msgstr "Comment deleted."
+
+#: web/views.py:134
+msgid "Vous n'êtes pas autorisé à supprimer ce commentaire."
+msgstr "You are not authorized to delete this comment."
+
+#: web/views.py:165
+msgid "Profil mis à jour avec succès."
+msgstr "Profile updated successfully."
+
+#: web/views.py:178
+msgid "Votre mot de passe a été mis à jour avec succès."
+msgstr "Your password has been updated successfully."
+
+#: web/views.py:181
+msgid "Veuillez corriger les erreurs ci-dessous."
+msgstr "Please correct the errors below."

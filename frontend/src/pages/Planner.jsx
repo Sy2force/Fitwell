@@ -15,8 +15,7 @@ const Planner = () => {
     height: '',
     weight: '',
     goal: 'weight_loss',
-    activity_level: 'moderate',
-    dietary_preferences: ''
+    activity_level: 'moderate'
   })
 
   // Check if plan already exists
@@ -24,8 +23,9 @@ const Planner = () => {
     const fetchPlan = async () => {
       try {
         const response = await axios.get('wellness/plans/')
-        if (response.data && response.data.length > 0) {
-          setPlan(response.data[0])
+        const plans = response.data?.results || response.data
+        if (Array.isArray(plans) && plans.length > 0) {
+          setPlan(plans[0])
         }
       } catch (error) {
         // No plan found, that's okay
@@ -199,7 +199,6 @@ const Planner = () => {
                       {[
                         { id: 'weight_loss', label: 'Weight Loss', desc: 'Shed excess mass, reveal definition.' },
                         { id: 'muscle_gain', label: 'Hypertrophy', desc: 'Build lean contractile tissue.' },
-                        { id: 'endurance', label: 'Endurance', desc: 'Optimize cardiovascular output.' },
                         { id: 'maintenance', label: 'Maintenance', desc: 'Sustain peak performance.' }
                       ].map((goal) => (
                         <button

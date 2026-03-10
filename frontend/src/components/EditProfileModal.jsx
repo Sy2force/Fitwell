@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Loader2, Save } from 'lucide-react'
 import axios from '../api/axios'
 import toast from 'react-hot-toast'
@@ -9,10 +9,20 @@ import Button from './ui/Button'
 const EditProfileModal = ({ isOpen, onClose, user, onUpdate }) => {
   const [formData, setFormData] = useState({
     email: user?.email || '',
-    bio: user?.bio || '',
-    avatar: user?.avatar || ''
+    bio: user?.profile?.bio || '',
+    avatar: user?.profile?.avatar || ''
   })
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    setFormData({
+      email: user?.email || '',
+      bio: user?.profile?.bio || '',
+      avatar: user?.profile?.avatar || ''
+    })
+  }, [isOpen, user])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -31,7 +41,7 @@ const EditProfileModal = ({ isOpen, onClose, user, onUpdate }) => {
         }
       }
 
-      const res = await axios.patch('auth/profile/', payload)
+      const res = await axios.patch('users/me/', payload)
       onUpdate(res.data)
       toast.success('Profile updated successfully')
       onClose()
