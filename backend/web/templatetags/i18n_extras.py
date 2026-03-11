@@ -11,3 +11,7 @@ def change_lang(context, lang=None, *args, **kwargs):
     """
     path = context['request'].path
     return translate_url(path, lang)
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)

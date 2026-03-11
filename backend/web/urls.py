@@ -42,6 +42,9 @@ urlpatterns = [
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('profile/password/', views.change_password, name='change_password'),
     path('planner/', views.planner_view, name='planner'),
+    path('agenda/', views.custom_planner_view, name='custom_planner'),
+    path('agenda/delete/<int:event_id>/', views.delete_custom_event, name='delete_custom_event'),
+    path('agenda/complete/<int:event_id>/', views.complete_custom_event, name='complete_custom_event'),
     path('tools/', views.tools_view, name='tools'),
     
     # Pages Statiques

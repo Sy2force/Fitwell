@@ -129,12 +129,59 @@ class UserStats(models.Model):
         self.last_activity_date = today
         self.save()
 
+    def add_xp(self, amount):
+        """
+        Adds XP and handles leveling up.
+        """
+        self.xp += amount
+        # Simple formula: Level N requires N * 100 XP
+        # Or cumulative: Level 2 needs 100, Level 3 needs 200...
+        # Let's use a simple threshold for now: Level * 100
+        required_xp = self.level * 100
+        
+        while self.xp >= required_xp:
+            self.xp -= required_xp
+            self.level += 1
+            required_xp = self.level * 100
+            
+        self.save()
+
     def __str__(self):
         return f"Stats for {self.user.username}"
 
 # -----------------------------------------------------------------------------
 # PLANNER / WELLNESS
 # -----------------------------------------------------------------------------
+class CustomEvent(models.Model):
+    """
+    Événements personnalisés pour le planning (Sport, Travail, etc.)
+    """
+    TYPE_CHOICES = [
+        ('sport', _('Sport & Fitness')),
+        ('work', _('Travail & Carrière')),
+        ('lifestyle', _('Vie Perso & Loisirs')),
+        ('nutrition', _('Nutrition')),
+    ]
+    
+    PRIORITY_CHOICES = [
+        ('low', _('Faible')),
+        ('medium', _('Moyenne')),
+        ('high', _('Haute')),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='custom_events')
+    title = models.CharField(max_length=200)
+    event_type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='work')
+    day_of_week = models.CharField(max_length=10, blank=True, null=True) # e.g., 'monday'
+    start_time = models.TimeField(blank=True, null=True)
+    end_time = models.TimeField(blank=True, null=True)
+    is_completed = models.BooleanField(default=False)
+    priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='medium')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.title} ({self.user.username})"
+
 class WellnessPlan(models.Model):
     """
     Plan généré par l'IA.

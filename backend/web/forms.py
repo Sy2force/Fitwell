@@ -1,7 +1,40 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from api.models import User, WellnessPlan, Comment
+from api.models import User, WellnessPlan, Comment, CustomEvent
+
+class CustomEventForm(forms.ModelForm):
+    class Meta:
+        model = CustomEvent
+        fields = ['title', 'event_type', 'day_of_week', 'start_time', 'end_time', 'priority']
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': _('Ex: Séance Pecs, Réunion Projet X')}),
+            'day_of_week': forms.Select(choices=[
+                ('monday', _('Lundi')),
+                ('tuesday', _('Mardi')),
+                ('wednesday', _('Mercredi')),
+                ('thursday', _('Jeudi')),
+                ('friday', _('Vendredi')),
+                ('saturday', _('Samedi')),
+                ('sunday', _('Dimanche')),
+            ]),
+            'start_time': forms.TimeInput(attrs={'type': 'time'}),
+            'end_time': forms.TimeInput(attrs={'type': 'time'}),
+        }
+        labels = {
+            'title': _('Titre de l\'activité'),
+            'event_type': _('Type'),
+            'day_of_week': _('Jour'),
+            'start_time': _('Début'),
+            'end_time': _('Fin'),
+            'priority': _('Priorité'),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        common_classes = 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white focus:border-energy focus:outline-none dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white'
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': common_classes})
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:

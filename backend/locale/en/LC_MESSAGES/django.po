@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 17:10+0000\n"
+"POT-Creation-Date: 2026-03-11 10:33+0000\n"
 "PO-Revision-Date: 2026-03-09 19:40+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,39 +17,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: api/models.py:147
+#: api/models.py:160
+#, fuzzy
+#| msgid "Fitness"
+msgid "Sport & Fitness"
+msgstr "Fitness"
+
+#: api/models.py:161
+msgid "Travail & Carrière"
+msgstr ""
+
+#: api/models.py:162
+msgid "Vie Perso & Loisirs"
+msgstr ""
+
+#: api/models.py:163
+msgid "Nutrition"
+msgstr ""
+
+#: api/models.py:167
+msgid "Faible"
+msgstr ""
+
+#: api/models.py:168
+msgid "Moyenne"
+msgstr ""
+
+#: api/models.py:169
+msgid "Haute"
+msgstr ""
+
+#: api/models.py:194
 msgid "Homme"
 msgstr "Male"
 
-#: api/models.py:148
+#: api/models.py:195
 msgid "Femme"
 msgstr "Female"
 
-#: api/models.py:152 api/services.py:105
+#: api/models.py:199 api/services.py:105
 msgid "Perte de Poids"
 msgstr "Weight Loss"
 
-#: api/models.py:153 api/services.py:106
+#: api/models.py:200 api/services.py:106
 msgid "Prise de Masse"
 msgstr "Muscle Gain"
 
-#: api/models.py:154 api/services.py:107
+#: api/models.py:201 api/services.py:107
 msgid "Maintien"
 msgstr "Maintenance"
 
-#: api/models.py:158
+#: api/models.py:205
 msgid "Sédentaire (Peu ou pas d'exercice)"
 msgstr "Sedentary (Little or no exercise)"
 
-#: api/models.py:159
+#: api/models.py:206
 msgid "Modéré (1-3 fois par semaine)"
 msgstr "Moderate (1-3 times per week)"
 
-#: api/models.py:160
+#: api/models.py:207
 msgid "Actif (3-5 fois par semaine)"
 msgstr "Active (3-5 times per week)"
 
-#: api/models.py:161
+#: api/models.py:208
 msgid "Élite (6-7 fois par semaine)"
 msgstr "Elite (6-7 times per week)"
 
@@ -120,87 +150,151 @@ msgstr ""
 msgid "Bien-être"
 msgstr "Wellness"
 
-#: web/forms.py:18
+#: config/settings.py:113
+msgid "Français"
+msgstr ""
+
+#: config/settings.py:114
+msgid "English"
+msgstr ""
+
+#: web/forms.py:11
+msgid "Ex: Séance Pecs, Réunion Projet X"
+msgstr "Ex: Chest Workout, Project X Meeting"
+
+#: web/forms.py:13 web/templates/web/custom_planner.html:84
+msgid "Lundi"
+msgstr "Monday"
+
+#: web/forms.py:14 web/templates/web/custom_planner.html:85
+msgid "Mardi"
+msgstr "Tuesday"
+
+#: web/forms.py:15 web/templates/web/custom_planner.html:86
+msgid "Mercredi"
+msgstr "Wednesday"
+
+#: web/forms.py:16 web/templates/web/custom_planner.html:87
+msgid "Jeudi"
+msgstr "Thursday"
+
+#: web/forms.py:17 web/templates/web/custom_planner.html:88
+msgid "Vendredi"
+msgstr "Friday"
+
+#: web/forms.py:18 web/templates/web/custom_planner.html:89
+msgid "Samedi"
+msgstr "Saturday"
+
+#: web/forms.py:19 web/templates/web/custom_planner.html:90
+msgid "Dimanche"
+msgstr "Sunday"
+
+#: web/forms.py:25
+msgid "Titre de l'activité"
+msgstr "Activity Title"
+
+#: web/forms.py:26
+msgid "Type"
+msgstr "Type"
+
+#: web/forms.py:27
+msgid "Jour"
+msgstr "Day"
+
+#: web/forms.py:28
+msgid "Début"
+msgstr "Start"
+
+#: web/forms.py:29
+msgid "Fin"
+msgstr "End"
+
+#: web/forms.py:30
+msgid "Priorité"
+msgstr "Priority"
+
+#: web/forms.py:51
 msgid "Nom d'utilisateur"
 msgstr "Username"
 
-#: web/forms.py:20
+#: web/forms.py:53
 msgid "adresse@email.com"
 msgstr "address@email.com"
 
-#: web/forms.py:29
+#: web/forms.py:62
 msgid "Nom d'utilisateur / Email"
 msgstr "Username / Email"
 
-#: web/forms.py:30
+#: web/forms.py:63
 msgid "Mot de passe"
 msgstr "Password"
 
-#: web/forms.py:38 web/forms.py:114
+#: web/forms.py:71 web/forms.py:147
 msgid "votre@email.com"
 msgstr "your@email.com"
 
-#: web/forms.py:54 web/templates/web/planner.html:180
+#: web/forms.py:87 web/templates/web/planner.html:180
 msgid "Âge"
 msgstr "Age"
 
-#: web/forms.py:55 web/templates/web/planner.html:187
+#: web/forms.py:88 web/templates/web/planner.html:187
 msgid "Genre"
 msgstr "Gender"
 
-#: web/forms.py:56
+#: web/forms.py:89
 msgid "Taille"
 msgstr "Height"
 
-#: web/forms.py:57
+#: web/forms.py:90
 msgid "Poids"
 msgstr "Weight"
 
-#: web/forms.py:58 web/templates/web/planner.html:208
+#: web/forms.py:91 web/templates/web/planner.html:208
 msgid "Objectif"
 msgstr "Goal"
 
-#: web/forms.py:59
+#: web/forms.py:92
 msgid "Niveau d'activité"
 msgstr "Activity Level"
 
-#: web/forms.py:77
+#: web/forms.py:110
 msgid "La taille doit être supérieure à 0."
 msgstr "Height must be greater than 0."
 
-#: web/forms.py:83
+#: web/forms.py:116
 msgid "Le poids doit être supérieur à 0."
 msgstr "Weight must be greater than 0."
 
-#: web/forms.py:89
+#: web/forms.py:122
 msgid "L'âge doit être supérieur à 0."
 msgstr "Age must be greater than 0."
 
-#: web/forms.py:100
+#: web/forms.py:133
 msgid "Partagez votre analyse..."
 msgstr "Share your analysis..."
 
-#: web/forms.py:104
+#: web/forms.py:137
 msgid "Votre Commentaire"
 msgstr "Your Comment"
 
-#: web/forms.py:119
+#: web/forms.py:152
 msgid "Parlez-nous de vos objectifs..."
 msgstr "Tell us about your goals..."
 
-#: web/forms.py:123
+#: web/forms.py:156
 msgid "URL de votre image"
 msgstr "Your image URL"
 
-#: web/forms.py:127
+#: web/forms.py:160
 msgid "Email"
 msgstr "Email"
 
-#: web/forms.py:128
+#: web/forms.py:161
 msgid "Biographie"
 msgstr "Biography"
 
-#: web/forms.py:129
+#: web/forms.py:162
 msgid "Avatar (URL)"
 msgstr "Avatar (URL)"
 
@@ -301,43 +395,54 @@ msgstr "Back to Intel"
 msgid "Performance Humaine"
 msgstr "Human Performance"
 
-#: web/templates/web/base.html:97 web/templates/web/base.html:192
+#: web/templates/web/base.html:97 web/templates/web/base.html:182
+#: web/templates/web/base.html:246
 msgid "Outils"
 msgstr "Tools"
 
-#: web/templates/web/base.html:98
+#: web/templates/web/base.html:98 web/templates/web/base.html:183
 msgid "Blog"
 msgstr "Blog"
 
-#: web/templates/web/base.html:100 web/templates/web/profile.html:114
+#: web/templates/web/base.html:100 web/templates/web/base.html:185
+#: web/templates/web/profile.html:114
 msgid "Planificateur"
 msgstr "Planner"
 
-#: web/templates/web/base.html:134
+#: web/templates/web/base.html:132
 msgid "Niveau Actuel"
 msgstr "Current Level"
 
-#: web/templates/web/base.html:138
+#: web/templates/web/base.html:136
 msgid "Points d'Expérience"
 msgstr "Experience Points"
 
-#: web/templates/web/base.html:142
+#: web/templates/web/base.html:140
 msgid "Série en cours"
 msgstr "Current Streak"
 
-#: web/templates/web/base.html:158
+#: web/templates/web/base.html:156 web/templates/web/base.html:211
 msgid "Déconnexion"
 msgstr "Logout"
 
-#: web/templates/web/base.html:160 web/templates/web/register.html:70
+#: web/templates/web/base.html:158 web/templates/web/base.html:215
+#: web/templates/web/register.html:70
 msgid "Connexion"
 msgstr "Login"
 
-#: web/templates/web/base.html:161
+#: web/templates/web/base.html:159
 msgid "Rejoindre"
 msgstr "Join"
 
-#: web/templates/web/base.html:184
+#: web/templates/web/base.html:186
+msgid "Agenda"
+msgstr ""
+
+#: web/templates/web/base.html:187
+msgid "Profil"
+msgstr ""
+
+#: web/templates/web/base.html:238
 msgid ""
 "L'écosystème ultime pour l'optimisation de la performance humaine. "
 "Entraînement, nutrition et bio-hacking unifiés dans une interface élite."
@@ -345,39 +450,39 @@ msgstr ""
 "The ultimate ecosystem for human performance optimization. Training, "
 "nutrition, and bio-hacking unified in an elite interface."
 
-#: web/templates/web/base.html:188
+#: web/templates/web/base.html:242
 msgid "Plateforme"
 msgstr "Platform"
 
-#: web/templates/web/base.html:190
+#: web/templates/web/base.html:244
 msgid "Accueil"
 msgstr "Home"
 
-#: web/templates/web/base.html:191
+#: web/templates/web/base.html:245
 msgid "Intel (Blog)"
 msgstr "Intel (Blog)"
 
-#: web/templates/web/base.html:196
+#: web/templates/web/base.html:250
 msgid "Légal"
 msgstr "Legal"
 
-#: web/templates/web/base.html:198
+#: web/templates/web/base.html:252
 msgid "Confidentialité"
 msgstr "Privacy"
 
-#: web/templates/web/base.html:199
+#: web/templates/web/base.html:253
 msgid "Conditions"
 msgstr "Terms"
 
-#: web/templates/web/base.html:200
+#: web/templates/web/base.html:254
 msgid "Contact"
 msgstr "Contact"
 
-#: web/templates/web/base.html:205
+#: web/templates/web/base.html:259
 msgid "TOUS DROITS RÉSERVÉS."
 msgstr "ALL RIGHTS RESERVED."
 
-#: web/templates/web/base.html:208
+#: web/templates/web/base.html:262
 #: web/templates/web/password_reset_email.html:13
 msgid "Systèmes Opérationnels"
 msgstr "Operational Systems"
@@ -443,6 +548,50 @@ msgstr "Confirm"
 #: web/templates/web/change_password.html:53
 msgid "Retour"
 msgstr "Back"
+
+#: web/templates/web/custom_planner.html:4
+msgid "Mon Agenda - FitWell"
+msgstr "My Agenda - FitWell"
+
+#: web/templates/web/custom_planner.html:12
+msgid "MON"
+msgstr "MY"
+
+#: web/templates/web/custom_planner.html:12
+msgid "AGENDA"
+msgstr "AGENDA"
+
+#: web/templates/web/custom_planner.html:15
+msgid "Organisez votre semaine. Dominez vos objectifs."
+msgstr "Organize your week. Dominate your goals."
+
+#: web/templates/web/custom_planner.html:24
+msgid "Ajouter une Activité"
+msgstr "Add Activity"
+
+#: web/templates/web/custom_planner.html:72
+msgid "Planifier"
+msgstr "Schedule"
+
+#: web/templates/web/custom_planner.html:126
+msgid "Terminer"
+msgstr "Complete"
+
+#: web/templates/web/custom_planner.html:130
+msgid "Fait"
+msgstr "Done"
+
+#: web/templates/web/custom_planner.html:133
+msgid "Supprimer cette activité ?"
+msgstr "Delete this activity?"
+
+#: web/templates/web/custom_planner.html:139
+msgid "Rien de prévu."
+msgstr "Nothing scheduled."
+
+#: web/templates/web/custom_planner.html:154
+msgid "Continuez comme ça !"
+msgstr "Keep it up!"
 
 #: web/templates/web/edit_profile.html:4
 msgid "Éditer Profil - FitWell"
@@ -1096,30 +1245,40 @@ msgstr "Overweight"
 msgid "Obésité"
 msgstr "Obesity"
 
-#: web/views.py:27
+#: web/views.py:29
 msgid "Identifiants invalides."
 msgstr "Invalid credentials."
 
-#: web/views.py:99
+#: web/views.py:103
 msgid "Commentaire ajouté."
 msgstr "Comment added."
 
-#: web/views.py:131
+#: web/views.py:135
 msgid "Commentaire supprimé."
 msgstr "Comment deleted."
 
-#: web/views.py:134
+#: web/views.py:138
 msgid "Vous n'êtes pas autorisé à supprimer ce commentaire."
 msgstr "You are not authorized to delete this comment."
 
-#: web/views.py:165
+#: web/views.py:169
 msgid "Profil mis à jour avec succès."
 msgstr "Profile updated successfully."
 
-#: web/views.py:178
+#: web/views.py:182
 msgid "Votre mot de passe a été mis à jour avec succès."
 msgstr "Your password has been updated successfully."
 
-#: web/views.py:181
+#: web/views.py:185
 msgid "Veuillez corriger les erreurs ci-dessous."
 msgstr "Please correct the errors below."
+
+#: web/views.py:280
+msgid "Activité ajoutée au planning !"
+msgstr ""
+
+#: web/views.py:295
+#, fuzzy
+#| msgid "Commentaire supprimé."
+msgid "Activité supprimée."
+msgstr "Comment deleted."

@@ -3,8 +3,10 @@ from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.translation import gettext as _
-from .forms import CustomUserCreationForm, CustomAuthenticationForm, WellnessPlanForm, CommentForm, UserUpdateForm, CustomPasswordChangeForm
-from api.models import User, Article, Category, UserStats, WellnessPlan, Comment
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, WellnessPlanForm, CommentForm, UserUpdateForm, CustomPasswordChangeForm, CustomEventForm
+from api.models import User, Article, Category, UserStats, WellnessPlan, Comment, CustomEvent
 from api.services import generate_wellness_plan
 
 def home(request):
@@ -254,6 +256,73 @@ def planner_view(request):
 
 
 @login_required(login_url='login')
+@login_required(login_url='login')
+def custom_planner_view(request):
+    # Update Streak
+    if hasattr(request.user, 'stats'):
+        request.user.stats.update_streak()
+        
+    events = request.user.custom_events.order_by('start_time')
+    
+    # Organize by day for the template
+    days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    weekly_events = {day: [] for day in days}
+    for event in events:
+        if event.day_of_week in weekly_events:
+            weekly_events[event.day_of_week].append(event)
+            
+    if request.method == 'POST':
+        form = CustomEventForm(request.POST)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.user = request.user
+            event.save()
+            messages.success(request, _("Activité ajoutée au planning !"))
+            return redirect('custom_planner')
+    else:
+        form = CustomEventForm()
+        
+    return render(request, 'web/custom_planner.html', {
+        'form': form,
+        'weekly_events': weekly_events,
+        'days': days
+    })
+
+@login_required(login_url='login')
+def delete_custom_event(request, event_id):
+    event = get_object_or_404(CustomEvent, id=event_id, user=request.user)
+    event.delete()
+    messages.success(request, _("Activité supprimée."))
+    return redirect('custom_planner')
+
+@login_required(login_url='login')
+@require_POST
+def complete_custom_event(request, event_id):
+    event = get_object_or_404(CustomEvent, id=event_id, user=request.user)
+    
+    if not event.is_completed:
+        event.is_completed = True
+        event.save()
+        
+        # Gamification Logic
+        xp_gain = 50 # Base XP
+        if event.priority == 'high':
+            xp_gain = 100
+        elif event.priority == 'medium':
+            xp_gain = 75
+            
+        request.user.stats.add_xp(xp_gain)
+        
+        return JsonResponse({
+            'status': 'success',
+            'xp_gain': xp_gain,
+            'new_xp': request.user.stats.xp,
+            'new_level': request.user.stats.level,
+            'message': _("Tâche complétée ! +%(xp)s XP") % {'xp': xp_gain}
+        })
+        
+    return JsonResponse({'status': 'already_completed'})
+
 def tools_view(request):
     # Update Streak on Tools Visit
     if hasattr(request.user, 'stats'):
