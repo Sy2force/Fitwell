@@ -202,6 +202,7 @@
                 <a href="{% url 'tools' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Outils" %}</a>
                 <a href="{% url 'blog_list' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Blog" %}</a>
                 <a href="{% url 'exercise_library' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Exercices" %}</a>
+                <a href="{% url 'recipe_list' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Nutrition" %}</a>
                 
                 {% if user.is_authenticated %}
                     <a href="{% url 'planner' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Planificateur" %}</a>
