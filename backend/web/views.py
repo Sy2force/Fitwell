@@ -419,7 +419,10 @@ def tools_view(request):
     if hasattr(request.user, 'stats'):
         request.user.stats.update_streak()
         
-    latest_plan = request.user.plans.order_by('-created_at').first()
+    latest_plan = None
+    if request.user.is_authenticated:
+        latest_plan = request.user.plans.order_by('-created_at').first()
+        
     return render(request, 'web/tools.html', {'plan': latest_plan})
 
 def legal_view(request):
