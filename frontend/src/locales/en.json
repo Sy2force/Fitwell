@@ -1,0 +1,36 @@
+{
+  "nav": {
+    "home": "Home",
+    "login": "Login",
+    "register": "Join Elite",
+    "dashboard": "Command Center",
+    "planner": "Planner",
+    "tools": "Intel Tools",
+    "admin": "Admin Panel"
+  },
+  "home": {
+    "hero_title": "UNLOCK POTENTIAL",
+    "hero_subtitle": "The premier ecosystem for biological optimization. Train. Analyze. Evolve.",
+    "cta_start": "Start Transformation",
+    "cta_login": "Member Login",
+    "features_title": "The Ecosystem",
+    "feature_planner": "Smart Planner",
+    "feature_planner_desc": "AI-driven workout and nutrition protocols tailored to your biometrics.",
+    "feature_gamification": "Gamified Growth",
+    "feature_gamification_desc": "Track your XP, Health Score, and Level up as you adhere to your regime.",
+    "feature_community": "Elite Community",
+    "feature_community_desc": "Access curated content and connect with high-performers worldwide."
+  },
+  "dashboard": {
+    "welcome": "Welcome back, Operator",
+    "xp": "XP Points",
+    "streak": "Streak",
+    "health_score": "Health Score"
+  },
+  "admin": {
+    "title": "Admin Command Center",
+    "users": "User Database",
+    "leads": "Lead Export",
+    "export_btn": "Export CSV"
+  }
+}

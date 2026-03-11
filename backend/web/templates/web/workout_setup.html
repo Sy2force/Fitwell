@@ -1,0 +1,59 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Configuration Tactique - FitWell" %}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-background transition-colors duration-300 relative overflow-hidden">
+    <!-- Background Grid Effect -->
+    <div class="absolute inset-0 z-0 opacity-10 pointer-events-none bg-grid bg-grid-energy">
+    </div>
+
+    <div class="max-w-4xl mx-auto relative z-10">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-display font-bold italic text-white mb-4 uppercase tracking-wide">
+                {% trans "CONFIGURATION" %} <span class="text-energy drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]">{% trans "TACTIQUE" %}</span>
+            </h1>
+            <p class="text-gray-400 font-mono text-sm tracking-widest uppercase flex justify-center items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-energy animate-pulse"></span>
+                {% trans "Définissez les paramètres de votre mission." %}
+            </p>
+        </div>
+
+        <form method="post" action="{% url 'workout_session' %}" class="glass-card p-8 border-l-4 border-energy bg-surface/50 border-white/5 shadow-lg">
+            {% csrf_token %}
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 font-mono">{{ form.work_duration.label }}</label>
+                    {{ form.work_duration }}
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 font-mono">{{ form.rest_duration.label }}</label>
+                    {{ form.rest_duration }}
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 font-mono">{% trans "Sélection des Exercices (Cochez pour inclure)" %}</label>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+                    {% for checkbox in form.exercises %}
+                    <div class="relative">
+                        <label class="flex items-center p-4 rounded-lg border border-white/10 bg-surface/30 hover:border-energy/50 cursor-pointer transition-all group">
+                            {{ checkbox.tag }}
+                            <span class="ml-3 text-white font-mono text-sm group-hover:text-energy transition-colors uppercase tracking-wide">
+                                {{ checkbox.choice_label }}
+                            </span>
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-energy text-black py-4 rounded font-display font-bold uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_20px_rgba(234,179,8,0.4)] text-lg">
+                {% trans "LANCER LA SÉQUENCE" %}
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

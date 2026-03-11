@@ -1,0 +1,97 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+    <!-- Background Gradient & Grid -->
+    <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background z-10"></div>
+        <div class="absolute inset-0 opacity-20 bg-grid bg-grid-primary">
+        </div>
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop" 
+             alt="Hero" 
+             class="w-full h-full object-cover opacity-40 grayscale">
+    </div>
+
+    <div class="relative z-20 text-center px-4 max-w-5xl mx-auto">
+        <h1 class="text-6xl md:text-9xl font-display font-bold mb-6 leading-none tracking-tighter text-white italic drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]">
+            {% trans "LIBÉREZ" %} <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-energy via-white to-energy animate-pulse-slow">{% trans "VOTRE POTENTIEL" %}</span>
+        </h1>
+        
+        <p class="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto mb-12 font-mono tracking-wide border-l-4 border-energy pl-6 text-left bg-black/50 p-6 backdrop-blur-md rounded-r-lg border-y border-y-white/5 border-r border-r-white/5">
+            {% trans "L'écosystème de référence pour l'optimisation biologique." %} <br/>
+            <span class="text-energy font-bold">{% trans "Entraînez. Analysez. Évoluez." %}</span>
+        </p>
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+            {% if user.is_authenticated %}
+                {% if plan %}
+                <a href="{% url 'planner' %}" class="w-full md:w-auto bg-energy text-black px-10 py-4 rounded font-display font-bold uppercase tracking-widest hover:bg-white transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+                    {% trans "Reprendre le Protocole" %}
+                </a>
+                {% else %}
+                <a href="{% url 'planner' %}" class="w-full md:w-auto bg-energy text-black px-10 py-4 rounded font-display font-bold uppercase tracking-widest hover:bg-white transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+                    {% trans "Initialiser le Protocole" %}
+                </a>
+                {% endif %}
+            {% else %}
+            <a href="{% url 'register' %}" class="w-full md:w-auto bg-energy text-black px-10 py-4 rounded font-display font-bold uppercase tracking-widest hover:bg-white transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+                {% trans "Commencer la Transformation" %}
+            </a>
+            <a href="{% url 'login' %}" class="w-full md:w-auto border border-white/20 text-white px-10 py-4 rounded font-display font-bold uppercase tracking-widest hover:bg-white/10 transition-all font-italic">
+                {% trans "Connexion Membre" %}
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="py-24 bg-background relative overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-5 pointer-events-none bg-radial-energy">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-6xl font-display font-bold text-white mb-4 italic uppercase tracking-wide">{% trans "L'ARSENAL" %} <span class="text-energy drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]">{% trans "COMPLET" %}</span></h2>
+            <p class="text-gray-400 max-w-2xl mx-auto font-mono text-sm tracking-widest uppercase">{% trans "Une suite d'outils intégrés pour gérer chaque variable de votre performance." %}</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Feature 1: AI Coach -->
+            <div class="group p-8 rounded-2xl bg-surface/50 border border-white/5 hover:border-primary/50 transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(0,243,255,0.1)]">
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-3xl group-hover:scale-110 transition-transform border border-primary/20">
+                    🤖
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3 font-display italic group-hover:text-primary transition-colors">{% trans "Coach Tactique IA" %}</h3>
+                <p class="text-gray-400 text-sm leading-relaxed font-sans">
+                    {% trans "Entraînez-vous avec J.A.R.V.I.S. Interface HUD immersive, guidage vocal temps réel et séquences adaptatives." %}
+                </p>
+            </div>
+
+            <!-- Feature 2: Dashboard -->
+            <div class="group p-8 rounded-2xl bg-surface/50 border border-white/5 hover:border-energy/50 transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(234,179,8,0.1)]">
+                <div class="w-16 h-16 bg-energy/10 rounded-full flex items-center justify-center mb-6 text-3xl group-hover:scale-110 transition-transform border border-energy/20">
+                    🎛️
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3 font-display italic group-hover:text-energy transition-colors">{% trans "Centre de Commandement" %}</h3>
+                <p class="text-gray-400 text-sm leading-relaxed font-sans">
+                    {% trans "Suivez vos métriques vitales (Sommeil, Hydratation, Humeur) et analysez votre progression avec des graphiques précis." %}
+                </p>
+            </div>
+
+            <!-- Feature 3: Nutrition -->
+            <div class="group p-8 rounded-2xl bg-surface/50 border border-white/5 hover:border-health/50 transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(16,185,129,0.1)]">
+                <div class="w-16 h-16 bg-health/10 rounded-full flex items-center justify-center mb-6 text-3xl group-hover:scale-110 transition-transform border border-health/20">
+                    🥗
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-3 font-display italic group-hover:text-health transition-colors">{% trans "Laboratoire Nutrition" %}</h3>
+                <p class="text-gray-400 text-sm leading-relaxed font-sans">
+                    {% trans "Accédez à des recettes optimisées pour la performance. Macros calculées et instructions détaillées." %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

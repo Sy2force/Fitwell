@@ -1,0 +1,180 @@
+{% extends 'web/base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans "Centre de Commandement - FitWell" %}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-background transition-colors duration-300 relative overflow-hidden">
+    <!-- Background Grid Effect (Subtle) -->
+    <div class="absolute inset-0 z-0 opacity-10 pointer-events-none bg-grid bg-grid-primary">
+    </div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+        <!-- Header -->
+        <div class="mb-12 flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-6">
+            <div>
+                <h1 class="text-4xl md:text-5xl font-display font-bold italic text-white mb-2 uppercase tracking-wide">
+                    {% trans "CENTRE DE" %} <span class="text-energy drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]">{% trans "COMMANDEMENT" %}</span>
+                </h1>
+                <p class="text-gray-400 font-mono text-xs uppercase tracking-[0.2em] flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-health animate-pulse"></span>
+                    {% trans "Rapport Quotidien & Métriques Vitales" %}
+                </p>
+            </div>
+            <div class="mt-4 md:mt-0 flex items-center space-x-4">
+                <div class="text-right hidden md:block">
+                    <span class="block text-xs text-gray-500 font-mono uppercase tracking-widest">{% trans "Niveau" %} {{ user.stats.level }}</span>
+                    <div class="w-48 h-3 bg-surface border border-white/10 rounded-full mt-2 overflow-hidden relative">
+                        <div class="h-full bg-gradient-to-r from-energy to-secondary relative" style="width: {{ user.stats.xp_progress }}%">
+                            <div class="absolute inset-0 bg-white/20"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column: Daily Log -->
+            <div class="lg:col-span-1 space-y-8">
+                <div class="glass-card p-6 border-l-4 border-energy">
+                    <h3 class="text-2xl font-bold text-white mb-6 font-display italic uppercase">
+                        {% trans "Journal de Bord" %}
+                    </h3>
+                    <form method="post" class="space-y-5">
+                        {% csrf_token %}
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-mono">{{ form.water_liters.label }}</label>
+                                {{ form.water_liters }}
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-mono">{{ form.sleep_hours.label }}</label>
+                                {{ form.sleep_hours }}
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-mono">{{ form.weight.label }}</label>
+                                {{ form.weight }}
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-mono">{{ form.mood.label }}</label>
+                                {{ form.mood }}
+                                <div class="flex justify-between text-[10px] text-gray-500 mt-1 font-mono">
+                                    <span>1</span><span>10</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-mono">{{ form.notes.label }}</label>
+                            {{ form.notes }}
+                        </div>
+
+                        <button type="submit" class="w-full bg-energy/10 text-energy border border-energy hover:bg-energy hover:text-black transition-all py-4 rounded font-display font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+                            {% trans "Mettre à jour le Rapport" %}
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass-card p-4 text-center group hover:border-primary/50 transition-colors">
+                        <span class="block text-5xl font-sport font-bold text-primary group-hover:drop-shadow-[0_0_10px_rgba(0,243,255,0.5)] transition-all">{{ avg_water }}L</span>
+                        <span class="text-[10px] text-gray-500 uppercase tracking-widest font-mono">{% trans "Moy. Eau (7j)" %}</span>
+                    </div>
+                    <div class="glass-card p-4 text-center group hover:border-secondary/50 transition-colors">
+                        <span class="block text-5xl font-sport font-bold text-secondary group-hover:drop-shadow-[0_0_10px_rgba(139,92,246,0.5)] transition-all">{{ avg_sleep }}h</span>
+                        <span class="text-[10px] text-gray-500 uppercase tracking-widest font-mono">{% trans "Moy. Sommeil (7j)" %}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Agenda & Status -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Agenda du Jour -->
+                <div class="glass-card p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-white font-display italic uppercase">
+                            {% trans "Opérations du Jour" %}
+                        </h3>
+                        <a href="{% url 'custom_planner' %}" class="text-xs font-bold text-primary hover:text-white uppercase tracking-widest transition-colors font-mono border border-primary/30 px-3 py-1 rounded hover:bg-primary/10">{% trans "Gérer l'Agenda" %} &rarr;</a>
+                    </div>
+
+                    <div class="space-y-3">
+                        {% for event in today_events %}
+                        <div class="flex items-center justify-between p-4 rounded-lg bg-surface/50 border border-white/5 hover:border-primary/30 transition-colors">
+                            <div class="flex items-center space-x-4">
+                                <span class="text-sm font-mono text-primary bg-primary/10 px-2 py-1 rounded border border-primary/20">
+                                    {{ event.start_time|time:"H:i" }}
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-white {% if event.is_completed %}line-through text-gray-500{% endif %} font-sans">
+                                        {{ event.title }}
+                                    </h4>
+                                    <span class="text-[10px] text-gray-500 uppercase tracking-wider font-mono">{{ event.get_event_type_display }}</span>
+                                </div>
+                            </div>
+                            <div>
+                                {% if event.is_completed %}
+                                    <span class="text-health font-bold text-xs uppercase tracking-widest font-mono border border-health/30 px-2 py-1 rounded bg-health/10">{% trans "Terminé" %}</span>
+                                {% else %}
+                                    <span class="text-energy font-bold text-xs uppercase tracking-widest font-mono border border-energy/30 px-2 py-1 rounded bg-energy/10 animate-pulse">{% trans "En attente" %}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="text-center py-12 text-gray-500 border-2 border-dashed border-white/5 rounded-lg">
+                            <p class="font-mono text-sm">{% trans "Aucune opération programmée pour aujourd'hui." %}</p>
+                            <a href="{% url 'custom_planner' %}" class="text-primary text-sm font-bold mt-2 inline-block hover:underline font-mono">{% trans "Créer une activité" %}</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Analysis / Charts -->
+                <div class="glass-card p-6">
+                    <h3 class="text-2xl font-bold text-white mb-6 font-display italic uppercase">
+                        {% trans "Analyse Biométrique" %}
+                    </h3>
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 font-mono border-l-2 border-energy pl-3">{% trans "Évolution du Poids" %}</h4>
+                            <div class="h-56 relative">
+                                <canvas id="weightChart"></canvas>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 font-mono border-l-2 border-primary pl-3">{% trans "Sommeil & Humeur" %}</h4>
+                            <div class="h-56 relative">
+                                <canvas id="sleepMoodChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Data Injection -->
+    {{ chart_dates|json_script:"chart-dates-data" }}
+    {{ chart_weight|json_script:"chart-weight-data" }}
+    {{ chart_sleep|json_script:"chart-sleep-data" }}
+    {{ chart_mood|json_script:"chart-mood-data" }}
+
+    <!-- Configuration for External JS -->
+    <script>
+        window.dashboardConfig = {
+            labelWeight: "{% trans 'Poids (kg)'|escapejs %}",
+            labelSleep: "{% trans 'Sommeil (h)'|escapejs %}",
+            labelMood: "{% trans 'Humeur (1-10)'|escapejs %}"
+        };
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'web/js/dashboard.js' %}"></script>
+{% endblock %}

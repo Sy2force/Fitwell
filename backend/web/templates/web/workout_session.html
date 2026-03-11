@@ -1,0 +1,179 @@
+{% extends 'web/base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans "Session Tactique - J.A.R.V.I.S." %}{% endblock %}
+
+{% block content %}
+<div class="relative min-h-screen bg-background overflow-hidden font-mono text-gray-200 selection:bg-energy selection:text-black">
+    <!-- Background Grid/HUD Effect -->
+    <div class="absolute inset-0 z-0 opacity-10 pointer-events-none bg-grid bg-grid-energy">
+    </div>
+    
+    <!-- Vignette -->
+    <div class="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,#050508_100%)]"></div>
+
+    <!-- HUD Container -->
+    <div class="relative z-10 container mx-auto px-4 py-8 h-screen flex flex-col">
+        
+        <!-- Top Bar: System Status -->
+        <div class="flex justify-between items-start mb-8 border-b border-energy/30 pb-4">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-display font-bold tracking-widest text-white animate-pulse-slow">
+                    {% trans "INTERFACE" %} <span class="text-energy drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]">{% trans "TACTIQUE" %}</span>
+                </h1>
+                <div class="flex items-center gap-2 mt-2">
+                    <span class="w-2 h-2 rounded-full bg-energy animate-pulse"></span>
+                    <p class="text-xs text-energy/80 font-mono tracking-widest">{% trans "SYSTEME: ONLINE" %} | {% trans "OPERATEUR:" %} <span class="text-white">{{ user.username|upper }}</span></p>
+                </div>
+            </div>
+            <div class="text-right">
+                <div class="text-5xl font-sport font-bold text-white tracking-wider leading-none" id="total-timer">00:00</div>
+                <div class="text-xs text-energy/60 font-mono tracking-[0.2em]">{% trans "TEMPS TOTAL" %}</div>
+            </div>
+        </div>
+
+        <!-- Main Interface -->
+        <div class="flex-grow flex flex-col justify-center items-center relative perspective-1000">
+            
+            <!-- 3D Carousel Container -->
+            <div id="carousel" class="relative w-full max-w-2xl h-96 transform-style-3d transition-transform duration-700 ease-out mb-12">
+                {% for step in sequence %}
+                <div class="carousel-item absolute inset-0 bg-surface/90 border border-energy/30 rounded-2xl p-6 backdrop-blur-md shadow-[0_0_20px_rgba(234,179,8,0.05)] flex flex-col items-center justify-center text-center transition-all duration-700 opacity-0" 
+                     id="step-card-{{ forloop.counter0 }}"
+                     style="transform: translateZ(-500px);">
+                    
+                    <!-- Step Type Badge -->
+                    <span class="absolute top-4 right-4 text-xs font-bold px-3 py-1 rounded-sm border border-energy/50 bg-energy/10 text-energy uppercase tracking-widest font-mono">
+                        {{ step.type }}
+                    </span>
+
+                    <!-- Image (if exercise) -->
+                    {% if step.image %}
+                    <div class="w-32 h-32 mb-6 rounded-full overflow-hidden border-2 border-energy/50 shadow-[0_0_25px_rgba(234,179,8,0.2)]">
+                        <img src="{{ step.image }}" alt="{{ step.name }}" class="w-full h-full object-cover">
+                    </div>
+                    {% endif %}
+
+                    <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-2 uppercase tracking-tight drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]">{{ step.name }}</h2>
+                    <p class="text-energy/80 text-sm md:text-base font-mono mb-8 max-w-md">{{ step.description }}</p>
+                    
+                    <div class="relative">
+                        <svg class="w-48 h-48 transform -rotate-90 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 opacity-20" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="2" class="text-energy" />
+                        </svg>
+                        <div class="text-8xl font-sport font-bold text-white tracking-tighter" id="timer-{{ forloop.counter0 }}">
+                            {{ step.duration }}
+                        </div>
+                    </div>
+                    <span class="text-xs text-energy/60 uppercase tracking-[0.3em] mt-2 font-mono">{% trans "SECONDES" %}</span>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Controls -->
+            <div class="z-50 flex items-center justify-center space-x-12 mt-8">
+                <button onclick="toggleSession()" id="btn-toggle" class="relative group">
+                    <div class="absolute inset-0 bg-energy blur-xl opacity-20 group-hover:opacity-50 transition-opacity rounded-full duration-500"></div>
+                    <div class="relative bg-surface border-2 border-energy text-energy hover:bg-energy hover:text-black w-24 h-24 rounded-full flex items-center justify-center transition-all duration-300 shadow-[0_0_20px_rgba(234,179,8,0.2)] group-hover:scale-105">
+                        <svg id="icon-play" class="w-10 h-10 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <svg id="icon-pause" class="w-10 h-10 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    </div>
+                </button>
+                
+                <button onclick="skipStep()" class="group flex flex-col items-center justify-center">
+                    <div class="w-14 h-14 rounded-full border border-energy/30 text-energy/50 flex items-center justify-center group-hover:border-energy group-hover:text-energy transition-all bg-surface/50 hover:bg-surface">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
+                    </div>
+                    <span class="text-[10px] text-energy/60 uppercase tracking-widest mt-2 group-hover:text-energy font-mono transition-colors">{% trans "PASSER" %}</span>
+                </button>
+            </div>
+
+            <!-- JARVIS Log -->
+            <div class="absolute bottom-8 left-4 right-4 md:left-auto md:right-8 md:w-80">
+                <div class="border-l-2 border-energy/50 pl-4 h-32 overflow-hidden mask-fade-bottom bg-gradient-to-r from-energy/5 to-transparent p-2 rounded-r-lg">
+                    <div id="ai-log" class="text-xs font-mono text-energy space-y-2">
+                        <p class="typing-effect">> {% trans "Système activé." %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mission Report / Post Workout Modal (Hidden by default) -->
+    <div id="mission-report" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center hidden opacity-0 transition-opacity duration-1000">
+        <div class="max-w-2xl w-full mx-4 relative">
+            <div class="glass-card p-8 border border-energy shadow-[0_0_50px_rgba(234,179,8,0.2)] text-center transform scale-95 transition-transform duration-500" id="report-card">
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-2 uppercase tracking-wide">
+                    {% trans "MISSION" %} <span class="text-energy">{% trans "ACCOMPLIE" %}</span>
+                </h2>
+                <p class="text-gray-400 font-mono text-sm tracking-widest uppercase mb-8 flex justify-center items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-energy animate-pulse"></span>
+                    {% trans "Données tactiques sauvegardées." %}
+                </p>
+
+                {% if post_workout_meal %}
+                <div class="mb-8 text-left bg-surface/50 rounded-lg p-6 border border-white/5 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-energy text-black text-xs font-bold px-3 py-1 font-mono uppercase tracking-wider">
+                        {% trans "Ravitaillement Recommandé" %}
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-6 items-center">
+                        {% if post_workout_meal.image_url %}
+                        <div class="w-24 h-24 rounded-full border-2 border-energy/50 overflow-hidden shrink-0 shadow-[0_0_15px_rgba(234,179,8,0.3)]">
+                            <img src="{{ post_workout_meal.image_url }}" alt="{{ post_workout_meal.title }}" class="w-full h-full object-cover">
+                        </div>
+                        {% else %}
+                        <div class="w-24 h-24 rounded-full border-2 border-energy/50 bg-energy/10 flex items-center justify-center shrink-0 text-3xl">
+                            🥤
+                        </div>
+                        {% endif %}
+                        
+                        <div>
+                            <h3 class="text-2xl font-bold text-white font-display italic mb-1">{{ post_workout_meal.title }}</h3>
+                            <p class="text-gray-400 text-xs font-mono mb-3 line-clamp-2">
+                                {% trans "Optimisé pour la récupération musculaire et la recharge glycogénique." %}
+                            </p>
+                            <div class="flex gap-4 text-xs font-mono font-bold">
+                                <span class="text-primary">{{ post_workout_meal.protein_g }}g PROT</span>
+                                <span class="text-energy">{{ post_workout_meal.carbs_g }}g GLU</span>
+                                <span class="text-white">{{ post_workout_meal.calories }} KCAL</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 pt-4 border-t border-white/5 text-right">
+                        <a href="{% url 'recipe_detail' post_workout_meal.id %}" target="_blank" class="text-energy text-xs uppercase tracking-widest hover:text-white transition-colors">
+                            {% trans "Voir la recette complète" %} &rarr;
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+
+                <a href="{% url 'dashboard' %}" class="inline-block w-full bg-energy text-black py-4 rounded font-display font-bold uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_20px_rgba(234,179,8,0.4)] text-lg">
+                    {% trans "RETOUR AU QG" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Data injection -->
+{{ sequence|json_script:"sequence-data" }}
+
+<!-- Configuration for External JS -->
+<script>
+    window.workoutConfig = {
+        textRest: "{% trans 'Récupération.'|escapejs %}",
+        textDone: "{% trans 'Terminé.'|escapejs %}",
+        textSessionDone: "{% trans 'Session terminée. Excellent travail. Analyse de récupération prête.'|escapejs %}",
+        textInit: "{% trans 'Initialisation.'|escapejs %}",
+        textResume: "{% trans 'Reprise.'|escapejs %}",
+        textPause: "{% trans 'Pause.'|escapejs %}",
+        textNext: "{% trans 'Suivant.'|escapejs %}"
+    };
+</script>
+
+<link rel="stylesheet" href="{% static 'web/css/workout.css' %}">
+<script src="{% static 'web/js/workout.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends 'web/base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans "Outils - FitWell" %}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-background transition-colors duration-300 relative overflow-hidden">
+    <!-- Background Grid Effect -->
+    <div class="absolute inset-0 z-0 opacity-10 pointer-events-none bg-grid bg-grid-energy">
+    </div>
+
+    <div class="max-w-4xl mx-auto relative z-10">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-display font-bold italic text-white mb-4 uppercase tracking-wide">
+                {% trans "OUTILS" %} <span class="text-energy drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]">{% trans "INTEL" %}</span>
+            </h1>
+            <p class="text-gray-400 font-mono text-sm tracking-widest uppercase flex justify-center items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-energy animate-pulse"></span>
+                {% trans "Quantifiez votre rendement biologique" %}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- BMI Calculator -->
+            <div class="glass-card p-8 border-l-4 border-secondary bg-surface/50 border-white/5 shadow-lg">
+                <h3 class="text-2xl font-bold text-white mb-6 font-display italic uppercase">{% trans "Calculateur IMC" %}</h3>
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 font-mono">{% trans "Taille (cm)" %}</label>
+                        <input type="number" id="bmi-height" value="{{ plan.height|default:'' }}" class="w-full bg-surface border border-white/10 p-3 rounded text-white placeholder-gray-600 focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-colors font-mono" placeholder="180">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 font-mono">{% trans "Poids (kg)" %}</label>
+                        <input type="number" id="bmi-weight" value="{{ plan.weight|default:'' }}" class="w-full bg-surface border border-white/10 p-3 rounded text-white placeholder-gray-600 focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-colors font-mono" placeholder="75">
+                    </div>
+                    <button type="button" onclick="calculateBMI()" class="w-full bg-secondary/10 text-secondary border border-secondary hover:bg-secondary hover:text-white transition-all py-3 rounded uppercase tracking-widest font-bold text-xs font-mono">
+                        {% trans "Calculer" %}
+                    </button>
+                    <div id="bmi-result" class="hidden mt-4 p-4 bg-secondary/10 border border-secondary/30 rounded text-center">
+                        <span class="block text-sm text-gray-400 font-mono">{% trans "Votre IMC" %}</span>
+                        <span id="bmi-value" class="text-5xl font-sport font-bold text-white">--</span>
+                        <span id="bmi-category" class="block text-sm text-secondary font-bold mt-1 font-mono uppercase tracking-wider">--</span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Macros Calculator -->
+            <div class="glass-card p-8 border-l-4 border-primary bg-surface/50 border-white/5 shadow-lg">
+                <h3 class="text-2xl font-bold text-white mb-6 font-display italic uppercase">{% trans "Profil Métabolique" %}</h3>
+                <p class="text-gray-400 mb-6 text-sm font-mono leading-relaxed">{% trans "Estimez vos besoins caloriques journaliers (DEJ) et la répartition optimale des macronutriments." %}</p>
+                <form class="space-y-4 mb-6">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 font-mono">{% trans "Poids (kg)" %}</label>
+                            <input type="number" id="macro-weight" class="w-full bg-surface border border-white/10 p-3 rounded text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors font-mono" placeholder="75">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 font-mono">{% trans "Activité" %}</label>
+                            <select id="macro-activity" class="w-full bg-surface border border-white/10 p-3 rounded text-white focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors font-mono">
+                                <option value="1.2">{% trans "Sédentaire" %}</option>
+                                <option value="1.375">{% trans "Légèrement Actif" %}</option>
+                                <option value="1.55">{% trans "Modérément Actif" %}</option>
+                                <option value="1.725">{% trans "Très Actif" %}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" onclick="calculateMacros()" class="w-full bg-primary/10 text-primary border border-primary hover:bg-primary hover:text-black transition-all py-3 rounded uppercase tracking-widest font-bold text-xs font-mono">
+                        {% trans "Calculer" %}
+                    </button>
+                </form>
+
+                <div class="space-y-4">
+                    <div class="bg-surface p-4 rounded border border-white/10">
+                        <span class="block text-xs text-gray-500 uppercase tracking-widest font-mono">{% trans "Métabolisme de Base (BMR)" %}</span>
+                        <span id="bmr-value" class="text-2xl font-sport font-bold text-white">-- kcal</span>
+                    </div>
+                    <div class="bg-surface p-4 rounded border border-white/10">
+                        <span class="block text-xs text-gray-500 uppercase tracking-widest font-mono">{% trans "Dépense Totale (TDEE)" %}</span>
+                        <span id="tdee-value" class="text-2xl font-sport font-bold text-primary">-- kcal</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stopwatch / Timer -->
+            <div class="glass-card p-8 border-l-4 border-health bg-surface/50 border-white/5 shadow-lg col-span-1 md:col-span-2">
+                <h3 class="text-2xl font-bold text-white mb-6 font-display italic uppercase">{% trans "Chronomètre & Timer" %}</h3>
+                
+                <div class="flex justify-center space-x-4 mb-8 border-b border-white/10 pb-4">
+                    <button onclick="switchTab('stopwatch')" id="tab-stopwatch" class="text-sm font-bold uppercase tracking-widest text-health border-b-2 border-health pb-4 px-4 transition-colors font-mono">{% trans "Chronomètre" %}</button>
+                    <button onclick="switchTab('timer')" id="tab-timer" class="text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-white pb-4 px-4 transition-colors font-mono">{% trans "Minuteur" %}</button>
+                </div>
+
+                <!-- Stopwatch UI -->
+                <div id="stopwatch-ui" class="text-center">
+                    <div class="text-7xl md:text-9xl font-sport font-bold text-white mb-8 tracking-wider drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]" id="stopwatch-display">00:00.00</div>
+                    <div class="flex justify-center space-x-4">
+                        <button onclick="startStopwatch()" id="btn-start-stopwatch" class="bg-health/10 text-health border border-health hover:bg-health hover:text-black px-8 py-3 rounded uppercase tracking-widest font-bold text-xs transition-all font-mono">{% trans "Démarrer" %}</button>
+                        <button onclick="resetStopwatch()" class="bg-accent/10 text-accent border border-accent hover:bg-accent hover:text-white px-8 py-3 rounded uppercase tracking-widest font-bold text-xs transition-all font-mono">{% trans "Reset" %}</button>
+                    </div>
+                </div>
+
+                <!-- Timer UI -->
+                <div id="timer-ui" class="text-center hidden">
+                    <div class="flex justify-center space-x-2 mb-8">
+                        <input type="number" id="timer-min" class="w-32 text-center bg-surface border border-white/10 p-4 rounded text-4xl font-sport font-bold text-white focus:border-health focus:outline-none" placeholder="00" value="00">
+                        <span class="text-4xl font-sport font-bold flex items-center text-white">:</span>
+                        <input type="number" id="timer-sec" class="w-32 text-center bg-surface border border-white/10 p-4 rounded text-4xl font-sport font-bold text-white focus:border-health focus:outline-none" placeholder="00" value="00">
+                    </div>
+                    <div class="text-7xl md:text-9xl font-sport font-bold text-white mb-8 tracking-wider hidden drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]" id="timer-display">00:00</div>
+                    <div class="flex justify-center space-x-4">
+                        <button onclick="startTimer()" id="btn-start-timer" class="bg-health/10 text-health border border-health hover:bg-health hover:text-black px-8 py-3 rounded uppercase tracking-widest font-bold text-xs transition-all font-mono">{% trans "Démarrer" %}</button>
+                        <button onclick="resetTimer()" class="bg-accent/10 text-accent border border-accent hover:bg-accent hover:text-white px-8 py-3 rounded uppercase tracking-widest font-bold text-xs transition-all font-mono">{% trans "Reset" %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        window.toolsConfig = {
+            alertMissingData: "{% trans 'Veuillez remplir tous les champs.'|escapejs %}",
+            bmiUnderweight: "{% trans 'Maigreur'|escapejs %}",
+            bmiNormal: "{% trans 'Corpulence Normale'|escapejs %}",
+            bmiOverweight: "{% trans 'Surpoids'|escapejs %}",
+            bmiObese: "{% trans 'Obésité'|escapejs %}",
+            btnPause: "{% trans 'Pause'|escapejs %}",
+            btnResume: "{% trans 'Reprendre'|escapejs %}",
+            btnStart: "{% trans 'Démarrer'|escapejs %}",
+            alertTimeUp: "{% trans 'Temps écoulé !'|escapejs %}"
+        };
+    </script>
+    <script src="{% static 'web/js/tools.js' %}"></script>
+{% endblock %}

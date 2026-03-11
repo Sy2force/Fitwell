@@ -1,0 +1,83 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Bibliothèque d'Exercices - FitWell" %}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-background transition-colors duration-300 relative overflow-hidden">
+    <!-- Background Grid Effect -->
+    <div class="absolute inset-0 z-0 opacity-10 pointer-events-none bg-grid bg-grid-energy">
+    </div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-display font-bold italic text-white mb-4 uppercase tracking-wide">
+                {% trans "BIBLIOTHÈQUE" %} <span class="text-energy drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]">{% trans "TACTIQUE" %}</span>
+            </h1>
+            <p class="text-gray-400 font-mono text-sm tracking-widest uppercase flex justify-center items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-energy animate-pulse"></span>
+                {% trans "Base de données des mouvements opérationnels" %}
+            </p>
+        </div>
+
+        <!-- Filters -->
+        <div class="flex flex-wrap justify-center gap-2 mb-12">
+            <a href="{% url 'exercise_library' %}" class="px-4 py-2 rounded-sm text-sm font-bold uppercase tracking-widest transition-all font-mono border {% if not current_muscle %}bg-primary/10 border-primary text-primary shadow-[0_0_15px_rgba(0,243,255,0.3)]{% else %}bg-surface border-white/10 text-gray-400 hover:border-primary/50 hover:text-white{% endif %}">
+                {% trans "Tous" %}
+            </a>
+            {% for code, name in muscle_choices %}
+            <a href="?muscle={{ code }}" class="px-4 py-2 rounded-sm text-sm font-bold uppercase tracking-widest transition-all font-mono border {% if current_muscle == code %}bg-primary/10 border-primary text-primary shadow-[0_0_15px_rgba(0,243,255,0.3)]{% else %}bg-surface border-white/10 text-gray-400 hover:border-primary/50 hover:text-white{% endif %}">
+                {{ name }}
+            </a>
+            {% endfor %}
+        </div>
+
+        <!-- Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for exercise in exercises %}
+            <div class="glass-card overflow-hidden group hover:border-primary/50 transition-all duration-300 bg-surface/50 border-white/5 hover:shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+                {% if exercise.image_url %}
+                <div class="h-48 overflow-hidden relative">
+                    <img src="{{ exercise.image_url }}" alt="{{ exercise.name }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+                    <span class="absolute bottom-4 left-4 text-primary text-[10px] font-bold uppercase tracking-widest bg-surface/80 border border-primary/30 px-2 py-1 rounded backdrop-blur-md font-mono">
+                        {{ exercise.get_muscle_group_display }}
+                    </span>
+                </div>
+                {% else %}
+                <div class="h-48 bg-surface flex items-center justify-center relative border-b border-white/5">
+                    <span class="text-4xl filter grayscale group-hover:grayscale-0 transition-all">🏋️</span>
+                    <span class="absolute bottom-4 left-4 text-[10px] font-bold uppercase tracking-widest bg-surface border border-white/10 text-gray-400 px-2 py-1 rounded font-mono">
+                        {{ exercise.get_muscle_group_display }}
+                    </span>
+                </div>
+                {% endif %}
+                
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-white font-display group-hover:text-primary transition-colors uppercase italic">{{ exercise.name }}</h3>
+                        <span class="text-[10px] font-mono px-2 py-1 rounded border uppercase tracking-wide {% if exercise.difficulty == 'beginner' %}border-health/50 text-health bg-health/10{% elif exercise.difficulty == 'intermediate' %}border-energy/50 text-energy bg-energy/10{% else %}border-accent/50 text-accent bg-accent/10{% endif %}">
+                            {{ exercise.get_difficulty_display }}
+                        </span>
+                    </div>
+                    
+                    <p class="text-gray-400 text-sm mb-4 line-clamp-3 font-mono leading-relaxed">
+                        {{ exercise.description }}
+                    </p>
+                    
+                    <div class="flex items-center text-xs text-gray-500 font-mono space-x-2 border-t border-white/5 pt-4">
+                        <span class="flex items-center gap-2"><span class="text-primary">🛠</span> {{ exercise.equipment|default:"Poids du corps" }}</span>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-full text-center py-12 border-2 border-dashed border-white/10 rounded-lg">
+                <p class="text-gray-500 text-lg font-mono">{% trans "Aucun exercice trouvé dans cette catégorie." %}</p>
+                <a href="{% url 'exercise_library' %}" class="text-primary hover:text-white mt-4 inline-block font-bold uppercase tracking-widest text-sm">{% trans "Voir tout" %}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

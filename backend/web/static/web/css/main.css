@@ -1,0 +1,139 @@
+/* Base transitions for smooth theme switching */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+}
+
+.dark .glass-card {
+    background: rgba(15, 15, 22, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dark .glass-card:hover {
+    border-color: rgba(0, 243, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+}
+
+/* Sport Typography Utilities */
+.text-sport { font-family: 'Teko', sans-serif; }
+
+/* Autofill Fix for Dark Mode */
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover, 
+.dark input:-webkit-autofill:focus, 
+.dark input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #111827 inset !important;
+    -webkit-text-fill-color: #f3f4f6 !important;
+    caret-color: white;
+}
+
+/* Autofill Fix for Light Mode */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+    -webkit-text-fill-color: #1f2937 !important;
+    caret-color: black;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(234, 179, 8, 0.3);
+    border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(234, 179, 8, 0.6);
+}
+
+/* Checkbox Styling override */
+input[type="checkbox"] {
+    appearance: none;
+    background-color: rgba(0,0,0,0.3);
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 0.15em;
+    display: grid;
+    place-content: center;
+}
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em #eab308;
+    transform-origin: center;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+input[type="checkbox"]:checked {
+    border-color: #eab308;
+}
+
+/* Background Grid Utilities */
+.bg-grid {
+    background-size: 40px 40px;
+    mask-image: linear-gradient(to bottom, transparent, 10% white, 90% white, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, 10% white, 90% white, transparent);
+}
+
+.bg-grid-energy {
+    background-image: 
+        linear-gradient(rgba(234, 179, 8, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(234, 179, 8, 0.1) 1px, transparent 1px);
+}
+
+.bg-grid-primary {
+    background-image: 
+        linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
+}
+
+.bg-grid-health {
+    background-image: 
+        linear-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 185, 129, 0.1) 1px, transparent 1px);
+}
+
+.bg-grid-accent {
+    background-image: 
+        linear-gradient(rgba(239, 68, 68, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(239, 68, 68, 0.1) 1px, transparent 1px);
+}
+
+.bg-grid-secondary {
+    background-image: 
+        linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
+}
+
+.bg-grid-white {
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+.bg-radial-energy {
+    background-image: radial-gradient(circle at 50% 50%, rgba(234, 179, 8, 0.15), transparent 70%);
+}
