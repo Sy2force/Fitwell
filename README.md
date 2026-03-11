@@ -27,6 +27,11 @@ FitWell est une plateforme SaaS complète dédiée à la santé, au fitness et �
 - Système de Likes et Commentaires pour l'interaction.
 - Filtrage par catégories et recherche textuelle.
 
+### 5. 🌍 Internationalisation
+- **Support Bilingue** : Français (défaut) et Anglais.
+- **Interface Adaptative** : Traduction intégrale (Menus, Formulaires, Plans IA).
+- **Accessible** : Sélecteur de langue optimisé pour Desktop et Mobile.
+
 ---
 
 ## 🛠 Installation & Démarrage
@@ -93,7 +98,6 @@ Accès : `http://127.0.0.1:8000/swagger/`
 ## 🏗 Architecture Technique
 
 - **Backend** : Django 4.2 (Monolithe) + Django REST Framework (API).
-- **Internationalisation** : Django i18n (gettext) pour le support FR/EN.
 - **Frontend** : Django Templates (DTL) + TailwindCSS (CDN).
 - **Design** : Thème "Dark Mode" / Glassmorphism futuriste.
 - **Base de Données** : SQLite (Dev) / PostgreSQL (Prod ready via `dj-database-url`).
