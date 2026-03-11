@@ -57,9 +57,8 @@ Le projet est maintenant entièrement contenu dans le dossier `backend` :
      ```
 
 2. **Charger des données de démo (Optionnel)** :
-   - Si vous voulez initialiser la base de données :
+   - Dans le Shell de Render (onglet "Connect") :
      ```bash
-     python ../_dev_only/scripts/seed.py
+     python manage.py seed_db
      ```
-     *(Note : Assurez-vous que le chemin vers le script est correct depuis la racine d'exécution)*
-
+     *(Ceci peuplera la base de données avec des articles, exercices et recettes)*
