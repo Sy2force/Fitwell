@@ -112,18 +112,16 @@
                         </button>
 
                         <!-- Language Switcher -->
-                        <div class="relative group">
-                            <button class="flex items-center text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white font-mono text-sm uppercase">
-                                {{ LANGUAGE_CODE }}
+                        <div class="relative group z-50">
+                            <button class="flex items-center text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white font-mono text-sm font-bold uppercase transition-colors">
+                                {{ LANGUAGE_CODE|slice:":2" }}
                                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </button>
-                            <div class="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100 dark:border-gray-700">
+                            <div class="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-md shadow-xl py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100 dark:border-gray-700 transform origin-top-right">
                                 {% for lang_code, lang_name in LANGUAGES %}
-                                    {% if lang_code != LANGUAGE_CODE %}
-                                        <a href="{% change_lang lang_code %}" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                            {{ lang_name }}
-                                        </a>
-                                    {% endif %}
+                                    <a href="{% change_lang lang_code %}" class="block w-full text-left px-4 py-2 text-sm {% if lang_code == LANGUAGE_CODE|slice:':2' %}text-primary font-bold bg-gray-50 dark:bg-gray-700{% else %}text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700{% endif %} transition-colors">
+                                        {{ lang_name }}
+                                    </a>
                                 {% endfor %}
                             </div>
                         </div>
@@ -161,6 +159,61 @@
                             <a href="{% url 'register' %}" class="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium uppercase tracking-widest hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg">{% trans "Rejoindre" %}</a>
                         {% endif %}
                     </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="bg-white dark:bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="{% url 'tools' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Outils" %}</a>
+                <a href="{% url 'blog_list' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Blog" %}</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'planner' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Planificateur" %}</a>
+                    <a href="{% url 'profile' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Profil" %}</a>
+                {% endif %}
+            </div>
+            <div class="pt-4 pb-4 border-t border-gray-200 dark:border-white/10">
+                <div class="flex items-center px-5 justify-between">
+                    <div class="flex items-center">
+                        <!-- Theme Toggle Mobile -->
+                        <button id="theme-toggle-mobile" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-2">
+                            <svg id="theme-toggle-dark-icon-mobile" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                            <svg id="theme-toggle-light-icon-mobile" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                        </button>
+                        
+                        <!-- Language Switcher Mobile -->
+                        <div class="flex space-x-2">
+                             {% for lang_code, lang_name in LANGUAGES %}
+                                <a href="{% change_lang lang_code %}" class="px-2 py-1 rounded-md text-sm font-medium {% if lang_code == LANGUAGE_CODE|slice:':2' %}bg-primary text-white{% else %}text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200{% endif %}">
+                                    {{ lang_code|upper }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    {% if user.is_authenticated %}
+                    <div class="flex items-center space-x-2">
+                        <a href="{% url 'logout' %}" class="text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-white px-3 py-2 rounded-md text-xs font-medium uppercase tracking-widest border border-gray-200 dark:border-white/20 hover:bg-gray-100 dark:hover:bg-white/5 transition-all">{% trans "Déconnexion" %}</a>
+                    </div>
+                    {% else %}
+                    <div class="flex items-center space-x-2">
+                         <a href="{% url 'login' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase tracking-widest">{% trans "Connexion" %}</a>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -215,21 +268,27 @@
         // Dark Mode Toggle Logic
         var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        var themeToggleDarkIconMobile = document.getElementById('theme-toggle-dark-icon-mobile');
+        var themeToggleLightIconMobile = document.getElementById('theme-toggle-light-icon-mobile');
 
         // Change the icons inside the button based on previous settings
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            themeToggleLightIcon.classList.remove('hidden');
+            if(themeToggleLightIcon) themeToggleLightIcon.classList.remove('hidden');
+            if(themeToggleLightIconMobile) themeToggleLightIconMobile.classList.remove('hidden');
         } else {
-            themeToggleDarkIcon.classList.remove('hidden');
+            if(themeToggleDarkIcon) themeToggleDarkIcon.classList.remove('hidden');
+            if(themeToggleDarkIconMobile) themeToggleDarkIconMobile.classList.remove('hidden');
         }
 
         var themeToggleBtn = document.getElementById('theme-toggle');
+        var themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
 
-        themeToggleBtn.addEventListener('click', function() {
-
+        function toggleTheme() {
             // toggle icons inside button
-            themeToggleDarkIcon.classList.toggle('hidden');
-            themeToggleLightIcon.classList.toggle('hidden');
+            if(themeToggleDarkIcon) themeToggleDarkIcon.classList.toggle('hidden');
+            if(themeToggleLightIcon) themeToggleLightIcon.classList.toggle('hidden');
+            if(themeToggleDarkIconMobile) themeToggleDarkIconMobile.classList.toggle('hidden');
+            if(themeToggleLightIconMobile) themeToggleLightIconMobile.classList.toggle('hidden');
 
             // if set via local storage previously
             if (localStorage.getItem('color-theme')) {
@@ -251,7 +310,10 @@
                     localStorage.setItem('color-theme', 'dark');
                 }
             }
-        });
+        }
+
+        if(themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+        if(themeToggleBtnMobile) themeToggleBtnMobile.addEventListener('click', toggleTheme);
     </script>
 </body>
 </html>
