@@ -75,11 +75,175 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Stopwatch / Timer -->
+            <div class="glass-card p-8 border-l-4 border-green-500 bg-white dark:bg-black/20 border-gray-200 dark:border-white/10 shadow-lg dark:shadow-none col-span-1 md:col-span-2">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 font-display italic">{% trans "Chronomètre & Timer" %}</h3>
+                
+                <div class="flex justify-center space-x-4 mb-8 border-b border-gray-200 dark:border-white/10 pb-4">
+                    <button onclick="switchTab('stopwatch')" id="tab-stopwatch" class="text-sm font-bold uppercase tracking-widest text-green-500 border-b-2 border-green-500 pb-4 px-4 transition-colors">{% trans "Chronomètre" %}</button>
+                    <button onclick="switchTab('timer')" id="tab-timer" class="text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-gray-900 dark:hover:text-white pb-4 px-4 transition-colors">{% trans "Minuteur" %}</button>
+                </div>
+
+                <!-- Stopwatch UI -->
+                <div id="stopwatch-ui" class="text-center">
+                    <div class="text-6xl md:text-8xl font-mono font-bold text-gray-900 dark:text-white mb-8 tracking-tighter" id="stopwatch-display">00:00.00</div>
+                    <div class="flex justify-center space-x-4">
+                        <button onclick="startStopwatch()" id="btn-start-stopwatch" class="bg-green-500/10 text-green-500 border border-green-500 hover:bg-green-500 hover:text-white px-8 py-3 rounded uppercase tracking-widest font-bold text-xs transition-all">{% trans "Démarrer" %}</button>
+                        <button onclick="resetStopwatch()" class="bg-red-500/10 text-red-500 border border-red-500 hover:bg-red-500 hover:text-white px-8 py-3 rounded uppercase tracking-widest font-bold text-xs transition-all">{% trans "Reset" %}</button>
+                    </div>
+                </div>
+
+                <!-- Timer UI -->
+                <div id="timer-ui" class="text-center hidden">
+                    <div class="flex justify-center space-x-2 mb-8">
+                        <input type="number" id="timer-min" class="w-24 text-center bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-white/10 p-3 rounded text-2xl font-mono" placeholder="00" value="00">
+                        <span class="text-2xl font-mono flex items-center">:</span>
+                        <input type="number" id="timer-sec" class="w-24 text-center bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-white/10 p-3 rounded text-2xl font-mono" placeholder="00" value="00">
+                    </div>
+                    <div class="text-6xl md:text-8xl font-mono font-bold text-gray-900 dark:text-white mb-8 tracking-tighter hidden" id="timer-display">00:00</div>
+                    <div class="flex justify-center space-x-4">
+                        <button onclick="startTimer()" id="btn-start-timer" class="bg-green-500/10 text-green-500 border border-green-500 hover:bg-green-500 hover:text-white px-8 py-3 rounded uppercase tracking-widest font-bold text-xs transition-all">{% trans "Démarrer" %}</button>
+                        <button onclick="resetTimer()" class="bg-red-500/10 text-red-500 border border-red-500 hover:bg-red-500 hover:text-white px-8 py-3 rounded uppercase tracking-widest font-bold text-xs transition-all">{% trans "Reset" %}</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
+    // --- Stopwatch Logic ---
+    let stopwatchInterval;
+    let stopwatchTime = 0;
+    let stopwatchRunning = false;
+
+    function startStopwatch() {
+        const btn = document.getElementById('btn-start-stopwatch');
+        if (!stopwatchRunning) {
+            stopwatchRunning = true;
+            btn.innerText = '{% trans "Pause" %}';
+            const startTime = Date.now() - stopwatchTime;
+            stopwatchInterval = setInterval(() => {
+                stopwatchTime = Date.now() - startTime;
+                updateStopwatchDisplay();
+            }, 10);
+        } else {
+            stopwatchRunning = false;
+            btn.innerText = '{% trans "Reprendre" %}';
+            clearInterval(stopwatchInterval);
+        }
+    }
+
+    function resetStopwatch() {
+        stopwatchRunning = false;
+        clearInterval(stopwatchInterval);
+        stopwatchTime = 0;
+        updateStopwatchDisplay();
+        document.getElementById('btn-start-stopwatch').innerText = '{% trans "Démarrer" %}';
+    }
+
+    function updateStopwatchDisplay() {
+        const time = new Date(stopwatchTime);
+        const minutes = String(time.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(time.getUTCSeconds()).padStart(2, '0');
+        const milliseconds = String(Math.floor(time.getUTCMilliseconds() / 10)).padStart(2, '0');
+        document.getElementById('stopwatch-display').innerText = `${minutes}:${seconds}.${milliseconds}`;
+    }
+
+    // --- Timer Logic ---
+    let timerInterval;
+    let timerTime = 0;
+    let timerRunning = false;
+
+    function startTimer() {
+        const btn = document.getElementById('btn-start-timer');
+        const display = document.getElementById('timer-display');
+        const inputs = document.querySelectorAll('#timer-ui input');
+
+        if (!timerRunning) {
+            if (timerTime === 0) {
+                const min = parseInt(document.getElementById('timer-min').value) || 0;
+                const sec = parseInt(document.getElementById('timer-sec').value) || 0;
+                timerTime = (min * 60 + sec) * 1000;
+            }
+
+            if (timerTime > 0) {
+                timerRunning = true;
+                btn.innerText = '{% trans "Pause" %}';
+                inputs.forEach(i => i.classList.add('hidden'));
+                document.querySelector('#timer-ui span').classList.add('hidden');
+                display.classList.remove('hidden');
+                updateTimerDisplay();
+
+                const endTime = Date.now() + timerTime;
+                
+                timerInterval = setInterval(() => {
+                    const remaining = endTime - Date.now();
+                    if (remaining <= 0) {
+                        clearInterval(timerInterval);
+                        timerTime = 0;
+                        timerRunning = false;
+                        display.innerText = "00:00";
+                        btn.innerText = '{% trans "Démarrer" %}';
+                        alert('{% trans "Temps écoulé !" %}');
+                        resetTimer(); // Reset UI
+                    } else {
+                        timerTime = remaining;
+                        updateTimerDisplay();
+                    }
+                }, 100);
+            }
+        } else {
+            timerRunning = false;
+            btn.innerText = '{% trans "Reprendre" %}';
+            clearInterval(timerInterval);
+        }
+    }
+
+    function resetTimer() {
+        timerRunning = false;
+        clearInterval(timerInterval);
+        timerTime = 0;
+        
+        document.getElementById('btn-start-timer').innerText = '{% trans "Démarrer" %}';
+        document.getElementById('timer-display').classList.add('hidden');
+        document.querySelectorAll('#timer-ui input').forEach(i => i.classList.remove('hidden'));
+        document.querySelector('#timer-ui span').classList.remove('hidden');
+        document.getElementById('timer-min').value = '00';
+        document.getElementById('timer-sec').value = '00';
+    }
+
+    function updateTimerDisplay() {
+        const totalSeconds = Math.ceil(timerTime / 1000);
+        const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+        const seconds = String(totalSeconds % 60).padStart(2, '0');
+        document.getElementById('timer-display').innerText = `${minutes}:${seconds}`;
+    }
+
+    // --- Tab Switching ---
+    function switchTab(tab) {
+        if(tab === 'stopwatch') {
+            document.getElementById('stopwatch-ui').classList.remove('hidden');
+            document.getElementById('timer-ui').classList.add('hidden');
+            
+            document.getElementById('tab-stopwatch').classList.add('text-green-500', 'border-b-2', 'border-green-500');
+            document.getElementById('tab-stopwatch').classList.remove('text-gray-500');
+            
+            document.getElementById('tab-timer').classList.remove('text-green-500', 'border-b-2', 'border-green-500');
+            document.getElementById('tab-timer').classList.add('text-gray-500');
+        } else {
+            document.getElementById('stopwatch-ui').classList.add('hidden');
+            document.getElementById('timer-ui').classList.remove('hidden');
+            
+            document.getElementById('tab-timer').classList.add('text-green-500', 'border-b-2', 'border-green-500');
+            document.getElementById('tab-timer').classList.remove('text-gray-500');
+            
+            document.getElementById('tab-stopwatch').classList.remove('text-green-500', 'border-b-2', 'border-green-500');
+            document.getElementById('tab-stopwatch').classList.add('text-gray-500');
+        }
+    }
+
     function calculateBMI() {
         const height = document.getElementById('bmi-height').value;
         const weight = document.getElementById('bmi-weight').value;

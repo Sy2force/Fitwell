@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from .forms import CustomUserCreationForm, CustomAuthenticationForm, WellnessPlanForm, CommentForm, UserUpdateForm, CustomPasswordChangeForm, CustomEventForm
-from api.models import User, Article, Category, UserStats, WellnessPlan, Comment, CustomEvent
+from django.db.models import Avg
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, WellnessPlanForm, CommentForm, UserUpdateForm, CustomPasswordChangeForm, CustomEventForm, DailyLogForm
+from api.models import User, Article, Category, UserStats, WellnessPlan, Comment, CustomEvent, Exercise, DailyLog, Recipe
 from api.services import generate_wellness_plan
 
 def home(request):
@@ -14,6 +16,95 @@ def home(request):
     if request.user.is_authenticated:
         latest_plan = request.user.plans.order_by('-created_at').first()
     return render(request, 'web/home.html', {'plan': latest_plan})
+
+@login_required(login_url='login')
+def dashboard_view(request):
+    # Update Streak
+    if hasattr(request.user, 'stats'):
+        request.user.stats.update_streak()
+        
+    today_log, created = DailyLog.objects.get_or_create(user=request.user, date=timezone.now().date())
+    
+    if request.method == 'POST':
+        form = DailyLogForm(request.POST, instance=today_log)
+        if form.is_valid():
+            form.save()
+            # XP Reward for logging (once per day fully)
+            # Simple logic: Give XP every save for now, or check delta. 
+            # Better: Just give small XP for updating.
+            request.user.stats.add_xp(20)
+            messages.success(request, _("Journal mis à jour ! +20 XP"))
+            return redirect('dashboard')
+    else:
+        form = DailyLogForm(instance=today_log)
+        
+    # Recent Activity / Stats
+    week_logs = request.user.daily_logs.order_by('-date')[:7]
+    avg_sleep = week_logs.aggregate(Avg('sleep_hours'))['sleep_hours__avg'] or 0
+    avg_water = week_logs.aggregate(Avg('water_liters'))['water_liters__avg'] or 0
+    
+    # Chart Data (Last 30 days)
+    # Fetch most recent 30 logs, then reverse to chronological order
+    recent_logs = request.user.daily_logs.order_by('-date')[:30]
+    chart_logs = sorted(recent_logs, key=lambda x: x.date)
+    
+    chart_dates = [log.date.strftime('%d/%m') for log in chart_logs]
+    chart_weight = [log.weight for log in chart_logs if log.weight]
+    chart_sleep = [log.sleep_hours for log in chart_logs]
+    chart_mood = [log.mood for log in chart_logs]
+    
+    # Today's Agenda
+    today_events = request.user.custom_events.filter(
+        day_of_week=timezone.now().strftime('%A').lower()
+    ).order_by('start_time')
+    
+    return render(request, 'web/dashboard.html', {
+        'form': form,
+        'user': request.user,
+        'avg_sleep': round(avg_sleep, 1),
+        'avg_water': round(avg_water, 1),
+        'today_events': today_events,
+        'chart_dates': chart_dates,
+        'chart_weight': chart_weight,
+        'chart_sleep': chart_sleep,
+        'chart_mood': chart_mood,
+    })
+
+@login_required(login_url='login')
+def exercise_library(request):
+    exercises = Exercise.objects.all()
+    
+    muscle = request.GET.get('muscle')
+    if muscle:
+        exercises = exercises.filter(muscle_group=muscle)
+        
+    return render(request, 'web/exercise_library.html', {
+        'exercises': exercises,
+        'current_muscle': muscle
+    })
+
+@login_required(login_url='login')
+def recipe_list(request):
+    recipes = Recipe.objects.all()
+    
+    category = request.GET.get('category')
+    difficulty = request.GET.get('difficulty')
+    
+    if category:
+        recipes = recipes.filter(category=category)
+    if difficulty:
+        recipes = recipes.filter(difficulty=difficulty)
+        
+    return render(request, 'web/recipe_list.html', {
+        'recipes': recipes,
+        'current_category': category,
+        'current_difficulty': difficulty
+    })
+
+@login_required(login_url='login')
+def recipe_detail(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    return render(request, 'web/recipe_detail.html', {'recipe': recipe})
 
 def login_view(request):
     if request.method == 'POST':

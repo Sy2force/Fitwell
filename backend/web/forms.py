@@ -1,7 +1,33 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from api.models import User, WellnessPlan, Comment, CustomEvent
+from api.models import User, WellnessPlan, Comment, CustomEvent, DailyLog
+
+class DailyLogForm(forms.ModelForm):
+    class Meta:
+        model = DailyLog
+        fields = ['water_liters', 'sleep_hours', 'mood', 'weight', 'notes']
+        widgets = {
+            'water_liters': forms.NumberInput(attrs={'step': '0.1', 'placeholder': '2.5'}),
+            'sleep_hours': forms.NumberInput(attrs={'step': '0.5', 'placeholder': '7.5'}),
+            'mood': forms.NumberInput(attrs={'type': 'range', 'min': '1', 'max': '10', 'class': 'w-full'}),
+            'weight': forms.NumberInput(attrs={'step': '0.1', 'placeholder': 'kg'}),
+            'notes': forms.Textarea(attrs={'rows': 3, 'placeholder': _('Notes sur la journée...')}),
+        }
+        labels = {
+            'water_liters': _('Eau (L)'),
+            'sleep_hours': _('Sommeil (h)'),
+            'mood': _('Humeur (1-10)'),
+            'weight': _('Poids (kg)'),
+            'notes': _('Journal de bord'),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        common_classes = 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white focus:border-energy focus:outline-none dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white'
+        for field_name, field in self.fields.items():
+            if field_name != 'mood': # Range input styling is different usually
+                field.widget.attrs.update({'class': common_classes})
 
 class CustomEventForm(forms.ModelForm):
     class Meta:

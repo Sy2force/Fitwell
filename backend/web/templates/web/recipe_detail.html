@@ -1,0 +1,106 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{{ recipe.title }} - FitWell{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-background transition-colors duration-300">
+    <div class="max-w-4xl mx-auto">
+        <!-- Back Link -->
+        <div class="mb-8">
+            <a href="{% url 'recipe_list' %}" class="inline-flex items-center text-sm font-bold text-gray-500 hover:text-green-500 transition-colors uppercase tracking-widest">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                {% trans "Retour au Labo" %}
+            </a>
+        </div>
+
+        <!-- Recipe Card -->
+        <div class="glass-card overflow-hidden bg-white dark:bg-black/20 border border-gray-200 dark:border-white/10 shadow-xl">
+            <!-- Hero Image -->
+            <div class="h-64 md:h-96 w-full relative bg-gray-100 dark:bg-white/5">
+                {% if recipe.image_url %}
+                    <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}" class="w-full h-full object-cover">
+                {% else %}
+                    <div class="w-full h-full flex items-center justify-center text-6xl">🥗</div>
+                {% endif %}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                
+                <div class="absolute bottom-0 left-0 w-full p-8">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="bg-green-600 text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-widest">{{ recipe.get_category_display }}</span>
+                        <span class="bg-black/50 backdrop-blur-md text-white border border-white/20 text-xs font-bold px-3 py-1 rounded uppercase tracking-widest border {% if recipe.difficulty == 'easy' %}border-green-500 text-green-400{% elif recipe.difficulty == 'medium' %}border-yellow-500 text-yellow-400{% else %}border-red-500 text-red-400{% endif %}">
+                            {{ recipe.get_difficulty_display }}
+                        </span>
+                    </div>
+                    <h1 class="text-3xl md:text-5xl font-display font-bold text-white mb-2">{{ recipe.title }}</h1>
+                    <div class="flex items-center text-gray-300 text-sm font-mono space-x-6">
+                        <span class="flex items-center"><span class="mr-2">⏱</span> {{ recipe.prep_time_minutes }} min</span>
+                        <span class="flex items-center"><span class="mr-2">🔥</span> {{ recipe.calories }} kcal</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <!-- Macros Sidebar -->
+                <div class="md:col-span-1 bg-gray-50 dark:bg-white/5 p-8 border-r border-gray-200 dark:border-white/10">
+                    <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-widest mb-6 border-b border-gray-200 dark:border-white/10 pb-2">{% trans "Profil Macro" %}</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <span class="text-xs text-gray-500 uppercase">{% trans "Protéines" %}</span>
+                                <span class="text-xl font-bold text-blue-500">{{ recipe.protein_g }}g</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-blue-500 h-full" style="width: 40%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <span class="text-xs text-gray-500 uppercase">{% trans "Glucides" %}</span>
+                                <span class="text-xl font-bold text-yellow-500">{{ recipe.carbs_g }}g</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-yellow-500 h-full" style="width: 50%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-end mb-1">
+                                <span class="text-xs text-gray-500 uppercase">{% trans "Lipides" %}</span>
+                                <span class="text-xl font-bold text-red-500">{{ recipe.fats_g }}g</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-white/10 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-red-500 h-full" style="width: 20%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="md:col-span-2 p-8">
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 font-display italic">{% trans "Ingrédients" %}</h3>
+                        <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                            {% for line in recipe.ingredients.splitlines %}
+                                {% if line|length > 0 %}
+                                <li class="flex items-start">
+                                    <span class="text-green-500 mr-2">•</span>
+                                    {{ line }}
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 font-display italic">{% trans "Préparation" %}</h3>
+                        <div class="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+                            {{ recipe.instructions|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

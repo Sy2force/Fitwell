@@ -42,9 +42,13 @@ urlpatterns = [
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('profile/password/', views.change_password, name='change_password'),
     path('planner/', views.planner_view, name='planner'),
+    path('dashboard/', views.dashboard_view, name='dashboard'),
     path('agenda/', views.custom_planner_view, name='custom_planner'),
     path('agenda/delete/<int:event_id>/', views.delete_custom_event, name='delete_custom_event'),
     path('agenda/complete/<int:event_id>/', views.complete_custom_event, name='complete_custom_event'),
+    path('exercises/', views.exercise_library, name='exercise_library'),
+    path('nutrition/', views.recipe_list, name='recipe_list'),
+    path('nutrition/<int:recipe_id>/', views.recipe_detail, name='recipe_detail'),
     path('tools/', views.tools_view, name='tools'),
     
     # Pages Statiques

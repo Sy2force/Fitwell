@@ -1,0 +1,96 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Nutrition & Recettes - FitWell" %}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-background transition-colors duration-300">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-display font-bold italic text-gray-900 dark:text-white mb-4">
+                {% trans "LABORATOIRE" %} <span class="text-green-500">{% trans "NUTRITION" %}</span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 font-mono text-sm tracking-widest uppercase">
+                {% trans "Carburant premium pour performance optimale" %}
+            </p>
+        </div>
+
+        <!-- Filters -->
+        <div class="flex flex-wrap justify-center gap-2 mb-12">
+            <a href="{% url 'recipe_list' %}" class="px-4 py-2 rounded-full text-sm font-bold uppercase tracking-widest transition-all {% if not current_category %}bg-green-500 text-white shadow-lg shadow-green-500/30{% else %}bg-white dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10{% endif %}">
+                {% trans "Tout" %}
+            </a>
+            <a href="?category=breakfast" class="px-4 py-2 rounded-full text-sm font-bold uppercase tracking-widest transition-all {% if current_category == 'breakfast' %}bg-green-500 text-white shadow-lg shadow-green-500/30{% else %}bg-white dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10{% endif %}">
+                {% trans "Petit Déj" %}
+            </a>
+            <a href="?category=lunch" class="px-4 py-2 rounded-full text-sm font-bold uppercase tracking-widest transition-all {% if current_category == 'lunch' %}bg-green-500 text-white shadow-lg shadow-green-500/30{% else %}bg-white dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10{% endif %}">
+                {% trans "Déjeuner" %}
+            </a>
+            <a href="?category=dinner" class="px-4 py-2 rounded-full text-sm font-bold uppercase tracking-widest transition-all {% if current_category == 'dinner' %}bg-green-500 text-white shadow-lg shadow-green-500/30{% else %}bg-white dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10{% endif %}">
+                {% trans "Dîner" %}
+            </a>
+            <a href="?category=snack" class="px-4 py-2 rounded-full text-sm font-bold uppercase tracking-widest transition-all {% if current_category == 'snack' %}bg-green-500 text-white shadow-lg shadow-green-500/30{% else %}bg-white dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10{% endif %}">
+                {% trans "Snack" %}
+            </a>
+            <a href="?category=shake" class="px-4 py-2 rounded-full text-sm font-bold uppercase tracking-widest transition-all {% if current_category == 'shake' %}bg-green-500 text-white shadow-lg shadow-green-500/30{% else %}bg-white dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10{% endif %}">
+                {% trans "Shakes" %}
+            </a>
+        </div>
+
+        <!-- Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for recipe in recipes %}
+            <a href="{% url 'recipe_detail' recipe.id %}" class="glass-card overflow-hidden group hover:border-green-500/50 transition-all duration-300 bg-white dark:bg-black/20 border-gray-200 dark:border-white/10 flex flex-col h-full">
+                <div class="h-48 overflow-hidden relative bg-gray-100 dark:bg-white/5">
+                    {% if recipe.image_url %}
+                        <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    {% else %}
+                        <div class="flex items-center justify-center h-full text-4xl">🥗</div>
+                    {% endif %}
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60"></div>
+                    <span class="absolute top-4 right-4 text-xs font-bold uppercase tracking-widest bg-black/50 text-white px-2 py-1 rounded backdrop-blur-sm border border-white/10">
+                        {{ recipe.calories }} kcal
+                    </span>
+                    <span class="absolute bottom-4 left-4 text-white text-xs font-bold uppercase tracking-widest bg-green-600 px-2 py-1 rounded">
+                        {{ recipe.get_category_display }}
+                    </span>
+                </div>
+                
+                <div class="p-6 flex-grow flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white font-display group-hover:text-green-500 transition-colors">{{ recipe.title }}</h3>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4 mb-4 text-xs text-gray-500 dark:text-gray-400 font-mono">
+                        <span class="flex items-center"><span class="mr-1">⏱</span> {{ recipe.prep_time_minutes }} min</span>
+                        <span class="flex items-center px-2 py-0.5 rounded border {% if recipe.difficulty == 'easy' %}border-green-500 text-green-500{% elif recipe.difficulty == 'medium' %}border-yellow-500 text-yellow-500{% else %}border-red-500 text-red-500{% endif %}">
+                            {{ recipe.get_difficulty_display }}
+                        </span>
+                    </div>
+                    
+                    <div class="mt-auto grid grid-cols-3 gap-2 text-center text-xs font-bold border-t border-gray-200 dark:border-white/10 pt-4">
+                        <div>
+                            <span class="block text-blue-500">{{ recipe.protein_g }}g</span>
+                            <span class="text-[10px] text-gray-400 uppercase">PROT</span>
+                        </div>
+                        <div>
+                            <span class="block text-yellow-500">{{ recipe.carbs_g }}g</span>
+                            <span class="text-[10px] text-gray-400 uppercase">GLU</span>
+                        </div>
+                        <div>
+                            <span class="block text-red-500">{{ recipe.fats_g }}g</span>
+                            <span class="text-[10px] text-gray-400 uppercase">LIP</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+            <div class="col-span-full text-center py-12">
+                <p class="text-gray-500 text-lg">{% trans "Aucune recette disponible pour le moment." %}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

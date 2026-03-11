@@ -182,6 +182,106 @@ class CustomEvent(models.Model):
     def __str__(self):
         return f"{self.title} ({self.user.username})"
 
+# -----------------------------------------------------------------------------
+# BIBLIOTHÈQUE D'EXERCICES
+# -----------------------------------------------------------------------------
+class Exercise(models.Model):
+    MUSCLE_CHOICES = [
+        ('chest', _('Pectoraux')),
+        ('back', _('Dos')),
+        ('legs', _('Jambes')),
+        ('shoulders', _('Épaules')),
+        ('arms', _('Bras')),
+        ('abs', _('Abdominaux')),
+        ('cardio', _('Cardio')),
+        ('full', _('Corps complet')),
+    ]
+    DIFFICULTY_CHOICES = [
+        ('beginner', _('Débutant')),
+        ('intermediate', _('Intermédiaire')),
+        ('advanced', _('Avancé')),
+    ]
+    
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    muscle_group = models.CharField(max_length=20, choices=MUSCLE_CHOICES)
+    difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES)
+    description = models.TextField()
+    equipment = models.CharField(max_length=100, blank=True)
+    image_url = models.CharField(max_length=500, blank=True, null=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+# -----------------------------------------------------------------------------
+# SUIVI QUOTIDIEN (DAILY LOG)
+# -----------------------------------------------------------------------------
+class DailyLog(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='daily_logs')
+    date = models.DateField(auto_now_add=True)
+    
+    # Métriques
+    water_liters = models.FloatField(default=0.0)
+    sleep_hours = models.FloatField(default=0.0)
+    mood = models.IntegerField(default=5) # 1-10
+    weight = models.FloatField(blank=True, null=True)
+    notes = models.TextField(blank=True)
+    
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('user', 'date')
+
+    def __str__(self):
+        return f"Log {self.user.username} - {self.date}"
+
+# -----------------------------------------------------------------------------
+# NUTRITION / RECETTES
+# -----------------------------------------------------------------------------
+class Recipe(models.Model):
+    DIFFICULTY_CHOICES = [
+        ('easy', _('Facile')),
+        ('medium', _('Moyen')),
+        ('hard', _('Difficile')),
+    ]
+    
+    CATEGORY_CHOICES = [
+        ('breakfast', _('Petit Déjeuner')),
+        ('lunch', _('Déjeuner')),
+        ('dinner', _('Dîner')),
+        ('snack', _('Collation')),
+        ('shake', _('Shake / Smoothie')),
+    ]
+
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES, default='easy')
+    prep_time_minutes = models.IntegerField(default=15)
+    calories = models.IntegerField(default=0)
+    protein_g = models.IntegerField(default=0)
+    carbs_g = models.IntegerField(default=0)
+    fats_g = models.IntegerField(default=0)
+    
+    ingredients = models.TextField(help_text="Liste des ingrédients séparés par des sauts de ligne")
+    instructions = models.TextField(help_text="Étapes de préparation")
+    image_url = models.CharField(max_length=500, blank=True, null=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
 class WellnessPlan(models.Model):
     """
     Plan généré par l'IA.

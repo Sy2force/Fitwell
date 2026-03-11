@@ -94,8 +94,23 @@
                     </a>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'dashboard' %}" class="text-white bg-white/10 px-3 py-2 rounded-md text-sm font-medium uppercase tracking-widest transition-colors border border-white/10 hover:bg-white/20">{% trans "QG" %}</a>
+                            {% endif %}
+                            
                             <a href="{% url 'tools' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase tracking-widest transition-colors">{% trans "Outils" %}</a>
-                            <a href="{% url 'blog_list' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase tracking-widest transition-colors">{% trans "Blog" %}</a>
+                            
+                            <div class="relative group">
+                                <button class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase tracking-widest transition-colors flex items-center">
+                                    {% trans "Intel" %}
+                                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </button>
+                                <div class="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-xl py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100 dark:border-gray-700 transform origin-top-right z-50">
+                                    <a href="{% url 'blog_list' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{% trans "Blog" %}</a>
+                                    <a href="{% url 'exercise_library' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">{% trans "Exercices" %}</a>
+                                </div>
+                            </div>
+
                             {% if user.is_authenticated %}
                                 <a href="{% url 'planner' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase tracking-widest transition-colors">{% trans "Planificateur" %}</a>
                                 <a href="{% url 'custom_planner' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium uppercase tracking-widest transition-colors">{% trans "Agenda" %}</a>
@@ -180,14 +195,21 @@
         <!-- Mobile Menu -->
         <div class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'dashboard' %}" class="text-energy hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest border border-energy/20 bg-energy/10 mb-2">{% trans "QG" %}</a>
+                {% endif %}
+                
                 <a href="{% url 'tools' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Outils" %}</a>
                 <a href="{% url 'blog_list' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Blog" %}</a>
+                <a href="{% url 'exercise_library' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Exercices" %}</a>
+                
                 {% if user.is_authenticated %}
                     <a href="{% url 'planner' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Planificateur" %}</a>
+                    <a href="{% url 'custom_planner' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Agenda" %}</a>
                     <a href="{% url 'profile' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Profil" %}</a>
                 {% endif %}
             </div>
-            <div class="pt-4 pb-4 border-t border-gray-200 dark:border-white/10">
+            <div class="pt-4 pb-4 border-t border-gray-200 dark:border-white/5">
                 <div class="flex items-center px-5 justify-between">
                     <div class="flex items-center">
                         <!-- Theme Toggle Mobile -->

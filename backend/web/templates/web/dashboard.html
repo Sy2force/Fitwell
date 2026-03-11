@@ -1,0 +1,220 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Centre de Commandement - FitWell" %}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-background transition-colors duration-300">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="mb-12 flex flex-col md:flex-row justify-between items-end">
+            <div>
+                <h1 class="text-4xl font-display font-bold italic text-gray-900 dark:text-white mb-2">
+                    {% trans "CENTRE DE" %} <span class="text-energy">{% trans "COMMANDEMENT" %}</span>
+                </h1>
+                <p class="text-gray-600 dark:text-gray-400 font-mono text-xs uppercase tracking-widest">
+                    {% trans "Rapport Quotidien & Métriques Vitales" %}
+                </p>
+            </div>
+            <div class="mt-4 md:mt-0 flex items-center space-x-4">
+                <div class="text-right hidden md:block">
+                    <span class="block text-xs text-gray-500 uppercase tracking-widest">{% trans "Niveau" %} {{ user.stats.level }}</span>
+                    <div class="w-32 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mt-1 overflow-hidden">
+                        <div class="h-full bg-energy" style="width: {% widthratio user.stats.xp 500 100 %}%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column: Daily Log -->
+            <div class="lg:col-span-1 space-y-8">
+                <div class="glass-card p-6 border-l-4 border-energy bg-white dark:bg-black/20">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 font-display italic">
+                        {% trans "Journal de Bord" %}
+                    </h3>
+                    <form method="post" class="space-y-4">
+                        {% csrf_token %}
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">{{ form.water_liters.label }}</label>
+                                {{ form.water_liters }}
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">{{ form.sleep_hours.label }}</label>
+                                {{ form.sleep_hours }}
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">{{ form.weight.label }}</label>
+                                {{ form.weight }}
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">{{ form.mood.label }}</label>
+                                {{ form.mood }}
+                                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                    <span>1</span><span>10</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">{{ form.notes.label }}</label>
+                            {{ form.notes }}
+                        </div>
+
+                        <button type="submit" class="w-full bg-energy/10 text-energy border border-energy hover:bg-energy hover:text-black transition-all py-3 rounded uppercase tracking-widest font-bold text-xs">
+                            {% trans "Mettre à jour le Rapport" %}
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass-card p-4 text-center">
+                        <span class="block text-3xl font-bold text-blue-500">{{ avg_water }}L</span>
+                        <span class="text-xs text-gray-500 uppercase tracking-widest">{% trans "Moy. Eau (7j)" %}</span>
+                    </div>
+                    <div class="glass-card p-4 text-center">
+                        <span class="block text-3xl font-bold text-purple-500">{{ avg_sleep }}h</span>
+                        <span class="text-xs text-gray-500 uppercase tracking-widest">{% trans "Moy. Sommeil (7j)" %}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Agenda & Status -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Agenda du Jour -->
+                <div class="glass-card p-6 border border-gray-200 dark:border-white/5">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white font-display italic">
+                            {% trans "Opérations du Jour" %}
+                        </h3>
+                        <a href="{% url 'custom_planner' %}" class="text-xs font-bold text-primary hover:text-white uppercase tracking-widest transition-colors">{% trans "Gérer l'Agenda" %} &rarr;</a>
+                    </div>
+
+                    <div class="space-y-3">
+                        {% for event in today_events %}
+                        <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10">
+                            <div class="flex items-center space-x-4">
+                                <span class="text-xs font-mono text-gray-500 bg-gray-200 dark:bg-white/10 px-2 py-1 rounded">
+                                    {{ event.start_time|time:"H:i" }}
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 dark:text-white {% if event.is_completed %}line-through text-gray-500{% endif %}">
+                                        {{ event.title }}
+                                    </h4>
+                                    <span class="text-xs text-gray-500 uppercase">{{ event.get_event_type_display }}</span>
+                                </div>
+                            </div>
+                            <div>
+                                {% if event.is_completed %}
+                                    <span class="text-green-500 font-bold text-xs uppercase">{% trans "Terminé" %}</span>
+                                {% else %}
+                                    <span class="text-energy font-bold text-xs uppercase">{% trans "En attente" %}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="text-center py-8 text-gray-500">
+                            <p>{% trans "Aucune opération programmée pour aujourd'hui." %}</p>
+                            <a href="{% url 'custom_planner' %}" class="text-primary text-sm font-bold mt-2 inline-block">{% trans "Créer une activité" %}</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Analysis / Charts -->
+                <div class="glass-card p-6 border border-gray-200 dark:border-white/5">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 font-display italic">
+                        {% trans "Analyse Biométrique" %}
+                    </h3>
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">{% trans "Évolution du Poids" %}</h4>
+                            <div class="h-48 relative">
+                                <canvas id="weightChart"></canvas>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">{% trans "Sommeil & Humeur" %}</h4>
+                            <div class="h-48 relative">
+                                <canvas id="sleepMoodChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Configuration commune
+    Chart.defaults.color = '#9ca3af';
+    Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+    
+    const dates = {{ chart_dates|safe }};
+    
+    // Weight Chart
+    new Chart(document.getElementById('weightChart'), {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: '{% trans "Poids (kg)" %}',
+                data: {{ chart_weight|safe }},
+                borderColor: '#eab308', // energy color
+                backgroundColor: 'rgba(234, 179, 8, 0.1)',
+                borderWidth: 2,
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { grid: { color: 'rgba(255,255,255,0.05)' } } }
+        }
+    });
+
+    // Sleep & Mood Chart
+    new Chart(document.getElementById('sleepMoodChart'), {
+        type: 'bar',
+        data: {
+            labels: dates,
+            datasets: [
+                {
+                    label: '{% trans "Sommeil (h)" %}',
+                    data: {{ chart_sleep|safe }},
+                    backgroundColor: '#3b82f6', // primary blue
+                    borderRadius: 4
+                },
+                {
+                    type: 'line',
+                    label: '{% trans "Humeur (1-10)" %}',
+                    data: {{ chart_mood|safe }},
+                    borderColor: '#10b981', // green
+                    borderWidth: 2,
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true, max: 12, grid: { display: false } },
+                y1: { beginAtZero: true, max: 10, position: 'right', grid: { display: false } }
+            }
+        }
+    });
+</script>
+{% endblock %}
