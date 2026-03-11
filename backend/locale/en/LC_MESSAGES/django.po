@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-11 12:16+0000\n"
+"POT-Creation-Date: 2026-03-11 13:12+0000\n"
 "PO-Revision-Date: 2026-03-09 19:40+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1317,7 +1317,13 @@ msgstr "Day Streak"
 msgid "OPTIMAL"
 msgstr "OPTIMAL"
 
-#: web/templates/web/profile.html:78
+#: web/templates/web/profile.html:78 web/views.py:187
+#, fuzzy
+#| msgid "Récupération"
+msgid "Récupération"
+msgstr "Recovery"
+
+#: web/templates/web/profile.html:89
 msgid "Lifestyle"
 msgstr "Lifestyle"
 
@@ -1340,6 +1346,12 @@ msgstr "BMI, TDEE calculators and advanced metrics."
 #: web/templates/web/recipe_detail.html:13
 msgid "Retour au Labo"
 msgstr "Back to Lab"
+
+#: web/templates/web/recipe_detail.html:46
+#, fuzzy
+#| msgid "Profil Métabolique"
+msgid "Profil Macro"
+msgstr "Metabolic Profile"
 
 #: web/templates/web/recipe_detail.html:82
 msgid "Ingrédients"
@@ -1547,180 +1559,200 @@ msgstr "Obesity"
 msgid "Session Tactique - J.A.R.V.I.S."
 msgstr "Tactical Session - J.A.R.V.I.S."
 
-#: web/templates/web/workout_session.html:36
+#: web/templates/web/workout_session.html:25
 msgid "INTERFACE TACTIQUE"
 msgstr "TACTICAL INTERFACE"
 
-#: web/templates/web/workout_session.html:38
+#: web/templates/web/workout_session.html:27
 msgid "SYSTEME: ONLINE"
 msgstr "SYSTEM: ONLINE"
 
-#: web/templates/web/workout_session.html:38
+#: web/templates/web/workout_session.html:27
 msgid "OPERATEUR:"
 msgstr "OPERATOR:"
 
-#: web/templates/web/workout_session.html:42
+#: web/templates/web/workout_session.html:31
 msgid "TEMPS TOTAL"
 msgstr "TOTAL TIME"
 
-#: web/templates/web/workout_session.html:49
-msgid "SEQUENCE DE MISSION"
-msgstr "MISSION SEQUENCE"
-
-#: web/templates/web/workout_session.html:70
-msgid "SECONDES RESTANTES"
+#: web/templates/web/workout_session.html:63
+#, fuzzy
+#| msgid "SECONDES RESTANTES"
+msgid "SECONDES"
 msgstr "SECONDS REMAINING"
 
-#: web/templates/web/workout_session.html:80
-msgid "INITIALISATION..."
-msgstr "INITIALIZING..."
-
-#: web/templates/web/workout_session.html:81
-msgid "Préparation des systèmes..."
-msgstr "System preparation..."
-
-#: web/templates/web/workout_session.html:87
-msgid "ENGAGER"
-msgstr "ENGAGE"
-
-#: web/templates/web/workout_session.html:95
+#: web/templates/web/workout_session.html:82
 msgid "PASSER"
 msgstr "SKIP"
 
-#: web/templates/web/workout_session.html:103
-msgid "ANALYSE IA"
-msgstr "AI ANALYSIS"
+#: web/templates/web/workout_session.html:90
+#, fuzzy
+#| msgid "Système en pause."
+msgid "Système activé."
+msgstr "System paused."
 
-#: web/templates/web/workout_session.html:113
-msgid "Connexion établie."
-msgstr "Connection established."
+#: web/templates/web/workout_session.html:178
+#, fuzzy
+#| msgid "Récupération"
+msgid "Récupération."
+msgstr "Recovery"
 
-#: web/templates/web/workout_session.html:114
-msgid "Protocoles biométriques chargés."
-msgstr "Biometric protocols loaded."
-
-#: web/templates/web/workout_session.html:115
-msgid "En attente de l'opérateur."
-msgstr "Awaiting operator."
-
-#: web/templates/web/workout_session.html:205
-msgid "Initialisation de la séquence. Échauffement requis."
-msgstr "Sequence initialization. Warmup required."
-
-#: web/templates/web/workout_session.html:207
-msgid "Engagement."
-msgstr "Engagement."
-
-#: web/templates/web/workout_session.html:207
-msgid "secondes"
-msgstr "seconds"
-
-#: web/templates/web/workout_session.html:209
-msgid "Pause tactique. Récupérez."
-msgstr "Tactical pause. Recover."
-
-#: web/templates/web/workout_session.html:211
-msgid "Mission accomplie. Retour au calme."
-msgstr "Mission accomplished. Cooldown."
-
-#: web/templates/web/workout_session.html:224
-msgid "10 secondes restantes."
-msgstr "10 seconds remaining."
-
-#: web/templates/web/workout_session.html:235
+#: web/templates/web/workout_session.html:200
 msgid "Terminé."
 msgstr "Complete."
 
-#: web/templates/web/workout_session.html:248
-msgid "SESSION TERMINÉE"
-msgstr "SESSION TERMINATED"
-
-#: web/templates/web/workout_session.html:249
-msgid "Bon travail, opérateur. Données sauvegardées."
-msgstr "Good job, operator. Data saved."
-
-#: web/templates/web/workout_session.html:251
-msgid "Session terminée. Excellent travail. Système en veille."
+#: web/templates/web/workout_session.html:212
+#, fuzzy
+#| msgid "Session terminée. Excellent travail. Système en veille."
+msgid "Session terminée. Excellent travail."
 msgstr "Session complete. Excellent work. System standby."
 
-#: web/templates/web/workout_session.html:264
-msgid "PAUSE"
-msgstr "PAUSE"
+#: web/templates/web/workout_session.html:224
+#, fuzzy
+#| msgid "Initialisation du Protocole"
+msgid "Initialisation."
+msgstr "Protocol Initialization"
 
-#: web/templates/web/workout_session.html:277
-msgid "Bienvenue, opérateur. Chargement du programme."
-msgstr "Welcome, operator. Loading program."
+#: web/templates/web/workout_session.html:227
+msgid "Reprise."
+msgstr ""
 
-#: web/templates/web/workout_session.html:283
-msgid "REPRENDRE"
-msgstr "RESUME"
+#: web/templates/web/workout_session.html:230
+#, fuzzy
+#| msgid "Pause"
+msgid "Pause."
+msgstr "Pause"
 
-#: web/templates/web/workout_session.html:284
-msgid "Système en pause."
-msgstr "System paused."
+#: web/templates/web/workout_session.html:235
+msgid "Suivant."
+msgstr ""
 
-#: web/templates/web/workout_session.html:289
-msgid "Saut de l'étape."
-msgstr "Skipping step."
+#: web/views.py:36
+msgid "Journal mis à jour ! +20 XP"
+msgstr ""
 
-#: web/views.py:140
+#: web/views.py:170
 msgid "Échauffement Articulaire"
 msgstr "Joint Warmup"
 
-#: web/views.py:142
+#: web/views.py:172
 msgid "Rotations des bras, poignets, chevilles et hanches."
 msgstr "Arm, wrist, ankle and hip rotations."
 
-#: web/views.py:159
+#: web/views.py:189
 msgid "Respirez profondément. Préparez-vous pour la suite."
 msgstr "Breathe deeply. Prepare for next."
 
-#: web/views.py:167
+#: web/views.py:195
+msgid "Retour au Calme"
+msgstr "Cooldown"
+
+#: web/views.py:197
 msgid "Étirements légers et respiration."
 msgstr "Light stretching and breathing."
 
-#: web/views.py:186
+#: web/views.py:216
 msgid "Identifiants invalides."
 msgstr "Invalid credentials."
 
-#: web/views.py:260
+#: web/views.py:290
 msgid "Commentaire ajouté."
 msgstr "Comment added."
 
-#: web/views.py:292
+#: web/views.py:322
 msgid "Commentaire supprimé."
 msgstr "Comment deleted."
 
-#: web/views.py:295
+#: web/views.py:325
 msgid "Vous n'êtes pas autorisé à supprimer ce commentaire."
 msgstr "You are not authorized to delete this comment."
 
-#: web/views.py:326
+#: web/views.py:356
 msgid "Profil mis à jour avec succès."
 msgstr "Profile updated successfully."
 
-#: web/views.py:339
+#: web/views.py:369
 msgid "Votre mot de passe a été mis à jour avec succès."
 msgstr "Your password has been updated successfully."
 
-#: web/views.py:342
+#: web/views.py:372
 msgid "Veuillez corriger les erreurs ci-dessous."
 msgstr "Please correct the errors below."
 
-#: web/views.py:437
+#: web/views.py:467
 msgid "Activité ajoutée au planning !"
 msgstr ""
 
-#: web/views.py:452
+#: web/views.py:482
 #, fuzzy
 #| msgid "Commentaire supprimé."
 msgid "Activité supprimée."
 msgstr "Comment deleted."
 
-#: web/views.py:478
+#: web/views.py:508
 #, python-format
 msgid "Tâche complétée ! +%(xp)s XP"
 msgstr ""
+
+#~ msgid "SEQUENCE DE MISSION"
+#~ msgstr "MISSION SEQUENCE"
+
+#~ msgid "INITIALISATION..."
+#~ msgstr "INITIALIZING..."
+
+#~ msgid "Préparation des systèmes..."
+#~ msgstr "System preparation..."
+
+#~ msgid "ENGAGER"
+#~ msgstr "ENGAGE"
+
+#~ msgid "ANALYSE IA"
+#~ msgstr "AI ANALYSIS"
+
+#~ msgid "Connexion établie."
+#~ msgstr "Connection established."
+
+#~ msgid "Protocoles biométriques chargés."
+#~ msgstr "Biometric protocols loaded."
+
+#~ msgid "En attente de l'opérateur."
+#~ msgstr "Awaiting operator."
+
+#~ msgid "Initialisation de la séquence. Échauffement requis."
+#~ msgstr "Sequence initialization. Warmup required."
+
+#~ msgid "Engagement."
+#~ msgstr "Engagement."
+
+#~ msgid "secondes"
+#~ msgstr "seconds"
+
+#~ msgid "Pause tactique. Récupérez."
+#~ msgstr "Tactical pause. Recover."
+
+#~ msgid "Mission accomplie. Retour au calme."
+#~ msgstr "Mission accomplished. Cooldown."
+
+#~ msgid "10 secondes restantes."
+#~ msgstr "10 seconds remaining."
+
+#~ msgid "SESSION TERMINÉE"
+#~ msgstr "SESSION TERMINATED"
+
+#~ msgid "Bon travail, opérateur. Données sauvegardées."
+#~ msgstr "Good job, operator. Data saved."
+
+#~ msgid "PAUSE"
+#~ msgstr "PAUSE"
+
+#~ msgid "Bienvenue, opérateur. Chargement du programme."
+#~ msgstr "Welcome, operator. Loading program."
+
+#~ msgid "REPRENDRE"
+#~ msgstr "RESUME"
+
+#~ msgid "Saut de l'étape."
+#~ msgstr "Skipping step."
 
 #~ msgid "Graphiques d'évolution bientôt disponibles"
 #~ msgstr "Evolution charts coming soon"
