@@ -93,6 +93,7 @@ Accès : `http://127.0.0.1:8000/swagger/`
 ## 🏗 Architecture Technique
 
 - **Backend** : Django 4.2 (Monolithe) + Django REST Framework (API).
+- **Internationalisation** : Django i18n (gettext) pour le support FR/EN.
 - **Frontend** : Django Templates (DTL) + TailwindCSS (CDN).
 - **Design** : Thème "Dark Mode" / Glassmorphism futuriste.
 - **Base de Données** : SQLite (Dev) / PostgreSQL (Prod ready via `dj-database-url`).
