@@ -19,3 +19,9 @@ staticfiles/
 # Editor
 .vscode/
 .idea/
+
+# Node.js / Playwright
+node_modules/
+playwright-report/
+test-results/
+*.png
