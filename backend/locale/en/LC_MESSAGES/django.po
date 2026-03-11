@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-11 11:30+0000\n"
+"POT-Creation-Date: 2026-03-11 12:16+0000\n"
 "PO-Revision-Date: 2026-03-09 19:40+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr ""
 msgid "Vie Perso & Loisirs"
 msgstr ""
 
-#: api/models.py:163
+#: api/models.py:163 web/templates/web/base.html:111
 msgid "Nutrition"
 msgstr ""
 
@@ -501,12 +501,12 @@ msgstr "Back to Intel"
 msgid "Performance Humaine"
 msgstr "Human Performance"
 
-#: web/templates/web/base.html:98 web/templates/web/base.html:199
+#: web/templates/web/base.html:98 web/templates/web/base.html:201
 msgid "QG"
 msgstr ""
 
-#: web/templates/web/base.html:101 web/templates/web/base.html:202
-#: web/templates/web/base.html:268
+#: web/templates/web/base.html:101 web/templates/web/base.html:204
+#: web/templates/web/base.html:271
 msgid "Outils"
 msgstr "Tools"
 
@@ -514,55 +514,59 @@ msgstr "Tools"
 msgid "Intel"
 msgstr ""
 
-#: web/templates/web/base.html:109 web/templates/web/base.html:203
+#: web/templates/web/base.html:109 web/templates/web/base.html:205
 msgid "Blog"
 msgstr "Blog"
 
-#: web/templates/web/base.html:110 web/templates/web/base.html:204
+#: web/templates/web/base.html:110 web/templates/web/base.html:206
 #, fuzzy
 #| msgid "Exercices Clés"
 msgid "Exercices"
 msgstr "Key Exercises"
 
-#: web/templates/web/base.html:115 web/templates/web/base.html:207
+#: web/templates/web/base.html:116 web/templates/web/base.html:209
 #: web/templates/web/profile.html:114
 msgid "Planificateur"
 msgstr "Planner"
 
-#: web/templates/web/base.html:116 web/templates/web/base.html:208
+#: web/templates/web/base.html:117 web/templates/web/base.html:210
 msgid "Agenda"
 msgstr ""
 
-#: web/templates/web/base.html:148
+#: web/templates/web/base.html:118 web/templates/web/base.html:211
+msgid "Coach IA"
+msgstr ""
+
+#: web/templates/web/base.html:150
 msgid "Niveau Actuel"
 msgstr "Current Level"
 
-#: web/templates/web/base.html:152
+#: web/templates/web/base.html:154
 msgid "Points d'Expérience"
 msgstr "Experience Points"
 
-#: web/templates/web/base.html:156
+#: web/templates/web/base.html:158
 msgid "Série en cours"
 msgstr "Current Streak"
 
-#: web/templates/web/base.html:172 web/templates/web/base.html:233
+#: web/templates/web/base.html:174 web/templates/web/base.html:236
 msgid "Déconnexion"
 msgstr "Logout"
 
-#: web/templates/web/base.html:174 web/templates/web/base.html:237
+#: web/templates/web/base.html:176 web/templates/web/base.html:240
 #: web/templates/web/register.html:70
 msgid "Connexion"
 msgstr "Login"
 
-#: web/templates/web/base.html:175
+#: web/templates/web/base.html:177
 msgid "Rejoindre"
 msgstr "Join"
 
-#: web/templates/web/base.html:209
+#: web/templates/web/base.html:212
 msgid "Profil"
 msgstr ""
 
-#: web/templates/web/base.html:260
+#: web/templates/web/base.html:263
 msgid ""
 "L'écosystème ultime pour l'optimisation de la performance humaine. "
 "Entraînement, nutrition et bio-hacking unifiés dans une interface élite."
@@ -570,39 +574,39 @@ msgstr ""
 "The ultimate ecosystem for human performance optimization. Training, "
 "nutrition, and bio-hacking unified in an elite interface."
 
-#: web/templates/web/base.html:264
+#: web/templates/web/base.html:267
 msgid "Plateforme"
 msgstr "Platform"
 
-#: web/templates/web/base.html:266
+#: web/templates/web/base.html:269
 msgid "Accueil"
 msgstr "Home"
 
-#: web/templates/web/base.html:267
+#: web/templates/web/base.html:270
 msgid "Intel (Blog)"
 msgstr "Intel (Blog)"
 
-#: web/templates/web/base.html:272
+#: web/templates/web/base.html:275
 msgid "Légal"
 msgstr "Legal"
 
-#: web/templates/web/base.html:274
+#: web/templates/web/base.html:277
 msgid "Confidentialité"
 msgstr "Privacy"
 
-#: web/templates/web/base.html:275
+#: web/templates/web/base.html:278
 msgid "Conditions"
 msgstr "Terms"
 
-#: web/templates/web/base.html:276
+#: web/templates/web/base.html:279
 msgid "Contact"
 msgstr "Contact"
 
-#: web/templates/web/base.html:281
+#: web/templates/web/base.html:284
 msgid "TOUS DROITS RÉSERVÉS."
 msgstr "ALL RIGHTS RESERVED."
 
-#: web/templates/web/base.html:284
+#: web/templates/web/base.html:287
 #: web/templates/web/password_reset_email.html:13
 msgid "Systèmes Opérationnels"
 msgstr "Operational Systems"
@@ -1314,10 +1318,6 @@ msgid "OPTIMAL"
 msgstr "OPTIMAL"
 
 #: web/templates/web/profile.html:78
-msgid "Récupération"
-msgstr "Recovery"
-
-#: web/templates/web/profile.html:89
 msgid "Lifestyle"
 msgstr "Lifestyle"
 
@@ -1551,49 +1551,181 @@ msgstr "Overweight"
 msgid "Obésité"
 msgstr "Obesity"
 
-#: web/views.py:36
-msgid "Journal mis à jour ! +20 XP"
-msgstr ""
+#: web/templates/web/workout_session.html:4
+msgid "Session Tactique - J.A.R.V.I.S."
+msgstr "Tactical Session - J.A.R.V.I.S."
 
-#: web/views.py:120
+#: web/templates/web/workout_session.html:36
+msgid "INTERFACE TACTIQUE"
+msgstr "TACTICAL INTERFACE"
+
+#: web/templates/web/workout_session.html:38
+msgid "SYSTEME: ONLINE"
+msgstr "SYSTEM: ONLINE"
+
+#: web/templates/web/workout_session.html:38
+msgid "OPERATEUR:"
+msgstr "OPERATOR:"
+
+#: web/templates/web/workout_session.html:42
+msgid "TEMPS TOTAL"
+msgstr "TOTAL TIME"
+
+#: web/templates/web/workout_session.html:49
+msgid "SEQUENCE DE MISSION"
+msgstr "MISSION SEQUENCE"
+
+#: web/templates/web/workout_session.html:70
+msgid "SECONDES RESTANTES"
+msgstr "SECONDS REMAINING"
+
+#: web/templates/web/workout_session.html:80
+msgid "INITIALISATION..."
+msgstr "INITIALIZING..."
+
+#: web/templates/web/workout_session.html:81
+msgid "Préparation des systèmes..."
+msgstr "System preparation..."
+
+#: web/templates/web/workout_session.html:87
+msgid "ENGAGER"
+msgstr "ENGAGE"
+
+#: web/templates/web/workout_session.html:95
+msgid "PASSER"
+msgstr "SKIP"
+
+#: web/templates/web/workout_session.html:103
+msgid "ANALYSE IA"
+msgstr "AI ANALYSIS"
+
+#: web/templates/web/workout_session.html:113
+msgid "Connexion établie."
+msgstr "Connection established."
+
+#: web/templates/web/workout_session.html:114
+msgid "Protocoles biométriques chargés."
+msgstr "Biometric protocols loaded."
+
+#: web/templates/web/workout_session.html:115
+msgid "En attente de l'opérateur."
+msgstr "Awaiting operator."
+
+#: web/templates/web/workout_session.html:205
+msgid "Initialisation de la séquence. Échauffement requis."
+msgstr "Sequence initialization. Warmup required."
+
+#: web/templates/web/workout_session.html:207
+msgid "Engagement."
+msgstr "Engagement."
+
+#: web/templates/web/workout_session.html:207
+msgid "secondes"
+msgstr "seconds"
+
+#: web/templates/web/workout_session.html:209
+msgid "Pause tactique. Récupérez."
+msgstr "Tactical pause. Recover."
+
+#: web/templates/web/workout_session.html:211
+msgid "Mission accomplie. Retour au calme."
+msgstr "Mission accomplished. Cooldown."
+
+#: web/templates/web/workout_session.html:224
+msgid "10 secondes restantes."
+msgstr "10 seconds remaining."
+
+#: web/templates/web/workout_session.html:235
+msgid "Terminé."
+msgstr "Complete."
+
+#: web/templates/web/workout_session.html:248
+msgid "SESSION TERMINÉE"
+msgstr "SESSION TERMINATED"
+
+#: web/templates/web/workout_session.html:249
+msgid "Bon travail, opérateur. Données sauvegardées."
+msgstr "Good job, operator. Data saved."
+
+#: web/templates/web/workout_session.html:251
+msgid "Session terminée. Excellent travail. Système en veille."
+msgstr "Session complete. Excellent work. System standby."
+
+#: web/templates/web/workout_session.html:264
+msgid "PAUSE"
+msgstr "PAUSE"
+
+#: web/templates/web/workout_session.html:277
+msgid "Bienvenue, opérateur. Chargement du programme."
+msgstr "Welcome, operator. Loading program."
+
+#: web/templates/web/workout_session.html:283
+msgid "REPRENDRE"
+msgstr "RESUME"
+
+#: web/templates/web/workout_session.html:284
+msgid "Système en pause."
+msgstr "System paused."
+
+#: web/templates/web/workout_session.html:289
+msgid "Saut de l'étape."
+msgstr "Skipping step."
+
+#: web/views.py:140
+msgid "Échauffement Articulaire"
+msgstr "Joint Warmup"
+
+#: web/views.py:142
+msgid "Rotations des bras, poignets, chevilles et hanches."
+msgstr "Arm, wrist, ankle and hip rotations."
+
+#: web/views.py:159
+msgid "Respirez profondément. Préparez-vous pour la suite."
+msgstr "Breathe deeply. Prepare for next."
+
+#: web/views.py:167
+msgid "Étirements légers et respiration."
+msgstr "Light stretching and breathing."
+
+#: web/views.py:186
 msgid "Identifiants invalides."
 msgstr "Invalid credentials."
 
-#: web/views.py:194
+#: web/views.py:260
 msgid "Commentaire ajouté."
 msgstr "Comment added."
 
-#: web/views.py:226
+#: web/views.py:292
 msgid "Commentaire supprimé."
 msgstr "Comment deleted."
 
-#: web/views.py:229
+#: web/views.py:295
 msgid "Vous n'êtes pas autorisé à supprimer ce commentaire."
 msgstr "You are not authorized to delete this comment."
 
-#: web/views.py:260
+#: web/views.py:326
 msgid "Profil mis à jour avec succès."
 msgstr "Profile updated successfully."
 
-#: web/views.py:273
+#: web/views.py:339
 msgid "Votre mot de passe a été mis à jour avec succès."
 msgstr "Your password has been updated successfully."
 
-#: web/views.py:276
+#: web/views.py:342
 msgid "Veuillez corriger les erreurs ci-dessous."
 msgstr "Please correct the errors below."
 
-#: web/views.py:371
+#: web/views.py:437
 msgid "Activité ajoutée au planning !"
 msgstr ""
 
-#: web/views.py:386
+#: web/views.py:452
 #, fuzzy
 #| msgid "Commentaire supprimé."
 msgid "Activité supprimée."
 msgstr "Comment deleted."
 
-#: web/views.py:412
+#: web/views.py:478
 #, python-format
 msgid "Tâche complétée ! +%(xp)s XP"
 msgstr ""

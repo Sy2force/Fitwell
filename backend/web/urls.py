@@ -49,6 +49,7 @@ urlpatterns = [
     path('exercises/', views.exercise_library, name='exercise_library'),
     path('nutrition/', views.recipe_list, name='recipe_list'),
     path('nutrition/<int:recipe_id>/', views.recipe_detail, name='recipe_detail'),
+    path('workout/', views.workout_session_view, name='workout_session'),
     path('tools/', views.tools_view, name='tools'),
     
     # Pages Statiques

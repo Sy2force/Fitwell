@@ -106,6 +106,72 @@ def recipe_detail(request, recipe_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     return render(request, 'web/recipe_detail.html', {'recipe': recipe})
 
+@login_required(login_url='login')
+def workout_session_view(request):
+    # Logic to build a session
+    # 1. Get User Level/Plan
+    user_level = 'beginner'
+    if hasattr(request.user, 'stats') and request.user.stats.level > 5:
+        user_level = 'intermediate'
+    if hasattr(request.user, 'stats') and request.user.stats.level > 15:
+        user_level = 'advanced'
+        
+    # 2. Select Exercises
+    # Try to match with latest plan goal if exists
+    latest_plan = request.user.plans.order_by('-created_at').first()
+    
+    exercises = Exercise.objects.filter(difficulty=user_level)
+    if not exercises.exists():
+        exercises = Exercise.objects.all()
+        
+    # Pick random 5 for the session (in a real app, this would be smarter)
+    import random
+    selected_exercises = list(exercises)
+    if len(selected_exercises) > 5:
+        selected_exercises = random.sample(selected_exercises, 5)
+        
+    # Build Sequence
+    # Format: {'type': 'exercise|rest|warmup', 'name': '', 'duration': seconds, 'description': ''}
+    sequence = []
+    
+    # Warmup
+    sequence.append({
+        'type': 'warmup',
+        'name': _("Échauffement Articulaire"),
+        'duration': 60,
+        'description': _("Rotations des bras, poignets, chevilles et hanches.")
+    })
+    
+    for ex in selected_exercises:
+        # Exercise
+        sequence.append({
+            'type': 'exercise',
+            'name': ex.name,
+            'duration': 45, # 45 seconds work
+            'description': ex.description,
+            'image': ex.image_url or ''
+        })
+        # Rest
+        sequence.append({
+            'type': 'rest',
+            'name': _("Récupération"),
+            'duration': 15, # 15 seconds rest
+            'description': _("Respirez profondément. Préparez-vous pour la suite.")
+        })
+        
+    # Cooldown
+    sequence.append({
+        'type': 'cooldown',
+        'name': _("Retour au Calme"),
+        'duration': 60,
+        'description': _("Étirements légers et respiration.")
+    })
+    
+    return render(request, 'web/workout_session.html', {
+        'sequence': sequence,
+        'total_time': sum(s['duration'] for s in sequence) // 60
+    })
+
 def login_view(request):
     if request.method == 'POST':
         form = CustomAuthenticationForm(request, data=request.POST)
