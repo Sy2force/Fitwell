@@ -36,7 +36,21 @@ FitWell est une plateforme SaaS complète dédiée à la santé, au fitness et �
 - **Base de Données** : Catalogue complet d'exercices classés par groupe musculaire.
 - **Fiches Techniques** : Instructions, difficulté et équipement requis pour chaque mouvement.
 
-### 7. 📚 Blog & Communauté
+### 7. 🥗 Laboratoire Nutrition
+- **Recettes Performance** : Bibliothèque de repas optimisés (Petit-déj, Déjeuner, Dîner, Shakes).
+- **Profil Macro** : Détail précis des protéines, glucides et lipides pour chaque recette.
+- **Filtrage Intelligent** : Tri par catégorie et niveau de difficulté.
+
+### 8. ⏱️ Outils Tactiques
+- **Chronomètre** : Mesure précise pour vos temps de repos ou circuits.
+- **Minuteur** : Compte à rebours pour la gestion du temps d'effort (Tabata, EMOM).
+
+### 9. 🤖 Coach Tactique IA
+- **Mode J.A.R.V.I.S.** : Assistant vocal interactif pour guider vos séances.
+- **HUD Immersif** : Interface futuriste temps réel avec compte à rebours et suivi de séquence.
+- **Guidage Vocal** : Synthèse vocale (TTS) pour annoncer les exercices, temps de repos et encouragements.
+
+### 10. 📚 Blog & Communauté
 - Articles éducatifs sur la nutrition, l'entraînement et le bio-hacking.
 - Système de Likes et Commentaires pour l'interaction.
 - Filtrage par catégories et recherche textuelle.
