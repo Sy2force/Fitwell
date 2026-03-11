@@ -4,6 +4,10 @@ from django.utils.translation import gettext_lazy as _
 from api.models import User, WellnessPlan, Comment, CustomEvent, DailyLog, Exercise
 
 class DailyLogForm(forms.ModelForm):
+    """
+    Formulaire pour le journal quotidien.
+    Champs : Eau, Sommeil, Humeur, Poids, Notes.
+    """
     class Meta:
         model = DailyLog
         fields = ['water_liters', 'sleep_hours', 'mood', 'weight', 'notes']
@@ -30,6 +34,9 @@ class DailyLogForm(forms.ModelForm):
                 field.widget.attrs.update({'class': common_classes})
 
 class CustomEventForm(forms.ModelForm):
+    """
+    Formulaire pour ajouter un événement personnalisé à l'agenda.
+    """
     class Meta:
         model = CustomEvent
         fields = ['title', 'event_type', 'day_of_week', 'start_time', 'end_time', 'priority']
@@ -63,6 +70,10 @@ class CustomEventForm(forms.ModelForm):
             field.widget.attrs.update({'class': common_classes})
 
 class CustomUserCreationForm(UserCreationForm):
+    """
+    Formulaire d'inscription personnalisé.
+    Utilise l'email et le username.
+    """
     class Meta:
         model = User
         fields = ('username', 'email')
@@ -79,6 +90,9 @@ class CustomUserCreationForm(UserCreationForm):
                 field.widget.attrs['placeholder'] = _("adresse@email.com")
 
 class CustomAuthenticationForm(AuthenticationForm):
+    """
+    Formulaire de connexion stylisé.
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
@@ -89,6 +103,9 @@ class CustomAuthenticationForm(AuthenticationForm):
         self.fields['password'].widget.attrs['placeholder'] = _("Mot de passe")
 
 class CustomPasswordResetForm(PasswordResetForm):
+    """
+    Formulaire de demande de réinitialisation de mot de passe.
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
@@ -98,6 +115,9 @@ class CustomPasswordResetForm(PasswordResetForm):
             })
 
 class CustomSetPasswordForm(SetPasswordForm):
+    """
+    Formulaire de définition du nouveau mot de passe.
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
@@ -106,6 +126,10 @@ class CustomSetPasswordForm(SetPasswordForm):
             })
 
 class WellnessPlanForm(forms.ModelForm):
+    """
+    Formulaire pour générer un plan bien-être (IA).
+    Recueille les données biométriques.
+    """
     class Meta:
         model = WellnessPlan
         fields = ['age', 'gender', 'height', 'weight', 'goal', 'activity_level']
@@ -149,6 +173,9 @@ class WellnessPlanForm(forms.ModelForm):
         return age
 
 class CommentForm(forms.ModelForm):
+    """
+    Formulaire pour ajouter un commentaire sur un article.
+    """
     class Meta:
         model = Comment
         fields = ['content']
@@ -164,6 +191,9 @@ class CommentForm(forms.ModelForm):
         }
 
 class UserUpdateForm(forms.ModelForm):
+    """
+    Formulaire de mise à jour du profil utilisateur (Email, Bio, Avatar).
+    """
     class Meta:
         model = User
         fields = ['email', 'bio', 'avatar']
@@ -189,6 +219,9 @@ class UserUpdateForm(forms.ModelForm):
         }
 
 class CustomPasswordChangeForm(PasswordChangeForm):
+    """
+    Formulaire de changement de mot de passe.
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
@@ -197,6 +230,10 @@ class CustomPasswordChangeForm(PasswordChangeForm):
             })
 
 class CustomWorkoutForm(forms.Form):
+    """
+    Formulaire pour configurer une séance d'entraînement.
+    Permet de sélectionner les exercices et les temps de travail/repos.
+    """
     exercises = forms.ModelMultipleChoiceField(
         queryset=Exercise.objects.all(),
         widget=forms.CheckboxSelectMultiple,

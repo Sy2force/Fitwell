@@ -12,6 +12,10 @@ from api.models import User, Article, Category, UserStats, WellnessPlan, Comment
 from api.services import generate_wellness_plan
 
 def home(request):
+    """
+    Page d'accueil du site.
+    Affiche le dernier plan généré si l'utilisateur est connecté.
+    """
     latest_plan = None
     if request.user.is_authenticated:
         latest_plan = request.user.plans.order_by('-created_at').first()
@@ -19,6 +23,14 @@ def home(request):
 
 @login_required(login_url='login')
 def dashboard_view(request):
+    """
+    Tableau de bord principal de l'utilisateur.
+    Gère :
+    - Le journal quotidien (Daily Log)
+    - Les statistiques rapides (Sommeil, Eau)
+    - Les graphiques de progression (Poids, Humeur, Sommeil)
+    - L'agenda du jour
+    """
     # Update Streak
     if hasattr(request.user, 'stats'):
         request.user.stats.update_streak()
@@ -72,6 +84,10 @@ def dashboard_view(request):
 
 @login_required(login_url='login')
 def exercise_library(request):
+    """
+    Bibliothèque d'exercices.
+    Permet de filtrer par groupe musculaire.
+    """
     exercises = Exercise.objects.all()
     
     muscle = request.GET.get('muscle')
@@ -86,6 +102,10 @@ def exercise_library(request):
 
 @login_required(login_url='login')
 def recipe_list(request):
+    """
+    Liste des recettes de nutrition.
+    Filtrage par catégorie (petit-déj, dîner...) et difficulté.
+    """
     recipes = Recipe.objects.all()
     
     category = request.GET.get('category')
@@ -105,6 +125,9 @@ def recipe_list(request):
 
 @login_required(login_url='login')
 def recipe_detail(request, recipe_id):
+    """
+    Détail d'une recette avec calcul des pourcentages de macros.
+    """
     recipe = get_object_or_404(Recipe, id=recipe_id)
     
     # Calculate Macro Percentages
@@ -131,11 +154,20 @@ def recipe_detail(request, recipe_id):
 
 @login_required(login_url='login')
 def workout_setup_view(request):
+    """
+    Page de configuration avant de lancer une séance.
+    Permet de choisir les exercices et la durée.
+    """
     form = CustomWorkoutForm()
     return render(request, 'web/workout_setup.html', {'form': form})
 
 @login_required(login_url='login')
 def workout_session_view(request):
+    """
+    Coach Tactique (Session d'entraînement).
+    Génère une séquence d'exercices (Échauffement -> Exos -> Repos -> Retour au calme).
+    Si aucun exercice n'est sélectionné, l'IA en choisit selon le profil.
+    """
     # Logic to build a session
     
     # Defaults
@@ -248,6 +280,10 @@ def workout_session_view(request):
     })
 
 def login_view(request):
+    """
+    Connexion utilisateur.
+    Met à jour le streak à la connexion.
+    """
     if request.method == 'POST':
         form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -264,10 +300,17 @@ def login_view(request):
     return render(request, 'web/login.html', {'form': form})
 
 def logout_view(request):
+    """
+    Déconnexion utilisateur.
+    """
     logout(request)
     return redirect('home')
 
 def register_view(request):
+    """
+    Inscription nouvel utilisateur.
+    Initialise les stats et le streak.
+    """
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -288,6 +331,10 @@ def register_view(request):
     return render(request, 'web/register.html', {'form': form})
 
 def blog_list(request):
+    """
+    Liste des articles de blog.
+    Supporte la recherche textuelle et le filtrage par catégorie.
+    """
     # Update Streak if reading blog
     if request.user.is_authenticated and hasattr(request.user, 'stats'):
         request.user.stats.update_streak()
@@ -315,6 +362,11 @@ def blog_list(request):
     })
 
 def article_detail(request, slug):
+    """
+    Lecture d'un article complet.
+    Permet de liker et de commenter.
+    Affiche des articles similaires en bas de page.
+    """
     # Update Streak if reading article
     if request.user.is_authenticated and hasattr(request.user, 'stats'):
         request.user.stats.update_streak()
@@ -568,11 +620,20 @@ def tools_view(request):
     return render(request, 'web/tools.html', {'plan': latest_plan})
 
 def legal_view(request):
+    """
+    Page des mentions légales et conditions d'utilisation.
+    """
     return render(request, 'web/legal.html')
 
 def custom_404(request, exception):
+    """
+    Page d'erreur 404 personnalisée (Page non trouvée).
+    """
     return render(request, '404.html', status=404)
 
 def custom_500(request):
+    """
+    Page d'erreur 500 personnalisée (Erreur serveur).
+    """
     return render(request, '500.html', status=500)
 

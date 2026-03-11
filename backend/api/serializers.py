@@ -23,12 +23,19 @@ class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
         return super().validate(attrs)
 
 class UserStatsSerializer(serializers.ModelSerializer):
+    """
+    Serializer pour les stats utilisateur (XP, Niveau, Scores).
+    """
     class Meta:
         model = UserStats
         fields = ('xp', 'level', 'current_streak', 'health_score', 
                   'fitness_score', 'recovery_score', 'lifestyle_score', 'consistency_score')
 
 class UserSerializer(serializers.ModelSerializer):
+    """
+    Serializer pour l'utilisateur.
+    Gère la création, la mise à jour et la représentation du profil complet.
+    """
     password = serializers.CharField(write_only=True)
     profile = serializers.SerializerMethodField()
 
@@ -82,6 +89,9 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
 
 class WellnessPlanSerializer(serializers.ModelSerializer):
+    """
+    Serializer pour les plans générés.
+    """
     class Meta:
         model = WellnessPlan
         fields = '__all__'

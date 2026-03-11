@@ -255,6 +255,10 @@ class DailyLog(models.Model):
 # NUTRITION / RECETTES
 # -----------------------------------------------------------------------------
 class Recipe(models.Model):
+    """
+    Recette de nutrition pour la performance.
+    Contient les macros (protéines, glucides, lipides) et les instructions.
+    """
     DIFFICULTY_CHOICES = [
         ('easy', _('Facile')),
         ('medium', _('Moyen')),
