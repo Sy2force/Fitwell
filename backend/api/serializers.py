@@ -23,19 +23,12 @@ class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
         return super().validate(attrs)
 
 class UserStatsSerializer(serializers.ModelSerializer):
-    """
-    Serializer pour les stats utilisateur (XP, Niveau, Scores).
-    """
     class Meta:
         model = UserStats
         fields = ('xp', 'level', 'current_streak', 'health_score', 
                   'fitness_score', 'recovery_score', 'lifestyle_score', 'consistency_score')
 
 class UserSerializer(serializers.ModelSerializer):
-    """
-    Serializer pour l'utilisateur.
-    Gère la création, la mise à jour et la représentation du profil complet.
-    """
     password = serializers.CharField(write_only=True)
     profile = serializers.SerializerMethodField()
 
@@ -89,20 +82,24 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
 
 class WellnessPlanSerializer(serializers.ModelSerializer):
-    """
-    Serializer pour les plans générés.
-    """
     class Meta:
         model = WellnessPlan
         fields = '__all__'
         read_only_fields = ('user', 'workout_plan', 'nutrition_plan', 'created_at')
 
 class CategorySerializer(serializers.ModelSerializer):
+    """
+    Serializer pour les catégories d'articles.
+    """
     class Meta:
         model = Category
         fields = '__all__'
 
 class CommentSerializer(serializers.ModelSerializer):
+    """
+    Serializer pour les commentaires.
+    Inclut le username de l'auteur en lecture seule.
+    """
     author_username = serializers.ReadOnlyField(source='author.username')
 
     class Meta:
@@ -111,6 +108,10 @@ class CommentSerializer(serializers.ModelSerializer):
         read_only_fields = ('author',)
 
 class ArticleSerializer(serializers.ModelSerializer):
+    """
+    Serializer pour les articles.
+    Inclut les champs calculés (likes, is_liked) et les relations (commentaires).
+    """
     author_username = serializers.ReadOnlyField(source='author.username')
     category_name = serializers.ReadOnlyField(source='category.name')
     category_slug = serializers.ReadOnlyField(source='category.slug')
