@@ -1338,16 +1338,8 @@ msgid "Calculateurs IMC, DEJ et métriques avancées."
 msgstr "BMI, TDEE calculators and advanced metrics."
 
 #: web/templates/web/recipe_detail.html:13
-#, fuzzy
-#| msgid "Retour à la Base"
 msgid "Retour au Labo"
-msgstr "Return to Base"
-
-#: web/templates/web/recipe_detail.html:46
-#, fuzzy
-#| msgid "Profil Métabolique"
-msgid "Profil Macro"
-msgstr "Metabolic Profile"
+msgstr "Back to Lab"
 
 #: web/templates/web/recipe_detail.html:82
 msgid "Ingrédients"

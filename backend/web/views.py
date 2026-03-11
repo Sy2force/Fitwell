@@ -116,19 +116,49 @@ def workout_session_view(request):
     if hasattr(request.user, 'stats') and request.user.stats.level > 15:
         user_level = 'advanced'
         
-    # 2. Select Exercises
+    # 2. Select Exercises & Sequence Strategy
     # Try to match with latest plan goal if exists
     latest_plan = request.user.plans.order_by('-created_at').first()
+    goal = latest_plan.goal if latest_plan else 'maintenance'
     
-    exercises = Exercise.objects.filter(difficulty=user_level)
-    if not exercises.exists():
-        exercises = Exercise.objects.all()
+    # Filter exercises by level first
+    base_exercises = Exercise.objects.filter(difficulty=user_level)
+    if not base_exercises.exists():
+        base_exercises = Exercise.objects.all()
         
-    # Pick random 5 for the session (in a real app, this would be smarter)
+    selected_exercises = []
     import random
-    selected_exercises = list(exercises)
-    if len(selected_exercises) > 5:
-        selected_exercises = random.sample(selected_exercises, 5)
+    
+    # Strategy based on Goal
+    work_duration = 45
+    rest_duration = 15
+    
+    if goal == 'weight_loss':
+        # High intensity, focus on Cardio/Full Body/Legs
+        work_duration = 40
+        rest_duration = 10
+        priority_groups = ['cardio', 'full', 'legs', 'abs']
+        candidates = base_exercises.filter(muscle_group__in=priority_groups)
+        # Fallback if not enough specific ones
+        if candidates.count() < 5:
+            candidates = base_exercises
+    elif goal == 'muscle_gain':
+        # Hypertrophy, focus on Upper/Lower split elements
+        work_duration = 50
+        rest_duration = 20
+        priority_groups = ['chest', 'back', 'legs', 'shoulders']
+        candidates = base_exercises.filter(muscle_group__in=priority_groups)
+        if candidates.count() < 5:
+            candidates = base_exercises
+    else: # maintenance
+        candidates = base_exercises
+
+    # Select 5 exercises
+    candidate_list = list(candidates)
+    if len(candidate_list) > 5:
+        selected_exercises = random.sample(candidate_list, 5)
+    else:
+        selected_exercises = candidate_list
         
     # Build Sequence
     # Format: {'type': 'exercise|rest|warmup', 'name': '', 'duration': seconds, 'description': ''}
@@ -147,7 +177,7 @@ def workout_session_view(request):
         sequence.append({
             'type': 'exercise',
             'name': ex.name,
-            'duration': 45, # 45 seconds work
+            'duration': work_duration,
             'description': ex.description,
             'image': ex.image_url or ''
         })
@@ -155,7 +185,7 @@ def workout_session_view(request):
         sequence.append({
             'type': 'rest',
             'name': _("Récupération"),
-            'duration': 15, # 15 seconds rest
+            'duration': rest_duration,
             'description': _("Respirez profondément. Préparez-vous pour la suite.")
         })
         
