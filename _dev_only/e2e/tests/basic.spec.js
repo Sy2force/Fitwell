@@ -24,7 +24,7 @@ test.describe('FitWell E2E Tests', () => {
     });
 
     // Augmenter le timeout de navigation et attendre le chargement complet
-    await page.goto('/', { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await page.goto('/fr/', { waitUntil: 'domcontentloaded', timeout: 60000 });
   });
 
   test('debug: check page source', async ({ page }) => {
