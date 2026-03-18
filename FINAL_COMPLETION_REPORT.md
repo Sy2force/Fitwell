@@ -75,7 +75,8 @@ Le site est durci pour la production ("Production Hardened") :
 Le fichier `vercel.json` et `build_files.sh` gèrent tout automatiquement.
 1. Connecter le repo GitHub à Vercel.
 2. Ajouter les variables d'environnement (voir `DEPLOY.md`).
-3. Déployer.
+3. **Note importante** : L'entrypoint est configuré sur `index.py` (renommé depuis `wsgi.py`) pour la détection automatique par Vercel.
+4. Déployer.
 
 ### Sur Render (Base de Données)
 Le fichier `render.yaml` définit l'infrastructure.
