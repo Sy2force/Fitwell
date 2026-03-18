@@ -187,7 +187,7 @@ class CommentForm(forms.ModelForm):
             })
         }
         labels = {
-            'content': _('Votre Commentaire')
+            'content': _('Votre commentaire')
         }
 
 class UserUpdateForm(forms.ModelForm):
@@ -243,14 +243,14 @@ class CustomWorkoutForm(forms.Form):
         initial=45,
         min_value=10,
         max_value=300,
-        label=_('Durée Effort (sec)'),
+        label=_('Durée effort (sec)'),
         widget=forms.NumberInput(attrs={'class': 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white focus:border-energy focus:outline-none'})
     )
     rest_duration = forms.IntegerField(
         initial=15,
         min_value=5,
         max_value=300,
-        label=_('Durée Repos (sec)'),
+        label=_('Durée repos (sec)'),
         widget=forms.NumberInput(attrs={'class': 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white focus:border-energy focus:outline-none'})
     )
 

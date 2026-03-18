@@ -1,0 +1,61 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Objectif" %} - FitWell{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-void flex items-center justify-center px-4">
+    <div class="max-w-3xl w-full">
+        <div class="card-glass border-neon-primary py-12 px-8">
+            <div class="text-center mb-8">
+                <div class="text-primary text-sm font-mono mb-2">{% trans "ÉTAPE 1/4" %}</div>
+                <h1 class="text-4xl font-display text-white mb-4">
+                    {% trans "Quel est ton objectif principal ?" %}
+                </h1>
+            </div>
+
+            <form method="POST" class="space-y-4">
+                {% csrf_token %}
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <label class="cursor-pointer">
+                        <input type="radio" name="goal" value="weight_loss" class="peer hidden" required>
+                        <div class="card-glass border-2 border-gray-700 peer-checked:border-primary peer-checked:bg-primary/10 p-6 text-center transition-all hover:border-primary/50">
+                            <div class="text-4xl mb-3">🔥</div>
+                            <div class="text-white font-semibold mb-2">{% trans "Perte de Poids" %}</div>
+                            <div class="text-gray-400 text-sm">{% trans "Brûler les graisses" %}</div>
+                        </div>
+                    </label>
+
+                    <label class="cursor-pointer">
+                        <input type="radio" name="goal" value="muscle_gain" class="peer hidden">
+                        <div class="card-glass border-2 border-gray-700 peer-checked:border-secondary peer-checked:bg-secondary/10 p-6 text-center transition-all hover:border-secondary/50">
+                            <div class="text-4xl mb-3">💪</div>
+                            <div class="text-white font-semibold mb-2">{% trans "Prise de Masse" %}</div>
+                            <div class="text-gray-400 text-sm">{% trans "Construire du muscle" %}</div>
+                        </div>
+                    </label>
+
+                    <label class="cursor-pointer">
+                        <input type="radio" name="goal" value="maintenance" class="peer hidden">
+                        <div class="card-glass border-2 border-gray-700 peer-checked:border-energy peer-checked:bg-energy/10 p-6 text-center transition-all hover:border-energy/50">
+                            <div class="text-4xl mb-3">⚖️</div>
+                            <div class="text-white font-semibold mb-2">{% trans "Maintien" %}</div>
+                            <div class="text-gray-400 text-sm">{% trans "Rester en forme" %}</div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="flex justify-between pt-8">
+                    <a href="{% url 'onboarding_welcome' %}" class="btn-secondary">
+                        ← {% trans "Retour" %}
+                    </a>
+                    <button type="submit" class="btn-primary">
+                        {% trans "Suivant" %} →
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

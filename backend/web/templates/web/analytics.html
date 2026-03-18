@@ -1,0 +1,222 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Analytics" %} - FitWell{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-void py-12 px-4">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-display text-white mb-4">
+                {% trans "Analytics & Progression" %} 📊
+            </h1>
+            <p class="text-gray-400 text-lg">
+                {% trans "Analyse complète de tes performances" %}
+            </p>
+        </div>
+
+        <!-- Global Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <div class="card-glass border-neon-primary text-center">
+                <div class="text-gray-400 text-sm mb-2">{% trans "Total Séances" %}</div>
+                <div class="text-4xl font-bold text-primary">{{ total_workouts }}</div>
+            </div>
+            <div class="card-glass border-neon-secondary text-center">
+                <div class="text-gray-400 text-sm mb-2">{% trans "Volume Total" %}</div>
+                <div class="text-4xl font-bold text-secondary">{{ total_volume|floatformat:0 }}</div>
+                <div class="text-gray-500 text-xs">kg</div>
+            </div>
+            <div class="card-glass border-neon-energy text-center">
+                <div class="text-gray-400 text-sm mb-2">{% trans "Temps Total" %}</div>
+                <div class="text-4xl font-bold text-energy">{{ total_duration }}</div>
+                <div class="text-gray-500 text-xs">min</div>
+            </div>
+            <div class="card-glass border-neon-health text-center">
+                <div class="text-gray-400 text-sm mb-2">{% trans "Streak Actuel" %}</div>
+                <div class="text-4xl font-bold text-health">{{ user.stats.current_streak }}</div>
+                <div class="text-gray-500 text-xs">jours</div>
+            </div>
+        </div>
+
+        <!-- Weight Progression -->
+        {% if weight_data %}
+        <div class="card-glass border-neon-primary mb-8">
+            <h2 class="text-2xl font-display text-white mb-6">{% trans "Évolution du Poids" %}</h2>
+            <canvas id="weightChart" height="80"></canvas>
+        </div>
+        {% endif %}
+
+        <!-- Volume by Muscle Group -->
+        {% if muscle_volume_data %}
+        <div class="card-glass border-neon-secondary mb-8">
+            <h2 class="text-2xl font-display text-white mb-6">{% trans "Volume par Groupe Musculaire" %}</h2>
+            <canvas id="muscleVolumeChart" height="80"></canvas>
+        </div>
+        {% endif %}
+
+        <!-- Personal Records -->
+        {% if personal_records %}
+        <div class="card-glass border-neon-energy mb-8">
+            <h2 class="text-2xl font-display text-white mb-6">{% trans "Records Personnels (PR)" %}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for pr in personal_records %}
+                <div class="bg-gray-900 rounded-lg p-4 border border-gray-800">
+                    <h3 class="text-white font-semibold mb-2">{{ pr.exercise_name }}</h3>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-400 text-sm">{% trans "Max" %}</span>
+                        <span class="text-energy font-bold text-xl">{{ pr.max_weight }} kg</span>
+                    </div>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="text-gray-400 text-sm">{% trans "Volume Max" %}</span>
+                        <span class="text-secondary font-mono">{{ pr.max_volume|floatformat:0 }} kg</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Workout Frequency -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <div class="card-glass border-neon-primary">
+                <h2 class="text-2xl font-display text-white mb-6">{% trans "Fréquence d'Entraînement" %}</h2>
+                <canvas id="frequencyChart"></canvas>
+            </div>
+
+            <div class="card-glass border-neon-health">
+                <h2 class="text-2xl font-display text-white mb-6">{% trans "Consistency Score" %}</h2>
+                <div class="text-center py-8">
+                    <div class="text-6xl font-bold text-health mb-4">{{ consistency_score }}%</div>
+                    <p class="text-gray-400">{% trans "Basé sur tes 30 derniers jours" %}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- XP Progression -->
+        {% if xp_progression %}
+        <div class="card-glass border-neon-secondary">
+            <h2 class="text-2xl font-display text-white mb-6">{% trans "Progression XP" %}</h2>
+            <canvas id="xpChart" height="80"></canvas>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+const chartColors = {
+    primary: 'rgba(6, 182, 212, 1)',
+    secondary: 'rgba(168, 85, 247, 1)',
+    energy: 'rgba(234, 179, 8, 1)',
+    health: 'rgba(34, 197, 94, 1)'
+};
+
+// Weight Chart
+{% if weight_data %}
+new Chart(document.getElementById('weightChart'), {
+    type: 'line',
+    data: {
+        labels: {{ weight_dates|safe }},
+        datasets: [{
+            label: '{% trans "Poids (kg)" %}',
+            data: {{ weight_values|safe }},
+            borderColor: chartColors.primary,
+            backgroundColor: 'rgba(6, 182, 212, 0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { beginAtZero: false, grid: { color: 'rgba(255, 255, 255, 0.1)' }, ticks: { color: '#9CA3AF' } },
+            x: { grid: { display: false }, ticks: { color: '#9CA3AF' } }
+        }
+    }
+});
+{% endif %}
+
+// Muscle Volume Chart
+{% if muscle_volume_data %}
+new Chart(document.getElementById('muscleVolumeChart'), {
+    type: 'bar',
+    data: {
+        labels: {{ muscle_labels|safe }},
+        datasets: [{
+            label: '{% trans "Volume (kg)" %}',
+            data: {{ muscle_values|safe }},
+            backgroundColor: [
+                chartColors.primary,
+                chartColors.secondary,
+                chartColors.energy,
+                chartColors.health,
+                'rgba(239, 68, 68, 0.8)',
+                'rgba(249, 115, 22, 0.8)',
+                'rgba(139, 92, 246, 0.8)',
+                'rgba(236, 72, 153, 0.8)'
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { beginAtZero: true, grid: { color: 'rgba(255, 255, 255, 0.1)' }, ticks: { color: '#9CA3AF' } },
+            x: { grid: { display: false }, ticks: { color: '#9CA3AF' } }
+        }
+    }
+});
+{% endif %}
+
+// Frequency Chart
+new Chart(document.getElementById('frequencyChart'), {
+    type: 'doughnut',
+    data: {
+        labels: {{ frequency_labels|safe }},
+        datasets: [{
+            data: {{ frequency_values|safe }},
+            backgroundColor: [chartColors.primary, chartColors.secondary, chartColors.energy, chartColors.health]
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { position: 'bottom', labels: { color: '#9CA3AF' } }
+        }
+    }
+});
+
+// XP Chart
+{% if xp_progression %}
+new Chart(document.getElementById('xpChart'), {
+    type: 'line',
+    data: {
+        labels: {{ xp_dates|safe }},
+        datasets: [{
+            label: 'XP',
+            data: {{ xp_values|safe }},
+            borderColor: chartColors.energy,
+            backgroundColor: 'rgba(234, 179, 8, 0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { beginAtZero: true, grid: { color: 'rgba(255, 255, 255, 0.1)' }, ticks: { color: '#9CA3AF' } },
+            x: { grid: { display: false }, ticks: { color: '#9CA3AF' } }
+        }
+    }
+});
+{% endif %}
+</script>
+{% endblock %}

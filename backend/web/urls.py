@@ -51,6 +51,28 @@ urlpatterns = [
     path('nutrition/<int:recipe_id>/', views.recipe_detail, name='recipe_detail'),
     path('workout/', views.workout_session_view, name='workout_session'),
     path('workout/setup/', views.workout_setup_view, name='workout_setup'),
+    path('workout/complete/', views.complete_workout, name='complete_workout'),
+    
+    # Workout Tracking
+    path('workout/start/', views.start_workout, name='start_workout'),
+    path('workout/session/<int:session_id>/', views.workout_session, name='workout_session_detail'),
+    path('workout/session/<int:session_id>/add-set/', views.add_set_to_session, name='add_set_to_session'),
+    path('workout/session/<int:session_id>/complete/', views.complete_workout_session, name='complete_workout_session'),
+    path('workout/history/', views.workout_history, name='workout_history'),
+    path('workout/detail/<int:session_id>/', views.workout_detail, name='workout_detail'),
+    
+    # Analytics
+    path('analytics/', views.analytics_view, name='analytics'),
+    
+    # Onboarding
+    path('onboarding/', views.onboarding_welcome, name='onboarding_welcome'),
+    path('onboarding/step1/', views.onboarding_step1, name='onboarding_step1'),
+    path('onboarding/step2/', views.onboarding_step2, name='onboarding_step2'),
+    path('onboarding/step3/', views.onboarding_step3, name='onboarding_step3'),
+    
+    # Leaderboard
+    path('leaderboard/', views.leaderboard_view, name='leaderboard'),
+    
     path('tools/', views.tools_view, name='tools'),
     
     # Pages Statiques

@@ -1,5 +1,46 @@
 from django.utils.translation import gettext as _
 
+def generate_split_training(goal, activity_level):
+    """
+    Génère un split d'entraînement (Push/Pull/Legs ou Full Body).
+    """
+    if activity_level in ['elite', 'active']:
+        # PPL Split pour utilisateurs actifs
+        return {
+            'type': 'PPL',
+            'frequency': '6x/semaine' if activity_level == 'elite' else '3x/semaine',
+            'split': {
+                'push': {
+                    'focus': 'Pectoraux, Épaules, Triceps',
+                    'exercises': ['Développé Couché', 'Développé Incliné', 'Développé Militaire', 'Élévations Latérales', 'Dips Triceps'],
+                    'sets': '15-20 sets total',
+                    'reps': '8-12 reps' if goal == 'muscle_gain' else '12-15 reps'
+                },
+                'pull': {
+                    'focus': 'Dos, Biceps',
+                    'exercises': ['Tractions', 'Rowing Barre', 'Tirage Vertical', 'Rowing Haltère', 'Curls Biceps'],
+                    'sets': '15-20 sets total',
+                    'reps': '8-12 reps' if goal == 'muscle_gain' else '12-15 reps'
+                },
+                'legs': {
+                    'focus': 'Jambes, Abdominaux',
+                    'exercises': ['Squats', 'Soulevé de Terre', 'Leg Press', 'Fentes', 'Planche'],
+                    'sets': '15-20 sets total',
+                    'reps': '8-12 reps' if goal == 'muscle_gain' else '12-15 reps'
+                }
+            }
+        }
+    else:
+        # Full Body pour débutants/modérés
+        return {
+            'type': 'Full Body',
+            'frequency': '3x/semaine',
+            'exercises': ['Squats', 'Développé Couché', 'Rowing Barre', 'Développé Militaire', 'Tractions', 'Planche'],
+            'sets': '3-4 sets par exercice',
+            'reps': '10-12 reps' if goal == 'muscle_gain' else '12-15 reps',
+            'rest': '90-120 secondes'
+        }
+
 def generate_wellness_plan(age, gender, height, weight, goal, activity_level):
     """
     Generates a workout and nutrition plan based on biometrics.
@@ -58,17 +99,25 @@ def generate_wellness_plan(age, gender, height, weight, goal, activity_level):
         }
     }
 
-    # 4. Workout Plan Structure
-    schedule = _("4 jours/semaine - Split Haut/Bas")
+    # 4. Workout Plan Structure avec Split Training
+    split_training = generate_split_training(goal, activity_level)
+    
+    schedule = _("4 jours/semaine - split haut/bas")
     if activity_level in ['active', 'elite']:
         schedule = _("6 jours/semaine - Split PPL (Push/Pull/Legs)")
     
     exercises = [
-        _("Mouvements Composés (Squat, Soulevé de terre, Développé couché)"),
-        _("Travail d'Accessoires (Haltères, Poulies)"),
+        _("Mouvements composés (squat, soulevé de terre, développé couché)"),
+        _("Travail d'accessoires (haltères, poulies)"),
         _("Mobilité (10 min avant séance)"),
-        _("Cardio Zone 2 (2x 30min)")
+        _("Cardio zone 2 (2x 30min)")
     ]
+    
+    workout_plan = {
+        'schedule': schedule,
+        'exercises': exercises,
+        'split': split_training
+    }
 
     # Dynamic Analysis Calculation
     height_m = height / 100
@@ -100,27 +149,15 @@ def generate_wellness_plan(age, gender, height, weight, goal, activity_level):
     health_score = int((bmi_score + 70 + activity_bonus) / 2)
     health_score = min(99, max(40, health_score)) # Clamp between 40 and 99
 
-    # Focus Translation
-    focus_map = {
-        'weight_loss': _('Perte de Poids'),
-        'muscle_gain': _('Prise de Masse'),
-        'maintenance': _('Maintien')
-    }
-
-    workout_plan = {
-        "focus": focus_map.get(goal, _("Bien-être")),
-        "schedule": schedule,
-        "exercises": exercises,
-        "analysis": {
-            "score": health_score,
-            "message": message,
-            "bmi": round(bmi, 1),
-            "breakdown": {
-                "fitness": 60 + (activity_bonus * 2),
-                "recovery": 85 - activity_bonus, # Harder to recover if very active
-                "lifestyle": 70 + activity_bonus,
-                "consistency": 90 # Optimistic default
-            }
+    workout_plan["analysis"] = {
+        "score": health_score,
+        "message": message,
+        "bmi": round(bmi, 1),
+        "breakdown": {
+            "fitness": 60 + (activity_bonus * 2),
+            "recovery": 85 - activity_bonus,
+            "lifestyle": 70 + activity_bonus,
+            "consistency": 90
         }
     }
     

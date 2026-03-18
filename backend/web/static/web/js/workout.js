@@ -145,6 +145,22 @@ function finishSession() {
     if (window.workoutConfig && window.workoutConfig.textSessionDone) {
         speak(window.workoutConfig.textSessionDone);
     }
+
+    // Call Backend to record completion
+    const csrfToken = window.workoutConfig ? window.workoutConfig.csrfToken : '';
+    fetch('/workout/complete/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrfToken,
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Workout recorded:', data);
+        // We could display the XP gain here if we wanted to dynamically update the UI
+    })
+    .catch(error => console.error('Error recording workout:', error));
     
     // Show Report Modal
     const modal = document.getElementById('mission-report');

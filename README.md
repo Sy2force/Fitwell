@@ -4,7 +4,53 @@ FitWell est une plateforme SaaS complète dédiée à la santé, au fitness et �
 
 ## 🚀 Fonctionnalités Clés
 
-### 1. 🧠 Planificateur IA ("Protocoles")
+### 1. 🎓 Onboarding Intelligent (NOUVEAU)
+- Flow guidé en 4 étapes pour nouveaux utilisateurs
+- Sélection objectif (Perte poids / Prise masse / Maintien)
+- Configuration niveau d'activité (Sédentaire → Élite)
+- Collecte données biométriques (Age, Genre, Taille, Poids)
+- Génération automatique du premier plan
+- Attribution badges de bienvenue
+- Middleware de redirection automatique
+
+### 2. 🏆 Badges & Achievements (NOUVEAU)
+- 20 badges débloquables dans 4 catégories :
+  - **Workout** : Première Séance, Guerrier (10), Spartiate (25), Titan (50), Légende (100)
+  - **Volume** : Force Montante (1000kg), Powerlifter (5000kg), Hercule (10000kg)
+  - **Streak** : Démarrage (3j), Constance (7j), Discipline de Fer (14j), Implacable (30j), Invincible (100j)
+  - **Milestones** : Bienvenue, Planificateur, Niveau 10/25/50
+  - **Social** : Contributeur, Engagé
+- Attribution automatique après chaque action
+- Récompenses XP (50-5000 XP)
+- Affichage sur profil avec animations
+
+### 3. 📊 Analytics Avancées (NOUVEAU)
+- Page dédiée `/analytics/` avec :
+  - Évolution du poids (30 derniers jours)
+  - Volume par groupe musculaire (répartition complète)
+  - Personal Records (PR) - Top 10 exercices
+  - Fréquence d'entraînement (7 derniers jours)
+  - Consistency Score (pourcentage sur 30 jours)
+  - Progression XP (graphique temporel)
+- 6 graphiques interactifs Chart.js
+
+### 4. 🏆 Leaderboard Global (NOUVEAU)
+- Classement des meilleurs athlètes FitWell
+- 3 catégories : Top XP, Top Streaks, Top Workouts
+- Position personnelle dans chaque classement
+- Top 10 pour chaque catégorie
+
+### 5. 🏋️ Workout Tracking Complet (NOUVEAU)
+- Démarrer séance avec timer en temps réel
+- Ajouter sets (exercice, reps, poids, repos) en Ajax
+- Rest timer avec notification sonore
+- Calcul automatique volume total et durée
+- Attribution XP automatique (50 base + 10 par 10min)
+- Historique complet avec graphiques
+- Détails par séance avec breakdown exercices
+- Statistiques globales
+
+### 6. 🧠 Planificateur IA ("Protocoles")
 - Génération de programmes d'entraînement et de nutrition sur mesure basés sur :
   - Biométrie (Âge, Poids, Taille, Genre)
   - Objectif (Perte de gras, Prise de masse, Maintien)
@@ -87,8 +133,12 @@ pip install -r backend/requirements.txt
 # Appliquer les migrations
 python3 backend/manage.py migrate
 
-# (Optionnel) Peupler la base de données avec des données de démo (Articles, Catégories, Admin)
-python3 backend/manage.py seed_db
+# Peupler la base de données avec du contenu complet
+python3 backend/manage.py seed_db          # Admin + catégories de base
+python3 backend/manage.py seed_exercises   # 101 exercices avec images
+python3 backend/manage.py seed_blog        # 25 articles professionnels
+python3 backend/manage.py seed_badges      # 20 badges débloquables
+python3 backend/manage.py seed_recipes     # Recettes nutritionnelles
 ```
 > **Note**: Le script `seed_db` crée un super-utilisateur : `admin` / `adminpassword`.
 
@@ -99,10 +149,11 @@ python3 backend/manage.py runserver
 Accédez à l'application sur `http://127.0.0.1:8000`.
 
 ### 4. Tests
-Une suite de tests complète (19 tests) couvre l'API, les Vues et la Logique Métier.
+Une suite de tests complète (30 tests) couvre l'API, les Vues et la Logique Métier.
 ```bash
 python3 backend/manage.py test api web
 ```
+Tous les tests passent avec succès (30/30) ✅
 
 ---
 

@@ -1,0 +1,99 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Classement" %} - FitWell{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-void py-12 px-4">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-display text-white mb-4">
+                {% trans "Classement Global" %} 🏆
+            </h1>
+            <p class="text-gray-400 text-lg">
+                {% trans "Les meilleurs athlètes FitWell" %}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div class="card-glass border-neon-primary text-center">
+                <h3 class="text-white font-semibold mb-4">{% trans "Top XP" %}</h3>
+                <div class="space-y-3">
+                    {% for user in top_xp %}
+                    <div class="flex items-center justify-between bg-gray-900 rounded-lg p-3 {% if user.id == request.user.id %}border-2 border-primary{% endif %}">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold {% if forloop.counter == 1 %}text-energy{% elif forloop.counter == 2 %}text-gray-400{% elif forloop.counter == 3 %}text-orange-600{% else %}text-gray-600{% endif %}">
+                                #{{ forloop.counter }}
+                            </span>
+                            <div class="text-left">
+                                <div class="text-white font-semibold">{{ user.username }}</div>
+                                <div class="text-gray-500 text-xs">Niveau {{ user.stats.level }}</div>
+                            </div>
+                        </div>
+                        <div class="text-primary font-mono font-bold">{{ user.stats.xp }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="card-glass border-neon-secondary text-center">
+                <h3 class="text-white font-semibold mb-4">{% trans "Top Streaks" %}</h3>
+                <div class="space-y-3">
+                    {% for user in top_streak %}
+                    <div class="flex items-center justify-between bg-gray-900 rounded-lg p-3 {% if user.id == request.user.id %}border-2 border-secondary{% endif %}">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold {% if forloop.counter == 1 %}text-energy{% elif forloop.counter == 2 %}text-gray-400{% elif forloop.counter == 3 %}text-orange-600{% else %}text-gray-600{% endif %}">
+                                #{{ forloop.counter }}
+                            </span>
+                            <div class="text-left">
+                                <div class="text-white font-semibold">{{ user.username }}</div>
+                                <div class="text-gray-500 text-xs">Niveau {{ user.stats.level }}</div>
+                            </div>
+                        </div>
+                        <div class="text-secondary font-mono font-bold">{{ user.stats.current_streak }} 🔥</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="card-glass border-neon-energy text-center">
+                <h3 class="text-white font-semibold mb-4">{% trans "Top Workouts" %}</h3>
+                <div class="space-y-3">
+                    {% for item in top_workouts %}
+                    <div class="flex items-center justify-between bg-gray-900 rounded-lg p-3 {% if item.user.id == request.user.id %}border-2 border-energy{% endif %}">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold {% if forloop.counter == 1 %}text-energy{% elif forloop.counter == 2 %}text-gray-400{% elif forloop.counter == 3 %}text-orange-600{% else %}text-gray-600{% endif %}">
+                                #{{ forloop.counter }}
+                            </span>
+                            <div class="text-left">
+                                <div class="text-white font-semibold">{{ item.user.username }}</div>
+                                <div class="text-gray-500 text-xs">{{ item.total_volume|floatformat:0 }} kg</div>
+                            </div>
+                        </div>
+                        <div class="text-energy font-mono font-bold">{{ item.workout_count }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="card-glass border-neon-health text-center">
+            <h3 class="text-2xl font-display text-white mb-6">{% trans "Ta Position" %}</h3>
+            <div class="grid grid-cols-3 gap-6">
+                <div>
+                    <div class="text-gray-400 text-sm mb-2">{% trans "XP" %}</div>
+                    <div class="text-3xl font-bold text-primary">#{{ user_rank_xp }}</div>
+                </div>
+                <div>
+                    <div class="text-gray-400 text-sm mb-2">{% trans "Streak" %}</div>
+                    <div class="text-3xl font-bold text-secondary">#{{ user_rank_streak }}</div>
+                </div>
+                <div>
+                    <div class="text-gray-400 text-sm mb-2">{% trans "Workouts" %}</div>
+                    <div class="text-3xl font-bold text-energy">#{{ user_rank_workouts }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

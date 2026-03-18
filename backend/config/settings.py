@@ -18,6 +18,23 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 # Qui a le droit d'accéder au site ?
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*').split(',')
 
+# CSRF Configuration - Ports dynamiques du browser preview
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
+
+# En développement, ajouter les ports du proxy (64800-65000)
+if DEBUG:
+    for port in range(64800, 65000):
+        CSRF_TRUSTED_ORIGINS.append(f'http://127.0.0.1:{port}')
+        CSRF_TRUSTED_ORIGINS.append(f'http://localhost:{port}')
+
+# CORS Configuration (pour les requêtes cross-origin)
+CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = DEBUG  # Permissif en dev, strict en prod
+
 # -----------------------------------------------------------------------------
 # APPLICATIONS INSTALLÉES
 # -----------------------------------------------------------------------------
@@ -44,13 +61,14 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',       # Optimisation fichiers statiques
-    'corsheaders.middleware.CorsMiddleware',            # Gestion des accès Cross-Origin
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',        # Gestion des langues (EN/FR)
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'web.middleware.OnboardingMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]

@@ -1,0 +1,43 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Bienvenue" %} - FitWell{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-void flex items-center justify-center px-4">
+    <div class="max-w-2xl w-full">
+        <div class="card-glass border-neon-primary text-center py-16 px-8">
+            <div class="text-6xl mb-6">🚀</div>
+            <h1 class="text-5xl font-display text-white mb-6">
+                {% trans "Bienvenue sur FitWell" %}
+            </h1>
+            <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                {% trans "Nous allons configurer ton profil en 4 étapes rapides pour créer ton plan d'entraînement personnalisé." %}
+            </p>
+            
+            <div class="grid grid-cols-4 gap-4 mb-12">
+                <div class="bg-primary/20 border border-primary rounded-lg p-4">
+                    <div class="text-primary text-2xl mb-2">1</div>
+                    <div class="text-white text-sm">{% trans "Objectif" %}</div>
+                </div>
+                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4">
+                    <div class="text-gray-500 text-2xl mb-2">2</div>
+                    <div class="text-gray-500 text-sm">{% trans "Niveau" %}</div>
+                </div>
+                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4">
+                    <div class="text-gray-500 text-2xl mb-2">3</div>
+                    <div class="text-gray-500 text-sm">{% trans "Données" %}</div>
+                </div>
+                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4">
+                    <div class="text-gray-500 text-2xl mb-2">4</div>
+                    <div class="text-gray-500 text-sm">{% trans "Plan" %}</div>
+                </div>
+            </div>
+
+            <a href="{% url 'onboarding_step1' %}" class="btn-primary text-xl px-12 py-4 inline-block">
+                {% trans "Commencer" %} →
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

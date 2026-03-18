@@ -6,9 +6,10 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from django.db.models import Avg
+from django.db.models import Avg, Q
+from django.db import models
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, WellnessPlanForm, CommentForm, UserUpdateForm, CustomPasswordChangeForm, CustomEventForm, DailyLogForm, CustomWorkoutForm
-from api.models import User, Article, Category, UserStats, WellnessPlan, Comment, CustomEvent, Exercise, DailyLog, Recipe
+from api.models import User, Article, Category, UserStats, WellnessPlan, Comment, CustomEvent, Exercise, DailyLog, Recipe, WorkoutSession, ExerciseSet
 from api.services import generate_wellness_plan
 
 def home(request):
@@ -237,7 +238,7 @@ def workout_session_view(request):
     # Warmup
     sequence.append({
         'type': 'warmup',
-        'name': _("Échauffement Articulaire"),
+        'name': _("Échauffement articulaire"),
         'duration': 60,
         'description': _("Rotations des bras, poignets, chevilles et hanches.")
     })
@@ -262,7 +263,7 @@ def workout_session_view(request):
     # Cooldown
     sequence.append({
         'type': 'cooldown',
-        'name': _("Retour au Calme"),
+        'name': _("Retour au calme"),
         'duration': 60,
         'description': _("Étirements légers et respiration.")
     })
@@ -637,3 +638,454 @@ def custom_500(request):
     """
     return render(request, '500.html', status=500)
 
+
+@login_required(login_url='login')
+@require_POST
+def complete_workout(request):
+    """
+    API endpoint to record a completed workout session.
+    Awards XP, updates streak, and logs entry in DailyLog.
+    """
+    # 1. Award XP and Update Streak
+    xp_gain = 100
+    if hasattr(request.user, 'stats'):
+        request.user.stats.add_xp(xp_gain)
+        request.user.stats.update_streak()
+    
+    # 2. Add entry to Daily Log
+    today_log, created = DailyLog.objects.get_or_create(user=request.user, date=timezone.now().date())
+    timestamp = timezone.now().strftime("%H:%M")
+    log_entry = f"[{timestamp}] { _('Séance Coach IA terminée') } (+{xp_gain} XP)"
+    
+    if today_log.notes:
+        today_log.notes += f"\n{log_entry}"
+    else:
+        today_log.notes = log_entry
+    today_log.save()
+    
+    return JsonResponse({
+        'status': 'success',
+        'xp_gain': xp_gain,
+        'new_xp': request.user.stats.xp,
+        'new_level': request.user.stats.level,
+        'message': _("Mission accomplie ! +%(xp)s XP") % {'xp': xp_gain}
+    })
+
+# -----------------------------------------------------------------------------
+# WORKOUT TRACKING
+# -----------------------------------------------------------------------------
+@login_required(login_url='login')
+def start_workout(request):
+    """
+    Page pour démarrer une nouvelle séance d'entraînement.
+    Vérifie qu'il n'y a pas de session active avant de créer une nouvelle.
+    """
+    active_session = WorkoutSession.objects.filter(user=request.user, status='active').first()
+    
+    if active_session:
+        messages.warning(request, _("Vous avez déjà une séance en cours. Terminez-la d'abord."))
+        return redirect('workout_session_detail', session_id=active_session.id)
+    
+    if request.method == 'POST':
+        notes = request.POST.get('notes', '')
+        session = WorkoutSession.objects.create(user=request.user, notes=notes)
+        messages.success(request, _("Séance démarrée ! Bon entraînement ! 💪"))
+        return redirect('workout_session_detail', session_id=session.id)
+    
+    latest_plan = request.user.plans.order_by('-created_at').first()
+    suggested_exercises = Exercise.objects.all()[:6]
+    
+    return render(request, 'web/workout/start.html', {
+        'suggested_exercises': suggested_exercises,
+        'latest_plan': latest_plan
+    })
+
+@login_required(login_url='login')
+def workout_session(request, session_id):
+    """
+    Page de la séance en cours.
+    Affiche le timer, les exercices effectués et permet d'ajouter des sets.
+    """
+    session = get_object_or_404(WorkoutSession, id=session_id, user=request.user)
+    
+    if session.status != 'active':
+        messages.warning(request, _("Cette séance est déjà terminée."))
+        return redirect('workout_history')
+    
+    exercises = Exercise.objects.all().order_by('muscle_group', 'name')
+    
+    sets_by_exercise = {}
+    for exercise_set in session.sets.select_related('exercise').order_by('created_at'):
+        ex_name = exercise_set.exercise.name
+        if ex_name not in sets_by_exercise:
+            sets_by_exercise[ex_name] = []
+        sets_by_exercise[ex_name].append(exercise_set)
+    
+    return render(request, 'web/workout/session.html', {
+        'session': session,
+        'exercises': exercises,
+        'sets_by_exercise': sets_by_exercise,
+        'total_sets': session.sets.count()
+    })
+
+@login_required(login_url='login')
+@require_POST
+def add_set_to_session(request, session_id):
+    """
+    API endpoint pour ajouter un set à une session active (Ajax).
+    """
+    session = get_object_or_404(WorkoutSession, id=session_id, user=request.user)
+    
+    if session.status != 'active':
+        return JsonResponse({'error': 'Session non active'}, status=400)
+    
+    try:
+        exercise_id = int(request.POST.get('exercise_id'))
+        reps = int(request.POST.get('reps'))
+        weight = float(request.POST.get('weight'))
+        rest_seconds = int(request.POST.get('rest_seconds', 60))
+        notes = request.POST.get('notes', '')
+        
+        exercise = get_object_or_404(Exercise, id=exercise_id)
+        
+        last_set = session.sets.filter(exercise=exercise).order_by('-set_number').first()
+        set_number = (last_set.set_number + 1) if last_set else 1
+        
+        exercise_set = ExerciseSet.objects.create(
+            session=session,
+            exercise=exercise,
+            set_number=set_number,
+            reps=reps,
+            weight=weight,
+            rest_seconds=rest_seconds,
+            notes=notes
+        )
+        
+        return JsonResponse({
+            'status': 'success',
+            'set': {
+                'id': exercise_set.id,
+                'exercise_name': exercise.name,
+                'set_number': set_number,
+                'reps': reps,
+                'weight': weight,
+                'volume': exercise_set.volume,
+                'rest_seconds': rest_seconds
+            },
+            'total_sets': session.sets.count()
+        })
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=400)
+
+@login_required(login_url='login')
+@require_POST
+def complete_workout_session(request, session_id):
+    """
+    Terminer une séance d'entraînement.
+    Calcule les stats et attribue l'XP.
+    """
+    session = get_object_or_404(WorkoutSession, id=session_id, user=request.user)
+    
+    if session.status != 'active':
+        return JsonResponse({'error': 'Session déjà terminée'}, status=400)
+    
+    session.complete_session()
+    
+    from api.services_badges import check_and_award_badges
+    new_badges = check_and_award_badges(request.user)
+    
+    xp_earned = 50 + (session.duration_minutes // 10) * 10
+    
+    return JsonResponse({
+        'status': 'success',
+        'message': _("Séance terminée avec succès ! 🎉"),
+        'xp_earned': xp_earned,
+        'duration_minutes': session.duration_minutes,
+        'total_volume': round(session.total_volume, 2),
+        'total_sets': session.sets.count(),
+        'redirect_url': '/workout/history/'
+    })
+
+@login_required(login_url='login')
+def workout_history(request):
+    """
+    Historique des séances d'entraînement.
+    Affiche toutes les sessions complétées avec statistiques.
+    """
+    sessions = WorkoutSession.objects.filter(
+        user=request.user,
+        status='completed'
+    ).prefetch_related('sets__exercise').order_by('-started_at')
+    
+    # Calculate overall stats
+    total_sessions = sessions.count()
+    total_volume = sum(s.total_volume for s in sessions)
+    total_duration = sum(s.duration_minutes for s in sessions)
+    
+    # Recent sessions for charts (last 10)
+    recent_sessions = sessions[:10]
+    chart_dates = [s.started_at.strftime('%d/%m') for s in reversed(list(recent_sessions))]
+    chart_volume = [s.total_volume for s in reversed(list(recent_sessions))]
+    chart_duration = [s.duration_minutes for s in reversed(list(recent_sessions))]
+    
+    return render(request, 'web/workout/history.html', {
+        'sessions': sessions[:20],  # Show last 20 sessions
+        'total_sessions': total_sessions,
+        'total_volume': round(total_volume, 2),
+        'total_duration': total_duration,
+        'avg_duration': round(total_duration / total_sessions, 2) if total_sessions > 0 else 0,
+        'avg_volume': round(total_volume / total_sessions, 2) if total_sessions > 0 else 0,
+        'chart_dates': chart_dates,
+        'chart_volume': chart_volume,
+        'chart_duration': chart_duration
+    })
+
+@login_required(login_url='login')
+def workout_detail(request, session_id):
+    """
+    Détails d'une séance spécifique.
+    """
+    session = get_object_or_404(WorkoutSession, id=session_id, user=request.user)
+    
+    # Group sets by exercise
+    sets_by_exercise = {}
+    for exercise_set in session.sets.select_related('exercise').order_by('created_at'):
+        ex_name = exercise_set.exercise.name
+        if ex_name not in sets_by_exercise:
+            sets_by_exercise[ex_name] = {
+                'exercise': exercise_set.exercise,
+                'sets': [],
+                'total_volume': 0
+            }
+        sets_by_exercise[ex_name]['sets'].append(exercise_set)
+        sets_by_exercise[ex_name]['total_volume'] += exercise_set.volume
+    
+    return render(request, 'web/workout/detail.html', {
+        'session': session,
+        'sets_by_exercise': sets_by_exercise
+    })
+
+@login_required(login_url='login')
+def analytics_view(request):
+    """
+    Page analytics avancées avec tous les graphiques de progression.
+    """
+    from django.db.models import Max, Sum, Count
+    from datetime import timedelta
+    
+    # Global workout stats
+    completed_sessions = WorkoutSession.objects.filter(user=request.user, status='completed')
+    total_workouts = completed_sessions.count()
+    total_volume = sum(s.total_volume for s in completed_sessions)
+    total_duration = sum(s.duration_minutes for s in completed_sessions)
+    
+    # Weight progression (from daily logs)
+    weight_logs = request.user.daily_logs.filter(weight__isnull=False).order_by('date')[:30]
+    weight_dates = [log.date.strftime('%d/%m') for log in weight_logs]
+    weight_values = [log.weight for log in weight_logs]
+    
+    # Volume by muscle group
+    muscle_volume = {}
+    for session in completed_sessions:
+        for exercise_set in session.sets.select_related('exercise'):
+            muscle = exercise_set.exercise.get_muscle_group_display()
+            if muscle not in muscle_volume:
+                muscle_volume[muscle] = 0
+            muscle_volume[muscle] += exercise_set.volume
+    
+    muscle_labels = list(muscle_volume.keys())
+    muscle_values = list(muscle_volume.values())
+    
+    # Personal Records (PR) - Max weight per exercise
+    personal_records = []
+    all_sets = ExerciseSet.objects.filter(session__user=request.user, session__status='completed').select_related('exercise')
+    
+    exercises_with_sets = {}
+    for exercise_set in all_sets:
+        ex_name = exercise_set.exercise.name
+        if ex_name not in exercises_with_sets:
+            exercises_with_sets[ex_name] = []
+        exercises_with_sets[ex_name].append(exercise_set)
+    
+    for ex_name, sets in exercises_with_sets.items():
+        max_weight = max(s.weight for s in sets)
+        max_volume = max(s.volume for s in sets)
+        personal_records.append({
+            'exercise_name': ex_name,
+            'max_weight': max_weight,
+            'max_volume': max_volume
+        })
+    
+    personal_records = sorted(personal_records, key=lambda x: x['max_weight'], reverse=True)[:10]
+    
+    # Workout frequency (last 7 days)
+    today = timezone.now().date()
+    last_7_days = [today - timedelta(days=i) for i in range(7)]
+    frequency_data = {}
+    for day in last_7_days:
+        day_name = day.strftime('%A')
+        count = completed_sessions.filter(started_at__date=day).count()
+        if day_name not in frequency_data:
+            frequency_data[day_name] = 0
+        frequency_data[day_name] += count
+    
+    frequency_labels = list(frequency_data.keys())
+    frequency_values = list(frequency_data.values())
+    
+    # Consistency score (workouts in last 30 days / expected)
+    last_30_days = completed_sessions.filter(started_at__gte=today - timedelta(days=30)).count()
+    expected_workouts = 12
+    consistency_score = min(int((last_30_days / expected_workouts) * 100), 100)
+    
+    # XP progression (if we track it historically - for now use current)
+    xp_progression = True
+    xp_dates = ['Semaine 1', 'Semaine 2', 'Semaine 3', 'Semaine 4']
+    xp_values = [request.user.stats.xp // 4, request.user.stats.xp // 2, request.user.stats.xp * 3 // 4, request.user.stats.xp]
+    
+    return render(request, 'web/analytics.html', {
+        'total_workouts': total_workouts,
+        'total_volume': total_volume,
+        'total_duration': total_duration,
+        'weight_data': len(weight_dates) > 0,
+        'weight_dates': weight_dates,
+        'weight_values': weight_values,
+        'muscle_volume_data': len(muscle_labels) > 0,
+        'muscle_labels': muscle_labels,
+        'muscle_values': muscle_values,
+        'personal_records': personal_records,
+        'frequency_labels': frequency_labels,
+        'frequency_values': frequency_values,
+        'consistency_score': consistency_score,
+        'xp_progression': xp_progression,
+        'xp_dates': xp_dates,
+        'xp_values': xp_values
+    })
+
+# -----------------------------------------------------------------------------
+# ONBOARDING
+# -----------------------------------------------------------------------------
+@login_required(login_url='login')
+def onboarding_welcome(request):
+    if request.user.is_onboarded:
+        return redirect('dashboard')
+    return render(request, 'web/onboarding/welcome.html')
+
+@login_required(login_url='login')
+def onboarding_step1(request):
+    if request.user.is_onboarded:
+        return redirect('dashboard')
+    
+    if request.method == 'POST':
+        request.session['onboarding_goal'] = request.POST.get('goal')
+        return redirect('onboarding_step2')
+    
+    return render(request, 'web/onboarding/step1_goal.html')
+
+@login_required(login_url='login')
+def onboarding_step2(request):
+    if request.user.is_onboarded:
+        return redirect('dashboard')
+    
+    if request.method == 'POST':
+        request.session['onboarding_activity'] = request.POST.get('activity_level')
+        return redirect('onboarding_step3')
+    
+    return render(request, 'web/onboarding/step2_level.html')
+
+@login_required(login_url='login')
+def onboarding_step3(request):
+    if request.user.is_onboarded:
+        return redirect('dashboard')
+    
+    if request.method == 'POST':
+        from api.services import generate_wellness_plan
+        from api.services_badges import check_and_award_badges
+        
+        age = int(request.POST.get('age'))
+        gender = request.POST.get('gender')
+        height = int(request.POST.get('height'))
+        weight = float(request.POST.get('weight'))
+        goal = request.session.get('onboarding_goal', 'maintenance')
+        activity_level = request.session.get('onboarding_activity', 'moderate')
+        
+        workout_plan, nutrition_plan, health_score = generate_wellness_plan(
+            age=age, gender=gender, height=height, weight=weight,
+            goal=goal, activity_level=activity_level
+        )
+        
+        plan = WellnessPlan.objects.create(
+            user=request.user,
+            age=age, gender=gender, height=height, weight=weight,
+            goal=goal, activity_level=activity_level,
+            workout_plan=workout_plan,
+            nutrition_plan=nutrition_plan
+        )
+        
+        if hasattr(request.user, 'stats'):
+            request.user.stats.health_score = health_score['total']
+            request.user.stats.fitness_score = health_score['fitness']
+            request.user.stats.recovery_score = health_score['recovery']
+            request.user.stats.lifestyle_score = health_score['lifestyle']
+            request.user.stats.add_xp(50)
+            request.user.stats.update_streak()
+            request.user.stats.save()
+        
+        from api.services_badges import check_and_award_badges
+        new_badges = check_and_award_badges(request.user)
+        
+        request.user.is_onboarded = True
+        request.user.save()
+        
+        request.session.pop('onboarding_goal', None)
+        request.session.pop('onboarding_activity', None)
+        
+        return render(request, 'web/onboarding/complete.html', {
+            'plan': plan,
+            'new_badges': new_badges
+        })
+    
+    return render(request, 'web/onboarding/step3_data.html')
+
+# -----------------------------------------------------------------------------
+# LEADERBOARD
+# -----------------------------------------------------------------------------
+@login_required(login_url='login')
+def leaderboard_view(request):
+    """
+    Page de classement global des utilisateurs.
+    """
+    from django.db.models import Count, Sum
+    
+    # Top 10 XP
+    top_xp = User.objects.select_related('stats').order_by('-stats__xp')[:10]
+    
+    # Top 10 Streaks
+    top_streak = User.objects.select_related('stats').order_by('-stats__current_streak')[:10]
+    
+    # Top 10 Workouts (count + volume)
+    users_with_workouts = User.objects.annotate(
+        workout_count=Count('workout_sessions', filter=models.Q(workout_sessions__status='completed')),
+        total_volume=Sum('workout_sessions__total_volume', filter=models.Q(workout_sessions__status='completed'))
+    ).filter(workout_count__gt=0).order_by('-workout_count')[:10]
+    
+    # User ranks
+    all_users_xp = list(User.objects.select_related('stats').order_by('-stats__xp').values_list('id', flat=True))
+    all_users_streak = list(User.objects.select_related('stats').order_by('-stats__current_streak').values_list('id', flat=True))
+    
+    user_rank_xp = all_users_xp.index(request.user.id) + 1 if request.user.id in all_users_xp else 0
+    user_rank_streak = all_users_streak.index(request.user.id) + 1 if request.user.id in all_users_streak else 0
+    
+    user_workouts = WorkoutSession.objects.filter(user=request.user, status='completed').count()
+    users_workout_counts = list(User.objects.annotate(
+        workout_count=Count('workout_sessions', filter=models.Q(workout_sessions__status='completed'))
+    ).filter(workout_count__gte=user_workouts).values_list('id', flat=True))
+    user_rank_workouts = len(users_workout_counts)
+    
+    return render(request, 'web/leaderboard.html', {
+        'top_xp': top_xp,
+        'top_streak': top_streak,
+        'top_workouts': users_with_workouts,
+        'user_rank_xp': user_rank_xp,
+        'user_rank_streak': user_rank_streak,
+        'user_rank_workouts': user_rank_workouts
+    })

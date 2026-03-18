@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}FitWell - {% trans "Performance Humaine" %}{% endblock %}</title>
+    <title>{% block title %}FitWell - {% trans "Performance humaine" %}{% endblock %}</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏋️</text></svg>">
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <script>
@@ -121,11 +121,11 @@
                         {% if user.is_authenticated %}
                             <!-- Stats Badges -->
                             <div class="hidden lg:flex items-center space-x-3 mr-4 border-r border-gray-200 dark:border-white/10 pr-4">
-                                <div class="flex items-center space-x-1" title="{% trans 'Niveau Actuel' %}">
+                                <div class="flex items-center space-x-1" title="{% trans 'Niveau actuel' %}">
                                     <span class="text-xs text-gray-500 font-mono">LVL</span>
                                     <span class="text-sm font-bold text-gray-900 dark:text-white">{{ user.stats.level }}</span>
                                 </div>
-                                <div class="flex items-center space-x-1" title="{% trans "Points d'Expérience" %}">
+                                <div class="flex items-center space-x-1" title="{% trans "Points d'expérience" %}">
                                     <span class="text-xs text-gray-500 font-mono">XP</span>
                                     <span class="text-sm font-bold text-yellow-600 dark:text-energy">{{ user.stats.xp }}</span>
                                 </div>
@@ -182,7 +182,7 @@
                 {% if user.is_authenticated %}
                     <a href="{% url 'planner' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Planificateur" %}</a>
                     <a href="{% url 'custom_planner' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Agenda" %}</a>
-                    <a href="{% url 'workout_session' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Coach IA" %}</a>
+                    <a href="{% url 'workout_setup' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Coach IA" %}</a>
                     <a href="{% url 'profile' %}" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium uppercase tracking-widest">{% trans "Profil" %}</a>
                 {% endif %}
             </div>
@@ -258,7 +258,7 @@
                 <p class="text-gray-600 font-mono text-xs">© 2026 FITWELL SYSTEMS INC. {% trans "TOUS DROITS RÉSERVÉS." %}</p>
                 <div class="flex space-x-4 mt-4 md:mt-0">
                     <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                    <span class="text-gray-600 font-mono text-xs uppercase">{% trans "Systèmes Opérationnels" %}</span>
+                    <span class="text-gray-600 font-mono text-xs uppercase">{% trans "Systèmes opérationnels" %}</span>
                 </div>
             </div>
         </div>

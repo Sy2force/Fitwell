@@ -1,0 +1,38 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Prêt" %} - FitWell{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-void flex items-center justify-center px-4">
+    <div class="max-w-2xl w-full">
+        <div class="card-glass border-neon-health text-center py-16 px-8">
+            <div class="text-6xl mb-6">✅</div>
+            <h1 class="text-5xl font-display text-white mb-6">
+                {% trans "Ton Plan est Prêt !" %}
+            </h1>
+            <p class="text-gray-400 text-lg mb-8">
+                {% trans "Ton profil est configuré. Tu as gagné" %} <span class="text-energy font-bold">+100 XP</span> !
+            </p>
+
+            {% if new_badges %}
+            <div class="mb-8">
+                <div class="text-white font-semibold mb-4">{% trans "Badges Débloqués" %}</div>
+                <div class="flex justify-center gap-4">
+                    {% for badge in new_badges %}
+                    <div class="bg-gray-900 rounded-lg p-4 border border-primary">
+                        <div class="text-4xl mb-2">{{ badge.icon }}</div>
+                        <div class="text-white text-sm">{{ badge.name }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <a href="{% url 'dashboard' %}" class="btn-primary text-xl px-12 py-4 inline-block">
+                {% trans "Accéder au Dashboard" %} 🎯
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

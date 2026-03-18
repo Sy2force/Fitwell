@@ -15,7 +15,7 @@ Ce guide explique comment déployer FitWell (Application Monolithique Django).
 3. **Paramètres de base** :
    - **Root Directory** : `backend`
    - **Runtime** : `Python 3`
-   - **Build Command** : `pip install -r requirements.txt && python manage.py compilemessages && python manage.py collectstatic --noinput && python manage.py migrate`
+   - **Build Command** : `pip install -r requirements.txt && python manage.py compilemessages && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py seed_exercises && python manage.py seed_blog && python manage.py seed_badges`
    - **Start Command** : `gunicorn config.wsgi:application`
 
 4. **Variables d'Environnement** :

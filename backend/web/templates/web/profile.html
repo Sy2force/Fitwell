@@ -14,15 +14,15 @@
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 pb-6 border-b border-white/10">
             <div>
                 <h1 class="text-4xl md:text-6xl font-display font-bold italic text-white mb-2 uppercase tracking-wide">
-                    {% trans "DOSSIER" %} <span class="text-energy drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]">{% trans "OPÉRATEUR" %}</span>
+                    {% trans "Dossier" %} <span class="text-energy drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]">{% trans "Opérateur" %}</span>
                 </h1>
                 <p class="text-gray-400 font-mono text-sm tracking-widest uppercase flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-energy animate-pulse"></span>
-                    {% trans "INDICATIF:" %} <span class="text-white font-bold">{{ user.username }}</span> // {% trans "NIVEAU" %} <span class="text-energy">{{ user.stats.level }}</span>
+                    {% trans "Indicatif :" %} <span class="text-white font-bold">{{ user.username }}</span> // {% trans "Niveau" %} <span class="text-energy">{{ user.stats.level }}</span>
                 </p>
                 <div class="mt-6 flex flex-wrap items-center gap-4">
                     <a href="{% url 'edit_profile' %}" class="inline-flex items-center px-4 py-2 rounded text-xs font-bold border border-white/20 text-white hover:bg-white/10 transition-all uppercase tracking-widest font-mono group">
-                        <span class="mr-2 group-hover:text-energy transition-colors">✎</span> {% trans "Éditer Dossier" %}
+                        <span class="mr-2 group-hover:text-energy transition-colors">✎</span> {% trans "Éditer dossier" %}
                     </a>
                     {% if plan %}
                     <span class="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-energy/10 text-energy border border-energy/20 uppercase tracking-widest font-mono">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="text-right border-l border-white/10 pl-8">
                     <span class="block text-5xl font-sport font-bold text-white">{{ user.stats.current_streak }}</span>
-                    <span class="text-xs text-energy uppercase tracking-widest font-bold font-mono">{% trans "Jours Série" %}</span>
+                    <span class="text-xs text-energy uppercase tracking-widest font-bold font-mono">{% trans "Jours série" %}</span>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
         <!-- Level Progress -->
         <div class="glass-card p-8 mb-12 border-l-4 border-energy bg-surface/50">
             <div class="flex justify-between items-center mb-4">
-                <span class="text-sm font-bold text-gray-400 uppercase tracking-widest font-mono">{% trans "Progression Niveau" %} <span class="text-white">{{ user.stats.level }}</span></span>
+                <span class="text-sm font-bold text-gray-400 uppercase tracking-widest font-mono">{% trans "Progression niveau" %} <span class="text-white">{{ user.stats.level }}</span></span>
                 <span class="text-xs font-mono text-energy">{{ user.stats.xp }} / {{ user.stats.xp_threshold }} XP</span>
             </div>
             <div class="w-full bg-surface border border-white/10 h-4 rounded-full overflow-hidden relative">
@@ -69,10 +69,10 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
             <!-- Health Score -->
             <div class="glass-card p-6 border-t-4 border-health bg-surface/50 hover:bg-surface/80 transition-all group">
-                <h3 class="text-gray-500 text-xs uppercase tracking-widest font-bold mb-2 font-mono">{% trans "Score Santé" %}</h3>
+                <h3 class="text-gray-500 text-xs uppercase tracking-widest font-bold mb-2 font-mono">{% trans "Score santé" %}</h3>
                 <div class="flex items-end justify-between">
                     <span class="text-6xl font-sport font-bold text-white group-hover:text-health transition-colors">{{ user.stats.health_score }}%</span>
-                    <span class="text-health text-xs mb-2 font-bold tracking-wider">{% trans "OPTIMAL" %}</span>
+                    <span class="text-health text-xs mb-2 font-bold tracking-wider">{% trans "Optimal" %}</span>
                 </div>
                 <div class="w-full bg-surface h-1 mt-4 rounded-full overflow-hidden">
                     <div class="bg-health h-full shadow-[0_0_10px_rgba(16,185,129,0.5)]" style="width: {{ user.stats.health_score }}%;"></div>
@@ -146,6 +146,26 @@
                 </div>
             </a>
         </div>
+
+        <!-- Badges Section -->
+        {% if user.badges.all %}
+        <div class="card-glass border-neon-energy mb-12">
+            <h2 class="text-3xl font-display text-white mb-6 flex items-center">
+                <span class="text-energy mr-3">🏆</span> {% trans "Badges Débloqués" %}
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {% for user_badge in user.badges.all %}
+                <div class="bg-gray-900 rounded-lg p-4 border border-gray-800 hover:border-energy transition-all text-center group">
+                    <div class="text-4xl mb-2 group-hover:scale-110 transition-transform">{{ user_badge.badge.icon }}</div>
+                    <div class="text-white font-semibold text-sm mb-1">{{ user_badge.badge.name }}</div>
+                    <div class="text-gray-500 text-xs mb-2">{{ user_badge.badge.description }}</div>
+                    <div class="text-energy text-xs font-mono">+{{ user_badge.badge.xp_reward }} XP</div>
+                    <div class="text-gray-600 text-xs mt-2">{{ user_badge.unlocked_at|date:"d/m/Y" }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

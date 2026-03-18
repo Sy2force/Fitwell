@@ -1,0 +1,201 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Historique Entraînements" %} - FitWell{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-void py-12 px-4">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-display text-white mb-4">
+                {% trans "Historique Entraînements" %} 📊
+            </h1>
+            <p class="text-gray-400 text-lg">
+                {% trans "Toutes tes séances et ta progression" %}
+            </p>
+        </div>
+
+        <!-- Overall Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <div class="card-glass border-neon-primary text-center">
+                <div class="text-gray-400 text-sm mb-2">{% trans "Total Séances" %}</div>
+                <div class="text-4xl font-bold text-primary">{{ total_sessions }}</div>
+            </div>
+            <div class="card-glass border-neon-secondary text-center">
+                <div class="text-gray-400 text-sm mb-2">{% trans "Volume Total" %}</div>
+                <div class="text-4xl font-bold text-secondary">{{ total_volume|floatformat:0 }} <span class="text-xl">kg</span></div>
+            </div>
+            <div class="card-glass border-neon-energy text-center">
+                <div class="text-gray-400 text-sm mb-2">{% trans "Temps Total" %}</div>
+                <div class="text-4xl font-bold text-energy">{{ total_duration }} <span class="text-xl">min</span></div>
+            </div>
+            <div class="card-glass border-neon-health text-center">
+                <div class="text-gray-400 text-sm mb-2">{% trans "Moyenne/Séance" %}</div>
+                <div class="text-4xl font-bold text-health">{{ avg_duration|floatformat:0 }} <span class="text-xl">min</span></div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        {% if chart_dates %}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Volume Chart -->
+            <div class="card-glass border-neon-primary">
+                <h2 class="text-2xl font-display text-white mb-6">{% trans "Volume par Séance" %}</h2>
+                <canvas id="volumeChart"></canvas>
+            </div>
+
+            <!-- Duration Chart -->
+            <div class="card-glass border-neon-secondary">
+                <h2 class="text-2xl font-display text-white mb-6">{% trans "Durée par Séance" %}</h2>
+                <canvas id="durationChart"></canvas>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Sessions List -->
+        <div class="card-glass border-neon-primary">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-display text-white">
+                    {% trans "Dernières Séances" %}
+                </h2>
+                <a href="{% url 'start_workout' %}" class="btn-primary">
+                    {% trans "Nouvelle Séance" %} +
+                </a>
+            </div>
+
+            {% if sessions %}
+            <div class="space-y-4">
+                {% for session in sessions %}
+                <div class="bg-gray-900 rounded-lg p-6 border border-gray-800 hover:border-primary transition-all">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                <h3 class="text-white font-semibold text-lg">
+                                    {{ session.started_at|date:"d/m/Y à H:i" }}
+                                </h3>
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">
+                                    ✓ {% trans "Terminée" %}
+                                </span>
+                            </div>
+                            
+                            {% if session.notes %}
+                            <p class="text-gray-400 text-sm mb-3">{{ session.notes }}</p>
+                            {% endif %}
+
+                            <div class="flex flex-wrap gap-4 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-gray-500">⏱️</span>
+                                    <span class="text-white">{{ session.duration_minutes }} min</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-gray-500">💪</span>
+                                    <span class="text-white">{{ session.sets.count }} sets</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-gray-500">⚡</span>
+                                    <span class="text-secondary">{{ session.total_volume|floatformat:1 }} kg</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <a href="{% url 'workout_detail' session.id %}" class="btn-secondary text-sm">
+                                {% trans "Détails" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-12">
+                <div class="text-6xl mb-4">🏋️</div>
+                <p class="text-gray-400 text-lg mb-6">
+                    {% trans "Aucune séance enregistrée pour le moment" %}
+                </p>
+                <a href="{% url 'start_workout' %}" class="btn-primary">
+                    {% trans "Démarrer ta première séance" %} 🚀
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% if chart_dates %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+// Volume Chart
+const volumeCtx = document.getElementById('volumeChart').getContext('2d');
+new Chart(volumeCtx, {
+    type: 'bar',
+    data: {
+        labels: {{ chart_dates|safe }},
+        datasets: [{
+            label: '{% trans "Volume (kg)" %}',
+            data: {{ chart_volume|safe }},
+            backgroundColor: 'rgba(6, 182, 212, 0.5)',
+            borderColor: 'rgba(6, 182, 212, 1)',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: { display: false }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                ticks: { color: '#9CA3AF' }
+            },
+            x: {
+                grid: { display: false },
+                ticks: { color: '#9CA3AF' }
+            }
+        }
+    }
+});
+
+// Duration Chart
+const durationCtx = document.getElementById('durationChart').getContext('2d');
+new Chart(durationCtx, {
+    type: 'line',
+    data: {
+        labels: {{ chart_dates|safe }},
+        datasets: [{
+            label: '{% trans "Durée (min)" %}',
+            data: {{ chart_duration|safe }},
+            backgroundColor: 'rgba(168, 85, 247, 0.2)',
+            borderColor: 'rgba(168, 85, 247, 1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: { display: false }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                ticks: { color: '#9CA3AF' }
+            },
+            x: {
+                grid: { display: false },
+                ticks: { color: '#9CA3AF' }
+            }
+        }
+    }
+});
+</script>
+{% endif %}
+{% endblock %}

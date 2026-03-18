@@ -1,7 +1,7 @@
 {% extends 'web/base.html' %}
 {% load i18n static %}
 
-{% block title %}{% trans "Centre de Commandement - FitWell" %}{% endblock %}
+{% block title %}{% trans "Centre de commandement - FitWell" %}{% endblock %}
 
 {% block content %}
 <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-background transition-colors duration-300 relative overflow-hidden">
@@ -14,11 +14,11 @@
         <div class="mb-12 flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-6">
             <div>
                 <h1 class="text-4xl md:text-5xl font-display font-bold italic text-white mb-2 uppercase tracking-wide">
-                    {% trans "CENTRE DE" %} <span class="text-energy drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]">{% trans "COMMANDEMENT" %}</span>
+                    {% trans "Centre de" %} <span class="text-energy drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]">{% trans "commandement" %}</span>
                 </h1>
                 <p class="text-gray-400 font-mono text-xs uppercase tracking-[0.2em] flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-health animate-pulse"></span>
-                    {% trans "Rapport Quotidien & Métriques Vitales" %}
+                    {% trans "Rapport quotidien & métriques vitales" %}
                 </p>
             </div>
             <div class="mt-4 md:mt-0 flex items-center space-x-4">
@@ -38,7 +38,7 @@
             <div class="lg:col-span-1 space-y-8">
                 <div class="glass-card p-6 border-l-4 border-energy">
                     <h3 class="text-2xl font-bold text-white mb-6 font-display italic uppercase">
-                        {% trans "Journal de Bord" %}
+                        {% trans "Journal de bord" %}
                     </h3>
                     <form method="post" class="space-y-5">
                         {% csrf_token %}
@@ -74,7 +74,7 @@
                         </div>
 
                         <button type="submit" class="w-full bg-energy/10 text-energy border border-energy hover:bg-energy hover:text-black transition-all py-4 rounded font-display font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_rgba(234,179,8,0.4)]">
-                            {% trans "Mettre à jour le Rapport" %}
+                            {% trans "Mettre à jour le rapport" %}
                         </button>
                     </form>
                 </div>
@@ -98,9 +98,9 @@
                 <div class="glass-card p-6">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-2xl font-bold text-white font-display italic uppercase">
-                            {% trans "Opérations du Jour" %}
+                            {% trans "Opérations du jour" %}
                         </h3>
-                        <a href="{% url 'custom_planner' %}" class="text-xs font-bold text-primary hover:text-white uppercase tracking-widest transition-colors font-mono border border-primary/30 px-3 py-1 rounded hover:bg-primary/10">{% trans "Gérer l'Agenda" %} &rarr;</a>
+                        <a href="{% url 'custom_planner' %}" class="text-xs font-bold text-primary hover:text-white uppercase tracking-widest transition-colors font-mono border border-primary/30 px-3 py-1 rounded hover:bg-primary/10">{% trans "Gérer l'agenda" %} &rarr;</a>
                     </div>
 
                     <div class="space-y-3">
@@ -137,18 +137,18 @@
                 <!-- Analysis / Charts -->
                 <div class="glass-card p-6">
                     <h3 class="text-2xl font-bold text-white mb-6 font-display italic uppercase">
-                        {% trans "Analyse Biométrique" %}
+                        {% trans "Analyse biométrique" %}
                     </h3>
                     
                     <div class="space-y-8">
                         <div>
-                            <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 font-mono border-l-2 border-energy pl-3">{% trans "Évolution du Poids" %}</h4>
+                            <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 font-mono border-l-2 border-energy pl-3">{% trans "Évolution du poids" %}</h4>
                             <div class="h-56 relative">
                                 <canvas id="weightChart"></canvas>
                             </div>
                         </div>
                         <div>
-                            <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 font-mono border-l-2 border-primary pl-3">{% trans "Sommeil & Humeur" %}</h4>
+                            <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 font-mono border-l-2 border-primary pl-3">{% trans "Sommeil & humeur" %}</h4>
                             <div class="h-56 relative">
                                 <canvas id="sleepMoodChart"></canvas>
                             </div>
