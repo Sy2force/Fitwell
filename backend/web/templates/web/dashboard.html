@@ -136,9 +136,12 @@
 
                 <!-- Analysis / Charts -->
                 <div class="glass-card p-6">
-                    <h3 class="text-2xl font-bold text-white mb-6 font-display italic uppercase">
-                        {% trans "Analyse biométrique" %}
-                    </h3>
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-white font-display italic uppercase">
+                            {% trans "Analyse biométrique" %}
+                        </h3>
+                        <a href="{% url 'analytics' %}" class="text-xs font-bold text-secondary hover:text-white uppercase tracking-widest transition-colors font-mono border border-secondary/30 px-3 py-1 rounded hover:bg-secondary/10">{% trans "Rapport complet" %} &rarr;</a>
+                    </div>
                     
                     <div class="space-y-8">
                         <div>
