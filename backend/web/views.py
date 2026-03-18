@@ -308,10 +308,15 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
+from django.core.mail import send_mail
+from django.conf import settings
+from django.urls import reverse
+
 def register_view(request):
     """
     Inscription nouvel utilisateur.
     Initialise les stats et le streak.
+    Envoie un email de bienvenue.
     """
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -323,6 +328,23 @@ def register_view(request):
             # Init Streak
             if hasattr(user, 'stats'):
                 user.stats.update_streak()
+            
+            # Send Welcome Email
+            try:
+                send_mail(
+                    subject=_("Bienvenue sur FitWell ! 🚀"),
+                    message=_("Salut %(username)s,\n\nBienvenue dans l'élite. Ton voyage vers l'optimisation commence maintenant.\n\nAccède à ton QG : %(url)s\n\nL'équipe FitWell") % {
+                        'username': user.username,
+                        'url': request.build_absolute_uri(reverse('dashboard'))
+                    },
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[user.email],
+                    fail_silently=True
+                )
+            except Exception:
+                pass # Don't block registration if email fails
+
+            messages.success(request, _("Bienvenue ! Ton compte a été créé avec succès."))
             return redirect('home')
         else:
             for field, errors in form.errors.items():
