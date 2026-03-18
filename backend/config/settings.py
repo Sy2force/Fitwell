@@ -15,26 +15,59 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-core-setup')
 # Mode Debug : True pour le dév, False pour la prod
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-# Qui a le droit d'accéder au site ?
+# -----------------------------------------------------------------------------
+# SÉCURITÉ, CORS & CSRF
+# -----------------------------------------------------------------------------
+
+# 1. ALLOWED_HOSTS
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*,.vercel.app,.now.sh,127.0.0.1,localhost').split(',')
 
-# CSRF Configuration - Ports dynamiques du browser preview
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-    'https://*.vercel.app',
-]
+# Support automatique pour Render
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-# En développement, ajouter les ports du proxy (64800-65000)
+# 2. CSRF & CORS Base Configuration
+# Liste de base via variable d'environnement ou défauts complets (Local + Vercel + Render)
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS', 
+    default='http://localhost:8000,http://127.0.0.1:8000,https://*.vercel.app,https://*.onrender.com'
+).split(',')
+
+# Ajout explicite du hostname Render s'il existe
+if RENDER_EXTERNAL_HOSTNAME:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{RENDER_EXTERNAL_HOSTNAME}')
+
+# 3. Mode Debug : Ports dynamiques
 if DEBUG:
+    # En développement, on ajoute les ports locaux dynamiques (ex: VS Code ports)
     for port in range(64800, 65000):
         CSRF_TRUSTED_ORIGINS.append(f'http://127.0.0.1:{port}')
         CSRF_TRUSTED_ORIGINS.append(f'http://localhost:{port}')
 
-# CORS Configuration (pour les requêtes cross-origin)
+# 4. Application aux réglages CORS
 CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = DEBUG  # Permissif en dev, strict en prod
+CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=DEBUG, cast=bool)
+
+# 5. Sécurité Production (HTTPS, HSTS, Cookies)
+if not DEBUG:
+    # SSL / HTTPS
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+    # HSTS (HTTP Strict Transport Security)
+    SECURE_HSTS_SECONDS = 31536000  # 1 an
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    
+    # Cookies
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    
+    # XSS & Content Type
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # -----------------------------------------------------------------------------
 # APPLICATIONS INSTALLÉES
@@ -187,25 +220,6 @@ SIMPLE_JWT = {
 }
 
 # -----------------------------------------------------------------------------
-# CONFIGURATION CORS (Qui peut nous parler ?)
-# -----------------------------------------------------------------------------
-# En mode monolithique, CORS est moins critique sauf si on ouvre l'API à des apps mobiles
-CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=False, cast=bool)
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:8000,http://localhost:5173,http://127.0.0.1:5173,http://127.0.0.1:54069').split(',')
-
-# CSRF Protection
-# Important pour que les formulaires Django marchent derrière un proxy https (Render)
-CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='http://localhost:8000,http://localhost:5173,http://127.0.0.1:5173,http://127.0.0.1:54069').split(',')
-
-# Support automatique pour Render
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-    CSRF_TRUSTED_ORIGINS.append(f'https://{RENDER_EXTERNAL_HOSTNAME}')
-
-
-
-# -----------------------------------------------------------------------------
 # EMAIL CONFIGURATION
 # -----------------------------------------------------------------------------
 if DEBUG:
@@ -219,38 +233,5 @@ else:
     EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
     EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
     DEFAULT_FROM_EMAIL = 'FitWell <noreply@fitwell.local>'
-
-# -----------------------------------------------------------------------------
-# SÉCURITÉ EN PRODUCTION
-# -----------------------------------------------------------------------------
-if not DEBUG:
-    # SSL / HTTPS
-    SECURE_SSL_REDIRECT = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    
-    # HSTS (HTTP Strict Transport Security)
-    SECURE_HSTS_SECONDS = 31536000  # 1 an
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
-    
-    # Cookies
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    
-    # XSS & Content Type
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-
-# CSRF & CORS Configuration (Support Vercel & Render)
-CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='http://localhost:8000,http://127.0.0.1:8000,https://*.vercel.app,https://*.onrender.com').split(',')
-
-if DEBUG:
-    # En développement, on ajoute les ports locaux dynamiques
-    for port in range(64800, 65000):
-        CSRF_TRUSTED_ORIGINS.append(f'http://127.0.0.1:{port}')
-        CSRF_TRUSTED_ORIGINS.append(f'http://localhost:{port}')
-
-CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS
-CORS_ALLOW_CREDENTIALS = True
 
 
