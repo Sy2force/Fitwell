@@ -22,6 +22,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*,.vercel.app,.now.sh,127.0.0.1
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
+    'https://*.vercel.app',
 ]
 
 # En développement, ajouter les ports du proxy (64800-65000)
