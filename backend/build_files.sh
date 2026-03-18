@@ -4,8 +4,8 @@ echo "Building project..."
 python3 -m pip install -r requirements.txt
 
 echo "Make migrations..."
-python3 manage.py makemigrations
-python3 manage.py migrate
+python3 backend/manage.py makemigrations
+python3 backend/manage.py migrate
 
 echo "Collect static..."
-python3 manage.py collectstatic --noinput --clear
+python3 backend/manage.py collectstatic --noinput --clear
