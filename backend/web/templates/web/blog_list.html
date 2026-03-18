@@ -64,8 +64,8 @@
                         <div class="flex items-center justify-between text-[10px] text-gray-500 mb-4 font-mono uppercase tracking-wider border-b border-white/5 pb-3">
                             <div class="flex items-center gap-3">
                                 <span>{{ article.created_at|date:"d M Y" }}</span>
-                                <span class="flex items-center gap-1"><span class="text-accent">♥</span> {{ article.likes.count }}</span>
-                                <span class="flex items-center gap-1"><span class="text-primary">💬</span> {{ article.comments.count }}</span>
+                                <span class="flex items-center gap-1"><span class="text-accent">♥</span> {{ article.likes_count }}</span>
+                                <span class="flex items-center gap-1"><span class="text-primary">💬</span> {{ article.comments_count }}</span>
                             </div>
                             <span class="text-white">{{ article.author.username }}</span>
                         </div>

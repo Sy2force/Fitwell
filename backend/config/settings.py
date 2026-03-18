@@ -224,11 +224,33 @@ else:
 # SÉCURITÉ EN PRODUCTION
 # -----------------------------------------------------------------------------
 if not DEBUG:
+    # SSL / HTTPS
     SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+    # HSTS (HTTP Strict Transport Security)
     SECURE_HSTS_SECONDS = 31536000  # 1 an
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+    
+    # Cookies
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    
+    # XSS & Content Type
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# CSRF & CORS Configuration (Support Vercel & Render)
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='http://localhost:8000,http://127.0.0.1:8000,https://*.vercel.app,https://*.onrender.com').split(',')
+
+if DEBUG:
+    # En développement, on ajoute les ports locaux dynamiques
+    for port in range(64800, 65000):
+        CSRF_TRUSTED_ORIGINS.append(f'http://127.0.0.1:{port}')
+        CSRF_TRUSTED_ORIGINS.append(f'http://localhost:{port}')
+
+CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS
+CORS_ALLOW_CREDENTIALS = True
 
 

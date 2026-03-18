@@ -6,8 +6,9 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from django.db.models import Avg, Q
+from django.db.models import Avg, Q, Max, Sum, Count, F
 from django.db import models
+from datetime import timedelta
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, WellnessPlanForm, CommentForm, UserUpdateForm, CustomPasswordChangeForm, CustomEventForm, DailyLogForm, CustomWorkoutForm
 from api.models import User, Article, Category, UserStats, WellnessPlan, Comment, CustomEvent, Exercise, DailyLog, Recipe, WorkoutSession, ExerciseSet
 from api.services import generate_wellness_plan
@@ -520,6 +521,10 @@ def planner_view(request):
                 
                 request.user.stats.save()
                 
+                # Badge Trigger
+                from api.services_badges import check_and_award_badges
+                check_and_award_badges(request.user)
+                
             messages.success(request, _(f"Plan généré ! +100 XP (Niveau {request.user.stats.level})"))
             return redirect('planner')
     else:
@@ -869,97 +874,160 @@ def workout_detail(request, session_id):
 def analytics_view(request):
     """
     Page analytics avancées avec tous les graphiques de progression.
+    Calcule et prépare les données pour Chart.js.
     """
-    from django.db.models import Max, Sum, Count
-    from datetime import timedelta
+    user = request.user
+    today = timezone.now().date()
+    last_30_days = today - timedelta(days=30)
     
-    # Global workout stats
-    completed_sessions = WorkoutSession.objects.filter(user=request.user, status='completed')
-    total_workouts = completed_sessions.count()
-    total_volume = sum(s.total_volume for s in completed_sessions)
-    total_duration = sum(s.duration_minutes for s in completed_sessions)
+    # 1. GLOBAL STATS
+    # ---------------
+    total_workouts = WorkoutSession.objects.filter(user=user, status='completed').count()
     
-    # Weight progression (from daily logs)
-    weight_logs = request.user.daily_logs.filter(weight__isnull=False).order_by('date')[:30]
+    # Aggregations globales
+    global_stats = WorkoutSession.objects.filter(user=user, status='completed').aggregate(
+        total_vol=Sum('total_volume'),
+        total_time=Sum('duration_minutes')
+    )
+    total_volume = global_stats['total_vol'] or 0
+    total_duration = global_stats['total_time'] or 0
+    
+    # Consistency Score (Pourcentage de jours avec activité sur les 30 derniers jours)
+    # On compte les jours uniques où il y a eu un log ou un workout
+    logs_dates = set(DailyLog.objects.filter(user=user, date__gte=last_30_days).values_list('date', flat=True))
+    workouts_dates = set(WorkoutSession.objects.filter(user=user, started_at__date__gte=last_30_days, status='completed').values_list('started_at__date', flat=True))
+    active_days = len(logs_dates.union(workouts_dates))
+    consistency_score = int((active_days / 30) * 100)
+    
+    # Mise à jour du score dans UserStats si différent
+    if hasattr(user, 'stats') and user.stats.consistency_score != consistency_score:
+        user.stats.consistency_score = consistency_score
+        user.stats.save()
+
+    # 2. WEIGHT PROGRESSION (Last 30 Days)
+    # ------------------------------------
+    weight_logs = DailyLog.objects.filter(
+        user=user, 
+        weight__isnull=False,
+        date__gte=last_30_days
+    ).order_by('date')
+    
     weight_dates = [log.date.strftime('%d/%m') for log in weight_logs]
     weight_values = [log.weight for log in weight_logs]
+
+    # 3. VOLUME BY MUSCLE GROUP (All Time)
+    # ------------------------------------
+    # On doit joindre WorkoutSession -> ExerciseSet -> Exercise
+    muscle_volume = ExerciseSet.objects.filter(
+        session__user=user,
+        session__status='completed'
+    ).values('exercise__muscle_group').annotate(
+        volume=Sum(F('weight') * F('reps'))
+    ).order_by('-volume')
     
-    # Volume by muscle group
-    muscle_volume = {}
-    for session in completed_sessions:
-        for exercise_set in session.sets.select_related('exercise'):
-            muscle = exercise_set.exercise.get_muscle_group_display()
-            if muscle not in muscle_volume:
-                muscle_volume[muscle] = 0
-            muscle_volume[muscle] += exercise_set.volume
+    # Mapping des codes muscles vers les labels traduits
+    muscle_labels_map = dict(Exercise.MUSCLE_CHOICES)
     
-    muscle_labels = list(muscle_volume.keys())
-    muscle_values = list(muscle_volume.values())
+    muscle_labels = [muscle_labels_map.get(item['exercise__muscle_group'], item['exercise__muscle_group']) for item in muscle_volume]
+    muscle_values = [item['volume'] for item in muscle_volume]
+
+    # 4. PERSONAL RECORDS (PR) - Top 6 Exercises
+    # ------------------------------------------
+    # Pour chaque exercice, on trouve le poids max soulevé
+    top_exercises_ids = ExerciseSet.objects.filter(
+        session__user=user,
+        session__status='completed'
+    ).values('exercise').annotate(
+        count=Count('id')
+    ).order_by('-count')[:6].values_list('exercise', flat=True)
     
-    # Personal Records (PR) - Max weight per exercise
     personal_records = []
-    all_sets = ExerciseSet.objects.filter(session__user=request.user, session__status='completed').select_related('exercise')
-    
-    exercises_with_sets = {}
-    for exercise_set in all_sets:
-        ex_name = exercise_set.exercise.name
-        if ex_name not in exercises_with_sets:
-            exercises_with_sets[ex_name] = []
-        exercises_with_sets[ex_name].append(exercise_set)
-    
-    for ex_name, sets in exercises_with_sets.items():
-        max_weight = max(s.weight for s in sets)
-        max_volume = max(s.volume for s in sets)
+    for ex_id in top_exercises_ids:
+        exercise = Exercise.objects.get(id=ex_id)
+        # Max Weight
+        max_weight = ExerciseSet.objects.filter(
+            session__user=user, 
+            exercise=exercise,
+            session__status='completed'
+        ).aggregate(Max('weight'))['weight__max'] or 0
+        
+        # Max Volume in one set
+        max_vol_set = ExerciseSet.objects.filter(
+            session__user=user, 
+            exercise=exercise,
+            session__status='completed'
+        ).annotate(
+            vol=F('weight') * F('reps')
+        ).order_by('-vol').first()
+        max_volume = max_vol_set.vol if max_vol_set else 0
+        
         personal_records.append({
-            'exercise_name': ex_name,
+            'exercise_name': exercise.name,
             'max_weight': max_weight,
             'max_volume': max_volume
         })
+
+    # 5. WORKOUT FREQUENCY (Last 7 Days)
+    # ----------------------------------
+    # Répartition par type (Plan vs Free ?) ou simplement présence
+    # Ici on va faire simple : Jours avec entrainement vs Jours de repos sur la semaine
+    start_week = today - timedelta(days=6)
+    workouts_this_week = WorkoutSession.objects.filter(
+        user=user,
+        started_at__date__gte=start_week,
+        status='completed'
+    ).count()
     
-    personal_records = sorted(personal_records, key=lambda x: x['max_weight'], reverse=True)[:10]
+    rest_days = 7 - workouts_this_week
+    frequency_labels = ['Entraînement', 'Repos']
+    frequency_values = [workouts_this_week, rest_days]
+
+    # 6. XP PROGRESSION (Simulation based on logs/workouts)
+    # -----------------------------------------------------
+    # C'est complexe de reconstruire l'historique exact de l'XP sans table dédiée 'XPLog'.
+    # On va simuler une progression linéaire sur les derniers workouts pour l'affichage
+    # Ou utiliser les dates de création des DailyLogs comme proxy
     
-    # Workout frequency (last 7 days)
-    today = timezone.now().date()
-    last_7_days = [today - timedelta(days=i) for i in range(7)]
-    frequency_data = {}
-    for day in last_7_days:
-        day_name = day.strftime('%A')
-        count = completed_sessions.filter(started_at__date=day).count()
-        if day_name not in frequency_data:
-            frequency_data[day_name] = 0
-        frequency_data[day_name] += count
+    xp_dates = []
+    xp_values = []
     
-    frequency_labels = list(frequency_data.keys())
-    frequency_values = list(frequency_data.values())
+    # On prend la valeur actuelle
+    current_xp = user.stats.xp
+    xp_dates.append(today.strftime('%d/%m'))
+    xp_values.append(current_xp)
     
-    # Consistency score (workouts in last 30 days / expected)
-    last_30_days = completed_sessions.filter(started_at__gte=today - timedelta(days=30)).count()
-    expected_workouts = 12
-    consistency_score = min(int((last_30_days / expected_workouts) * 100), 100)
-    
-    # XP progression (if we track it historically - for now use current)
-    xp_progression = True
-    xp_dates = ['Semaine 1', 'Semaine 2', 'Semaine 3', 'Semaine 4']
-    xp_values = [request.user.stats.xp // 4, request.user.stats.xp // 2, request.user.stats.xp * 3 // 4, request.user.stats.xp]
-    
-    return render(request, 'web/analytics.html', {
+    # On remonte un peu dans le temps (fake history for visual if no data)
+    # Idéalement, il faudrait une table XPHistory. Pour l'instant, on affiche juste le point actuel
+    # et 0 il y a 30 jours si c'est un nouveau user.
+    if user.date_joined.date() > last_30_days:
+        xp_dates.insert(0, user.date_joined.date().strftime('%d/%m'))
+        xp_values.insert(0, 0)
+
+    context = {
         'total_workouts': total_workouts,
         'total_volume': total_volume,
         'total_duration': total_duration,
-        'weight_data': len(weight_dates) > 0,
+        'consistency_score': consistency_score,
+        
         'weight_dates': weight_dates,
         'weight_values': weight_values,
-        'muscle_volume_data': len(muscle_labels) > 0,
+        'weight_data': len(weight_values) > 1, # Flag to show chart
+        
         'muscle_labels': muscle_labels,
         'muscle_values': muscle_values,
+        'muscle_volume_data': len(muscle_values) > 0,
+        
         'personal_records': personal_records,
+        
         'frequency_labels': frequency_labels,
         'frequency_values': frequency_values,
-        'consistency_score': consistency_score,
-        'xp_progression': xp_progression,
+        
         'xp_dates': xp_dates,
-        'xp_values': xp_values
-    })
+        'xp_values': xp_values,
+        'xp_progression': len(xp_values) > 1
+    }
+    
+    return render(request, 'web/analytics.html', context)
 
 # -----------------------------------------------------------------------------
 # ONBOARDING
