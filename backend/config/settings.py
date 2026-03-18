@@ -16,7 +16,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-core-setup')
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 # Qui a le droit d'accéder au site ?
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*').split(',')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*,.vercel.app,.now.sh,127.0.0.1,localhost').split(',')
 
 # CSRF Configuration - Ports dynamiques du browser preview
 CSRF_TRUSTED_ORIGINS = [
