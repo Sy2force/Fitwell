@@ -128,6 +128,32 @@ source venv/bin/activate  # Mac/Linux
 pip install -r backend/requirements.txt
 ```
 
+### 📂 Structure du Projet
+
+```
+fitwell/
+├── backend/               # Application Django Monolithe
+│   ├── api/               # Modèles, Logique Métier, API REST
+│   │   ├── models/        # Modèles organisés par domaine
+│   │   ├── services/      # Logique métier
+│   │   ├── views/         # Vues API REST
+│   │   └── management/    # Commandes Django (seed_*)
+│   ├── web/               # Vues & Templates (Frontend)
+│   │   ├── views/         # Vues organisées par domaine
+│   │   └── templates/     # Templates HTML
+│   ├── config/            # Settings & URLs
+│   ├── static/            # CSS, JS, Images
+│   └── manage.py          # CLI Django
+├── docs/                  # Documentation
+│   ├── DEPLOY.md          # Guide de déploiement
+│   ├── CONTRIBUTING.md    # Guide de contribution
+│   └── SECURITY.md        # Politique de sécurité
+├── tests/                 # Tests E2E Playwright
+├── vercel.json            # Config déploiement Vercel
+├── render.yaml            # Config déploiement Render
+└── README.md              # Documentation principale
+```
+
 ### 2. Base de Données
 ```bash
 # Appliquer les migrations
