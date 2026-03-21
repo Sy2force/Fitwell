@@ -46,6 +46,10 @@
                         <div class="space-y-4 font-mono text-sm">
                             <!-- Displaying workout plan details nicely -->
                             <div class="mb-4">
+                                <span class="text-gray-500 text-[10px] uppercase tracking-wider">{% trans "Objectif" %}</span>
+                                <p class="text-white font-bold">{{ plan.get_goal_display }}</p>
+                            </div>
+                            <div class="mb-4">
                                 <span class="text-gray-500 text-[10px] uppercase tracking-wider">{% trans "Focus" %}</span>
                                 <p class="text-white font-bold">{{ plan.workout_plan.focus }}</p>
                             </div>

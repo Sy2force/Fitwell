@@ -5,6 +5,8 @@ from api.models import User, Exercise, WellnessPlan, Recipe
 class FlowTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='flowuser', password='password')
+        self.user.is_onboarded = True
+        self.user.save()
         
         # Create some exercises
         self.ex1 = Exercise.objects.create(name="Pushups", muscle_group="chest", difficulty="beginner", description="Push the floor")

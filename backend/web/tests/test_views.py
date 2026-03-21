@@ -5,6 +5,8 @@ from api.models import User, Article, Category, Comment
 class WebTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='password')
+        self.user.is_onboarded = True
+        self.user.save()
         self.category = Category.objects.create(name='Test Category', slug='test-cat')
         self.article = Article.objects.create(
             title='Test Article', 

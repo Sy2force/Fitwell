@@ -7,6 +7,8 @@ import datetime
 class AgendaTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='agendatester', password='password')
+        self.user.is_onboarded = True
+        self.user.save()
         self.client.force_login(self.user)
 
     def test_add_event(self):

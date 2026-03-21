@@ -1,21 +1,20 @@
 # 🚀 FitWell - Guide de Déploiement
 
-Ce guide explique comment déployer FitWell, une application complète composée d'un Backend Django (API) et d'un Frontend React.
+Ce guide explique comment déployer FitWell, une application **Monolithe Django** complète (Backend + Frontend intégré).
 
 ---
 
 ## 🏗️ Architecture de Déploiement
 
-- **Backend (API Django)** : Peut être déployé sur **Vercel** (Serverless) ou **Render** (Docker/Python).
-- **Frontend (React/Vite)** : Déployé sur **Vercel** (Recommandé).
+- **Application** : Déployée sur **Vercel** (Serverless) ou **Render**. Sert à la fois l'API et les pages HTML.
 - **Base de données** : **PostgreSQL** (Hébergé sur Render, Neon ou Supabase).
-- **Fichiers Statiques (Backend)** : Gérés par **WhiteNoise**.
+- **Fichiers Statiques** : Gérés par **WhiteNoise** et servis par l'application.
 
 ---
 
-## 1️⃣ Déploiement Backend (API)
+## 1️⃣ Déploiement Sur Vercel (Recommandé)
 
-### Option A : Sur Vercel (Serverless - Recommandé pour le coût)
+### Option A : Sur Vercel (Serverless)
 
 Le projet est configuré pour Vercel via `vercel.json` et `index.py`.
 
@@ -41,20 +40,7 @@ Le projet est configuré pour Vercel via `vercel.json` et `index.py`.
 
 ---
 
-## 2️⃣ Déploiement Frontend (React)
-
-Le frontend se trouve dans le dossier `frontend/`.
-
-1. **Sur Vercel**, importer le projet.
-2. **Framework Preset** : Vite.
-3. **Root Directory** : `frontend`.
-4. **Variables d'environnement** :
-   - `VITE_API_URL` : L'URL de votre Backend déployé (ex: `https://fitwell-api.vercel.app/api`).
-5. **Déployer**.
-
----
-
-## 3️⃣ Initialisation de la Base de Données
+## 2️⃣ Initialisation de la Base de Données
 
 Une fois le Backend en ligne, vous devez initialiser la BDD.
 
@@ -81,15 +67,12 @@ python3 backend/manage.py seed_recipes   # Recettes
 
 ```text
 /
-├── backend/            # API Django (Django REST Framework)
+├── backend/            # API & Web App Django (Monolithe)
 │   ├── config/         # Settings & URLs
-│   ├── api/            # Logique métier, Modèles, Vues
-│   ├── web/            # Templates Legacy (si utilisé)
+│   ├── api/            # Logique métier, Modèles (DRF)
+│   ├── web/            # Vues et Templates Django (Frontend)
 │   └── build_files.sh  # Script de build
-├── frontend/           # Application React (Vite)
-│   ├── src/            # Code source React
-│   └── vercel.json     # Config de déploiement Frontend
-├── vercel.json         # Config de déploiement Backend
-├── index.py            # Entrypoint Vercel (Backend)
+├── vercel.json         # Config de déploiement Vercel
+├── index.py            # Entrypoint Vercel
 └── ...
 ```

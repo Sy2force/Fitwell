@@ -818,7 +818,7 @@ def complete_workout_session(request, session_id):
     
     session.complete_session()
     
-    from api.services_badges import check_and_award_badges
+    from api.services.gamification import check_and_award_badges
     new_badges = check_and_award_badges(request.user)
     
     xp_earned = 50 + (session.duration_minutes // 10) * 10
@@ -1112,10 +1112,18 @@ def onboarding_step3(request):
         )
         
         if hasattr(request.user, 'stats'):
-            request.user.stats.health_score = health_score['total']
-            request.user.stats.fitness_score = health_score['fitness']
-            request.user.stats.recovery_score = health_score['recovery']
-            request.user.stats.lifestyle_score = health_score['lifestyle']
+            request.user.stats.health_score = health_score
+            
+            # Update breakdown scores from analysis
+            if 'analysis' in workout_plan and 'breakdown' in workout_plan['analysis']:
+                breakdown = workout_plan['analysis']['breakdown']
+                request.user.stats.fitness_score = breakdown.get('fitness', 0)
+                request.user.stats.recovery_score = breakdown.get('recovery', 0)
+                request.user.stats.lifestyle_score = breakdown.get('lifestyle', 0)
+                # Consistency score is usually calculated from logs, but if provided in plan, we can init it
+                if 'consistency' in breakdown:
+                    request.user.stats.consistency_score = breakdown.get('consistency', 0)
+
             request.user.stats.add_xp(50)
             request.user.stats.update_streak()
             request.user.stats.save()
