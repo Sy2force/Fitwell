@@ -2,7 +2,17 @@ from django.utils.translation import gettext as _
 
 def calculate_bmr_tdee(age, gender, height, weight, activity_level):
     """
-    Calcule le BMR (Mifflin-St Jeor) et le TDEE.
+    Calcule le métabolisme de base (BMR) et la dépense énergétique totale (TDEE).
+    
+    Args:
+        age (int): Âge en années
+        gender (str): Genre ('male' ou 'female')
+        height (int): Taille en cm
+        weight (int): Poids en kg
+        activity_level (str): Niveau d'activité ('sedentary', 'moderate', 'active', 'elite')
+    
+    Returns:
+        int: TDEE (Total Daily Energy Expenditure) en calories
     """
     # Mifflin-St Jeor Equation
     bmr = 10 * weight + 6.25 * height - 5 * age
@@ -21,7 +31,14 @@ def calculate_bmr_tdee(age, gender, height, weight, activity_level):
 
 def calculate_macros(weight, target_calories):
     """
-    Calcule les macronutriments (Protéines, Glucides, Lipides).
+    Calcule la répartition des macronutriments (protéines, glucides, lipides).
+    
+    Args:
+        weight (int): Poids en kg
+        target_calories (int): Calories cibles journalières
+    
+    Returns:
+        dict: Répartition des macros en grammes
     """
     # Protein: 2g per kg of bodyweight (Standard for active individuals)
     protein_g = int(weight * 2)
@@ -44,6 +61,12 @@ def calculate_macros(weight, target_calories):
     }
 
 def get_meal_plan():
+    """
+    Génère un plan de repas type avec recommandations.
+    
+    Returns:
+        str: Plan de repas formaté
+    """
     return {
         "breakfast": _("Flocons d'avoine, whey protéine & fruits rouges"),
         "lunch": _("Blanc de poulet, quinoa, légumes rôtis"),

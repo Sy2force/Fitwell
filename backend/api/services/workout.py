@@ -2,7 +2,14 @@ from django.utils.translation import gettext as _
 
 def generate_split_training(goal, activity_level):
     """
-    Génère un split d'entraînement (Push/Pull/Legs ou Full Body).
+    Génère un programme d'entraînement adapté au niveau et à l'objectif.
+    
+    Args:
+        goal (str): Objectif ('weight_loss', 'muscle_gain', 'maintenance')
+        activity_level (str): Niveau d'activité
+    
+    Returns:
+        str: Programme d'entraînement formaté
     """
     if activity_level in ['elite', 'active']:
         # PPL Split pour utilisateurs actifs
@@ -42,12 +49,27 @@ def generate_split_training(goal, activity_level):
         }
 
 def get_workout_schedule(activity_level):
+    """
+    Détermine la fréquence d'entraînement recommandée.
+    
+    Args:
+        activity_level (str): Niveau d'activité
+    
+    Returns:
+        str: Planning d'entraînement hebdomadaire
+    """
     schedule = _("4 jours/semaine - split haut/bas")
     if activity_level in ['active', 'elite']:
         schedule = _("6 jours/semaine - Split PPL (Push/Pull/Legs)")
     return schedule
 
 def get_base_exercises():
+    """
+    Retourne la liste des exercices de base recommandés.
+    
+    Returns:
+        str: Liste des exercices fondamentaux
+    """
     return [
         _("Mouvements composés (squat, soulevé de terre, développé couché)"),
         _("Travail d'accessoires (haltères, poulies)"),
