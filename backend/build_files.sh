@@ -1,17 +1,19 @@
 #!/bin/bash
+set -e
 
-echo "Building project..."
+echo "==> Installing dependencies..."
+python3 -m pip install --upgrade pip
 python3 -m pip install -r backend/requirements.txt
 
-echo "Make migrations..."
+echo "==> Applying migrations..."
 cd backend
 python3 manage.py makemigrations --noinput
 python3 manage.py migrate --noinput
 
-echo "Collect static..."
+echo "==> Collecting static files..."
 python3 manage.py collectstatic --noinput --clear
 
-echo "Compile translations..."
-python3 manage.py compilemessages
+echo "==> Compiling translations..."
+python3 manage.py compilemessages || echo "No translations to compile"
 
-echo "Build completed successfully!"
+echo "==> Build completed successfully!"
