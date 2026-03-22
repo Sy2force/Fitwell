@@ -25,3 +25,5 @@ node_modules/
 playwright-report/
 test-results/
 *.png
+package.json
+package-lock.json
