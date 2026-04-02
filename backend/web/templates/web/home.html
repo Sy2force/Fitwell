@@ -2,84 +2,47 @@
 {% load i18n %}
 
 {% block content %}
-<div class="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
-    <!-- Background style Booking avec photo et overlay -->
+<div class="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+    <!-- Background Gradient & Grid -->
     <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/95 to-blue-800/95 z-10"></div>
-        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2400&auto=format&fit=crop" 
-             alt="Fitness" 
-             class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background z-10"></div>
+        <div class="absolute inset-0 opacity-20 bg-grid bg-grid-primary">
+        </div>
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop" 
+             alt="Hero" 
+             class="w-full h-full object-cover opacity-40 grayscale">
     </div>
 
-    <div class="relative z-30 text-center px-4 max-w-7xl mx-auto">
-        <!-- Badge style Booking -->
-        <div class="inline-flex items-center gap-2 bg-yellow-400 text-gray-900 px-6 py-2 rounded-md mb-6 font-bold shadow-lg">
-            <span>⭐</span>
-            <span>{% trans "Plateforme #1 pour votre transformation" %}</span>
-        </div>
-        
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
-            {% trans "Atteignez vos objectifs fitness" %}<br/>
-            <span class="text-yellow-400">{% trans "avec FitWell" %}</span>
+    <div class="relative z-20 text-center px-4 max-w-5xl mx-auto">
+        <h1 class="text-6xl md:text-9xl font-display font-bold mb-6 leading-none tracking-tighter text-white italic drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]">
+            {% trans "Libérez" %} <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-energy via-white to-energy animate-pulse-slow">{% trans "Votre potentiel" %}</span>
         </h1>
         
-        <p class="text-xl md:text-2xl text-white/95 max-w-3xl mx-auto mb-10 leading-relaxed">
-            {% trans "Rejoignez des milliers d'utilisateurs satisfaits" %} • {% trans "Plans personnalisés" %} • {% trans "Résultats garantis" %}
+        <p class="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto mb-12 font-mono tracking-wide border-l-4 border-energy pl-6 text-left bg-black/50 p-6 backdrop-blur-md rounded-r-lg border-y border-y-white/5 border-r border-r-white/5">
+            {% trans "L'écosystème de référence pour l'optimisation biologique." %} <br/>
+            <span class="text-energy font-bold">{% trans "Entraînez. Analysez. Évoluez." %}</span>
         </p>
-        
-        <!-- Stats style Booking avec fond blanc -->
-        <div class="bg-white rounded-2xl shadow-2xl p-8 mb-10 max-w-4xl mx-auto">
-            <div class="grid grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-blue-600 mb-1">101</div>
-                    <div class="text-sm text-gray-600 font-medium">{% trans "Exercices" %}</div>
-                </div>
-                <div class="text-center border-x border-gray-200">
-                    <div class="text-4xl font-bold text-green-600 mb-1">39</div>
-                    <div class="text-sm text-gray-600 font-medium">{% trans "Recettes" %}</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-purple-600 mb-1">20</div>
-                    <div class="text-sm text-gray-600 font-medium">{% trans "Badges" %}</div>
-                </div>
-            </div>
-        </div>
 
-        <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6">
             {% if user.is_authenticated %}
                 {% if plan %}
-                <a href="{% url 'planner' %}" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-xl transition-all">
+                <a href="{% url 'planner' %}" class="w-full md:w-auto bg-energy text-black px-10 py-4 rounded font-display font-bold uppercase tracking-widest hover:bg-white transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(234,179,8,0.4)]">
                     {% trans "Reprendre le protocole" %}
                 </a>
                 {% else %}
-                <a href="{% url 'planner' %}" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-xl transition-all">
+                <a href="{% url 'planner' %}" class="w-full md:w-auto bg-energy text-black px-10 py-4 rounded font-display font-bold uppercase tracking-widest hover:bg-white transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(234,179,8,0.4)]">
                     {% trans "Initialiser le protocole" %}
                 </a>
                 {% endif %}
             {% else %}
-            <a href="{% url 'register' %}" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-xl transition-all">
-                {% trans "Commencer gratuitement" %}
+            <a href="{% url 'register' %}" class="w-full md:w-auto bg-energy text-black px-10 py-4 rounded font-display font-bold uppercase tracking-widest hover:bg-white transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+                {% trans "Commencer la transformation" %}
             </a>
-            <a href="{% url 'login' %}" class="w-full md:w-auto bg-white text-blue-600 px-10 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-xl transition-all hover:bg-gray-50">
-                {% trans "Se connecter" %}
+            <a href="{% url 'login' %}" class="w-full md:w-auto border border-white/20 text-white px-10 py-4 rounded font-display font-bold uppercase tracking-widest hover:bg-white/10 transition-all font-italic">
+                {% trans "Connexion membre" %}
             </a>
             {% endif %}
-        </div>
-        
-        <!-- Trust badges style Booking -->
-        <div class="mt-12 flex justify-center items-center gap-8 flex-wrap text-white/80 text-sm">
-            <div class="flex items-center gap-2">
-                <span>✅</span>
-                <span>{% trans "Gratuit pour commencer" %}</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <span>🔒</span>
-                <span>{% trans "Sécurisé et privé" %}</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <span>⭐</span>
-                <span>{% trans "Noté 4.8/5" %}</span>
-            </div>
         </div>
     </div>
 </div>
