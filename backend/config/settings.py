@@ -21,7 +21,7 @@ DEBUG = True
 # -----------------------------------------------------------------------------
 
 # 1. ALLOWED_HOSTS
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*,.vercel.app,.now.sh,127.0.0.1,localhost').split(',')
+ALLOWED_HOSTS = ['*']  # Accepte tous les domaines
 
 # Support automatique pour Render
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
