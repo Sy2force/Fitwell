@@ -1,6 +1,36 @@
-/* Base transitions for smooth theme switching */
+/* ============================================================================
+   THÈME CLAIR (LIGHT MODE) - COULEURS LUMINEUSES
+   ============================================================================ */
+
+/* Variables couleurs claires */
+:root {
+    --light-bg: #f8fafc;
+    --light-surface: #ffffff;
+    --light-text: #1e293b;
+    --light-border: #e2e8f0;
+    --light-primary: #0ea5e9;
+    --light-accent: #8b5cf6;
+}
+
+/* Mode clair par défaut */
 body {
+    background-color: var(--light-bg);
+    color: var(--light-text);
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Cards en mode clair */
+.glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--light-border);
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.glass-card:hover {
+    border-color: var(--light-primary);
+    box-shadow: 0 8px 30px rgba(14, 165, 233, 0.15);
 }
 
 .glass-card {
