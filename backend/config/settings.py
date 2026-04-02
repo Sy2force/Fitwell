@@ -173,7 +173,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # BASE DE DONNÉES
 # -----------------------------------------------------------------------------
 # Utilise SQLite en local, ou PostgreSQL si DATABASE_URL est défini (ex: sur Render)
-import os
 DATABASE_URL = os.environ.get('DATABASE_URL', '')
 
 # Fix pour Render: si DATABASE_URL commence par https://, on utilise SQLite
