@@ -135,5 +135,120 @@ input[type="checkbox"]:checked {
 }
 
 .bg-radial-energy {
-    background-image: radial-gradient(circle at 50% 50%, rgba(234, 179, 8, 0.15), transparent 70%);
+    background: radial-gradient(circle at center, rgba(234, 179, 8, 0.15) 0%, transparent 70%);
+}
+
+/* ============================================================================
+   DESIGN FUTURISTE 3D - EFFETS MODERNES
+   ============================================================================ */
+
+/* Cards 3D Glassmorphism */
+.card-3d {
+    background: rgba(20, 20, 30, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform-style: preserve-3d;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-3d:hover {
+    transform: translateY(-8px) rotateX(2deg) scale(1.02);
+    border-color: rgba(0, 240, 255, 0.5);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 60px rgba(0, 240, 255, 0.3);
+}
+
+/* Boutons Futuristes Néon */
+.btn-neon {
+    position: relative;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(176, 0, 255, 0.2));
+    border: 2px solid #00f0ff;
+    border-radius: 12px;
+    color: #00f0ff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    overflow: hidden;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+}
+
+.btn-neon:hover {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.3), rgba(176, 0, 255, 0.3));
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+/* XP Bar Animée */
+.xp-bar-animated {
+    height: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid rgba(0, 240, 255, 0.3);
+}
+
+.xp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00f0ff 0%, #b000ff 50%, #ff006e 100%);
+    background-size: 200% 100%;
+    animation: xp-flow 3s linear infinite;
+    box-shadow: 0 0 20px #00f0ff;
+}
+
+@keyframes xp-flow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+/* Texte Néon */
+.text-neon-cyan {
+    color: #00f0ff;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.8), 0 0 20px rgba(0, 240, 255, 0.6);
+}
+
+/* Stats Cards 3D */
+.stat-card-3d {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(176, 0, 255, 0.1));
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s;
+}
+
+.stat-card-3d:hover {
+    transform: translateZ(20px) scale(1.05);
+    border-color: #00f0ff;
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.4);
+}
+
+/* Animations Entrée */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px) rotateX(-10deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out backwards;
+}
+
+/* Holographic Effect */
+.holographic {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(176, 0, 255, 0.1) 50%, rgba(0, 240, 255, 0.1) 100%);
+    background-size: 400% 400%;
+    animation: holographic-shift 8s ease infinite;
+}
+
+@keyframes holographic-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }

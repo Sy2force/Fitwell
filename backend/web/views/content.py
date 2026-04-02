@@ -83,7 +83,8 @@ def blog_list(request):
     if request.user.is_authenticated and hasattr(request.user, 'stats'):
         request.user.stats.update_streak()
         
-    articles = Article.objects.filter(is_published=True)
+    # Optimisé: select_related pour author et category
+    articles = Article.objects.filter(is_published=True).select_related('author', 'category')
     categories = Category.objects.all()
     
     # Search
@@ -115,8 +116,13 @@ def article_detail(request, slug):
     if request.user.is_authenticated and hasattr(request.user, 'stats'):
         request.user.stats.update_streak()
         
-    article = get_object_or_404(Article, slug=slug, is_published=True)
-    comments = article.comments.order_by('-created_at')
+    # Optimisé: select_related pour author et category, prefetch comments avec authors
+    article = get_object_or_404(
+        Article.objects.select_related('author', 'category').prefetch_related('comments__author'),
+        slug=slug,
+        is_published=True
+    )
+    comments = article.comments.select_related('author').order_by('-created_at')
     
     if request.method == 'POST':
         if not request.user.is_authenticated:
@@ -137,13 +143,15 @@ def article_detail(request, slug):
     if request.user.is_authenticated:
         is_liked = article.likes.filter(id=request.user.id).exists()
         
-    # Related Articles
+    # Related Articles (optimisé)
     related_articles = []
     if article.category:
         related_articles = Article.objects.filter(
             category=article.category, 
             is_published=True
-        ).exclude(id=article.id).order_by('-created_at')[:3]
+        ).exclude(id=article.id).select_related('author', 'category').only(
+            'title', 'slug', 'image', 'created_at', 'author__username', 'category__name'
+        ).order_by('-created_at')[:3]
         
     return render(request, 'web/article_detail.html', {
         'article': article,

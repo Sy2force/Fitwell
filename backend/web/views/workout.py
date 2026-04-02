@@ -50,12 +50,12 @@ def workout_session_view(request):
         if hasattr(request.user, 'stats') and request.user.stats.level > 15:
             user_level = 'advanced'
             
-        # 2. Select Exercises & Sequence Strategy
-        latest_plan = request.user.plans.order_by('-created_at').first()
+        # 2. Select Exercises & Sequence Strategy (optimisé)
+        latest_plan = request.user.plans.only('goal').order_by('-created_at').first()
         goal = latest_plan.goal if latest_plan else 'maintenance'
         
-        # Filter exercises by level first
-        base_exercises = Exercise.objects.filter(difficulty=user_level)
+        # Filter exercises by level first (optimisé avec only)
+        base_exercises = Exercise.objects.filter(difficulty=user_level).only('name', 'muscle_group', 'difficulty', 'description', 'image_url')
         if not base_exercises.exists():
             base_exercises = Exercise.objects.all()
             
@@ -203,10 +203,14 @@ def workout_session(request, session_id):
         messages.warning(request, _("Cette séance est déjà terminée."))
         return redirect('workout_history')
     
-    exercises = Exercise.objects.all().order_by('muscle_group', 'name')
+    # Optimisé: only pour charger uniquement les champs nécessaires
+    exercises = Exercise.objects.only('id', 'name', 'muscle_group').order_by('muscle_group', 'name')
     
+    # Optimisé: prefetch sets avec exercises
     sets_by_exercise = {}
-    for exercise_set in session.sets.select_related('exercise').order_by('created_at'):
+    for exercise_set in session.sets.select_related('exercise').only(
+        'id', 'set_number', 'reps', 'weight', 'rest_seconds', 'created_at', 'exercise__name'
+    ).order_by('created_at'):
         ex_name = exercise_set.exercise.name
         if ex_name not in sets_by_exercise:
             sets_by_exercise[ex_name] = []
@@ -302,10 +306,13 @@ def workout_history(request):
     Historique des séances d'entraînement.
     Affiche toutes les sessions complétées avec statistiques.
     """
+    # Optimisé: only pour charger uniquement les champs nécessaires
     sessions = WorkoutSession.objects.filter(
         user=request.user,
         status='completed'
-    ).prefetch_related('sets__exercise').order_by('-started_at')
+    ).prefetch_related('sets__exercise').only(
+        'id', 'started_at', 'duration_minutes', 'total_volume', 'status'
+    ).order_by('-started_at')
     
     # Calculate overall stats
     total_sessions = sessions.count()
@@ -337,9 +344,11 @@ def workout_detail(request, session_id):
     """
     session = get_object_or_404(WorkoutSession, id=session_id, user=request.user)
     
-    # Group sets by exercise
+    # Group sets by exercise (optimisé)
     sets_by_exercise = {}
-    for exercise_set in session.sets.select_related('exercise').order_by('created_at'):
+    for exercise_set in session.sets.select_related('exercise').only(
+        'id', 'set_number', 'reps', 'weight', 'rest_seconds', 'created_at', 'exercise__name', 'exercise__muscle_group'
+    ).order_by('created_at'):
         ex_name = exercise_set.exercise.name
         if ex_name not in sets_by_exercise:
             sets_by_exercise[ex_name] = {

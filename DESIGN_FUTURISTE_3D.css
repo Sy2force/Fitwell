@@ -1,0 +1,644 @@
+/* ============================================================================
+   FITWELL - DESIGN FUTURISTE 3D ULTRA-MODERNE
+   Effets: Glassmorphism, Néon, 3D Transforms, Animations
+   ============================================================================ */
+
+/* Variables CSS Futuristes */
+:root {
+    /* Couleurs Néon */
+    --neon-cyan: #00f0ff;
+    --neon-purple: #b000ff;
+    --neon-pink: #ff006e;
+    --neon-green: #00ff88;
+    --neon-yellow: #ffea00;
+    
+    /* Couleurs de base */
+    --bg-dark: #0a0a0f;
+    --bg-darker: #050508;
+    --surface: rgba(20, 20, 30, 0.6);
+    --surface-hover: rgba(30, 30, 45, 0.8);
+    
+    /* Effets */
+    --glow-cyan: 0 0 20px rgba(0, 240, 255, 0.5);
+    --glow-purple: 0 0 20px rgba(176, 0, 255, 0.5);
+    --glow-strong: 0 0 30px currentColor, 0 0 60px currentColor;
+}
+
+/* Background Futuriste avec Grid 3D */
+body {
+    background: var(--bg-dark);
+    background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+    animation: rotate-bg 30s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes rotate-bg {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Cards Glassmorphism 3D */
+.card-3d {
+    background: rgba(20, 20, 30, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 40px rgba(0, 240, 255, 0.1);
+    transform-style: preserve-3d;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.card-3d::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+}
+
+.card-3d:hover {
+    transform: translateY(-8px) rotateX(2deg) scale(1.02);
+    border-color: rgba(0, 240, 255, 0.5);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 0 60px rgba(0, 240, 255, 0.3),
+        0 0 100px rgba(0, 240, 255, 0.1);
+}
+
+.card-3d:hover::before {
+    opacity: 1;
+}
+
+/* Boutons Futuristes avec Effets Néon */
+.btn-futuristic {
+    position: relative;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(176, 0, 255, 0.2));
+    border: 2px solid var(--neon-cyan);
+    border-radius: 12px;
+    color: var(--neon-cyan);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    overflow: hidden;
+    transition: all 0.3s;
+    box-shadow: 
+        0 0 20px rgba(0, 240, 255, 0.3),
+        inset 0 0 20px rgba(0, 240, 255, 0.1);
+}
+
+.btn-futuristic::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.4), transparent);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    border-radius: 50%;
+}
+
+.btn-futuristic:hover {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.3), rgba(176, 0, 255, 0.3));
+    box-shadow: 
+        0 0 40px rgba(0, 240, 255, 0.6),
+        inset 0 0 30px rgba(0, 240, 255, 0.2);
+    transform: translateY(-2px);
+    border-color: var(--neon-cyan);
+}
+
+.btn-futuristic:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-futuristic:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Stats Cards avec Effet 3D */
+.stat-card-3d {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(176, 0, 255, 0.1));
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: all 0.3s;
+}
+
+.stat-card-3d::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(0, 240, 255, 0.2), transparent 30%);
+    animation: rotate-gradient 4s linear infinite;
+}
+
+@keyframes rotate-gradient {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.stat-card-3d:hover {
+    transform: translateZ(20px) scale(1.05);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.4);
+}
+
+/* Texte avec Effet Néon */
+.text-neon {
+    color: var(--neon-cyan);
+    text-shadow: 
+        0 0 10px rgba(0, 240, 255, 0.8),
+        0 0 20px rgba(0, 240, 255, 0.6),
+        0 0 30px rgba(0, 240, 255, 0.4);
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { 
+        text-shadow: 
+            0 0 10px rgba(0, 240, 255, 0.8),
+            0 0 20px rgba(0, 240, 255, 0.6),
+            0 0 30px rgba(0, 240, 255, 0.4);
+    }
+    50% { 
+        text-shadow: 
+            0 0 20px rgba(0, 240, 255, 1),
+            0 0 30px rgba(0, 240, 255, 0.8),
+            0 0 40px rgba(0, 240, 255, 0.6);
+    }
+}
+
+/* Progress Bar Futuriste */
+.progress-futuristic {
+    height: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+.progress-bar-futuristic {
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 20px var(--neon-cyan);
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-bar-futuristic::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Badge 3D avec Animation */
+.badge-3d {
+    display: inline-block;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(176, 0, 255, 0.2));
+    border: 2px solid var(--neon-cyan);
+    border-radius: 20px;
+    color: var(--neon-cyan);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    transform-style: preserve-3d;
+    transition: all 0.3s;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotateZ(0deg); }
+    50% { transform: translateY(-10px) rotateZ(2deg); }
+}
+
+.badge-3d:hover {
+    transform: scale(1.1) rotateZ(-5deg);
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.8);
+}
+
+/* Input Futuriste */
+.input-futuristic {
+    background: rgba(10, 10, 20, 0.6);
+    border: 2px solid rgba(0, 240, 255, 0.3);
+    border-radius: 12px;
+    padding: 14px 20px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.input-futuristic:focus {
+    outline: none;
+    border-color: var(--neon-cyan);
+    box-shadow: 
+        0 0 20px rgba(0, 240, 255, 0.4),
+        inset 0 0 10px rgba(0, 240, 255, 0.1);
+    background: rgba(10, 10, 20, 0.8);
+}
+
+.input-futuristic::placeholder {
+    color: rgba(0, 240, 255, 0.5);
+}
+
+/* Navbar Futuriste */
+.navbar-futuristic {
+    background: rgba(10, 10, 20, 0.8);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Holographic Effect */
+.holographic {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 240, 255, 0.1) 0%,
+        rgba(176, 0, 255, 0.1) 25%,
+        rgba(255, 0, 110, 0.1) 50%,
+        rgba(176, 0, 255, 0.1) 75%,
+        rgba(0, 240, 255, 0.1) 100%
+    );
+    background-size: 400% 400%;
+    animation: holographic-shift 8s ease infinite;
+}
+
+@keyframes holographic-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Scan Line Effect */
+.scan-lines {
+    position: relative;
+    overflow: hidden;
+}
+
+.scan-lines::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+    animation: scan 3s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes scan {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+}
+
+/* Chart Container Futuriste */
+.chart-container-3d {
+    background: rgba(10, 10, 20, 0.6);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 20px;
+    padding: 24px;
+    position: relative;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.chart-container-3d::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple), var(--neon-cyan));
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.chart-container-3d:hover::before {
+    opacity: 0.5;
+    animation: border-glow 2s linear infinite;
+}
+
+@keyframes border-glow {
+    0%, 100% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(90deg); }
+}
+
+/* Table Futuriste */
+.table-futuristic {
+    background: rgba(10, 10, 20, 0.4);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+.table-futuristic thead {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(176, 0, 255, 0.2));
+    border-bottom: 2px solid var(--neon-cyan);
+}
+
+.table-futuristic tbody tr {
+    border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+    transition: all 0.3s;
+}
+
+.table-futuristic tbody tr:hover {
+    background: rgba(0, 240, 255, 0.1);
+    transform: translateX(5px);
+    box-shadow: inset 4px 0 0 var(--neon-cyan);
+}
+
+/* XP Bar avec Animation */
+.xp-bar-container {
+    height: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid rgba(0, 240, 255, 0.3);
+    position: relative;
+}
+
+.xp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, 
+        var(--neon-cyan) 0%, 
+        var(--neon-purple) 50%, 
+        var(--neon-pink) 100%
+    );
+    background-size: 200% 100%;
+    animation: xp-flow 3s linear infinite;
+    box-shadow: 
+        0 0 20px var(--neon-cyan),
+        inset 0 2px 10px rgba(255, 255, 255, 0.3);
+    position: relative;
+}
+
+@keyframes xp-flow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+.xp-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent);
+}
+
+/* Level Badge Futuriste */
+.level-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.3), rgba(176, 0, 255, 0.3));
+    border: 3px solid var(--neon-cyan);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--neon-cyan);
+    box-shadow: 
+        0 0 30px rgba(0, 240, 255, 0.6),
+        inset 0 0 20px rgba(0, 240, 255, 0.2);
+    animation: rotate-level 10s linear infinite, pulse-level 2s ease-in-out infinite;
+    position: relative;
+}
+
+@keyframes rotate-level {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-level {
+    0%, 100% { box-shadow: 0 0 30px rgba(0, 240, 255, 0.6); }
+    50% { box-shadow: 0 0 50px rgba(0, 240, 255, 1); }
+}
+
+/* Dashboard Grid Futuriste */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    perspective: 1000px;
+}
+
+.dashboard-grid > * {
+    animation: fade-in-up 0.6s ease-out backwards;
+}
+
+.dashboard-grid > *:nth-child(1) { animation-delay: 0.1s; }
+.dashboard-grid > *:nth-child(2) { animation-delay: 0.2s; }
+.dashboard-grid > *:nth-child(3) { animation-delay: 0.3s; }
+.dashboard-grid > *:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px) rotateX(-10deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+/* Workout Timer Futuriste */
+.timer-futuristic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.2), transparent);
+    border: 4px solid var(--neon-cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--neon-cyan);
+    box-shadow: 
+        0 0 60px rgba(0, 240, 255, 0.6),
+        inset 0 0 40px rgba(0, 240, 255, 0.2);
+    animation: pulse-timer 1s ease-in-out infinite;
+    position: relative;
+}
+
+@keyframes pulse-timer {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 60px rgba(0, 240, 255, 0.6);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 80px rgba(0, 240, 255, 0.9);
+    }
+}
+
+/* Modal Futuriste */
+.modal-futuristic {
+    background: rgba(10, 10, 20, 0.95);
+    backdrop-filter: blur(30px);
+    border: 2px solid rgba(0, 240, 255, 0.3);
+    border-radius: 24px;
+    box-shadow: 
+        0 20px 80px rgba(0, 0, 0, 0.8),
+        0 0 100px rgba(0, 240, 255, 0.3);
+    animation: modal-appear 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modal-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Scrollbar Futuriste */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(10, 10, 20, 0.5);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple));
+    border-radius: 10px;
+    border: 2px solid rgba(10, 10, 20, 0.5);
+    box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    box-shadow: 0 0 20px var(--neon-cyan);
+}
+
+/* Hover Effects 3D */
+.hover-3d {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.hover-3d:hover {
+    transform: translateZ(10px) scale(1.02);
+}
+
+/* Loading Spinner Futuriste */
+.spinner-futuristic {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(0, 240, 255, 0.2);
+    border-top: 4px solid var(--neon-cyan);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Notification Toast Futuriste */
+.toast-futuristic {
+    background: rgba(10, 10, 20, 0.95);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--neon-green);
+    border-radius: 16px;
+    padding: 16px 24px;
+    color: var(--neon-green);
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(0, 255, 136, 0.4);
+    animation: toast-slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes toast-slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive 3D Effects */
+@media (max-width: 768px) {
+    .card-3d:hover {
+        transform: translateY(-4px) scale(1.01);
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}

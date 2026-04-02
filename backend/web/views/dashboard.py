@@ -35,13 +35,13 @@ def dashboard_view(request):
     else:
         form = DailyLogForm(instance=today_log)
         
-    # Recent Activity / Stats
-    week_logs = request.user.daily_logs.order_by('-date')[:7]
+    # Recent Activity / Stats (optimisé)
+    week_logs = request.user.daily_logs.only('sleep_hours', 'water_liters', 'date').order_by('-date')[:7]
     avg_sleep = week_logs.aggregate(Avg('sleep_hours'))['sleep_hours__avg'] or 0
     avg_water = week_logs.aggregate(Avg('water_liters'))['water_liters__avg'] or 0
     
-    # Chart Data (Last 30 days)
-    recent_logs = request.user.daily_logs.order_by('-date')[:30]
+    # Chart Data (Last 30 days) - optimisé
+    recent_logs = request.user.daily_logs.only('date', 'weight', 'sleep_hours', 'mood').order_by('-date')[:30]
     chart_logs = sorted(recent_logs, key=lambda x: x.date)
     
     chart_dates = [log.date.strftime('%d/%m') for log in chart_logs]
@@ -200,11 +200,11 @@ def leaderboard_view(request):
     """
     Page de classement global des utilisateurs.
     """
-    # Top 10 XP
-    top_xp = User.objects.select_related('stats').order_by('-stats__xp')[:10]
+    # Top 10 XP (optimisé avec only)
+    top_xp = User.objects.select_related('stats').only('username', 'stats__xp', 'stats__level').order_by('-stats__xp')[:10]
     
-    # Top 10 Streaks
-    top_streak = User.objects.select_related('stats').order_by('-stats__current_streak')[:10]
+    # Top 10 Streaks (optimisé avec only)
+    top_streak = User.objects.select_related('stats').only('username', 'stats__current_streak', 'stats__level').order_by('-stats__current_streak')[:10]
     
     # Top 10 Workouts
     users_with_workouts = User.objects.annotate(
@@ -212,9 +212,9 @@ def leaderboard_view(request):
         total_volume=Sum('workout_sessions__total_volume', filter=Q(workout_sessions__status='completed'))
     ).filter(workout_count__gt=0).order_by('-workout_count')[:10]
     
-    # User ranks
-    all_users_xp = list(User.objects.select_related('stats').order_by('-stats__xp').values_list('id', flat=True))
-    all_users_streak = list(User.objects.select_related('stats').order_by('-stats__current_streak').values_list('id', flat=True))
+    # User ranks (optimisé - seulement IDs)
+    all_users_xp = list(User.objects.order_by('-stats__xp').values_list('id', flat=True))
+    all_users_streak = list(User.objects.order_by('-stats__current_streak').values_list('id', flat=True))
     
     user_rank_xp = all_users_xp.index(request.user.id) + 1 if request.user.id in all_users_xp else 0
     user_rank_streak = all_users_streak.index(request.user.id) + 1 if request.user.id in all_users_streak else 0
