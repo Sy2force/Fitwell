@@ -28,10 +28,26 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r backend/requirements.txt
         
+    - name: Run Migrations
+      run: |
+        cd backend
+        python manage.py migrate --noinput
+      env:
+        SECRET_KEY: 'django-insecure-test-key-for-github-actions'
+        DEBUG: 'True'
+    
+    - name: Collect Static Files
+      run: |
+        cd backend
+        python manage.py collectstatic --noinput
+      env:
+        SECRET_KEY: 'django-insecure-test-key-for-github-actions'
+        DEBUG: 'True'
+        
     - name: Run Tests
       run: |
         cd backend
-        python manage.py test api web
+        python manage.py test api web --verbosity=2
       env:
-        SECRET_KEY: 'django-insecure-test-key'
+        SECRET_KEY: 'django-insecure-test-key-for-github-actions'
         DEBUG: 'True'
