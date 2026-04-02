@@ -173,13 +173,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # BASE DE DONNÉES
 # -----------------------------------------------------------------------------
 # Utilise SQLite en local, ou PostgreSQL si DATABASE_URL est défini (ex: sur Render)
-DATABASES = {
-    'default': config(
-        'DATABASE_URL',
-        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        cast=dj_database_url.parse
-    )
-}
+import os
+DATABASE_URL = os.environ.get('DATABASE_URL', '')
+
+# Fix pour Render: si DATABASE_URL commence par https://, on utilise SQLite
+if DATABASE_URL and DATABASE_URL.startswith('postgresql'):
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL)
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # -----------------------------------------------------------------------------
 # MOTS DE PASSE & SÉCURITÉ
