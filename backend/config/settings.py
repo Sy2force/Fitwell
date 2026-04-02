@@ -227,6 +227,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'api.User'
 
 # -----------------------------------------------------------------------------
+# CACHE CONFIGURATION (Performance Optimization)
+# -----------------------------------------------------------------------------
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'fitwell-cache',
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000
+        }
+    }
+}
+
+# Cache timeout settings (in seconds)
+CACHE_MIDDLEWARE_SECONDS = 300  # 5 minutes
+CACHE_MIDDLEWARE_KEY_PREFIX = 'fitwell'
+
+# -----------------------------------------------------------------------------
 # REDIRECTIONS & URLs
 # -----------------------------------------------------------------------------
 LOGIN_URL = 'login'
