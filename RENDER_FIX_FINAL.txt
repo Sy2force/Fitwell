@@ -1,0 +1,22 @@
+SOLUTION POUR VOIR L'INTERFACE RENDER
+
+Le problème: Base de données vide sur Render
+
+SOLUTION SIMPLE:
+
+1. Aller sur https://dashboard.render.com
+2. Cliquer sur votre service "fitwell"
+3. Cliquer "Manual Deploy" → "Deploy latest commit"
+4. Attendre 5-10 minutes que le build se termine
+5. Le build exécutera automatiquement les seeds
+6. L'interface sera accessible sur https://fitwell-izy6.onrender.com/fr/
+
+OU
+
+Si Manual Deploy ne fonctionne pas:
+1. Cliquer sur "Shell" dans le service
+2. Exécuter: bash init_db.sh
+3. Attendre 2 minutes
+4. Rafraîchir https://fitwell-izy6.onrender.com/fr/
+
+L'interface fonctionnera après l'une de ces 2 méthodes.
