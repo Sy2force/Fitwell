@@ -4,9 +4,19 @@ services:
     env: python
     region: frankfurt
     plan: free
-    rootDir: backend
-    buildCommand: bash build_files.sh
-    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120 --access-logfile - --error-logfile -
+    buildCommand: |
+      cd backend
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      python manage.py migrate --noinput
+      python manage.py collectstatic --noinput --clear
+      python manage.py compilemessages || echo "No translations"
+      python manage.py seed_db || echo "Seed skipped"
+      python manage.py seed_exercises || echo "Seed skipped"
+      python manage.py seed_blog || echo "Seed skipped"
+      python manage.py seed_badges || echo "Seed skipped"
+      python manage.py seed_recipes || echo "Seed skipped"
+    startCommand: cd backend && gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120 --access-logfile - --error-logfile -
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.18
