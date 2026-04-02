@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-fitwell-dev-key-change-in-production-2026-very-long-secret-key-for-security')
 
 # Mode Debug : True pour le dév, False pour la prod
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 # -----------------------------------------------------------------------------
 # SÉCURITÉ, CORS & CSRF
