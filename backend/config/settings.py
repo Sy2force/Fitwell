@@ -51,7 +51,8 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=DEBUG, cast=bool)
 
 # 5. Sécurité Production (HTTPS, HSTS, Cookies)
-if not DEBUG:
+import sys
+if not DEBUG and 'test' not in sys.argv:
     # SSL / HTTPS
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
