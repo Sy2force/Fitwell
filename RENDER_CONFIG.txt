@@ -1,0 +1,33 @@
+CONFIGURATION RENDER - COPIER-COLLER EXACTEMENT
+
+=== SUPPRIMER SERVICE EXISTANT ===
+Dashboard → Service actuel → Settings → Delete Service
+
+=== CRÉER NOUVEAU WEB SERVICE ===
+New + → Web Service
+Repository: Sy2force/Fitwell
+Branch: main
+
+Runtime: Python 3 (SÉLECTIONNER DANS DROPDOWN - PAS AUTO)
+Root Directory: backend
+
+Build Command:
+pip install -r requirements.txt && python manage.py migrate --noinput && python manage.py collectstatic --noinput
+
+Start Command:
+gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+
+=== VARIABLES (5) ===
+PYTHON_VERSION=3.9.18
+SECRET_KEY=hackeru-fitwell-demo-2026
+DEBUG=False
+ALLOWED_HOSTS=.onrender.com
+DATABASE_URL=<Internal Database URL de PostgreSQL>
+
+=== APRÈS DÉPLOIEMENT (Shell) ===
+cd backend
+python manage.py seed_db
+python manage.py seed_exercises
+python manage.py seed_badges
+python manage.py seed_blog
+python manage.py seed_recipes
