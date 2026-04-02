@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-23 08:26+0000\n"
+"POT-Creation-Date: 2026-04-02 21:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
 #: api/models/gamification.py:87
 msgid "Entraînement"
 msgstr ""
@@ -247,11 +248,11 @@ msgstr ""
 msgid "Cardio zone 2 (2x 30min)"
 msgstr ""
 
-#: config/settings.py:207
+#: config/settings.py:214
 msgid "Français"
 msgstr ""
 
-#: config/settings.py:208
+#: config/settings.py:215
 msgid "English"
 msgstr ""
 
@@ -624,6 +625,7 @@ msgid "Blog"
 msgstr ""
 
 #: web/templates/web/base.html:85 web/templates/web/base.html:181
+#: web/templates/web/home.html:34
 msgid "Exercices"
 msgstr ""
 
@@ -953,75 +955,89 @@ msgid "Voir tout"
 msgstr ""
 
 #: web/templates/web/home.html:18
-msgid "Libérez"
+msgid "Plateforme de confiance pour votre transformation"
 msgstr ""
 
-#: web/templates/web/home.html:19
-msgid "Votre potentiel"
+#: web/templates/web/home.html:22
+msgid "Transformez"
+msgstr ""
+
+#: web/templates/web/home.html:22
+msgid "Votre"
 msgstr ""
 
 #: web/templates/web/home.html:23
-msgid "L'écosystème de référence pour l'optimisation biologique."
+msgid "Corps & Esprit"
 msgstr ""
 
-#: web/templates/web/home.html:24
-msgid "Entraînez. Analysez. Évoluez."
+#: web/templates/web/home.html:27
+msgid ""
+"Rejoignez des milliers d'utilisateurs qui atteignent leurs objectifs avec "
+"FitWell"
 msgstr ""
 
-#: web/templates/web/home.html:31
+#: web/templates/web/home.html:38
+msgid "Recettes"
+msgstr ""
+
+#: web/templates/web/home.html:42
+msgid "Badges"
+msgstr ""
+
+#: web/templates/web/home.html:50
 msgid "Reprendre le protocole"
 msgstr ""
 
-#: web/templates/web/home.html:35
+#: web/templates/web/home.html:54
 msgid "Initialiser le protocole"
 msgstr ""
 
-#: web/templates/web/home.html:40
+#: web/templates/web/home.html:59
 msgid "Commencer la transformation"
 msgstr ""
 
-#: web/templates/web/home.html:43
+#: web/templates/web/home.html:62
 msgid "Connexion membre"
 msgstr ""
 
-#: web/templates/web/home.html:57
+#: web/templates/web/home.html:76
 msgid "L'arsenal"
 msgstr ""
 
-#: web/templates/web/home.html:57
+#: web/templates/web/home.html:76
 msgid "Complet"
 msgstr ""
 
-#: web/templates/web/home.html:58
+#: web/templates/web/home.html:77
 msgid ""
 "Une suite d'outils intégrés pour gérer chaque variable de votre performance."
 msgstr ""
 
-#: web/templates/web/home.html:67
+#: web/templates/web/home.html:86
 msgid "Coach tactique IA"
 msgstr ""
 
-#: web/templates/web/home.html:69
+#: web/templates/web/home.html:88
 msgid ""
 "Entraînez-vous avec J.A.R.V.I.S. Interface HUD immersive, guidage vocal "
 "temps réel et séquences adaptatives."
 msgstr ""
 
-#: web/templates/web/home.html:78
+#: web/templates/web/home.html:97
 msgid "Centre de commandement"
 msgstr ""
 
-#: web/templates/web/home.html:80
+#: web/templates/web/home.html:99
 msgid ""
 "Suivez vos métriques vitales (Sommeil, Hydratation, Humeur) et analysez "
 "votre progression avec des graphiques précis."
 msgstr ""
 
-#: web/templates/web/home.html:89
+#: web/templates/web/home.html:108
 msgid "Laboratoire nutrition"
 msgstr ""
 
-#: web/templates/web/home.html:91
+#: web/templates/web/home.html:110
 msgid ""
 "Accédez à des recettes optimisées pour la performance. Macros calculées et "
 "instructions détaillées."
@@ -2087,15 +2103,15 @@ msgstr ""
 msgid "Veuillez corriger les erreurs ci-dessous."
 msgstr ""
 
-#: web/views/content.py:131
+#: web/views/content.py:137
 msgid "Commentaire ajouté."
 msgstr ""
 
-#: web/views/content.py:163
+#: web/views/content.py:171
 msgid "Commentaire supprimé."
 msgstr ""
 
-#: web/views/content.py:166
+#: web/views/content.py:174
 msgid "Vous n'êtes pas autorisé à supprimer ce commentaire."
 msgstr ""
 
@@ -2157,6 +2173,6 @@ msgstr ""
 msgid "Cette séance est déjà terminée."
 msgstr ""
 
-#: web/views/workout.py:291
+#: web/views/workout.py:295
 msgid "Séance terminée avec succès ! 🎉"
 msgstr ""
