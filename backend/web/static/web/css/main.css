@@ -1,22 +1,85 @@
 /* ============================================================================
-   THÈME CLAIR (LIGHT MODE) - COULEURS LUMINEUSES
+   THÈME LUXUEUX PREMIUM - DESIGN SOPHISTIQUÉ
    ============================================================================ */
 
-/* Variables couleurs claires */
+/* Variables couleurs luxe */
 :root {
-    --light-bg: #f8fafc;
-    --light-surface: #ffffff;
-    --light-text: #1e293b;
-    --light-border: #e2e8f0;
-    --light-primary: #0ea5e9;
-    --light-accent: #8b5cf6;
+    --luxury-gold: #d4af37;
+    --luxury-gold-light: #f4e4b7;
+    --luxury-gold-dark: #b8941f;
+    --luxury-black: #0a0a0a;
+    --luxury-gray: #1a1a1a;
+    --luxury-white: #ffffff;
+    --luxury-accent: #c9a961;
+    --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4e4b7 50%, #d4af37 100%);
+    --gradient-luxury: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+    --shadow-gold: 0 10px 40px rgba(212, 175, 55, 0.3);
+    --shadow-gold-strong: 0 20px 60px rgba(212, 175, 55, 0.5);
+    --shadow-luxury: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
-/* Mode clair par défaut */
+/* Mode luxueux par défaut */
 body {
-    background-color: var(--light-bg);
-    color: var(--light-text);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    background: var(--gradient-luxury);
+    color: var(--luxury-white);
+    transition: all 0.3s ease;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Boutons premium luxe */
+.btn-luxury {
+    background: linear-gradient(135deg, var(--luxury-gold) 0%, var(--luxury-gold-light) 50%, var(--luxury-gold) 100%);
+    color: var(--luxury-black);
+    padding: 1rem 2.5rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 2px solid var(--luxury-gold-light);
+    box-shadow: var(--shadow-gold);
+    transition: all 0.3s ease;
+}
+
+.btn-luxury:hover {
+    background: linear-gradient(135deg, var(--luxury-gold-light) 0%, var(--luxury-gold) 50%, var(--luxury-gold-light) 100%);
+    box-shadow: var(--shadow-gold-strong);
+    transform: translateY(-2px) scale(1.02);
+    border-color: var(--luxury-gold);
+}
+
+/* Cards premium */
+.card-luxury {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(10, 10, 10, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--luxury-gold);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: var(--shadow-gold), inset 0 1px 0 rgba(212, 175, 55, 0.2);
+    transition: all 0.4s ease;
+}
+
+.card-luxury:hover {
+    border-color: var(--luxury-gold-light);
+    box-shadow: var(--shadow-gold-strong), inset 0 1px 0 rgba(212, 175, 55, 0.3);
+    transform: translateY(-4px);
+}
+
+/* Texte or */
+.text-luxury-gold {
+    color: var(--luxury-gold);
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+/* Animations luxe */
+@keyframes shimmer-gold {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+.shimmer-gold {
+    background: linear-gradient(90deg, transparent, var(--luxury-gold-light), transparent);
+    background-size: 200% 100%;
+    animation: shimmer-gold 3s infinite;
 }
 
 /* Cards luxueuses */
