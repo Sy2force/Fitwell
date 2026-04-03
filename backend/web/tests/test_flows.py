@@ -19,7 +19,7 @@ class FlowTests(TestCase):
         # 1. Unauthenticated
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Commencer la transformation")
+        self.assertContains(response, "Commencer Maintenant")
         
         # 2. Authenticated, No Plan
         self.client.force_login(self.user)
