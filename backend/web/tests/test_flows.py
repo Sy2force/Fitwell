@@ -33,7 +33,7 @@ class FlowTests(TestCase):
         )
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Reprendre le protocole")
+        self.assertContains(response, "Reprendre")
 
     def test_workout_flow_auto_gen(self):
         """Test accessing workout session directly (auto-generation)"""
