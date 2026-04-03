@@ -25,7 +25,7 @@ class FlowTests(TestCase):
         self.client.force_login(self.user)
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Initialiser le protocole")
+        self.assertContains(response, "Commencer")
         
         # 3. Authenticated, With Plan
         WellnessPlan.objects.create(
