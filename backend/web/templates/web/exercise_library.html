@@ -41,7 +41,7 @@
         <!-- Section S'AFFINER -->
         <div class="mb-16">
             <h2 class="text-4xl font-black text-white mb-8 italic">{% trans "S'AFFINER" %}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
                 {% for exercise in exercises|slice:":4" %}
                 <div class="group relative overflow-hidden rounded-lg bg-gray-800 hover:transform hover:scale-105 transition-all duration-300 cursor-pointer">
                     <div class="relative h-64">
@@ -66,6 +66,26 @@
                     </div>
                 </div>
                 {% endfor %}
+                
+                <!-- Overlay invitation inscription pour non-connectés -->
+                {% if not user.is_authenticated %}
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/95 to-transparent flex items-center justify-center z-50">
+                    <div class="text-center max-w-2xl px-8">
+                        <div class="text-6xl mb-6">🔒</div>
+                        <h3 class="text-4xl font-black text-white mb-4">{% trans "Découvre 101 Exercices" %}</h3>
+                        <p class="text-xl text-gray-300 mb-8">{% trans "Crée ton compte gratuit pour accéder à tous les exercices, programmes personnalisés et bien plus !" %}</p>
+                        <div class="flex gap-4 justify-center">
+                            <a href="{% url 'register' %}" class="bg-yellow-400 text-black px-12 py-4 rounded-lg font-black uppercase hover:bg-yellow-300 transition-all text-lg">
+                                {% trans "CRÉER MON COMPTE GRATUIT" %}
+                            </a>
+                            <a href="{% url 'login' %}" class="bg-white/10 backdrop-blur-md border-2 border-white text-white px-12 py-4 rounded-lg font-bold uppercase hover:bg-white/20 transition-all">
+                                {% trans "J'ai déjà un compte" %}
+                            </a>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-6">✨ {% trans "Gratuit • Sans engagement • Accès immédiat" %}</p>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
         
