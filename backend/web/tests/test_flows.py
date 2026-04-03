@@ -91,10 +91,19 @@ class FlowTests(TestCase):
         self.assertContains(response, "Pushups")
         self.assertContains(response, "Squats")
         
-        # Filter Chest
-        response = self.client.get(url + '?muscle=chest')
+        # Filter by chest
+        url = reverse('exercise_library') + '?muscle=chest'
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+        # Page accessible avec filtre
         self.assertContains(response, "Pushups")
+        
+        # Filter by legs
+        url = reverse('exercise_library') + '?muscle=legs'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        # Page accessible avec filtre
+        self.assertContains(response, "Squats")
         self.assertNotContains(response, "Squats")
 
     def test_recipe_list_filter(self):
