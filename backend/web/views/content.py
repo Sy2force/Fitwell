@@ -5,7 +5,6 @@ from django.utils.translation import gettext as _
 from web.forms import CommentForm
 from api.models import Article, Category, Comment, Exercise, Recipe
 
-@login_required(login_url='login')
 def exercise_library(request):
     """
     Bibliothèque d'exercices.
@@ -23,7 +22,6 @@ def exercise_library(request):
         'muscle_choices': Exercise.MUSCLE_CHOICES
     })
 
-@login_required(login_url='login')
 def recipe_list(request):
     """
     Liste des recettes de nutrition.
@@ -46,7 +44,6 @@ def recipe_list(request):
         'category_choices': Recipe.CATEGORY_CHOICES
     })
 
-@login_required(login_url='login')
 def recipe_detail(request, recipe_id):
     """
     Détail d'une recette avec calcul des pourcentages de macros.
