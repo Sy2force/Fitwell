@@ -18,12 +18,51 @@
     --shadow-luxury: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
-/* Mode luxueux par défaut */
+/* Mode Nike - minimaliste */
 body {
-    background: var(--gradient-luxury);
-    color: var(--luxury-white);
+    background: #ffffff;
+    color: #111111;
     transition: all 0.3s ease;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
+    font-weight: 400;
+}
+
+/* Typographie Nike */
+.nike-title {
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+
+/* Boutons style Nike */
+.btn-nike {
+    background: #000000;
+    color: #ffffff;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    text-transform: none;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-nike:hover {
+    background: #333333;
+}
+
+.btn-nike-outline {
+    background: transparent;
+    color: #ffffff;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    border: 2px solid #ffffff;
+    transition: all 0.3s ease;
+}
+
+.btn-nike-outline:hover {
+    background: #ffffff;
+    color: #000000;
 }
 
 /* Boutons premium luxe */

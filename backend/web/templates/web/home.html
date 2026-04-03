@@ -2,86 +2,56 @@
 {% load i18n %}
 
 {% block content %}
-<div class="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-    <!-- Background luxueux avec or -->
+<div class="relative min-h-screen flex items-center overflow-hidden bg-white">
+    <!-- Hero image style Nike -->
     <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black z-10"></div>
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-yellow-600/20 via-transparent to-yellow-600/20"></div>
-        </div>
-        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2400&auto=format&fit=crop" 
-             alt="Luxury Fitness" 
-             class="w-full h-full object-cover opacity-20 grayscale">
+        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2400&auto=format&fit=crop" 
+             alt="Athlete" 
+             class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
     </div>
 
-    <div class="relative z-30 text-center px-4 max-w-6xl mx-auto">
-        <!-- Badge premium -->
-        <div class="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-600 to-yellow-400 text-black px-8 py-3 rounded-full mb-8 font-bold shadow-2xl border-2 border-yellow-300">
-            <span class="text-2xl">🌟</span>
-            <span class="text-lg uppercase tracking-wider">{% trans "Expérience Premium" %}</span>
+    <div class="relative z-30 px-8 md:px-16 max-w-7xl mx-auto text-left">
+        <!-- Slogan style Nike -->
+        <div class="mb-6">
+            <span class="text-white text-sm font-semibold uppercase tracking-widest">{% trans "FitWell" %}</span>
         </div>
         
-        <h1 class="text-6xl md:text-8xl font-bold mb-8 leading-tight">
-            <span class="text-white">{% trans "Votre" %}</span><br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-400 drop-shadow-2xl">{% trans "Transformation Luxe" %}</span>
+        <h1 class="text-6xl md:text-9xl font-black mb-8 leading-none text-white">
+            {% trans "JUST" %}<br/>
+            {% trans "DO IT" %}
         </h1>
         
-        <p class="text-2xl md:text-3xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
-            {% trans "L'élégance rencontre la performance" %} • {% trans "Excellence garantie" %}
+        <p class="text-2xl md:text-3xl text-white max-w-2xl mb-12 font-light">
+            {% trans "Transformez votre corps. Dépassez vos limites. Devenez légende." %}
         </p>
-        
-        <!-- Stats luxueuses -->
-        <div class="flex justify-center gap-8 mb-16 flex-wrap">
-            <div class="bg-gradient-to-br from-yellow-600/20 to-yellow-400/20 backdrop-blur-xl px-10 py-6 rounded-2xl border-2 border-yellow-500/50 shadow-2xl">
-                <div class="text-5xl font-bold text-yellow-400 mb-2">101</div>
-                <div class="text-sm text-gray-300 uppercase tracking-widest">{% trans "Exercices" %}</div>
-            </div>
-            <div class="bg-gradient-to-br from-yellow-600/20 to-yellow-400/20 backdrop-blur-xl px-10 py-6 rounded-2xl border-2 border-yellow-500/50 shadow-2xl">
-                <div class="text-5xl font-bold text-yellow-400 mb-2">39</div>
-                <div class="text-sm text-gray-300 uppercase tracking-widest">{% trans "Recettes" %}</div>
-            </div>
-            <div class="bg-gradient-to-br from-yellow-600/20 to-yellow-400/20 backdrop-blur-xl px-10 py-6 rounded-2xl border-2 border-yellow-500/50 shadow-2xl">
-                <div class="text-5xl font-bold text-yellow-400 mb-2">20</div>
-                <div class="text-sm text-gray-300 uppercase tracking-widest">{% trans "Badges" %}</div>
-            </div>
-        </div>
 
-        <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+        <div class="flex flex-col md:flex-row items-start gap-6">
             {% if user.is_authenticated %}
                 {% if plan %}
-                <a href="{% url 'planner' %}" class="w-full md:w-auto bg-gradient-to-r from-yellow-600 to-yellow-400 text-black px-14 py-5 rounded-xl font-bold text-lg uppercase tracking-wider hover:from-yellow-500 hover:to-yellow-300 transition-all transform hover:scale-105 shadow-2xl border-2 border-yellow-300">
-                    <span class="flex items-center justify-center gap-3">
-                        <span>👑</span>
-                        {% trans "Reprendre le protocole" %}
-                    </span>
+                <a href="{% url 'planner' %}" class="bg-black text-white px-12 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition-all">
+                    {% trans "Reprendre" %}
                 </a>
                 {% else %}
-                <a href="{% url 'planner' %}" class="w-full md:w-auto bg-gradient-to-r from-yellow-600 to-yellow-400 text-black px-14 py-5 rounded-xl font-bold text-lg uppercase tracking-wider hover:from-yellow-500 hover:to-yellow-300 transition-all transform hover:scale-105 shadow-2xl border-2 border-yellow-300">
-                    <span class="flex items-center justify-center gap-3">
-                        <span>👑</span>
-                        {% trans "Initialiser le protocole" %}
-                    </span>
+                <a href="{% url 'planner' %}" class="bg-black text-white px-12 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition-all">
+                    {% trans "Commencer" %}
                 </a>
                 {% endif %}
             {% else %}
-            <a href="{% url 'register' %}" class="w-full md:w-auto bg-gradient-to-r from-yellow-600 to-yellow-400 text-black px-14 py-5 rounded-xl font-bold text-lg uppercase tracking-wider hover:from-yellow-500 hover:to-yellow-300 transition-all transform hover:scale-105 shadow-2xl border-2 border-yellow-300">
-                <span class="flex items-center justify-center gap-3">
-                    <span>✨</span>
-                    {% trans "Commencer Maintenant" %}
-                </span>
+            <a href="{% url 'register' %}" class="bg-black text-white px-12 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition-all">
+                {% trans "Commencer Maintenant" %}
             </a>
-            <a href="{% url 'login' %}" class="w-full md:w-auto bg-white/10 backdrop-blur-md border-2 border-yellow-500/50 text-yellow-400 px-14 py-5 rounded-xl font-bold text-lg uppercase tracking-wider hover:bg-yellow-500/20 hover:border-yellow-400 transition-all shadow-xl">
-                {% trans "Accès Membre" %}
+            <a href="{% url 'exercises' %}" class="border-2 border-white text-white px-12 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all">
+                {% trans "Découvrir" %}
             </a>
             {% endif %}
         </div>
         
-        <!-- Garantie luxe -->
-        <div class="mt-16 text-center">
-            <div class="inline-flex items-center gap-3 text-yellow-400 text-sm font-semibold">
-                <span>🎖️</span>
-                <span>{% trans "Garantie satisfaction 100% ou remboursé" %}</span>
-            </div>
+        <!-- Liens rapides style Nike -->
+        <div class="mt-20 flex gap-8 text-white">
+            <a href="/fr/exercises/" class="hover:text-gray-300 transition-colors font-medium">{% trans "Exercices" %}</a>
+            <a href="/fr/nutrition/" class="hover:text-gray-300 transition-colors font-medium">{% trans "Nutrition" %}</a>
+            <a href="/fr/blog/" class="hover:text-gray-300 transition-colors font-medium">{% trans "Blog" %}</a>
         </div>
     </div>
 </div>
