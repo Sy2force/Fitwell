@@ -19,18 +19,19 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Cards en mode clair */
+/* Cards luxueuses */
 .glass-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--light-border);
-    border-radius: 1rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(10, 10, 10, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--luxury-gold);
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-gold), inset 0 1px 0 rgba(212, 175, 55, 0.2);
 }
 
 .glass-card:hover {
-    border-color: var(--light-primary);
-    box-shadow: 0 8px 30px rgba(14, 165, 233, 0.15);
+    border-color: var(--luxury-gold-light);
+    box-shadow: 0 20px 60px rgba(212, 175, 55, 0.4), inset 0 1px 0 rgba(212, 175, 55, 0.3);
+    transform: translateY(-4px);
 }
 
 .glass-card {
