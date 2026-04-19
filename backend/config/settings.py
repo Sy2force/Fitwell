@@ -13,8 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-fitwell-dev-key-change-in-production-2026-very-long-secret-key-for-security')
 
 # Mode Debug : True pour le dév, False pour la prod
-# Temporairement True pour diagnostiquer Render
-DEBUG = True
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 # -----------------------------------------------------------------------------
 # SÉCURITÉ, CORS & CSRF
@@ -178,13 +177,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASE_URL = os.environ.get('DATABASE_URL', '')
 
 # Configuration base de données
-if DATABASE_URL and DATABASE_URL.startswith('postgresql'):
-    # PostgreSQL sur Render
+if DATABASE_URL:
+    # Support pour Render (convertit postgres:// en postgresql:// si nécessaire)
+    if DATABASE_URL.startswith('postgres://'):
+        DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
+    
     DATABASES = {
-        'default': dj_database_url.config(
-            default=DATABASE_URL,
+        'default': dj_database_url.parse(
+            DATABASE_URL,
             conn_max_age=600,
             conn_health_checks=True,
+            ssl_require=not DEBUG,
         )
     }
 else:
@@ -233,7 +236,12 @@ LOCALE_PATHS = [
 # -----------------------------------------------------------------------------
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# 236. WhiteNoise Storage
+# Utiliser le stockage standard en développement pour éviter les erreurs de manifest
+if DEBUG:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'

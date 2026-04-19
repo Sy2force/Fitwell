@@ -47,19 +47,15 @@ def planner_view(request):
                     request.user.stats.consistency_score = breakdown.get('consistency', 0)
                 
                 # Gamification: +100 XP for taking action
-                request.user.stats.xp += 100
-                # Level Up Logic: Every 500 XP is a level
-                request.user.stats.level = 1 + (request.user.stats.xp // 500)
+                request.user.stats.add_xp(100)
                 
                 # Update Streak (Explicit update on action)
                 request.user.stats.update_streak()
                 
-                request.user.stats.save()
-                
                 # Badge Trigger
                 check_and_award_badges(request.user)
                 
-            messages.success(request, _(f"Plan généré ! +100 XP (Niveau {request.user.stats.level})"))
+            messages.success(request, _("Ton programme est prêt ! +100 d'énergie"))
             return redirect('planner')
     else:
         if latest_plan:
@@ -100,7 +96,7 @@ def custom_planner_view(request):
             event = form.save(commit=False)
             event.user = request.user
             event.save()
-            messages.success(request, _("Activité ajoutée au planning !"))
+            messages.success(request, _("Activité ajoutée à ton planning !"))
             return redirect('custom_planner')
     else:
         form = CustomEventForm()
@@ -141,7 +137,7 @@ def complete_custom_event(request, event_id):
             'xp_gain': xp_gain,
             'new_xp': request.user.stats.xp,
             'new_level': request.user.stats.level,
-            'message': _("Tâche complétée ! +%(xp)s XP") % {'xp': xp_gain}
+            'message': _("C'est fait ! +%(xp)s") % {'xp': xp_gain}
         })
         
     return JsonResponse({'status': 'already_completed'})

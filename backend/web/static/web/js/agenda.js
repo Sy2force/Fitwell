@@ -33,7 +33,7 @@ function completeEvent(eventId) {
                 }
             }
             
-            // Show XP Notification
+            // Show Energy Notification
             const notif = document.getElementById('xp-notification');
             const msg = document.getElementById('xp-message');
             if (notif && msg) {

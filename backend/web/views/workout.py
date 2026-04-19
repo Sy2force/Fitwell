@@ -22,7 +22,7 @@ def workout_setup_view(request):
 @login_required(login_url='login')
 def workout_session_view(request):
     """
-    Coach Tactique (Session d'entraînement).
+    Studio Live (Session d'entraînement).
     Génère une séquence d'exercices (Échauffement -> Exos -> Repos -> Retour au calme).
     Si aucun exercice n'est sélectionné, l'IA en choisit selon le profil.
     """
@@ -138,18 +138,18 @@ def workout_session_view(request):
 def complete_workout(request):
     """
     API endpoint to record a completed workout session.
-    Awards XP, updates streak, and logs entry in DailyLog.
+    Awards energy, updates streak, and logs entry in DailyLog.
     """
-    # 1. Award XP and Update Streak
-    xp_gain = 100
+    # 1. Award energy and Update Streak
+    energy_gain = 100
     if hasattr(request.user, 'stats'):
-        request.user.stats.add_xp(xp_gain)
+        request.user.stats.add_xp(energy_gain)
         request.user.stats.update_streak()
     
     # 2. Add entry to Daily Log
     today_log, created = DailyLog.objects.get_or_create(user=request.user, date=timezone.now().date())
     timestamp = timezone.now().strftime("%H:%M")
-    log_entry = f"[{timestamp}] { _('Séance Coach IA terminée') } (+{xp_gain} XP)"
+    log_entry = f"[{timestamp}] { _('Session Studio terminée') } (+{energy_gain})"
     
     if today_log.notes:
         today_log.notes += f"\n{log_entry}"
@@ -159,10 +159,10 @@ def complete_workout(request):
     
     return JsonResponse({
         'status': 'success',
-        'xp_gain': xp_gain,
-        'new_xp': request.user.stats.xp,
+        'energy_gain': energy_gain,
+        'new_energy': request.user.stats.xp,
         'new_level': request.user.stats.level,
-        'message': _("Mission accomplie ! +%(xp)s XP") % {'xp': xp_gain}
+        'message': _("Bien joué ! +%(xp)s d'énergie") % {'xp': energy_gain}
     })
 
 @login_required(login_url='login')
@@ -180,7 +180,7 @@ def start_workout(request):
     if request.method == 'POST':
         notes = request.POST.get('notes', '')
         session = WorkoutSession.objects.create(user=request.user, notes=notes)
-        messages.success(request, _("Séance démarrée ! Bon entraînement ! 💪"))
+        messages.success(request, _("C'est parti ! Profite de ton mouvement ! ✨"))
         return redirect('workout_session_detail', session_id=session.id)
     
     latest_plan = request.user.plans.order_by('-created_at').first()
@@ -277,7 +277,7 @@ def add_set_to_session(request, session_id):
 def complete_workout_session(request, session_id):
     """
     Terminer une séance d'entraînement.
-    Calcule les stats et attribue l'XP.
+    Calcule les stats et attribue l'énergie.
     """
     session = get_object_or_404(WorkoutSession, id=session_id, user=request.user)
     
@@ -288,12 +288,12 @@ def complete_workout_session(request, session_id):
     
     new_badges = check_and_award_badges(request.user)
     
-    xp_earned = 50 + (session.duration_minutes // 10) * 10
+    energy_earned = 50 + (session.duration_minutes // 10) * 10
     
     return JsonResponse({
         'status': 'success',
         'message': _("Séance terminée avec succès ! 🎉"),
-        'xp_earned': xp_earned,
+        'energy_earned': energy_earned,
         'duration_minutes': session.duration_minutes,
         'total_volume': round(session.total_volume, 2),
         'total_sets': session.sets.count(),

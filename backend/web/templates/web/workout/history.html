@@ -5,103 +5,100 @@
 {% block title %}{% trans "Historique Entraînements" %} - FitWell{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-void py-12 px-4">
+<div class="bg-white min-h-screen pt-32 pb-20 px-6 lg:px-8">
     <div class="max-w-7xl mx-auto">
         <!-- Header -->
-        <div class="text-center mb-12">
-            <h1 class="text-5xl font-display text-white mb-4">
-                {% trans "Historique Entraînements" %} 📊
+        <div class="mb-16 text-center">
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-4 leading-none">
+                Mon <span class="text-tse_accent">Ascension</span>
             </h1>
-            <p class="text-gray-400 text-lg">
-                {% trans "Toutes tes séances et ta progression" %}
+            <p class="text-sm font-bold uppercase tracking-widest text-tse_muted">
+                {% trans "Retrace ton parcours et visualise chaque victoire vers ton sommet" %}
             </p>
         </div>
 
         <!-- Overall Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-            <div class="card-glass border-neon-primary text-center">
-                <div class="text-gray-400 text-sm mb-2">{% trans "Total Séances" %}</div>
-                <div class="text-4xl font-bold text-primary">{{ total_sessions }}</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+            <div class="bg-gray-50 rounded-tse-card p-10 text-center border border-gray-100 shadow-soft">
+                <div class="text-[10px] font-black uppercase tracking-widest text-tse_muted mb-4">{% trans "Séances" %}</div>
+                <div class="text-5xl font-black italic text-tse_text">{{ total_sessions }}</div>
             </div>
-            <div class="card-glass border-neon-secondary text-center">
-                <div class="text-gray-400 text-sm mb-2">{% trans "Volume Total" %}</div>
-                <div class="text-4xl font-bold text-secondary">{{ total_volume|floatformat:0 }} <span class="text-xl">kg</span></div>
+            <div class="bg-gray-50 rounded-tse-card p-10 text-center border border-gray-100 shadow-soft">
+                <div class="text-[10px] font-black uppercase tracking-widest text-tse_muted mb-4">{% trans "Volume" %}</div>
+                <div class="text-5xl font-black italic text-tse_text">{{ total_volume|floatformat:0 }}</div>
+                <div class="text-[8px] font-bold uppercase tracking-widest text-tse_muted mt-2">kg</div>
             </div>
-            <div class="card-glass border-neon-energy text-center">
-                <div class="text-gray-400 text-sm mb-2">{% trans "Temps Total" %}</div>
-                <div class="text-4xl font-bold text-energy">{{ total_duration }} <span class="text-xl">min</span></div>
+            <div class="bg-gray-50 rounded-tse-card p-10 text-center border border-gray-100 shadow-soft">
+                <div class="text-[10px] font-black uppercase tracking-widest text-tse_muted mb-4">{% trans "Temps" %}</div>
+                <div class="text-5xl font-black italic text-tse_text">{{ total_duration }}</div>
+                <div class="text-[8px] font-bold uppercase tracking-widest text-tse_muted mt-2">min</div>
             </div>
-            <div class="card-glass border-neon-health text-center">
-                <div class="text-gray-400 text-sm mb-2">{% trans "Moyenne/Séance" %}</div>
-                <div class="text-4xl font-bold text-health">{{ avg_duration|floatformat:0 }} <span class="text-xl">min</span></div>
+            <div class="bg-gray-50 rounded-tse-card p-10 text-center border border-gray-100 shadow-soft">
+                <div class="text-[10px] font-black uppercase tracking-widest text-tse_muted mb-4">{% trans "Moyenne" %}</div>
+                <div class="text-5xl font-black italic text-tse_text">{{ avg_duration|floatformat:0 }}</div>
+                <div class="text-[8px] font-bold uppercase tracking-widest text-tse_muted mt-2">min</div>
             </div>
         </div>
 
         <!-- Charts -->
         {% if chart_dates %}
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            <!-- Volume Chart -->
-            <div class="card-glass border-neon-primary">
-                <h2 class="text-2xl font-display text-white mb-6">{% trans "Volume par Séance" %}</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <div class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft">
+                <h2 class="text-2xl font-black uppercase tracking-tighter italic mb-10">{% trans "Volume par séance" %}</h2>
                 <canvas id="volumeChart"></canvas>
             </div>
-
-            <!-- Duration Chart -->
-            <div class="card-glass border-neon-secondary">
-                <h2 class="text-2xl font-display text-white mb-6">{% trans "Durée par Séance" %}</h2>
+            <div class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft">
+                <h2 class="text-2xl font-black uppercase tracking-tighter italic mb-10">{% trans "Durée par séance" %}</h2>
                 <canvas id="durationChart"></canvas>
             </div>
         </div>
         {% endif %}
 
         <!-- Sessions List -->
-        <div class="card-glass border-neon-primary">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-display text-white">
-                    {% trans "Dernières Séances" %}
+        <div class="bg-white rounded-tse-card p-10 border border-gray-100 shadow-soft">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-6 mb-12">
+                <h2 class="text-3xl font-black uppercase tracking-tighter italic">
+                    {% trans "Dernières Performances" %}
                 </h2>
-                <a href="{% url 'start_workout' %}" class="btn-primary">
-                    {% trans "Nouvelle Séance" %} +
+                <a href="{% url 'start_workout' %}" class="btn-tse py-4 px-10 text-[10px]">
+                    {% trans "Nouvelle Ascension" %}
                 </a>
             </div>
 
             {% if sessions %}
-            <div class="space-y-4">
+            <div class="space-y-6">
                 {% for session in sessions %}
-                <div class="bg-gray-900 rounded-lg p-6 border border-gray-800 hover:border-primary transition-all">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-50 hover:border-tse_accent transition-all group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div class="flex-1">
-                            <div class="flex items-center gap-3 mb-2">
-                                <h3 class="text-white font-semibold text-lg">
-                                    {{ session.started_at|date:"d/m/Y à H:i" }}
+                            <div class="flex items-center gap-4 mb-4">
+                                <h3 class="text-lg font-black uppercase tracking-tighter italic text-tse_text">
+                                    {{ session.started_at|date:"d M Y" }}
                                 </h3>
-                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">
-                                    ✓ {% trans "Terminée" %}
+                                <span class="px-3 py-1 bg-white rounded-tse-pill text-[8px] font-black uppercase tracking-widest text-tse_accent border border-gray-100">
+                                    {{ session.started_at|date:"H:i" }}
                                 </span>
                             </div>
                             
                             {% if session.notes %}
-                            <p class="text-gray-400 text-sm mb-3">{{ session.notes }}</p>
+                            <p class="text-xs text-tse_muted font-medium mb-6 italic border-l-2 border-tse_accent pl-4">{{ session.notes }}</p>
                             {% endif %}
 
-                            <div class="flex flex-wrap gap-4 text-sm">
+                            <div class="flex flex-wrap gap-8">
                                 <div class="flex items-center gap-2">
-                                    <span class="text-gray-500">⏱️</span>
-                                    <span class="text-white">{{ session.duration_minutes }} min</span>
+                                    <span class="text-[10px] font-black italic text-tse_text">{{ session.duration_minutes }} min</span>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <span class="text-gray-500">💪</span>
-                                    <span class="text-white">{{ session.sets_count }} sets</span>
+                                    <span class="text-[10px] font-black italic text-tse_text">{{ session.sets_count }} séries</span>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <span class="text-gray-500">⚡</span>
-                                    <span class="text-secondary">{{ session.total_volume|floatformat:1 }} kg</span>
+                                    <span class="text-[10px] font-black italic text-tse_accent">{{ session.total_volume|floatformat:1 }} kg</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flex gap-3">
-                            <a href="{% url 'workout_detail' session.id %}" class="btn-secondary text-sm">
+                        <div class="flex gap-4">
+                            <a href="{% url 'workout_detail' session.id %}" class="bg-white border-2 border-gray-100 py-3 px-8 rounded-tse-pill text-[10px] font-black uppercase tracking-widest text-tse_muted hover:border-tse_accent transition-all">
                                 {% trans "Détails" %}
                             </a>
                         </div>
@@ -110,92 +107,90 @@
                 {% endfor %}
             </div>
             {% else %}
-            <div class="text-center py-12">
-                <div class="text-6xl mb-4">🏋️</div>
-                <p class="text-gray-400 text-lg mb-6">
+            <div class="text-center py-20 bg-gray-50 rounded-2xl border border-gray-100 border-dashed">
+                <div class="text-6xl mb-6">🧘</div>
+                <p class="text-[10px] font-black uppercase tracking-widest text-tse_muted mb-8">
                     {% trans "Aucune séance enregistrée pour le moment" %}
                 </p>
-                <a href="{% url 'start_workout' %}" class="btn-primary">
-                    {% trans "Démarrer ta première séance" %} 🚀
+                <a href="{% url 'start_workout' %}" class="btn-tse py-4 px-12 text-[10px]">
+                    {% trans "Commencer maintenant" %}
                 </a>
             </div>
             {% endif %}
         </div>
     </div>
+
+    {% if chart_dates %}
+        <!-- Data Injection -->
+        {{ chart_dates|json_script:"chart-dates-data" }}
+        {{ chart_volume|json_script:"chart-volume-data" }}
+        {{ chart_duration|json_script:"chart-duration-data" }}
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+    const chartColors = {
+        primary: '#111111',
+        secondary: '#facc15',
+        accent: '#facc15',
+        muted: '#666666'
+    };
+
+    const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { grid: { color: '#f3f4f6' }, ticks: { color: '#666666', font: { weight: 'bold' } } },
+            x: { grid: { display: false }, ticks: { color: '#666666', font: { weight: 'bold' } } }
+        }
+    };
+
+    // Data retrieval helper
+    const getJsonData = (id) => JSON.parse(document.getElementById(id).textContent);
+
+    // Volume Chart
+    const volumeCtx = document.getElementById('volumeChart');
+    if (volumeCtx) {
+        new Chart(volumeCtx.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: getJsonData('chart-dates-data'),
+                datasets: [{
+                    label: '{% trans "Volume (kg)" %}',
+                    data: getJsonData('chart-volume-data'),
+                    backgroundColor: chartColors.secondary,
+                    borderRadius: 4
+                }]
+            },
+            options: commonOptions
+        });
+    }
+
+    // Duration Chart
+    const durationCtx = document.getElementById('durationChart');
+    if (durationCtx) {
+        new Chart(durationCtx.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: getJsonData('chart-dates-data'),
+                datasets: [{
+                    label: '{% trans "Durée (min)" %}',
+                    data: getJsonData('chart-duration-data'),
+                    borderColor: chartColors.primary,
+                    backgroundColor: 'rgba(17, 17, 17, 0.05)',
+                    borderWidth: 4,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: chartColors.secondary,
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6
+                }]
+            },
+            options: commonOptions
+        });
+    }
+    </script>
+    {% endif %}
 </div>
-
-{% if chart_dates %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script>
-// Volume Chart
-const volumeCtx = document.getElementById('volumeChart').getContext('2d');
-new Chart(volumeCtx, {
-    type: 'bar',
-    data: {
-        labels: {{ chart_dates|safe }},
-        datasets: [{
-            label: '{% trans "Volume (kg)" %}',
-            data: {{ chart_volume|safe }},
-            backgroundColor: 'rgba(6, 182, 212, 0.5)',
-            borderColor: 'rgba(6, 182, 212, 1)',
-            borderWidth: 2
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: true,
-        plugins: {
-            legend: { display: false }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                ticks: { color: '#9CA3AF' }
-            },
-            x: {
-                grid: { display: false },
-                ticks: { color: '#9CA3AF' }
-            }
-        }
-    }
-});
-
-// Duration Chart
-const durationCtx = document.getElementById('durationChart').getContext('2d');
-new Chart(durationCtx, {
-    type: 'line',
-    data: {
-        labels: {{ chart_dates|safe }},
-        datasets: [{
-            label: '{% trans "Durée (min)" %}',
-            data: {{ chart_duration|safe }},
-            backgroundColor: 'rgba(168, 85, 247, 0.2)',
-            borderColor: 'rgba(168, 85, 247, 1)',
-            borderWidth: 3,
-            fill: true,
-            tension: 0.4
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: true,
-        plugins: {
-            legend: { display: false }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                ticks: { color: '#9CA3AF' }
-            },
-            x: {
-                grid: { display: false },
-                ticks: { color: '#9CA3AF' }
-            }
-        }
-    }
-});
-</script>
-{% endif %}
 {% endblock %}

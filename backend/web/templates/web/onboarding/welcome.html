@@ -4,38 +4,38 @@
 {% block title %}{% trans "Bienvenue" %} - FitWell{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-void flex items-center justify-center px-4">
+<div class="min-h-screen bg-white flex items-center justify-center px-6 lg:px-8">
     <div class="max-w-2xl w-full">
-        <div class="card-glass border-neon-primary text-center py-16 px-8">
-            <div class="text-6xl mb-6">🚀</div>
-            <h1 class="text-5xl font-display text-white mb-6">
-                {% trans "Bienvenue sur FitWell" %}
+        <div class="bg-gray-50 rounded-tse-card border border-gray-100 text-center py-20 px-10 shadow-soft">
+            <div class="text-6xl mb-10">✨</div>
+            <h1 class="text-5xl md:text-6xl font-black uppercase tracking-tighter italic text-tse_text mb-6 leading-none">
+                {% trans "Prêt pour ta" %} <span class="text-tse_accent">{% trans "Métamorphose" %}</span> ?
             </h1>
-            <p class="text-gray-400 text-lg mb-8 leading-relaxed">
-                {% trans "Nous allons configurer ton profil en 4 étapes rapides pour créer ton plan d'entraînement personnalisé." %}
+            <p class="text-tse_muted text-sm font-bold uppercase tracking-widest mb-12 leading-relaxed">
+                {% trans "Oublie les régimes, adopte un style de vie. Configurons ton accès exclusif en quelques secondes." %}
             </p>
             
-            <div class="grid grid-cols-4 gap-4 mb-12">
-                <div class="bg-primary/20 border border-primary rounded-lg p-4">
-                    <div class="text-primary text-2xl mb-2">1</div>
-                    <div class="text-white text-sm">{% trans "Objectif" %}</div>
+            <div class="grid grid-cols-4 gap-4 mb-16">
+                <div class="bg-tse_accent rounded-2xl p-4 shadow-soft">
+                    <div class="text-tse_text text-xl font-black italic mb-1">1</div>
+                    <div class="text-tse_text text-[8px] font-black uppercase tracking-widest">{% trans "Objectif" %}</div>
                 </div>
-                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4">
-                    <div class="text-gray-500 text-2xl mb-2">2</div>
-                    <div class="text-gray-500 text-sm">{% trans "Niveau" %}</div>
+                <div class="bg-white border border-gray-100 rounded-2xl p-4">
+                    <div class="text-gray-300 text-xl font-black italic mb-1">2</div>
+                    <div class="text-gray-300 text-[8px] font-black uppercase tracking-widest">{% trans "Niveau" %}</div>
                 </div>
-                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4">
-                    <div class="text-gray-500 text-2xl mb-2">3</div>
-                    <div class="text-gray-500 text-sm">{% trans "Données" %}</div>
+                <div class="bg-white border border-gray-100 rounded-2xl p-4">
+                    <div class="text-gray-300 text-xl font-black italic mb-1">3</div>
+                    <div class="text-gray-300 text-[8px] font-black uppercase tracking-widest">{% trans "Données" %}</div>
                 </div>
-                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4">
-                    <div class="text-gray-500 text-2xl mb-2">4</div>
-                    <div class="text-gray-500 text-sm">{% trans "Plan" %}</div>
+                <div class="bg-white border border-gray-100 rounded-2xl p-4">
+                    <div class="text-gray-300 text-xl font-black italic mb-1">4</div>
+                    <div class="text-gray-300 text-[8px] font-black uppercase tracking-widest">{% trans "Prêt" %}</div>
                 </div>
             </div>
 
-            <a href="{% url 'onboarding_step1' %}" class="btn-primary text-xl px-12 py-4 inline-block">
-                {% trans "Commencer" %} →
+            <a href="{% url 'onboarding_step1' %}" class="btn-tse py-5 px-16 text-sm inline-block">
+                {% trans "Commencer l'expérience" %}
             </a>
         </div>
     </div>

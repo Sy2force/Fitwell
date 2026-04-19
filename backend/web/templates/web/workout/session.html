@@ -4,64 +4,53 @@
 
 {% block title %}{% trans "Séance en Cours" %} - FitWell{% endblock %}
 
-{% block extra_head %}
-<style>
-    .timer-display {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 3rem;
-        font-weight: bold;
-        text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
-    }
-</style>
-{% endblock %}
-
 {% block content %}
-<div class="min-h-screen bg-void py-8 px-4">
+<div class="bg-white min-h-screen pt-32 pb-20 px-6 lg:px-8">
     <div class="max-w-6xl mx-auto">
         <!-- Header with Timer -->
-        <div class="card-glass border-neon-primary mb-8">
+        <div class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft mb-12">
             <div class="text-center">
-                <h1 class="text-3xl font-display text-white mb-4">
-                    {% trans "Séance en Cours" %} 🔥
+                <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter italic text-tse_text mb-6">
+                    {% trans "Studio" %} <span class="text-tse_accent">Live</span>
                 </h1>
                 
                 <!-- Timer -->
-                <div class="timer-display text-primary mb-4" id="sessionTimer">
+                <div class="text-6xl md:text-8xl font-black italic text-tse_text tracking-tighter mb-8" id="sessionTimer">
                     00:00:00
                 </div>
                 
                 <!-- Quick Stats -->
-                <div class="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
-                    <div class="bg-gray-900 rounded-lg p-4">
-                        <div class="text-gray-400 text-sm mb-1">{% trans "Sets" %}</div>
-                        <div class="text-2xl font-bold text-white" id="totalSets">{{ total_sets }}</div>
+                <div class="grid grid-cols-3 gap-6 max-w-2xl mx-auto">
+                    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-soft">
+                        <div class="text-[8px] font-bold uppercase tracking-widest text-tse_muted mb-2">{% trans "Séries" %}</div>
+                        <div class="text-3xl font-black italic text-tse_text" id="totalSets">{{ total_sets }}</div>
                     </div>
-                    <div class="bg-gray-900 rounded-lg p-4">
-                        <div class="text-gray-400 text-sm mb-1">{% trans "Volume" %}</div>
-                        <div class="text-2xl font-bold text-secondary" id="totalVolume">0 kg</div>
+                    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-soft">
+                        <div class="text-[8px] font-bold uppercase tracking-widest text-tse_muted mb-2">{% trans "Volume" %}</div>
+                        <div class="text-3xl font-black italic text-tse_accent" id="totalVolume">0 kg</div>
                     </div>
-                    <div class="bg-gray-900 rounded-lg p-4">
-                        <div class="text-gray-400 text-sm mb-1">{% trans "XP Estimé" %}</div>
-                        <div class="text-2xl font-bold text-energy" id="estimatedXP">50</div>
+                    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-soft">
+                        <div class="text-[8px] font-bold uppercase tracking-widest text-tse_muted mb-2">{% trans "Énergie" %}</div>
+                        <div class="text-3xl font-black italic text-tse_text" id="estimatedXP">50</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <!-- Add Set Form -->
-            <div class="card-glass border-neon-secondary">
-                <h2 class="text-2xl font-display text-white mb-6">
-                    {% trans "Ajouter un Set" %}
+            <div class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft">
+                <h2 class="text-2xl font-black uppercase tracking-tighter italic text-tse_text mb-10">
+                    {% trans "Nouvelle Série" %}
                 </h2>
                 
-                <form id="addSetForm" class="space-y-4">
+                <form id="addSetForm" class="space-y-6">
                     {% csrf_token %}
                     
                     <div>
-                        <label class="block text-white font-semibold mb-2">{% trans "Exercice" %}</label>
-                        <select name="exercise_id" required class="w-full bg-gray-900 text-white border border-gray-700 rounded-lg px-4 py-3 focus:border-primary focus:outline-none">
-                            <option value="">{% trans "Sélectionner un exercice" %}</option>
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-tse_muted mb-3">{% trans "Ton Mouvement" %}</label>
+                        <select name="exercise_id" required class="w-full bg-white border-gray-100 rounded-2xl p-4 text-tse_text font-bold focus:border-tse_accent focus:ring-0 transition-all appearance-none">
+                            <option value="">{% trans "Choisir un mouvement" %}</option>
                             {% regroup exercises by muscle_group as muscle_groups %}
                             {% for group in muscle_groups %}
                                 <optgroup label="{{ group.grouper|capfirst }}">
@@ -73,62 +62,62 @@
                         </select>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-white font-semibold mb-2">{% trans "Répétitions" %}</label>
-                            <input type="number" name="reps" required min="1" class="w-full bg-gray-900 text-white border border-gray-700 rounded-lg px-4 py-3 focus:border-primary focus:outline-none" placeholder="12">
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-tse_muted mb-3">{% trans "Répétitions" %}</label>
+                            <input type="number" name="reps" required min="1" class="w-full bg-white border-gray-100 rounded-2xl p-4 text-tse_text font-bold focus:border-tse_accent focus:ring-0 transition-all" placeholder="12">
                         </div>
                         <div>
-                            <label class="block text-white font-semibold mb-2">{% trans "Poids (kg)" %}</label>
-                            <input type="number" name="weight" required min="0" step="0.5" class="w-full bg-gray-900 text-white border border-gray-700 rounded-lg px-4 py-3 focus:border-primary focus:outline-none" placeholder="50">
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-tse_muted mb-3">{% trans "Charge (kg)" %}</label>
+                            <input type="number" name="weight" required min="0" step="0.5" class="w-full bg-white border-gray-100 rounded-2xl p-4 text-tse_text font-bold focus:border-tse_accent focus:ring-0 transition-all" placeholder="50">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-white font-semibold mb-2">{% trans "Repos (secondes)" %}</label>
-                        <input type="number" name="rest_seconds" value="60" min="0" class="w-full bg-gray-900 text-white border border-gray-700 rounded-lg px-4 py-3 focus:border-primary focus:outline-none">
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-tse_muted mb-3">{% trans "Repos (sec)" %}</label>
+                        <input type="number" name="rest_seconds" value="60" min="0" class="w-full bg-white border-gray-100 rounded-2xl p-4 text-tse_text font-bold focus:border-tse_accent focus:ring-0 transition-all">
                     </div>
 
-                    <button type="submit" class="btn-primary w-full">
-                        {% trans "Ajouter le Set" %} ✅
+                    <button type="submit" class="btn-tse w-full py-5 text-sm">
+                        {% trans "Valider la série" %}
                     </button>
                 </form>
 
-                <!-- Rest Timer (appears after adding set) -->
-                <div id="restTimer" class="hidden mt-6 p-6 bg-gradient-radial-energy rounded-lg text-center">
-                    <div class="text-white text-sm mb-2">{% trans "Repos" %}</div>
-                    <div class="text-4xl font-mono font-bold text-white" id="restCountdown">60</div>
-                    <button onclick="skipRest()" class="mt-4 text-sm text-gray-300 hover:text-white">
+                <!-- Rest Timer -->
+                <div id="restTimer" class="hidden mt-10 p-10 bg-tse_accent rounded-2xl text-center shadow-soft">
+                    <div class="text-tse_text text-[10px] font-black uppercase tracking-widest mb-4">{% trans "Récupération" %}</div>
+                    <div class="text-6xl font-black italic text-tse_text tracking-tighter" id="restCountdown">60</div>
+                    <button onclick="skipRest()" class="mt-6 text-[10px] font-black uppercase tracking-widest text-tse_text/60 hover:text-tse_text transition-colors">
                         {% trans "Passer" %} →
                     </button>
                 </div>
             </div>
 
             <!-- Current Session Sets -->
-            <div class="card-glass border-neon-primary">
-                <h2 class="text-2xl font-display text-white mb-6">
-                    {% trans "Sets Effectués" %}
+            <div class="bg-white rounded-tse-card p-10 border border-gray-100 shadow-soft">
+                <h2 class="text-2xl font-black uppercase tracking-tighter italic text-tse_text mb-10">
+                    {% trans "Séries Réalisées" %}
                 </h2>
                 
-                <div id="setsList" class="space-y-4 max-h-96 overflow-y-auto">
+                <div id="setsList" class="space-y-6 max-h-[500px] overflow-y-auto pr-4 custom-scrollbar">
                     {% if sets_by_exercise %}
                         {% for exercise_name, sets in sets_by_exercise.items %}
-                        <div class="bg-gray-900 rounded-lg p-4">
-                            <h3 class="text-white font-semibold mb-3">{{ exercise_name }}</h3>
-                            <div class="space-y-2">
+                        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-50">
+                            <h3 class="text-sm font-black uppercase tracking-tighter italic text-tse_text mb-4">{{ exercise_name }}</h3>
+                            <div class="space-y-3">
                                 {% for set in sets %}
-                                <div class="flex justify-between items-center text-sm">
-                                    <span class="text-gray-400">Set {{ set.set_number }}</span>
-                                    <span class="text-white font-mono">{{ set.reps }} reps × {{ set.weight }} kg</span>
-                                    <span class="text-secondary">{{ set.volume|floatformat:1 }} kg</span>
+                                <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-gray-50">
+                                    <span class="text-[8px] font-bold uppercase tracking-widest text-tse_muted">{% trans "Série" %} {{ set.set_number }}</span>
+                                    <span class="text-xs font-black italic text-tse_text">{{ set.reps }} × {{ set.weight }}kg</span>
+                                    <span class="text-[10px] font-black italic text-tse_accent">{{ set.volume|floatformat:1 }}kg</span>
                                 </div>
                                 {% endfor %}
                             </div>
                         </div>
                         {% endfor %}
                     {% else %}
-                        <div class="text-center text-gray-500 py-8">
-                            {% trans "Aucun set pour le moment. Commence maintenant !" %}
+                        <div class="text-center py-20 text-gray-300">
+                            <p class="text-[10px] font-black uppercase tracking-widest">{% trans "Ta progression commence ici" %}</p>
                         </div>
                     {% endif %}
                 </div>
@@ -136,9 +125,9 @@
         </div>
 
         <!-- Complete Session Button -->
-        <div class="mt-8 text-center">
-            <button onclick="completeSession()" class="btn-success text-xl px-12 py-4">
-                {% trans "Terminer la Séance" %} 🎉
+        <div class="mt-16 text-center">
+            <button onclick="completeSession()" class="btn-tse py-6 px-20 text-lg">
+                {% trans "Finaliser ma Performance" %}
             </button>
         </div>
     </div>
@@ -204,10 +193,10 @@ document.getElementById('addSetForm').addEventListener('submit', async (e) => {
             startRestTimer(data.set.rest_seconds);
             
             // Success feedback
-            showNotification('✅ Set ajouté !', 'success');
+            showNotification('✅ {% trans "Série ajoutée !" %}', 'success');
         }
     } catch (error) {
-        showNotification('❌ Erreur lors de l\'ajout du set', 'error');
+        showNotification('❌ {% trans "Erreur lors de l\'ajout de la série" %}', 'error');
     }
 });
 
@@ -273,7 +262,7 @@ async function completeSession() {
         
         if (data.status === 'success') {
             clearInterval(timerInterval);
-            alert(`${data.message}\n\n💪 ${data.total_sets} sets\n⚡ ${data.total_volume} kg\n⏱️ ${data.duration_minutes} min\n🎯 +${data.xp_earned} XP`);
+            // Redirection vers le dashboard après succès
             window.location.href = data.redirect_url;
         }
     } catch (error) {

@@ -131,7 +131,7 @@ def article_detail(request, slug):
             comment.article = article
             comment.author = request.user
             comment.save()
-            messages.success(request, _("Commentaire ajouté."))
+            messages.success(request, _("Ton avis a été partagé ! ✨"))
             return redirect('article_detail', slug=slug)
     else:
         form = CommentForm()
@@ -165,10 +165,10 @@ def delete_comment(request, comment_id):
     if request.user == comment.author:
         article_slug = comment.article.slug
         comment.delete()
-        messages.success(request, _("Commentaire supprimé."))
+        messages.success(request, _("Ton commentaire a été retiré."))
         return redirect('article_detail', slug=article_slug)
     else:
-        messages.error(request, _("Vous n'êtes pas autorisé à supprimer ce commentaire."))
+        messages.error(request, _("Tu n'as pas l'autorisation de retirer ce commentaire."))
         return redirect('article_detail', slug=comment.article.slug)
 
 @login_required(login_url='login')

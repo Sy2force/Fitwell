@@ -4,93 +4,59 @@
 {% block title %}{% trans "Blog - FitWell" %}{% endblock %}
 
 {% block content %}
-<div class="min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative bg-background transition-colors duration-300 overflow-hidden">
-    <!-- Background Grid Effect -->
-    <div class="absolute inset-0 z-0 opacity-10 pointer-events-none bg-grid bg-grid-primary">
-    </div>
-
-    <div class="max-w-7xl mx-auto relative z-10">
-        <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-6xl font-display font-bold italic text-white mb-4 uppercase tracking-wide">
-                {% trans "Renseignements" %} <span class="text-primary drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]">{% trans "Élite" %}</span>
+<div class="bg-white min-h-screen pt-32 pb-20 px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header TSE -->
+        <div class="mb-16">
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-4 leading-none">
+                {% trans "L'Art de" %} <span class="text-tse_accent">{% trans "Vivre" %}</span>
             </h1>
-            <p class="text-gray-400 font-mono text-sm tracking-widest uppercase flex justify-center items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                {% trans "Base de connaissances pour l'optimisation humaine" %}
+            <p class="text-sm font-bold uppercase tracking-widest text-tse_muted">
+                {% trans "Mindset, nutrition et secrets d'experts. Découvre les clés d'un épanouissement total." %}
             </p>
         </div>
 
-        <!-- Search & Filter -->
-        <div class="mb-12">
-            <form method="get" class="max-w-3xl mx-auto mb-8">
-                <div class="relative group">
-                    <input type="text" name="q" value="{{ search_query|default:'' }}" placeholder="{% trans 'Rechercher dans la base de données...' %}" 
-                           class="w-full bg-surface border border-white/10 text-white px-6 py-4 rounded-full focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all text-sm font-mono placeholder-gray-600 shadow-[0_0_15px_rgba(0,0,0,0.3)]">
-                    <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-primary transition-colors">
-                        🔍
-                    </button>
-                </div>
-            </form>
-
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="{% url 'blog_list' %}" class="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all font-mono border {% if not current_category %}bg-primary text-black border-primary shadow-[0_0_15px_rgba(59,130,246,0.4)]{% else %}bg-surface text-gray-400 border-white/10 hover:border-primary hover:text-white{% endif %}">
-                    {% trans "Tous" %}
-                </a>
-                {% for cat in categories %}
-                <a href="?category={{ cat.slug }}" class="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all font-mono border {% if current_category == cat.slug %}bg-primary text-black border-primary shadow-[0_0_15px_rgba(59,130,246,0.4)]{% else %}bg-surface text-gray-400 border-white/10 hover:border-primary hover:text-white{% endif %}">
-                    {{ cat.name }}
-                </a>
-                {% endfor %}
-            </div>
+        <!-- Filtres TSE -->
+        <div class="flex flex-wrap gap-4 mb-16">
+            <a href="{% url 'blog_list' %}" class="{% if not current_category %}bg-tse_accent{% else %}bg-gray-100{% endif %} px-6 py-2 rounded-tse-pill text-[10px] font-black uppercase tracking-widest transition-all">
+                {% trans "Tous" %}
+            </a>
+            {% for cat in categories %}
+            <a href="?category={{ cat.slug }}" class="{% if current_category == cat.slug %}bg-tse_accent{% else %}bg-gray-100{% endif %} px-6 py-2 rounded-tse-pill text-[10px] font-black uppercase tracking-widest transition-all">
+                {{ cat.name }}
+            </a>
+            {% endfor %}
         </div>
 
         {% if articles %}
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {% for article in articles %}
-                <div class="group relative bg-surface border border-white/10 hover:border-primary/50 transition-all duration-300 overflow-hidden rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(59,130,246,0.1)] flex flex-col h-full">
-                    <div class="relative h-56 overflow-hidden">
+                <a href="{% url 'article_detail' article.slug %}" class="group block">
+                    <div class="card-overlay aspect-[4/5] mb-6 shadow-soft group-hover:transform group-hover:scale-[1.02] transition-all duration-500">
                         <img src="{% if article.image %}{{ article.image }}{% else %}https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop{% endif %}" 
                              alt="{{ article.title }}" 
-                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100">
-                        <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-90"></div>
-                        <div class="absolute top-4 left-4">
-                            <span class="px-3 py-1 bg-black/80 backdrop-blur-sm border border-primary/30 text-primary text-[10px] uppercase tracking-widest font-bold rounded font-mono">
+                             class="w-full h-full object-cover">
+                        
+                        <div class="absolute bottom-8 left-8 right-8 z-10">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-tse_accent mb-2 block">
                                 {{ article.category.name }}
                             </span>
+                            <h3 class="text-2xl font-black uppercase tracking-tighter italic text-white leading-tight">
+                                {{ article.title }}
+                            </h3>
                         </div>
                     </div>
-                    
-                    <div class="p-6 flex-grow flex flex-col">
-                        <div class="flex items-center justify-between text-[10px] text-gray-500 mb-4 font-mono uppercase tracking-wider border-b border-white/5 pb-3">
-                            <div class="flex items-center gap-3">
-                                <span>{{ article.created_at|date:"d M Y" }}</span>
-                                <span class="flex items-center gap-1"><span class="text-accent">♥</span> {{ article.likes_count }}</span>
-                                <span class="flex items-center gap-1"><span class="text-primary">💬</span> {{ article.comments_count }}</span>
-                            </div>
-                            <span class="text-white">{{ article.author.username }}</span>
-                        </div>
-                        
-                        <h3 class="text-xl font-display font-bold mb-3 leading-tight text-white group-hover:text-primary transition-colors italic uppercase">
-                            {{ article.title }}
-                        </h3>
-                        
-                        <p class="text-gray-400 text-xs mb-6 line-clamp-3 leading-relaxed font-sans border-l-2 border-white/10 pl-3 group-hover:border-primary/50 transition-colors">
-                            {{ article.content|truncatechars:150 }}
+                    <div class="px-2">
+                        <p class="text-xs font-bold uppercase tracking-widest text-tse_muted">
+                            {{ article.created_at|date:"d M Y" }} • {{ article.author.username }}
                         </p>
-                        
-                        <div class="flex items-center justify-end pt-4 mt-auto border-t border-white/5">
-                            <a href="{% url 'article_detail' article.slug %}" class="flex items-center text-primary text-[10px] font-bold uppercase tracking-widest hover:translate-x-1 transition-transform group-hover:text-white font-mono">
-                                {% trans "Accéder aux données" %} <span class="ml-2">→</span>
-                            </a>
-                        </div>
                     </div>
-                </div>
+                </a>
                 {% endfor %}
             </div>
         {% else %}
-            <div class="text-center py-20 bg-surface/30 rounded-xl border border-dashed border-white/10">
-                <p class="text-gray-500 font-display italic text-2xl mb-2">{% trans "Aucun renseignement disponible." %}</p>
-                <p class="text-gray-600 text-sm uppercase tracking-widest font-mono">{% trans "Revenez plus tard, opérateur." %}</p>
+            <div class="text-center py-32 border-2 border-dashed border-gray-100 rounded-tse-card">
+                <p class="text-xl font-black uppercase tracking-tighter italic text-gray-300">{% trans "Aucun article pour le moment" %}</p>
             </div>
         {% endif %}
     </div>

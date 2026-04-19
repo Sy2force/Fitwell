@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-02 21:08+0000\n"
+"POT-Creation-Date: 2026-04-15 11:24+0000\n"
 "PO-Revision-Date: 2026-03-09 19:40+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,21 +17,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: api/models/gamification.py:87
+#: api/models/gamification.py:88
 msgid "Entraînement"
-msgstr ""
+msgstr "Training"
 
-#: api/models/gamification.py:88 web/templates/web/profile.html:117
+#: api/models/gamification.py:89 web/templates/web/profile.html:105
 msgid "Constance"
-msgstr ""
-
-#: api/models/gamification.py:89
-msgid "Social"
-msgstr ""
+msgstr "Consistency"
 
 #: api/models/gamification.py:90
+msgid "Social"
+msgstr "Social"
+
+#: api/models/gamification.py:91
 msgid "Jalon"
-msgstr ""
+msgstr "Milestone"
 
 #: api/models/nutrition.py:10
 msgid "Facile"
@@ -45,15 +45,15 @@ msgstr "Medium"
 msgid "Difficile"
 msgstr "Hard"
 
-#: api/models/nutrition.py:16 web/templates/web/planner.html:99
+#: api/models/nutrition.py:16
 msgid "Petit déjeuner"
 msgstr "Breakfast"
 
-#: api/models/nutrition.py:17 web/templates/web/planner.html:103
+#: api/models/nutrition.py:17
 msgid "Déjeuner"
 msgstr "Lunch"
 
-#: api/models/nutrition.py:18 web/templates/web/planner.html:107
+#: api/models/nutrition.py:18
 msgid "Dîner"
 msgstr "Dinner"
 
@@ -77,8 +77,8 @@ msgstr "Work & Career"
 msgid "Vie perso & loisirs"
 msgstr "Personal Life & Leisure"
 
-#: api/models/plan.py:16 web/templates/web/base.html:86
-#: web/templates/web/recipe_list.html:16
+#: api/models/plan.py:16 web/templates/web/base.html:51
+#: web/templates/web/base.html:96 web/templates/web/base.html:159
 msgid "Nutrition"
 msgstr "Nutrition"
 
@@ -86,7 +86,7 @@ msgstr "Nutrition"
 msgid "Faible"
 msgstr "Low"
 
-#: api/models/plan.py:21
+#: api/models/plan.py:21 web/templates/web/workout/history.html:37
 msgid "Moyenne"
 msgstr "Medium"
 
@@ -94,11 +94,11 @@ msgstr "Medium"
 msgid "Haute"
 msgstr "High"
 
-#: api/models/plan.py:47 web/templates/web/onboarding/step3_data.html:27
+#: api/models/plan.py:47 web/templates/web/onboarding/step3_data.html:28
 msgid "Homme"
 msgstr "Male"
 
-#: api/models/plan.py:48 web/templates/web/onboarding/step3_data.html:34
+#: api/models/plan.py:48 web/templates/web/onboarding/step3_data.html:35
 msgid "Femme"
 msgstr "Female"
 
@@ -110,7 +110,7 @@ msgstr "Weight Loss"
 msgid "Prise de masse"
 msgstr "Muscle Gain"
 
-#: api/models/plan.py:54 web/templates/web/onboarding/step1_goal.html:43
+#: api/models/plan.py:54
 msgid "Maintien"
 msgstr "Maintenance"
 
@@ -180,7 +180,7 @@ msgstr "Advanced"
 msgid "En cours"
 msgstr "Current Streak"
 
-#: api/models/workout.py:56 web/templates/web/workout/history.html:79
+#: api/models/workout.py:56
 #, fuzzy
 #| msgid "Terminé"
 msgid "Terminée"
@@ -255,11 +255,11 @@ msgstr "Mobility (10 min before session)"
 msgid "Cardio zone 2 (2x 30min)"
 msgstr "Zone 2 Cardio (2x 30min)"
 
-#: config/settings.py:214
+#: config/settings.py:225
 msgid "Français"
 msgstr "French"
 
-#: config/settings.py:215
+#: config/settings.py:226
 msgid "English"
 msgstr "English"
 
@@ -271,55 +271,54 @@ msgstr "Notes on the day..."
 msgid "Eau (L)"
 msgstr "Water (L)"
 
-#: web/forms.py:23 web/templates/web/dashboard.html:176
+#: web/forms.py:23 web/templates/web/dashboard.html:190
 msgid "Sommeil (h)"
 msgstr "Sleep (h)"
 
-#: web/forms.py:24 web/templates/web/dashboard.html:177
+#: web/forms.py:24 web/templates/web/dashboard.html:191
 msgid "Humeur (1-10)"
 msgstr "Mood (1-10)"
 
-#: web/forms.py:25 web/templates/web/analytics.html:123
-#: web/templates/web/dashboard.html:175
-#: web/templates/web/onboarding/step3_data.html:52
-#: web/templates/web/planner.html:212 web/templates/web/tools.html:33
-#: web/templates/web/tools.html:54 web/templates/web/workout/session.html:82
+#: web/forms.py:25 web/templates/web/dashboard.html:189
+#: web/templates/web/planner.html:180 web/templates/web/tools.html:33
 msgid "Poids (kg)"
 msgstr "Weight (kg)"
 
-#: web/forms.py:26 web/templates/web/dashboard.html:41
+#: web/forms.py:26
 msgid "Journal de bord"
 msgstr "Logbook"
 
 #: web/forms.py:44
-msgid "Ex: Séance Pecs, Réunion Projet X"
+#, fuzzy
+#| msgid "Ex: Séance Pecs, Réunion Projet X"
+msgid "Ex: Séance Fitness, Routine Matinale"
 msgstr "Ex: Chest Session, Project X Meeting"
 
-#: web/forms.py:46 web/templates/web/custom_planner.html:89
+#: web/forms.py:46 web/templates/web/custom_planner.html:79
 msgid "Lundi"
 msgstr "Monday"
 
-#: web/forms.py:47 web/templates/web/custom_planner.html:90
+#: web/forms.py:47 web/templates/web/custom_planner.html:80
 msgid "Mardi"
 msgstr "Tuesday"
 
-#: web/forms.py:48 web/templates/web/custom_planner.html:91
+#: web/forms.py:48 web/templates/web/custom_planner.html:81
 msgid "Mercredi"
 msgstr "Wednesday"
 
-#: web/forms.py:49 web/templates/web/custom_planner.html:92
+#: web/forms.py:49 web/templates/web/custom_planner.html:82
 msgid "Jeudi"
 msgstr "Thursday"
 
-#: web/forms.py:50 web/templates/web/custom_planner.html:93
+#: web/forms.py:50 web/templates/web/custom_planner.html:83
 msgid "Vendredi"
 msgstr "Friday"
 
-#: web/forms.py:51 web/templates/web/custom_planner.html:94
+#: web/forms.py:51 web/templates/web/custom_planner.html:84
 msgid "Samedi"
 msgstr "Saturday"
 
-#: web/forms.py:52 web/templates/web/custom_planner.html:95
+#: web/forms.py:52 web/templates/web/custom_planner.html:85
 msgid "Dimanche"
 msgstr "Sunday"
 
@@ -343,37 +342,36 @@ msgstr "Start"
 msgid "Fin"
 msgstr "End"
 
-#: web/forms.py:63
+#: web/forms.py:63 web/templates/web/home.html:114
 msgid "Priorité"
 msgstr "Priority"
 
 #: web/forms.py:88
-msgid "Nom d'utilisateur"
-msgstr "Username"
+msgid "Ton nom"
+msgstr "Your name"
 
-#: web/forms.py:90
-msgid "adresse@email.com"
-msgstr "address@email.com"
-
-#: web/forms.py:102
-msgid "Nom d'utilisateur / Email"
-msgstr "Username / Email"
-
-#: web/forms.py:103
-msgid "Mot de passe"
-msgstr "Password"
-
-#: web/forms.py:114 web/forms.py:203
-msgid "votre@email.com"
+#: web/forms.py:90 web/forms.py:114 web/forms.py:203
+#, fuzzy
+#| msgid "votre@email.com"
+msgid "ton@email.com"
 msgstr "your@email.com"
 
-#: web/forms.py:137 web/templates/web/onboarding/step3_data.html:42
-#: web/templates/web/planner.html:191
+#: web/forms.py:102
+msgid "Nom ou Email"
+msgstr "Name or Email"
+
+#: web/forms.py:103
+#, fuzzy
+#| msgid "Mot de passe"
+msgid "Ton mot de passe"
+msgstr "Password"
+
+#: web/forms.py:137 web/templates/web/onboarding/step3_data.html:43
+#: web/templates/web/planner.html:168
 msgid "Âge"
 msgstr "Age"
 
-#: web/forms.py:138 web/templates/web/onboarding/step3_data.html:21
-#: web/templates/web/planner.html:198
+#: web/forms.py:138 web/templates/web/planner.html:172
 msgid "Genre"
 msgstr "Gender"
 
@@ -381,17 +379,17 @@ msgstr "Gender"
 msgid "Taille"
 msgstr "Height"
 
-#: web/forms.py:140 web/templates/web/workout/detail.html:106
+#: web/forms.py:140
 msgid "Poids"
 msgstr "Weight"
 
 #: web/forms.py:141 web/templates/web/onboarding/step1_goal.html:4
 #: web/templates/web/onboarding/welcome.html:21
-#: web/templates/web/planner.html:49 web/templates/web/planner.html:219
+#: web/templates/web/planner.html:48
 msgid "Objectif"
 msgstr "Goal"
 
-#: web/forms.py:142 web/templates/web/planner.html:226
+#: web/forms.py:142 web/templates/web/tools.html:58
 msgid "Niveau d'activité"
 msgstr "Activity Level"
 
@@ -407,8 +405,10 @@ msgstr "Weight must be greater than 0."
 msgid "L'âge doit être supérieur à 0."
 msgstr "Age must be greater than 0."
 
-#: web/forms.py:186
-msgid "Partagez votre analyse..."
+#: web/forms.py:186 web/templates/web/article_detail.html:105
+#, fuzzy
+#| msgid "Partagez votre analyse..."
+msgid "Partage ton avis..."
 msgstr "Share your analysis..."
 
 #: web/forms.py:190
@@ -416,11 +416,15 @@ msgid "Votre commentaire"
 msgstr "Your Comment"
 
 #: web/forms.py:208
-msgid "Parlez-nous de vos objectifs..."
+#, fuzzy
+#| msgid "Parlez-nous de vos objectifs..."
+msgid "Parle-nous de tes objectifs..."
 msgstr "Tell us about your goals..."
 
 #: web/forms.py:212
-msgid "URL de votre image"
+#, fuzzy
+#| msgid "URL de votre image"
+msgid "URL de ton image"
 msgstr "Your image URL"
 
 #: web/forms.py:216
@@ -436,8 +440,8 @@ msgid "Avatar (URL)"
 msgstr "Avatar (URL)"
 
 #: web/forms.py:240
-msgid "Sélectionnez vos exercices"
-msgstr "Select your exercises"
+msgid "Choisis tes mouvements"
+msgstr "Choose your movements"
 
 #: web/forms.py:246
 msgid "Durée effort (sec)"
@@ -448,357 +452,314 @@ msgid "Durée repos (sec)"
 msgstr "Rest duration (sec)"
 
 #: web/templates/404.html:4
-msgid "404 - Zone inconnue"
-msgstr "404 - Unknown Zone"
+msgid "Page Introuvable"
+msgstr "Page Not Found"
 
-#: web/templates/404.html:18
-msgid "Signal perdu"
-msgstr "Signal Lost"
+#: web/templates/404.html:17
+msgid "Moment d'évasion"
+msgstr "Moment of Escape"
 
 #: web/templates/404.html:21
-msgid "L'URL demandée n'existe pas dans le protocole. Recalibrage nécessaire."
+msgid ""
+"La page que tu cherches a pris un autre chemin. Repartons du bon pied pour "
+"ton prochain mouvement."
 msgstr ""
-"The requested URL does not exist in the protocol. Recalibration required."
 
-#: web/templates/404.html:25 web/templates/500.html:25
-msgid "Retour à la base"
+#: web/templates/404.html:25
+#, fuzzy
+#| msgid "Retour à la base"
+msgid "Retour à l'essentiel"
 msgstr "Return to Base"
 
 #: web/templates/500.html:4
 msgid "500 - Erreur système"
 msgstr "500 - System Error"
 
-#: web/templates/500.html:18
-msgid "Échec critique"
-msgstr ""
+#: web/templates/500.html:17
+msgid "Pause inattendue"
+msgstr "Unexpected Pause"
 
 #: web/templates/500.html:21
 msgid ""
-"Une erreur interne a compromis le système. Nos ingénieurs sont sur le "
-"problème."
+"Une petite erreur de parcours. Notre équipe travaille à rétablir "
+"l'équilibre. Merci de ta patience."
 msgstr ""
-"An internal error has compromised the system. Our engineers are on the "
-"problem."
 
-#: web/templates/web/analytics.html:5 web/templates/web/base.html:73
-msgid "Analytics"
-msgstr ""
+#: web/templates/500.html:25 web/views/workout.py:120
+msgid "Retour au calme"
+msgstr "Cooldown"
+
+#: web/templates/web/analytics.html:5
+#, fuzzy
+#| msgid "Connexion - FitWell"
+msgid "Mon Évolution - FitWell"
+msgstr "Login - FitWell"
+
+#: web/templates/web/analytics.html:13 web/templates/web/profile.html:17
+msgid "Mon"
+msgstr "My"
 
 #: web/templates/web/analytics.html:13
-msgid "Analytics & Progression"
-msgstr ""
+msgid "Héritage"
+msgstr "Legacy"
 
 #: web/templates/web/analytics.html:16
-msgid "Analyse complète de tes performances"
-msgstr ""
+msgid "Analyse ton parcours et célèbre tes victoires quotidiennes"
+msgstr "Analyze your journey and celebrate your daily victories"
 
 #: web/templates/web/analytics.html:23
 #: web/templates/web/workout/history.html:23
-msgid "Total Séances"
-msgstr ""
+#, fuzzy
+#| msgid "Série en cours"
+msgid "Séances"
+msgstr "Current Streak"
 
-#: web/templates/web/analytics.html:27 web/templates/web/workout/detail.html:49
-#: web/templates/web/workout/detail.html:94
+#: web/templates/web/analytics.html:27 web/templates/web/analytics.html:75
+#: web/templates/web/workout/detail.html:50
+#: web/templates/web/workout/detail.html:96
+#: web/templates/web/workout/detail.html:109
 #: web/templates/web/workout/history.html:27
-msgid "Volume Total"
-msgstr ""
+#: web/templates/web/workout/session.html:29
+msgid "Volume"
+msgstr "Volume"
 
 #: web/templates/web/analytics.html:32
-#: web/templates/web/workout/history.html:31
+#: web/templates/web/workout/history.html:32
 #, fuzzy
 #| msgid "Temps total"
-msgid "Temps Total"
+msgid "Temps"
 msgstr "Total Time"
 
-#: web/templates/web/analytics.html:37
-#, fuzzy
-#| msgid "Niveau actuel"
-msgid "Streak Actuel"
-msgstr "Current Level"
+#: web/templates/web/analytics.html:37 web/templates/web/leaderboard.html:42
+#: web/templates/web/leaderboard.html:92 web/templates/web/profile.html:41
+msgid "Régularité"
+msgstr "Consistency"
 
-#: web/templates/web/analytics.html:46
-#, fuzzy
-#| msgid "Évolution du poids"
-msgid "Évolution du Poids"
-msgstr "Weight Evolution"
+#: web/templates/web/analytics.html:48 web/templates/web/dashboard.html:162
+msgid "Mon poids"
+msgstr "My Weight"
 
-#: web/templates/web/analytics.html:54
-msgid "Volume par Groupe Musculaire"
-msgstr ""
+#: web/templates/web/analytics.html:56
+msgid "Volume Musculaire"
+msgstr "Muscle Volume"
 
-#: web/templates/web/analytics.html:62
-msgid "Records Personnels (PR)"
-msgstr ""
+#: web/templates/web/analytics.html:65 web/templates/web/dashboard.html:155
+msgid "Mes Victoires"
+msgstr "My Victories"
 
-#: web/templates/web/analytics.html:68
+#: web/templates/web/analytics.html:71
 msgid "Max"
-msgstr ""
+msgstr "Max"
 
-#: web/templates/web/analytics.html:72
-msgid "Volume Max"
-msgstr ""
+#: web/templates/web/analytics.html:87
+msgid "Fréquence"
+msgstr "Frequency"
 
-#: web/templates/web/analytics.html:84
-msgid "Fréquence d'Entraînement"
-msgstr ""
+#: web/templates/web/analytics.html:95
+msgid "Mon Énergie"
+msgstr "My Energy"
 
-#: web/templates/web/analytics.html:89
-msgid "Consistency Score"
-msgstr ""
+#: web/templates/web/article_detail.html:13
+#, fuzzy
+#| msgid "Retour aux Renseignements"
+msgid "Retour aux conseils"
+msgstr "Back to Intel"
 
-#: web/templates/web/analytics.html:92
-msgid "Basé sur tes 30 derniers jours"
-msgstr ""
-
-#: web/templates/web/analytics.html:100
-msgid "Progression XP"
-msgstr ""
-
-#: web/templates/web/analytics.html:151
-#: web/templates/web/workout/history.html:137
-msgid "Volume (kg)"
-msgstr ""
-
-#: web/templates/web/article_detail.html:34
+#: web/templates/web/article_detail.html:42
 msgid "Par"
 msgstr "By"
 
-#: web/templates/web/article_detail.html:35
-msgid "Contributeur Élite"
+#: web/templates/web/article_detail.html:43
+msgid "Coach & Expert Lifestyle"
+msgstr "Coach & Lifestyle Expert"
+
+#: web/templates/web/article_detail.html:71
+#, fuzzy
+#| msgid "Contributeur Élite"
+msgid "Continuer la lecture"
 msgstr "Elite Contributor"
 
-#: web/templates/web/article_detail.html:46
-msgid "Approuvé"
-msgstr "Approved"
+#: web/templates/web/article_detail.html:90
+msgid "Passe à l'action"
+msgstr "Take Action"
 
-#: web/templates/web/article_detail.html:46
-msgid "Approuver"
-msgstr "Approve"
-
-#: web/templates/web/article_detail.html:76
-msgid "Intel Similaire :"
-msgstr "Similar Intel:"
-
-#: web/templates/web/article_detail.html:104
-msgid "Transmission de Données"
-msgstr "Data Transmission"
-
-#: web/templates/web/article_detail.html:114
-msgid "Votre Analyse"
-msgstr "Your Analysis"
-
-#: web/templates/web/article_detail.html:123
-msgid "Transmettre"
-msgstr "Transmit"
-
-#: web/templates/web/article_detail.html:130
-msgid "Connectez-vous pour rejoindre le canal de communication."
-msgstr "Log in to join the comms channel."
-
-#: web/templates/web/article_detail.html:132
-msgid "Connexion Requise"
-msgstr "Login Required"
-
-#: web/templates/web/article_detail.html:155
-msgid "Supprimer"
-msgstr "Delete"
-
-#: web/templates/web/article_detail.html:168
-msgid "Aucune transmission pour le moment."
-msgstr "No transmission yet."
-
-#: web/templates/web/article_detail.html:176
-msgid "Retour aux Renseignements"
-msgstr "Back to Intel"
-
-#: web/templates/web/article_detail.html:184
-msgid "Lien copié !"
+#: web/templates/web/article_detail.html:91
+msgid ""
+"Ne te contente pas de lire. Applique ces conseils et commence ta "
+"transformation dès aujourd'hui avec nos programmes sur-mesure."
 msgstr ""
 
-#: web/templates/web/article_detail.html:185
-msgid "Confirmer la suppression du message ?"
-msgstr "Confirm message deletion?"
+#: web/templates/web/article_detail.html:92
+#: web/templates/web/exercise_library.html:69
+msgid "Rejoindre l'élite"
+msgstr "Join the Elite"
 
-#: web/templates/web/base.html:9
-msgid "Performance humaine"
-msgstr "Human Performance"
+#: web/templates/web/article_detail.html:98
+msgid "La Communauté"
+msgstr "The Community"
 
-#: web/templates/web/base.html:72 web/templates/web/base.html:176
-msgid "QG"
-msgstr ""
+#: web/templates/web/article_detail.html:108
+msgid "Publier"
+msgstr "Publish"
 
-#: web/templates/web/base.html:76 web/templates/web/base.html:179
-#: web/templates/web/base.html:271 web/templates/web/tools.html:15
-msgid "Outils"
-msgstr "Tools"
+#: web/templates/web/article_detail.html:113
+msgid "Connecte-toi pour participer"
+msgstr "Log in to participate"
 
-#: web/templates/web/base.html:80 web/templates/web/tools.html:15
-msgid "Intel"
-msgstr "Intel"
-
-#: web/templates/web/base.html:84 web/templates/web/base.html:180
-msgid "Blog"
-msgstr "Blog"
-
-#: web/templates/web/base.html:85 web/templates/web/base.html:181
-#: web/templates/web/home.html:34
-msgid "Exercices"
-msgstr "Exercises"
-
-#: web/templates/web/base.html:91 web/templates/web/base.html:184
-#: web/templates/web/planner.html:15 web/templates/web/profile.html:131
-msgid "Planificateur"
-msgstr "Planner"
-
-#: web/templates/web/base.html:92 web/templates/web/base.html:185
-#: web/templates/web/custom_planner.html:16
-msgid "Agenda"
-msgstr "Agenda"
-
-#: web/templates/web/base.html:93 web/templates/web/base.html:186
-msgid "Coach IA"
-msgstr "AI Coach"
-
-#: web/templates/web/base.html:125
-msgid "Niveau actuel"
-msgstr "Current Level"
-
-#: web/templates/web/base.html:129
-msgid "Points d'expérience"
-msgstr "Experience Points"
-
-#: web/templates/web/base.html:133
-msgid "Série en cours"
-msgstr "Current Streak"
-
-#: web/templates/web/base.html:149 web/templates/web/base.html:211
-msgid "Déconnexion"
-msgstr "Logout"
-
-#: web/templates/web/base.html:151 web/templates/web/base.html:215
-#: web/templates/web/register.html:70
+#: web/templates/web/article_detail.html:114 web/templates/web/base.html:64
+#: web/templates/web/base.html:105 web/templates/web/register.html:68
 msgid "Connexion"
 msgstr "Login"
 
-#: web/templates/web/base.html:152
+#: web/templates/web/article_detail.html:133
+msgid "Supprimer"
+msgstr "Delete"
+
+#: web/templates/web/article_detail.html:147
+msgid "Lien copié !"
+msgstr "Link copied!"
+
+#: web/templates/web/article_detail.html:148
+msgid "Confirmer la suppression du message ?"
+msgstr "Confirm message deletion?"
+
+#: web/templates/web/base.html:49 web/templates/web/base.html:94
+#: web/templates/web/base.html:157 web/templates/web/profile.html:94
+msgid "Lifestyle"
+msgstr "Lifestyle"
+
+#: web/templates/web/base.html:50 web/templates/web/base.html:95
+#: web/templates/web/base.html:158 web/templates/web/exercise_library.html:9
+#: web/templates/web/workout/session.html:14
+#: web/templates/web/workout/start.html:5
+#: web/templates/web/workout/start.html:13
+#: web/templates/web/workout_session.html:18
+#: web/templates/web/workout_setup.html:11
+msgid "Studio"
+msgstr "Studio"
+
+#: web/templates/web/base.html:52 web/templates/web/base.html:97
+#: web/templates/web/base.html:160
+#, fuzzy
+#| msgid "Planifier"
+msgid "Planning"
+msgstr "Plan"
+
+#: web/templates/web/base.html:53 web/templates/web/base.html:98
+#: web/templates/web/base.html:161
+#, fuzzy
+#| msgid "Commentaire ajouté."
+msgid "Communauté"
+msgstr "Comment added."
+
+#: web/templates/web/base.html:54 web/templates/web/base.html:99
+#: web/templates/web/tools.html:15
+msgid "Outils"
+msgstr "Tools"
+
+#: web/templates/web/base.html:61 web/templates/web/base.html:102
+msgid "Mon Espace"
+msgstr ""
+
+#: web/templates/web/base.html:62 web/templates/web/base.html:103
+msgid "Déconnexion"
+msgstr "Logout"
+
+#: web/templates/web/base.html:65
 msgid "Rejoindre"
 msgstr "Join"
 
-#: web/templates/web/base.html:187
-msgid "Profil"
-msgstr "Profile"
+#: web/templates/web/base.html:106 web/templates/web/home.html:117
+#, fuzzy
+#| msgid "Rejoindre l'élite"
+msgid "Rejoindre l'aventure"
+msgstr "Join the Elite"
 
-#: web/templates/web/base.html:263
+#: web/templates/web/base.html:151
 msgid ""
-"L'écosystème ultime pour l'optimisation de la performance humaine. "
-"Entraînement, nutrition et bio-hacking unifiés dans une interface élite."
-msgstr ""
-"The ultimate ecosystem for human performance optimization. Training, "
-"nutrition, and bio-hacking unified in an elite interface."
-
-#: web/templates/web/base.html:267
-msgid "Plateforme"
+"Ton compagnon quotidien pour une vie plus saine, plus forte et plus sereine."
 msgstr ""
 
-#: web/templates/web/base.html:269
-msgid "Accueil"
-msgstr "Home"
+#: web/templates/web/base.html:155
+#, fuzzy
+#| msgid "Nutrition"
+msgid "Navigation"
+msgstr "Nutrition"
 
-#: web/templates/web/base.html:270
-msgid "Intel (Blog)"
-msgstr ""
-
-#: web/templates/web/base.html:275 web/templates/web/legal.html:15
+#: web/templates/web/base.html:165
 msgid "Légal"
 msgstr "Legal"
 
-#: web/templates/web/base.html:277
+#: web/templates/web/base.html:167
 msgid "Confidentialité"
 msgstr "Privacy"
 
-#: web/templates/web/base.html:278
+#: web/templates/web/base.html:168
 msgid "Conditions"
 msgstr "Terms"
 
-#: web/templates/web/base.html:279
+#: web/templates/web/base.html:169
 msgid "Contact"
-msgstr ""
-
-#: web/templates/web/base.html:284
-msgid "TOUS DROITS RÉSERVÉS."
-msgstr ""
-
-#: web/templates/web/base.html:287
-#: web/templates/web/password_reset_email.html:13
-msgid "Systèmes opérationnels"
-msgstr "Operational Systems"
+msgstr "Contact"
 
 #: web/templates/web/blog_list.html:4
 msgid "Blog - FitWell"
 msgstr "Blog - FitWell"
 
-#: web/templates/web/blog_list.html:15
-msgid "Renseignements"
-msgstr "INTELLIGENCE"
+#: web/templates/web/blog_list.html:12
+msgid "L'Art de"
+msgstr "The Art of"
+
+#: web/templates/web/blog_list.html:12
+msgid "Vivre"
+msgstr "Living"
 
 #: web/templates/web/blog_list.html:15
-#: web/templates/web/onboarding/step2_level.html:66
-#: web/templates/web/planner.html:15
-msgid "Élite"
+msgid ""
+"Mindset, nutrition et secrets d'experts. Découvre les clés d'un "
+"épanouissement total."
 msgstr ""
 
-#: web/templates/web/blog_list.html:19
-msgid "Base de connaissances pour l'optimisation humaine"
-msgstr "Knowledge base for human optimization"
-
-#: web/templates/web/blog_list.html:27
-msgid "Rechercher dans la base de données..."
-msgstr "Search database..."
-
-#: web/templates/web/blog_list.html:37
-#: web/templates/web/exercise_library.html:27
+#: web/templates/web/blog_list.html:22
+#: web/templates/web/exercise_library.html:19
+#: web/templates/web/recipe_list.html:21
 msgid "Tous"
 msgstr "All"
 
-#: web/templates/web/blog_list.html:83
-msgid "Accéder aux données"
-msgstr "Access Data"
-
-#: web/templates/web/blog_list.html:92
-msgid "Aucun renseignement disponible."
-msgstr "No intelligence available."
-
-#: web/templates/web/blog_list.html:93
-msgid "Revenez plus tard, opérateur."
-msgstr "Check back later, operator."
+#: web/templates/web/blog_list.html:59
+#, fuzzy
+#| msgid "Aucune recette disponible pour le moment."
+msgid "Aucun article pour le moment"
+msgstr "No recipes available at the moment."
 
 #: web/templates/web/change_password.html:4
 msgid "Changer mot de passe - FitWell"
 msgstr "Change password - FitWell"
 
-#: web/templates/web/change_password.html:19
+#: web/templates/web/change_password.html:18
+#: web/templates/web/custom_planner.html:16 web/templates/web/dashboard.html:17
+#: web/templates/web/edit_profile.html:18 web/templates/web/planner.html:15
+msgid "Ma"
+msgstr "My"
+
+#: web/templates/web/change_password.html:18
 msgid "Sécurité"
-msgstr ""
+msgstr "Security"
 
-#: web/templates/web/change_password.html:19
-#: web/templates/web/password_reset_complete.html:14
-#: web/templates/web/password_reset_form.html:14
-msgid "Accès"
-msgstr ""
-
-#: web/templates/web/change_password.html:23
-msgid "Modification des identifiants"
-msgstr ""
+#: web/templates/web/change_password.html:22
+msgid "Modifie tes accès personnels"
+msgstr "Modify your personal access"
 
 #: web/templates/web/change_password.html:57
+#: web/templates/web/password_reset_confirm.html:48
 msgid "Confirmer"
-msgstr ""
+msgstr "Confirm"
 
-#: web/templates/web/change_password.html:60 web/templates/web/login.html:19
-#: web/templates/web/onboarding/step1_goal.html:51
-#: web/templates/web/onboarding/step2_level.html:76
-#: web/templates/web/onboarding/step3_data.html:58
-#: web/templates/web/workout/detail.html:24
+#: web/templates/web/change_password.html:60
+#: web/templates/web/onboarding/step1_goal.html:52
+#: web/templates/web/onboarding/step2_level.html:77
+#: web/templates/web/onboarding/step3_data.html:59
+#: web/templates/web/workout/detail.html:26
 msgid "Retour"
 msgstr "Back"
 
@@ -807,121 +768,140 @@ msgid "Mon agenda - FitWell"
 msgstr "My Agenda - FitWell"
 
 #: web/templates/web/custom_planner.html:16
-msgid "Mon"
-msgstr "My"
+msgid "Semaine"
+msgstr "Week"
 
 #: web/templates/web/custom_planner.html:20
-msgid "Organisez votre semaine. Dominez vos objectifs."
-msgstr "Organize your week. Dominate your goals."
+msgid "Organise ton ascension et maîtrise ton temps"
+msgstr "Organize your ascent and master your time"
 
 #: web/templates/web/custom_planner.html:29
-msgid "Ajouter une activité"
-msgstr "Add Activity"
+msgid "Nouvel Engagement"
+msgstr "New Commitment"
 
-#: web/templates/web/custom_planner.html:77
-msgid "Planifier"
-msgstr "Plan"
+#: web/templates/web/custom_planner.html:68
+msgid "Ancrer dans ma Semaine"
+msgstr "Anchor in my Week"
 
-#: web/templates/web/custom_planner.html:130
-msgid "Terminer"
-msgstr "Complete"
-
-#: web/templates/web/custom_planner.html:134
-#: web/templates/web/custom_planner.html:165
+#: web/templates/web/custom_planner.html:115
+#: web/templates/web/custom_planner.html:146
+#: web/templates/web/dashboard.html:136
 msgid "Fait"
 msgstr "Done"
 
-#: web/templates/web/custom_planner.html:137
-msgid "Supprimer cette activité ?"
-msgstr "Delete this activity?"
-
-#: web/templates/web/custom_planner.html:143
-msgid "Rien de prévu."
+#: web/templates/web/custom_planner.html:124
+#, fuzzy
+#| msgid "Rien de prévu."
+msgid "Rien de prévu"
 msgstr "Nothing planned."
 
-#: web/templates/web/custom_planner.html:158
-msgid "Continuez comme ça !"
+#: web/templates/web/custom_planner.html:139
+#, fuzzy
+#| msgid "Continuez comme ça !"
+msgid "Continue comme ça !"
 msgstr "Keep it up!"
 
 #: web/templates/web/dashboard.html:4
-msgid "Centre de commandement - FitWell"
-msgstr "Command center - FitWell"
+#, fuzzy
+#| msgid "Outils - FitWell"
+msgid "Ma Routine - FitWell"
+msgstr "Tools - FitWell"
 
 #: web/templates/web/dashboard.html:17
-msgid "Centre de"
-msgstr "Command"
-
-#: web/templates/web/dashboard.html:17
-msgid "commandement"
-msgstr "Center"
+msgid "Discipline"
+msgstr "Discipline"
 
 #: web/templates/web/dashboard.html:21
-msgid "Rapport quotidien & métriques vitales"
-msgstr "Daily Report & Vital Metrics"
+msgid "Ton carnet de bord vers une meilleure version de toi"
+msgstr "Your logbook to a better version of yourself"
 
 #: web/templates/web/dashboard.html:26
 #: web/templates/web/onboarding/step2_level.html:4
 #: web/templates/web/onboarding/welcome.html:25
-#: web/templates/web/profile.html:21
+#: web/templates/web/recipe_detail.html:27
 #, fuzzy
 #| msgid "Niveau actuel"
 msgid "Niveau"
 msgstr "Current Level"
 
-#: web/templates/web/dashboard.html:77
-msgid "Mettre à jour le rapport"
-msgstr "Update Report"
+#: web/templates/web/dashboard.html:39
+msgid "Ma journée"
+msgstr "My Day"
 
-#: web/templates/web/dashboard.html:86
-msgid "Moy. Eau (7j)"
-msgstr "Avg. Water (7d)"
-
-#: web/templates/web/dashboard.html:90
-msgid "Moy. Sommeil (7j)"
-msgstr "Avg. Sleep (7d)"
-
-#: web/templates/web/dashboard.html:101
-msgid "Opérations du jour"
-msgstr "Daily Operations"
-
-#: web/templates/web/dashboard.html:103
-msgid "Gérer l'agenda"
-msgstr "Manage Agenda"
-
-#: web/templates/web/dashboard.html:122
-msgid "Terminé"
-msgstr "Completed"
-
-#: web/templates/web/dashboard.html:124
-msgid "En attente"
-msgstr "Pending"
-
-#: web/templates/web/dashboard.html:130
-msgid "Aucune opération programmée pour aujourd'hui."
-msgstr "No operations scheduled for today."
-
-#: web/templates/web/dashboard.html:131
+#: web/templates/web/dashboard.html:64
 #, fuzzy
-#| msgid "Ajouter une activité"
-msgid "Créer une activité"
+#| msgid "Bras"
+msgid "Bas"
+msgstr "Arms"
+
+#: web/templates/web/dashboard.html:64
+#, fuzzy
+#| msgid "Haute"
+msgid "Haut"
+msgstr "High"
+
+#: web/templates/web/dashboard.html:75
+msgid "Enregistrer ma journée"
+msgstr "Save my day"
+
+#: web/templates/web/dashboard.html:84
+#, fuzzy
+#| msgid "Eau (L)"
+msgid "Eau (7j)"
+msgstr "Water (L)"
+
+#: web/templates/web/dashboard.html:88
+#, fuzzy
+#| msgid "Sommeil (h)"
+msgid "Sommeil (7j)"
+msgstr "Sleep (h)"
+
+#: web/templates/web/dashboard.html:98
+msgid "Mon Studio"
+msgstr "My Studio"
+
+#: web/templates/web/dashboard.html:100
+#, fuzzy
+#| msgid "Voir tout"
+msgid "Mon historique"
+msgstr "View All"
+
+#: web/templates/web/dashboard.html:104
+msgid "Prêt pour ton prochain mouvement ?"
+msgstr "Ready for your next move?"
+
+#: web/templates/web/dashboard.html:106
+msgid "Lancer mon Studio"
+msgstr "Launch my Studio"
+
+#: web/templates/web/dashboard.html:115
+#, fuzzy
+#| msgid "Renseignements"
+msgid "Mes Engagements"
+msgstr "INTELLIGENCE"
+
+#: web/templates/web/dashboard.html:117
+msgid "Optimiser mon temps"
+msgstr "Optimize my time"
+
+#: web/templates/web/dashboard.html:144
+#, fuzzy
+#| msgid "Rien de prévu."
+msgid "Rien de prévu pour aujourd'hui."
+msgstr "Nothing planned."
+
+#: web/templates/web/dashboard.html:145
+msgid "Ajouter une activité"
 msgstr "Add Activity"
 
-#: web/templates/web/dashboard.html:141
-msgid "Analyse biométrique"
-msgstr "Biometric Analysis"
+#: web/templates/web/dashboard.html:157
+msgid "Analyser mes progrès"
+msgstr "Analyze my progress"
 
-#: web/templates/web/dashboard.html:143
+#: web/templates/web/dashboard.html:168
 #, fuzzy
-#| msgid "Corps complet"
-msgid "Rapport complet"
-msgstr "Full Body"
-
-#: web/templates/web/dashboard.html:148
-msgid "Évolution du poids"
-msgstr "Weight Evolution"
-
-#: web/templates/web/dashboard.html:154
-msgid "Sommeil & humeur"
+#| msgid "Sommeil & humeur"
+msgid "Sommeil & Énergie"
 msgstr "Sleep & Mood"
 
 #: web/templates/web/edit_profile.html:4
@@ -930,412 +910,400 @@ msgstr "Sleep & Mood"
 msgid "Éditer profil - FitWell"
 msgstr "Tools - FitWell"
 
-#: web/templates/web/edit_profile.html:19
-msgid "Mise à jour"
-msgstr "Update"
+#: web/templates/web/edit_profile.html:18
+#, fuzzy
+#| msgid "Conditions"
+msgid "Configuration"
+msgstr "Terms"
 
-#: web/templates/web/edit_profile.html:19 web/templates/web/profile.html:17
-msgid "Dossier"
-msgstr "Dossier"
-
-#: web/templates/web/edit_profile.html:23
-msgid "Paramètres opérateur"
-msgstr "Operator parameters"
+#: web/templates/web/edit_profile.html:22
+msgid "Optimise ton expérience FitWell"
+msgstr "Optimize your FitWell experience"
 
 #: web/templates/web/edit_profile.html:57
-msgid "Sauvegarder"
+msgid "Enregistrer"
 msgstr "Save"
 
-#: web/templates/web/edit_profile.html:60 web/templates/web/planner.html:240
+#: web/templates/web/edit_profile.html:60
 msgid "Annuler"
 msgstr "Cancel"
 
 #: web/templates/web/edit_profile.html:66
 #, fuzzy
-#| msgid "Mot de passe"
-msgid "Modifier le mot de passe"
-msgstr "Password"
+#| msgid "Changer mot de passe - FitWell"
+msgid "Changer mon mot de passe"
+msgstr "Change password - FitWell"
 
-#: web/templates/web/exercise_library.html:4
-msgid "Bibliothèque d'exercices - FitWell"
-msgstr "Exercise Library - FitWell"
+#: web/templates/web/exercise_library.html:9
+#: web/templates/web/workout/start.html:13
+#: web/templates/web/workout_session.html:18
+#: web/templates/web/workout_setup.html:11
+msgid "Live"
+msgstr "Live"
 
-#: web/templates/web/exercise_library.html:16
-#: web/templates/web/workout/start.html:92
-msgid "Bibliothèque"
-msgstr "Library"
-
-#: web/templates/web/exercise_library.html:16
-#: web/templates/web/workout_session.html:22
-msgid "Tactique"
+#: web/templates/web/exercise_library.html:12
+msgid ""
+"L'art du mouvement. Des séances immersives pour sculpter ton corps et "
+"libérer ton esprit."
 msgstr ""
 
-#: web/templates/web/exercise_library.html:20
-msgid "Base de données des mouvements opérationnels"
-msgstr "Database of operational movements"
-
-#: web/templates/web/exercise_library.html:76
-msgid "Aucun exercice trouvé dans cette catégorie."
+#: web/templates/web/exercise_library.html:59
+#, fuzzy
+#| msgid "Aucun exercice trouvé dans cette catégorie."
+msgid "Aucun exercice trouvé"
 msgstr "No exercises found in this category."
 
-#: web/templates/web/exercise_library.html:77
-msgid "Voir tout"
-msgstr "View All"
+#: web/templates/web/exercise_library.html:66
+msgid "Révèle ton plein potentiel"
+msgstr "Reveal your full potential"
 
-#: web/templates/web/home.html:18
-msgid "Plateforme de confiance pour votre transformation"
-msgstr ""
-
-#: web/templates/web/home.html:22
-#, fuzzy
-#| msgid "Transmettre"
-msgid "Transformez"
-msgstr "Transmit"
-
-#: web/templates/web/home.html:22
-#, fuzzy
-#| msgid "Votre IMC"
-msgid "Votre"
-msgstr "Your BMI"
-
-#: web/templates/web/home.html:23
-msgid "Corps & Esprit"
-msgstr ""
-
-#: web/templates/web/home.html:27
+#: web/templates/web/exercise_library.html:67
 msgid ""
-"Rejoignez des milliers d'utilisateurs qui atteignent leurs objectifs avec "
-"FitWell"
+"Accède à l'intégralité de notre Studio et commence ta transformation dès "
+"aujourd'hui."
 msgstr ""
 
-#: web/templates/web/home.html:38
-msgid "Recettes"
-msgstr ""
+#: web/templates/web/exercise_library.html:70 web/templates/web/login.html:62
+#: web/templates/web/password_reset_complete.html:23
+msgid "Me connecter"
+msgstr "Log in"
 
-#: web/templates/web/home.html:42
-msgid "Badges"
-msgstr ""
+#: web/templates/web/home.html:10
+msgid "Révèle"
+msgstr "Reveal"
 
-#: web/templates/web/home.html:50
+#: web/templates/web/home.html:11 web/templates/web/home.html:67
 #, fuzzy
-#| msgid "Archives du protocole"
-msgid "Reprendre le protocole"
-msgstr "Protocol Archives"
+#| msgid "Mon"
+msgid "Ton"
+msgstr "My"
 
-#: web/templates/web/home.html:54
+#: web/templates/web/home.html:12
+msgid "Potentiel"
+msgstr "Potential"
+
+#: web/templates/web/home.html:16
+msgid ""
+"L'expérience fitness ultime pour transformer ton corps et ton esprit. "
+"Rejoins une communauté de passionnés."
+msgstr ""
+
+#: web/templates/web/home.html:21 web/templates/web/workout/history.html:116
+msgid "Commencer maintenant"
+msgstr "Start now"
+
+#: web/templates/web/home.html:24
+msgid "Explorer le Studio"
+msgstr "Explore the Studio"
+
+#: web/templates/web/home.html:44
+msgid "Outils de Progression"
+msgstr "Progress Tools"
+
+#: web/templates/web/home.html:48
+msgid "Plaisirs Sains"
+msgstr "Healthy Pleasures"
+
+#: web/templates/web/home.html:52
+msgid "Passionnés"
+msgstr "Enthusiasts"
+
+#: web/templates/web/home.html:56
+msgid "Ton Studio Partout"
+msgstr "Your Studio Everywhere"
+
+#: web/templates/web/home.html:67
 #, fuzzy
-#| msgid "Initialisation du protocole"
-msgid "Initialiser le protocole"
-msgstr "Protocol Initialization"
+#| msgid "Nouveau"
+msgid "Nouveau Départ"
+msgstr "New"
 
-#: web/templates/web/home.html:59
-msgid "Commencer la transformation"
-msgstr ""
+#: web/templates/web/home.html:69
+msgid "Tout ce dont tu as besoin pour une transformation durable"
+msgstr "Everything you need for lasting transformation"
 
-#: web/templates/web/home.html:62
-#, fuzzy
-#| msgid "Connexion Requise"
-msgid "Connexion membre"
-msgstr "Member Login"
+#: web/templates/web/home.html:78
+msgid "Studio Live"
+msgstr "Live Studio"
 
-#: web/templates/web/home.html:76
-msgid "L'arsenal"
-msgstr "The Arsenal"
-
-#: web/templates/web/home.html:76
-msgid "Complet"
-msgstr "Complete"
-
-#: web/templates/web/home.html:77
+#: web/templates/web/home.html:80
 msgid ""
-"Une suite d'outils intégrés pour gérer chaque variable de votre performance."
+"Accède à des centaines de séances immersives conçues par des experts pour "
+"des résultats visibles."
 msgstr ""
-"A suite of integrated tools to manage every variable of your performance."
 
-#: web/templates/web/home.html:86
-msgid "Coach tactique IA"
-msgstr "Tactical AI Coach"
+#: web/templates/web/home.html:89
+msgid "Cuisine Plaisir"
+msgstr "Pleasure Cooking"
 
-#: web/templates/web/home.html:88
+#: web/templates/web/home.html:91
 msgid ""
-"Entraînez-vous avec J.A.R.V.I.S. Interface HUD immersive, guidage vocal "
-"temps réel et séquences adaptatives."
+"Nourris tes ambitions avec des recettes gourmandes et saines. Parce que bien "
+"manger est un plaisir."
 msgstr ""
-"Train with J.A.R.V.I.S. Immersive HUD interface, real-time vocal guidance "
-"and adaptive sequences."
 
-#: web/templates/web/home.html:97
-msgid "Centre de commandement"
-msgstr "Command Center"
+#: web/templates/web/home.html:100
+msgid "Art de Vivre"
+msgstr "Art of Living"
 
-#: web/templates/web/home.html:99
+#: web/templates/web/home.html:102
 msgid ""
-"Suivez vos métriques vitales (Sommeil, Hydratation, Humeur) et analysez "
-"votre progression avec des graphiques précis."
+"Plus qu'un sport, une discipline pour forger un mental d'acier et rayonner "
+"au quotidien."
 msgstr ""
-"Track your vital metrics (Sleep, Hydration, Mood) and analyze your "
-"progression with precise charts."
 
-#: web/templates/web/home.html:108
-msgid "Laboratoire nutrition"
-msgstr "Nutrition Laboratory"
-
-#: web/templates/web/home.html:110
-msgid ""
-"Accédez à des recettes optimisées pour la performance. Macros calculées et "
-"instructions détaillées."
-msgstr ""
-"Access performance-optimized recipes. Calculated macros and detailed "
-"instructions."
+#: web/templates/web/home.html:113
+msgid "Fais de toi ta"
+msgstr "Make yourself your"
 
 #: web/templates/web/leaderboard.html:4
-msgid "Classement"
-msgstr ""
+#, fuzzy
+#| msgid "Connexion - FitWell"
+msgid "Communauté - FitWell"
+msgstr "Login - FitWell"
 
 #: web/templates/web/leaderboard.html:11
-msgid "Classement Global"
-msgstr ""
+msgid "L'Élite"
+msgstr "The Elite"
+
+#: web/templates/web/leaderboard.html:11
+#, fuzzy
+#| msgid "Blog - FitWell"
+msgid "FitWell"
+msgstr "Blog - FitWell"
 
 #: web/templates/web/leaderboard.html:14
-msgid "Les meilleurs athlètes FitWell"
-msgstr ""
+msgid "Inspire-toi de la communauté et dépasse tes limites chaque jour"
+msgstr "Be inspired by the community and push your limits every day"
 
-#: web/templates/web/leaderboard.html:20
-msgid "Top XP"
-msgstr ""
+#: web/templates/web/leaderboard.html:21
+msgid "Progression"
+msgstr "Progression"
 
-#: web/templates/web/leaderboard.html:40
-msgid "Top Streaks"
-msgstr ""
+#: web/templates/web/leaderboard.html:63 web/templates/web/legal.html:35
+#: web/templates/web/onboarding/step2_level.html:13
+msgid "Engagement"
+msgstr "Commitment"
 
-#: web/templates/web/leaderboard.html:60
-msgid "Top Workouts"
-msgstr ""
+#: web/templates/web/leaderboard.html:85
+msgid "Mon Classement"
+msgstr "My Ranking"
 
-#: web/templates/web/leaderboard.html:81
-msgid "Ta Position"
-msgstr ""
+#: web/templates/web/leaderboard.html:88 web/templates/web/profile.html:37
+#: web/templates/web/workout/detail.html:54
+#: web/templates/web/workout/session.html:33
+msgid "Énergie"
+msgstr "Energy"
 
-#: web/templates/web/leaderboard.html:84
-msgid "XP"
-msgstr ""
-
-#: web/templates/web/leaderboard.html:88
-msgid "Streak"
-msgstr ""
-
-#: web/templates/web/leaderboard.html:92
-msgid "Workouts"
-msgstr ""
+#: web/templates/web/leaderboard.html:96 web/templates/web/planner.html:107
+msgid "Mouvement"
+msgstr "Movement"
 
 #: web/templates/web/legal.html:4
 msgid "Mentions légales - FitWell"
 msgstr "Legal - FitWell"
 
-#: web/templates/web/legal.html:15
-msgid "Protocole"
-msgstr "Protocol"
+#: web/templates/web/legal.html:14
+msgid "Confidentialité, transparence et confiance pour ton quotidien"
+msgstr "Privacy, transparency and trust for your daily life"
 
-#: web/templates/web/legal.html:19
-msgid "Conditions d'utilisation et confidentialité"
-msgstr "Terms of Use and Privacy"
+#: web/templates/web/legal.html:21
+#, fuzzy
+#| msgid "Transmission de Données"
+msgid "Tes Données"
+msgstr "Data Transmission"
 
-#: web/templates/web/legal.html:26
-msgid "Confidentialité des données"
-msgstr "Privacy"
-
-#: web/templates/web/legal.html:29
+#: web/templates/web/legal.html:25
 msgid ""
-"Chez FitWell, la sécurité de vos données biométriques est une priorité "
-"absolue. Nous utilisons des protocoles de chiffrement avancés pour garantir "
-"que vos performances restent confidentielles."
+"Ta vie privée est sacrée. Chez FitWell, nous protégeons tes données "
+"personnelles avec la plus grande rigueur. Elles ne servent qu'à une chose : "
+"t'offrir l'expérience la plus personnalisée possible."
 msgstr ""
-"At FitWell, the security of your biometric data is an absolute priority. We "
-"use advanced encryption protocols to ensure your performance remains "
-"confidential."
 
-#: web/templates/web/legal.html:32
+#: web/templates/web/legal.html:28
 msgid ""
-"Vos données ne sont jamais vendues à des tiers. Elles sont utilisées "
-"exclusivement pour générer vos plans d'entraînement et optimiser votre "
-"expérience sur la plateforme."
+"Aucune revente, aucun partage non sollicité. Tes mesures et tes progrès "
+"t'appartiennent, nous ne sommes que les outils de ta réussite."
 msgstr ""
-"Your data is never sold to third parties. It is exclusively used to generate "
-"your training plans and optimize your experience on the platform."
 
-#: web/templates/web/legal.html:38
-msgid "Conditions d'utilisation"
-msgstr "Terms of Use"
-
-#: web/templates/web/legal.html:41
+#: web/templates/web/legal.html:39
 msgid ""
-"L'utilisation de FitWell est réservée aux individus engagés dans une "
-"démarche d'optimisation personnelle. En accédant à nos services, vous "
-"acceptez de respecter les standards de la communauté."
+"En utilisant FitWell, tu rejoins une communauté basée sur le respect et "
+"l'amélioration de soi. Nous demandons à chacun de nos membres de cultiver "
+"cet esprit positif."
 msgstr ""
-"The use of FitWell is reserved for individuals committed to personal "
-"optimization. By accessing our services, you agree to respect community "
-"standards."
 
-#: web/templates/web/legal.html:44
+#: web/templates/web/legal.html:42
+#, fuzzy
+#| msgid ""
+#| "FitWell n'est pas un dispositif médical. Consultez toujours un "
+#| "professionnel de santé avant de commencer un nouveau programme "
+#| "d'entraînement ou de nutrition."
 msgid ""
-"FitWell n'est pas un dispositif médical. Consultez toujours un professionnel "
-"de santé avant de commencer un nouveau programme d'entraînement ou de "
-"nutrition."
+"Attention : FitWell est un guide, pas un médecin. Consulte toujours un "
+"professionnel de santé pour valider que ton nouveau rythme de vie est adapté "
+"à ta condition physique."
 msgstr ""
 "FitWell is not a medical device. Always consult a healthcare professional "
 "before starting a new training or nutrition program."
 
-#: web/templates/web/legal.html:50
-msgid "Contact opérationnel"
-msgstr "Operational Contact"
+#: web/templates/web/legal.html:49
+msgid "Nous Contacter"
+msgstr "Contact Us"
 
-#: web/templates/web/legal.html:53
+#: web/templates/web/legal.html:52
 msgid ""
-"Pour toute requête technique ou administrative, veuillez contacter notre "
-"centre de commande :"
+"Une question, une suggestion ou juste envie de partager ton succès ? Notre "
+"équipe est là pour toi."
 msgstr ""
 
 #: web/templates/web/login.html:4
 msgid "Connexion - FitWell"
 msgstr "Login - FitWell"
 
-#: web/templates/web/login.html:19
-msgid "Bon"
-msgstr ""
+#: web/templates/web/login.html:18
+msgid "Ravi de"
+msgstr "Great to"
 
-#: web/templates/web/login.html:23
-msgid "Accès terminal sécurisé"
-msgstr ""
+#: web/templates/web/login.html:18
+msgid "te Revoir"
+msgstr "see you again"
+
+#: web/templates/web/login.html:22
+msgid "Reprends ton ascension maintenant"
+msgstr "Resume your ascent now"
 
 #: web/templates/web/login.html:55
 msgid "Mot de passe oublié ?"
 msgstr "Forgot Password?"
 
-#: web/templates/web/login.html:67
-msgid "Initier session"
-msgstr "Initialize Session"
-
-#: web/templates/web/login.html:73
+#: web/templates/web/login.html:68
 msgid "Pas encore membre ?"
-msgstr ""
+msgstr "Not a member yet?"
 
-#: web/templates/web/login.html:73
-msgid "Rejoindre l'élite"
-msgstr "Join the Elite"
+#: web/templates/web/login.html:68 web/templates/web/onboarding/welcome.html:38
+#: web/templates/web/recipe_list.html:40
+#, fuzzy
+#| msgid "Points d'expérience"
+msgid "Commencer l'expérience"
+msgstr "Experience Points"
 
 #: web/templates/web/onboarding/complete.html:4
+#: web/templates/web/onboarding/welcome.html:33
 msgid "Prêt"
-msgstr ""
-
-#: web/templates/web/onboarding/complete.html:12
-msgid "Ton Plan est Prêt !"
-msgstr ""
+msgstr "Ready"
 
 #: web/templates/web/onboarding/complete.html:15
-msgid "Ton profil est configuré. Tu as gagné"
-msgstr ""
+msgid "Ton profil est optimisé. Ton énergie vitale a augmenté de"
+msgstr "Your profile is optimized. Your vital energy has increased by"
 
 #: web/templates/web/onboarding/complete.html:20
-#: web/templates/web/profile.html:154
-msgid "Badges Débloqués"
-msgstr ""
+msgid "Succès Débloqués"
+msgstr "Unlocked Achievements"
 
 #: web/templates/web/onboarding/complete.html:33
-#, fuzzy
-#| msgid "Accéder au terminal"
-msgid "Accéder au Dashboard"
-msgstr "Access Terminal"
+msgid "Découvrir mon nouvel univers"
+msgstr "Discover my new universe"
 
 #: web/templates/web/onboarding/step1_goal.html:11
 msgid "ÉTAPE 1/4"
-msgstr ""
+msgstr "STEP 1/4"
 
 #: web/templates/web/onboarding/step1_goal.html:13
-msgid "Quel est ton objectif principal ?"
-msgstr ""
+msgid "Quelle est ta"
+msgstr "What is your"
 
-#: web/templates/web/onboarding/step1_goal.html:25
-#, fuzzy
-#| msgid "Perte de poids"
-msgid "Perte de Poids"
-msgstr "Weight Loss"
+#: web/templates/web/onboarding/step1_goal.html:13
+msgid "Vision"
+msgstr "Vision"
+
+#: web/templates/web/onboarding/step1_goal.html:15
+msgid "Définis le cap de ta transformation"
+msgstr "Define the course of your transformation"
 
 #: web/templates/web/onboarding/step1_goal.html:26
-msgid "Brûler les graisses"
-msgstr ""
+msgid "S'affiner"
+msgstr "Get Lean"
 
-#: web/templates/web/onboarding/step1_goal.html:34
-#, fuzzy
-#| msgid "Prise de masse"
-msgid "Prise de Masse"
-msgstr "Muscle Gain"
+#: web/templates/web/onboarding/step1_goal.html:27
+msgid "Brûler & Tonifier"
+msgstr "Burn & Tone"
 
 #: web/templates/web/onboarding/step1_goal.html:35
-msgid "Construire du muscle"
-msgstr ""
+msgid "Se Renforcer"
+msgstr "Get Stronger"
+
+#: web/templates/web/onboarding/step1_goal.html:36
+msgid "Bâtir & Sculpter"
+msgstr "Build & Sculpt"
 
 #: web/templates/web/onboarding/step1_goal.html:44
-msgid "Rester en forme"
+msgid "Équilibre"
+msgstr "Balance"
+
+#: web/templates/web/onboarding/step1_goal.html:45
+msgid "Santé & Énergie"
 msgstr ""
 
-#: web/templates/web/onboarding/step1_goal.html:54
-#: web/templates/web/onboarding/step2_level.html:79
-#, fuzzy
-#| msgid "Suivant."
-msgid "Suivant"
-msgstr "Next."
+#: web/templates/web/onboarding/step1_goal.html:55
+msgid "Continuer"
+msgstr ""
 
 #: web/templates/web/onboarding/step2_level.html:11
 msgid "ÉTAPE 2/4"
+msgstr "STEP 2/4"
+
+#: web/templates/web/onboarding/step2_level.html:15
+msgid "Quelle place souhaites-tu accorder à ton bien-être ?"
 msgstr ""
 
-#: web/templates/web/onboarding/step2_level.html:13
-#, fuzzy
-#| msgid "Niveau d'activité"
-msgid "Quel est ton niveau d'activité ?"
-msgstr "Activity Level"
-
-#: web/templates/web/onboarding/step2_level.html:27
-#: web/templates/web/tools.html:60
-msgid "Sédentaire"
-msgstr "Sedentary"
-
 #: web/templates/web/onboarding/step2_level.html:28
-#, fuzzy
-#| msgid "Sédentaire (peu ou pas d'exercice)"
-msgid "Peu ou pas d'exercice"
-msgstr "Sedentary (little or no exercise)"
+msgid "Calme"
+msgstr ""
 
-#: web/templates/web/onboarding/step2_level.html:40
-#, fuzzy
-#| msgid "Modérément actif"
-msgid "Modéré"
-msgstr "Moderately Active"
+#: web/templates/web/onboarding/step2_level.html:29
+msgid "Journées de bureau, peu de mouvement"
+msgstr ""
 
 #: web/templates/web/onboarding/step2_level.html:41
-#, fuzzy
-#| msgid "Modéré (1-3 fois par semaine)"
-msgid "1-3 fois par semaine"
-msgstr "Moderate (1-3 times per week)"
-
-#: web/templates/web/onboarding/step2_level.html:53
 #, fuzzy
 #| msgid "Objectif"
 msgid "Actif"
 msgstr "Goal"
 
-#: web/templates/web/onboarding/step2_level.html:54
+#: web/templates/web/onboarding/step2_level.html:42
 #, fuzzy
-#| msgid "Actif (3-5 fois par semaine)"
-msgid "3-5 fois par semaine"
-msgstr "Active (3-5 times per week)"
+#| msgid "Modéré (1-3 fois par semaine)"
+msgid "1 à 2 séances par semaine"
+msgstr "Moderate (1-3 times per week)"
+
+#: web/templates/web/onboarding/step2_level.html:54
+msgid "Régulier"
+msgstr ""
+
+#: web/templates/web/onboarding/step2_level.html:55
+#, fuzzy
+#| msgid "Modéré (1-3 fois par semaine)"
+msgid "3 à 4 séances par semaine"
+msgstr "Moderate (1-3 times per week)"
 
 #: web/templates/web/onboarding/step2_level.html:67
 #, fuzzy
-#| msgid "Élite (6-7 fois par semaine)"
-msgid "6-7 fois par semaine"
-msgstr "Elite (6-7 times per week)"
+#| msgid "Intel"
+msgid "Intense"
+msgstr "Intel"
+
+#: web/templates/web/onboarding/step2_level.html:68
+#, fuzzy
+#| msgid "Actif (3-5 fois par semaine)"
+msgid "Plus de 5 séances par semaine"
+msgstr "Active (3-5 times per week)"
+
+#: web/templates/web/onboarding/step2_level.html:80
+#, fuzzy
+#| msgid "Suivant."
+msgid "Suivant"
+msgstr "Next."
 
 #: web/templates/web/onboarding/step3_data.html:4
 #: web/templates/web/onboarding/welcome.html:29
@@ -1344,23 +1312,38 @@ msgstr ""
 
 #: web/templates/web/onboarding/step3_data.html:11
 msgid "ÉTAPE 3/4"
-msgstr ""
+msgstr "STEP 3/4"
 
 #: web/templates/web/onboarding/step3_data.html:13
-#, fuzzy
-#| msgid "Analyse biométrique"
-msgid "Tes données biométriques"
-msgstr "Biometric Analysis"
+msgid "Profil"
+msgstr "Profile"
 
-#: web/templates/web/onboarding/step3_data.html:46
-#: web/templates/web/planner.html:205 web/templates/web/tools.html:29
+#: web/templates/web/onboarding/step3_data.html:15
+msgid "Tes métriques personnelles pour une expérience sur-mesure"
+msgstr ""
+
+#: web/templates/web/onboarding/step3_data.html:22
+#, fuzzy
+#| msgid "Genre"
+msgid "Ton Genre"
+msgstr "Gender"
+
+#: web/templates/web/onboarding/step3_data.html:47
+#: web/templates/web/planner.html:176 web/templates/web/tools.html:29
 msgid "Taille (cm)"
 msgstr "Height (cm)"
 
-#: web/templates/web/onboarding/step3_data.html:61
+#: web/templates/web/onboarding/step3_data.html:53
+#: web/templates/web/tools.html:54
+#, fuzzy
+#| msgid "Poids (kg)"
+msgid "Poids actuel (kg)"
+msgstr "Weight (kg)"
+
+#: web/templates/web/onboarding/step3_data.html:62
 #, fuzzy
 #| msgid "Générer un nouveau plan"
-msgid "Générer mon Plan"
+msgid "Générer mon équilibre"
 msgstr "Generate New Plan"
 
 #: web/templates/web/onboarding/welcome.html:4
@@ -1368,88 +1351,54 @@ msgid "Bienvenue"
 msgstr ""
 
 #: web/templates/web/onboarding/welcome.html:12
-#, fuzzy
-#| msgid "Connexion - FitWell"
-msgid "Bienvenue sur FitWell"
-msgstr "Login - FitWell"
+msgid "Prêt pour ta"
+msgstr ""
+
+#: web/templates/web/onboarding/welcome.html:12
+msgid "Métamorphose"
+msgstr ""
 
 #: web/templates/web/onboarding/welcome.html:15
 msgid ""
-"Nous allons configurer ton profil en 4 étapes rapides pour créer ton plan "
-"d'entraînement personnalisé."
-msgstr ""
-
-#: web/templates/web/onboarding/welcome.html:33
-#, fuzzy
-#| msgid "Planifier"
-msgid "Plan"
-msgstr "Plan"
-
-#: web/templates/web/onboarding/welcome.html:38
-msgid "Commencer"
+"Oublie les régimes, adopte un style de vie. Configurons ton accès exclusif "
+"en quelques secondes."
 msgstr ""
 
 #: web/templates/web/password_reset_complete.html:4
 msgid "Mot de passe réinitialisé - FitWell"
 msgstr "Password Reset - FitWell"
 
-#: web/templates/web/password_reset_complete.html:14
-msgid "Restauré"
-msgstr "Restored"
-
-#: web/templates/web/password_reset_complete.html:18
+#: web/templates/web/password_reset_complete.html:19
 msgid ""
-"Votre mot de passe a été mis à jour avec succès. Vous pouvez maintenant "
-"reprendre vos opérations."
+"Ton mot de passe est mis à jour. Reprends ton ascension vers tes objectifs "
+"dès maintenant."
 msgstr ""
-"Your password has been updated successfully. You can now resume your "
-"operations."
-
-#: web/templates/web/password_reset_complete.html:22
-msgid "Accéder au terminal"
-msgstr "Access Terminal"
 
 #: web/templates/web/password_reset_confirm.html:4
 msgid "Nouveau Mot de Passe - FitWell"
 msgstr "New Password - FitWell"
 
-#: web/templates/web/password_reset_confirm.html:11
-msgid "Nouveau"
-msgstr "New"
-
-#: web/templates/web/password_reset_confirm.html:11
-msgid "Code"
-msgstr "Code"
-
-#: web/templates/web/password_reset_confirm.html:14
-msgid "Sécurisation du compte"
-msgstr "Account Security"
-
-#: web/templates/web/password_reset_confirm.html:51
-msgid "Confirmer le mot de passe"
-msgstr "Confirm Password"
+#: web/templates/web/password_reset_confirm.html:17
+msgid "Sécurise ton accès exclusif avec un nouveau mot de passe."
+msgstr ""
 
 #: web/templates/web/password_reset_done.html:4
 msgid "Email envoyé - FitWell"
 msgstr "Email Sent - FitWell"
 
-#: web/templates/web/password_reset_done.html:14
-msgid "Transmission"
-msgstr "Transmission"
-
-#: web/templates/web/password_reset_done.html:14
-msgid "Réussie"
-msgstr "Successful"
-
-#: web/templates/web/password_reset_done.html:18
+#: web/templates/web/password_reset_done.html:19
+#, fuzzy
+#| msgid ""
+#| "Si un compte existe avec cet email, nous vous avons envoyé les "
+#| "instructions pour réinitialiser votre mot de passe."
 msgid ""
-"Si un compte existe avec cet email, nous vous avons envoyé les instructions "
-"pour réinitialiser votre mot de passe."
+"Si ton compte existe, tu vas recevoir les instructions pour réinitialiser "
+"ton mot de passe d'ici quelques instants."
 msgstr ""
 "If an account exists with this email, we have sent you instructions to reset "
 "your password."
 
-#: web/templates/web/password_reset_done.html:22
+#: web/templates/web/password_reset_done.html:23
 msgid "Retour à la connexion"
 msgstr "Return to Login"
 
@@ -1458,9 +1407,12 @@ msgid "Bonjour,"
 msgstr "Hello,"
 
 #: web/templates/web/password_reset_email.html:3
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Une demande de réinitialisation de mot de passe a été reçue pour votre "
+#| "compte FitWell associé à l'adresse %(email)s."
 msgid ""
-"Une demande de réinitialisation de mot de passe a été reçue pour votre "
+"Une demande de réinitialisation de ton mot de passe a été reçue pour ton "
 "compte FitWell associé à l'adresse %(email)s."
 msgstr ""
 "A password reset request has been received for your FitWell account "
@@ -1468,48 +1420,46 @@ msgstr ""
 
 #: web/templates/web/password_reset_email.html:5
 msgid ""
-"Pour initier la procédure de réinitialisation, veuillez accéder au terminal "
-"sécurisé via le lien suivant :"
+"Pour choisir un nouveau mot de passe, clique simplement sur le lien ci-"
+"dessous :"
 msgstr ""
-"To initiate the reset procedure, please access the secure terminal via the "
-"following link:"
 
 #: web/templates/web/password_reset_email.html:9
+#, fuzzy
+#| msgid ""
+#| "Si vous n'êtes pas à l'origine de cette demande, ignorez ce message. "
+#| "Votre compte reste sécurisé."
 msgid ""
-"Si vous n'êtes pas à l'origine de cette demande, ignorez ce message. Votre "
-"compte reste sécurisé."
+"Si tu n'es pas à l'origine de cette demande, ignore simplement ce message. "
+"Ton compte reste en sécurité."
 msgstr ""
 "If you did not request this, ignore this message. Your account remains "
 "secure."
 
 #: web/templates/web/password_reset_email.html:12
-msgid "Centre de commande FitWell"
-msgstr "FitWell Command Center"
+#, fuzzy
+#| msgid "Outils - FitWell"
+msgid "L'équipe FitWell"
+msgstr "Tools - FitWell"
+
+#: web/templates/web/password_reset_email.html:13
+msgid "Ton mouvement, ton équilibre."
+msgstr ""
 
 #: web/templates/web/password_reset_form.html:4
 msgid "Réinitialisation mot de passe - FitWell"
 msgstr "Password Reset - FitWell"
 
-#: web/templates/web/password_reset_form.html:14
-#: web/templates/web/profile.html:95 web/views/workout.py:112
-msgid "Récupération"
-msgstr "Recovery"
-
 #: web/templates/web/password_reset_form.html:17
-msgid "Protocole de sécurité"
-msgstr "Security Protocol"
-
-#: web/templates/web/password_reset_form.html:22
 msgid ""
-"Entrez votre identifiant email pour initier la procédure de réinitialisation "
-"du mot de passe."
-msgstr "Enter your email identifier to initiate the password reset procedure."
+"Pas d'inquiétude, entre ton email pour recevoir un lien de réinitialisation."
+msgstr ""
 
-#: web/templates/web/password_reset_form.html:41
+#: web/templates/web/password_reset_form.html:35
 msgid "Envoyer le lien"
 msgstr "Send Link"
 
-#: web/templates/web/password_reset_form.html:47
+#: web/templates/web/password_reset_form.html:40
 msgid "← Retour à la connexion"
 msgstr "← Return to Login"
 
@@ -1517,197 +1467,202 @@ msgstr "← Return to Login"
 msgid "Planificateur - FitWell"
 msgstr "Planner - FitWell"
 
+#: web/templates/web/planner.html:15
+msgid "Stratégie"
+msgstr ""
+
 #: web/templates/web/planner.html:19
-msgid "Concevez votre feuille de route vers l'excellence"
+msgid "Ton architecture sur-mesure pour une vie plus forte"
 msgstr ""
 
 #: web/templates/web/planner.html:38
-#, fuzzy
-#| msgid "Votre potentiel"
-msgid "Votre plan actuel"
-msgstr "Your Potential"
+msgid "Ma Stratégie de Vie"
+msgstr ""
 
 #: web/templates/web/planner.html:39
-msgid "Généré le"
-msgstr ""
+#, fuzzy
+#| msgid "Mise à jour"
+msgid "Dernière mise à jour :"
+msgstr "Update"
 
 #: web/templates/web/planner.html:45
-msgid "Protocole d'entraînement"
+msgid "Action & Mouvement"
 msgstr ""
 
-#: web/templates/web/planner.html:53
+#: web/templates/web/planner.html:52
 msgid "Focus"
 msgstr ""
 
-#: web/templates/web/planner.html:57
-msgid "Programme"
+#: web/templates/web/planner.html:56
+msgid "Tes séances"
 msgstr ""
 
-#: web/templates/web/planner.html:62
-msgid "Exercices clés"
-msgstr "Exercises"
+#: web/templates/web/planner.html:71
+msgid "Carburant & Plaisir"
+msgstr ""
 
 #: web/templates/web/planner.html:74
 #, fuzzy
-#| msgid "Laboratoire nutrition"
-msgid "Carburant nutritionnel"
-msgstr "Nutrition Laboratory"
+#| msgid "Objectif"
+msgid "Objectif Calories"
+msgstr "Goal"
 
-#: web/templates/web/planner.html:77
-#, fuzzy
-#| msgid "CCarbsalories cibles"
-msgid "Calories cibles"
-msgstr "Target Calories"
-
-#: web/templates/web/planner.html:83 web/templates/web/recipe_detail.html:55
-msgid "Protéines"
+#: web/templates/web/planner.html:98
+msgid "Lecture de ton Potentiel"
 msgstr ""
 
-#: web/templates/web/planner.html:87 web/templates/web/recipe_detail.html:64
-msgid "Glucides"
-msgstr ""
-
-#: web/templates/web/planner.html:91 web/templates/web/recipe_detail.html:73
-msgid "Lipides"
-msgstr ""
-
-#: web/templates/web/planner.html:96
-msgid "Exemple de repas"
-msgstr "Meal Example"
-
-#: web/templates/web/planner.html:117
-#, fuzzy
-#| msgid "AFitnessnalyse du protocole IA"
-msgid "Analyse du protocole IA"
-msgstr "AI Protocol Analysis"
-
-#: web/templates/web/planner.html:122 web/templates/web/profile.html:72
+#: web/templates/web/planner.html:103
 #, fuzzy
 #| msgid "Score santé:"
-msgid "Score santé"
+msgid "Score Vitalité"
 msgstr "Health Score:"
 
-#: web/templates/web/planner.html:126 web/templates/web/profile.html:84
-msgid "Fitness"
+#: web/templates/web/planner.html:111 web/templates/web/workout/detail.html:110
+msgid "Repos"
 msgstr ""
 
-#: web/templates/web/planner.html:130
-#, fuzzy
-#| msgid "Récupération"
-msgid "Récup"
-msgstr "Recovery"
-
-#: web/templates/web/planner.html:134
-msgid "Vie"
+#: web/templates/web/planner.html:115
+msgid "Style de vie"
 msgstr ""
 
-#: web/templates/web/planner.html:138
+#: web/templates/web/planner.html:119
 msgid "IMC"
 msgstr ""
 
-#: web/templates/web/planner.html:147
-msgid "Générer un nouveau plan"
-msgstr "Generate New Plan"
+#: web/templates/web/planner.html:128
+msgid "Redéfinir ma Stratégie"
+msgstr ""
 
-#: web/templates/web/planner.html:154
-msgid "Archives du protocole"
-msgstr "Protocol Archives"
+#: web/templates/web/planner.html:135
+msgid "Mon Historique d'Évolution"
+msgstr ""
 
-#: web/templates/web/planner.html:164
-msgid "Score santé:"
-msgstr "Health Score:"
-
-#: web/templates/web/planner.html:183
+#: web/templates/web/planner.html:145
 #, fuzzy
-#| msgid "Initialisation du protocole"
-msgid "Initialisation du protocole"
-msgstr "Protocol Initialization"
+#| msgid "Bien-être"
+msgid "Bien-être:"
+msgstr "Wellness"
+
+#: web/templates/web/planner.html:160
+msgid "Forger ma Stratégie"
+msgstr ""
+
+#: web/templates/web/planner.html:161
+msgid "Quelques métriques pour une architecture sur-mesure."
+msgstr ""
 
 #: web/templates/web/planner.html:184
-msgid ""
-"Entrez vos données biométriques pour permettre à l'algorithme de générer "
-"votre programme optimal."
-msgstr ""
-"Enter your biometric data to allow the algorithm to generate your optimal "
-"program."
+#, fuzzy
+#| msgid "Objectif"
+msgid "Ton Objectif"
+msgstr "Goal"
 
-#: web/templates/web/planner.html:236
-msgid "Générer le programme"
-msgstr "Generate Program"
+#: web/templates/web/planner.html:188
+msgid "Activité"
+msgstr "Activity"
+
+#: web/templates/web/planner.html:195
+#, fuzzy
+#| msgid "Générer un nouveau plan"
+msgid "Générer ma Stratégie"
+msgstr "Generate New Plan"
 
 #: web/templates/web/profile.html:4
 msgid "Profil - FitWell"
 msgstr "Profile - FitWell"
 
 #: web/templates/web/profile.html:17
-msgid "Opérateur"
-msgstr "Operator"
+msgid "Univers"
+msgstr ""
 
 #: web/templates/web/profile.html:21
-msgid "Indicatif :"
+msgid "Ton évolution, tes victoires, ton héritage quotidien."
 msgstr ""
 
 #: web/templates/web/profile.html:25
-msgid "Éditer dossier"
-msgstr ""
+#, fuzzy
+#| msgid "Mot de passe"
+msgid "Modifier mon profil"
+msgstr "Password"
 
 #: web/templates/web/profile.html:29
 msgid "Objectif:"
 msgstr "Goal:"
 
-#: web/templates/web/profile.html:33
-msgid "Focus:"
+#: web/templates/web/profile.html:49
+msgid "Vers le niveau"
 msgstr ""
 
-#: web/templates/web/profile.html:47
-msgid "Points XP"
+#: web/templates/web/profile.html:61
+msgid "Bien-être"
+msgstr "Wellness"
+
+#: web/templates/web/profile.html:72
+msgid "Fitness"
 msgstr ""
 
-#: web/templates/web/profile.html:51
-msgid "Jours série"
+#: web/templates/web/profile.html:83 web/templates/web/workout/session.html:88
+#: web/views/workout.py:112
+msgid "Récupération"
+msgstr "Recovery"
+
+#: web/templates/web/profile.html:119
+msgid "Optimiser"
 msgstr ""
 
-#: web/templates/web/profile.html:59
-msgid "Progression niveau"
+#: web/templates/web/profile.html:120
+msgid "Ton équilibre et ta nutrition sur-mesure"
 msgstr ""
 
-#: web/templates/web/profile.html:65
-msgid "Prochain rang dans"
+#: web/templates/web/profile.html:129
+msgid "Propulser"
 msgstr ""
 
-#: web/templates/web/profile.html:75
-msgid "Optimal"
+#: web/templates/web/profile.html:130
+msgid "Tes outils de mesure et de performance"
 msgstr ""
-
-#: web/templates/web/profile.html:106
-msgid "Lifestyle"
-msgstr ""
-
-#: web/templates/web/profile.html:132
-msgid "Gérez votre protocole d'entraînement et de nutrition."
-msgstr ""
-
-#: web/templates/web/profile.html:141
-msgid "Outils Intel"
-msgstr "Intel Tools"
 
 #: web/templates/web/profile.html:142
-msgid "Calculateurs IMC, DEJ et métriques avancées."
+msgid "Mes Succès"
 msgstr ""
 
 #: web/templates/web/recipe_detail.html:17
-msgid "Retour au labo"
-msgstr "Back to Lab"
+#, fuzzy
+#| msgid "Retour à la base"
+msgid "Retour à la cuisine"
+msgstr "Return to Base"
 
-#: web/templates/web/recipe_detail.html:50
-msgid "Profil macro"
-msgstr "Macro Profile"
+#: web/templates/web/recipe_detail.html:52
+#, fuzzy
+#| msgid "AFitnessnalyse du protocole IA"
+msgid "Analyse Nutritionnelle"
+msgstr "AI Protocol Analysis"
 
-#: web/templates/web/recipe_detail.html:86
+#: web/templates/web/recipe_detail.html:56
+msgid "Énergie (Prot)"
+msgstr ""
+
+#: web/templates/web/recipe_detail.html:65
+msgid "Carburant (Glu)"
+msgstr ""
+
+#: web/templates/web/recipe_detail.html:74
+msgid "Structure (Lip)"
+msgstr ""
+
+#: web/templates/web/recipe_detail.html:85
+msgid "Optimise tes résultats avec un plan nutritionnel sur-mesure."
+msgstr ""
+
+#: web/templates/web/recipe_detail.html:88
+msgid "Personnaliser mon plan"
+msgstr ""
+
+#: web/templates/web/recipe_detail.html:97
 msgid "Ingrédients"
 msgstr ""
 
-#: web/templates/web/recipe_detail.html:100
+#: web/templates/web/recipe_detail.html:111
 msgid "Préparation"
 msgstr "Preparation"
 
@@ -1715,47 +1670,64 @@ msgstr "Preparation"
 msgid "Nutrition & recettes - FitWell"
 msgstr "Nutrition & Recipes - FitWell"
 
-#: web/templates/web/recipe_list.html:16
-msgid "Laboratoire"
-msgstr "Laboratory"
+#: web/templates/web/recipe_list.html:11
+msgid "Cuisine"
+msgstr ""
 
-#: web/templates/web/recipe_list.html:20
-msgid "Carburant premium pour performance optimale"
-msgstr "Premium fuel for optimal performance"
+#: web/templates/web/recipe_list.html:11
+msgid "Plaisir"
+msgstr ""
 
-#: web/templates/web/recipe_list.html:27
-msgid "Tout"
-msgstr "All"
+#: web/templates/web/recipe_list.html:14
+msgid ""
+"Nourris tes ambitions. Des recettes exclusives pour allier gourmandise et "
+"résultats."
+msgstr ""
 
-#: web/templates/web/recipe_list.html:85
-msgid "Aucune recette disponible pour le moment."
-msgstr "No recipes available at the moment."
+#: web/templates/web/recipe_list.html:38
+msgid "Accès Privé"
+msgstr ""
+
+#: web/templates/web/recipe_list.html:39
+msgid ""
+"Rejoins l'élite et débloque plus de 100 recettes optimisées pour ton succès."
+msgstr ""
+
+#: web/templates/web/recipe_list.html:91
+#, fuzzy
+#| msgid "Aucune transmission pour le moment."
+msgid "Cuisine fermée pour le moment"
+msgstr "No transmission yet."
 
 #: web/templates/web/register.html:4
 msgid "Inscription - FitWell"
 msgstr "Registration - FitWell"
 
-#: web/templates/web/register.html:14
-msgid "Inscription"
-msgstr "REGISTRATION"
+#: web/templates/web/register.html:18
+#, fuzzy
+#| msgid "Homme"
+msgid "Commence"
+msgstr "Male"
 
-#: web/templates/web/register.html:14
-msgid "Athlète"
-msgstr "ATHLETE"
+#: web/templates/web/register.html:18
+msgid "l'Aventure"
+msgstr ""
 
-#: web/templates/web/register.html:17
-msgid "Commencez votre héritage"
-msgstr "Begin Your Legacy"
+#: web/templates/web/register.html:21
+msgid "Rejoins l'élite et transforme ton quotidien dès aujourd'hui"
+msgstr ""
 
-#: web/templates/web/register.html:55
-msgid "Initialiser profil"
-msgstr "Initialize Profile"
+#: web/templates/web/register.html:56
+#, fuzzy
+#| msgid "Déjà un compte ?"
+msgid "Créer mon compte"
+msgstr "Already have an account?"
 
-#: web/templates/web/register.html:64
-msgid "En vous inscrivant, vous vous engagez à l'excellence."
-msgstr "By registering, you commit to excellence."
+#: web/templates/web/register.html:62
+msgid "En t'inscrivant, tu fais le choix d'une transformation sans limite."
+msgstr ""
 
-#: web/templates/web/register.html:70
+#: web/templates/web/register.html:68
 msgid "Déjà un compte ?"
 msgstr "Already have an account?"
 
@@ -1763,61 +1735,65 @@ msgstr "Already have an account?"
 msgid "Outils - FitWell"
 msgstr "Tools - FitWell"
 
+#: web/templates/web/tools.html:15
+msgid "Mes"
+msgstr ""
+
 #: web/templates/web/tools.html:19
-msgid "Quantifiez votre rendement biologique"
-msgstr "Quantify your biological yield"
+msgid "La précision au service de ta progression"
+msgstr ""
 
 #: web/templates/web/tools.html:26
-msgid "Calculateur IMC"
-msgstr "BMI Calculator"
+msgid "Indice de Forme"
+msgstr ""
 
 #: web/templates/web/tools.html:37 web/templates/web/tools.html:68
 msgid "Calculer"
 msgstr "Calculate"
 
 #: web/templates/web/tools.html:40
-msgid "Votre IMC"
-msgstr "Your BMI"
+msgid "Ton résultat"
+msgstr ""
 
 #: web/templates/web/tools.html:49
-msgid "Profil métabolique"
-msgstr "Metabolic Profile"
+msgid "Mes Besoins"
+msgstr ""
 
 #: web/templates/web/tools.html:50
-msgid ""
-"Estimez vos besoins caloriques journaliers (DEJ) et la répartition optimale "
-"des macronutriments."
+msgid "Calcule tes besoins énergétiques pour une transformation maîtrisée."
 msgstr ""
-"Estimate your daily caloric needs (TDEE) and optimal macronutrient "
-"distribution."
 
-#: web/templates/web/tools.html:58
-msgid "Activité"
-msgstr "Activity"
+#: web/templates/web/tools.html:60
+msgid "Calme (bureau)"
+msgstr ""
 
 #: web/templates/web/tools.html:61
-msgid "Légèrement actif"
-msgstr "Lightly Active"
+msgid "Actif (1-3 séances/sem)"
+msgstr ""
 
 #: web/templates/web/tools.html:62
-msgid "Modérément actif"
-msgstr "Moderately Active"
+msgid "Très actif (4-5 séances/sem)"
+msgstr ""
 
 #: web/templates/web/tools.html:63
-msgid "Très actif"
-msgstr "Very Active"
+msgid "Athlète (6+ séances/sem)"
+msgstr ""
 
 #: web/templates/web/tools.html:74
-msgid "Métabolisme de base (BMR)"
+#, fuzzy
+#| msgid "Métabolisme de base (BMR)"
+msgid "Métabolisme de base"
 msgstr "Basal Metabolic Rate (BMR)"
 
 #: web/templates/web/tools.html:78
-msgid "Dépense totale (TDEE)"
+#, fuzzy
+#| msgid "Dépense totale (TDEE)"
+msgid "Dépense totale"
 msgstr "Total Expenditure (TDEE)"
 
 #: web/templates/web/tools.html:86
-msgid "Chronomètre & Timer"
-msgstr "Stopwatch & Timer"
+msgid "Focus & Temps"
+msgstr ""
 
 #: web/templates/web/tools.html:89
 msgid "Chronomètre"
@@ -1873,211 +1849,186 @@ msgid "Détails Séance"
 msgstr ""
 
 #: web/templates/web/workout/detail.html:15
-msgid "Séance du"
+#, fuzzy
+#| msgid "Performance humaine"
+msgid "Performance du"
+msgstr "Human Performance"
+
+#: web/templates/web/workout/detail.html:33
+msgid "Mes Notes"
 msgstr ""
 
-#: web/templates/web/workout/detail.html:31
-msgid "Notes"
-msgstr ""
-
-#: web/templates/web/workout/detail.html:40
+#: web/templates/web/workout/detail.html:42
 msgid "Durée"
 msgstr ""
 
-#: web/templates/web/workout/detail.html:45
-#: web/templates/web/workout/detail.html:128
-msgid "Total Sets"
-msgstr ""
-
-#: web/templates/web/workout/detail.html:54
-msgid "XP Gagné"
+#: web/templates/web/workout/detail.html:46
+msgid "Total Séries"
 msgstr ""
 
 #: web/templates/web/workout/detail.html:62
-#, fuzzy
-#| msgid "Sélectionnez vos exercices"
-msgid "Détails des Exercices"
-msgstr "Select your exercises"
-
-#: web/templates/web/workout/detail.html:104
-msgid "Set"
+msgid "Analyse de la Performance"
 msgstr ""
 
-#: web/templates/web/workout/detail.html:105
-msgid "Reps"
+#: web/templates/web/workout/detail.html:106
+#: web/templates/web/workout/detail.html:116
+#: web/templates/web/workout/session.html:110
+msgid "Série"
 msgstr ""
 
 #: web/templates/web/workout/detail.html:107
-#: web/templates/web/workout/session.html:40
-msgid "Volume"
+msgid "Reps"
 msgstr ""
 
 #: web/templates/web/workout/detail.html:108
-#: web/templates/web/workout/session.html:99
-msgid "Repos"
+msgid "Charge"
 msgstr ""
 
-#: web/templates/web/workout/detail.html:132
+#: web/templates/web/workout/detail.html:131
 #, fuzzy
-#| msgid "Moyenne"
-msgid "Reps Moyennes"
-msgstr "Medium"
+#| msgid "Aucune transmission pour le moment."
+msgid "Aucun détail enregistré"
+msgstr "No transmission yet."
 
 #: web/templates/web/workout/detail.html:139
-#, fuzzy
-#| msgid "Poids"
-msgid "Poids Max"
-msgstr "Weight"
-
-#: web/templates/web/workout/detail.html:152
-msgid "Aucun exercice enregistré"
-msgstr ""
-
-#: web/templates/web/workout/detail.html:160
-#: web/templates/web/workout/history.html:64
-#: web/templates/web/workout/start.html:13
 msgid "Nouvelle Séance"
 msgstr ""
 
-#: web/templates/web/workout/detail.html:163
+#: web/templates/web/workout/detail.html:142
 #, fuzzy
 #| msgid "Voir tout"
 msgid "Voir l'Historique"
 msgstr "View All"
 
 #: web/templates/web/workout/history.html:5
-#: web/templates/web/workout/history.html:13
 msgid "Historique Entraînements"
 msgstr ""
 
 #: web/templates/web/workout/history.html:16
-msgid "Toutes tes séances et ta progression"
+msgid "Retrace ton parcours et visualise chaque victoire vers ton sommet"
 msgstr ""
 
-#: web/templates/web/workout/history.html:35
-#, fuzzy
-#| msgid "Moyenne"
-msgid "Moyenne/Séance"
-msgstr "Medium"
-
-#: web/templates/web/workout/history.html:45
-msgid "Volume par Séance"
+#: web/templates/web/workout/history.html:47
+msgid "Volume par séance"
 msgstr ""
 
 #: web/templates/web/workout/history.html:51
-msgid "Durée par Séance"
-msgstr ""
+#, fuzzy
+#| msgid "Démarrer"
+msgid "Durée par séance"
+msgstr "Start"
 
 #: web/templates/web/workout/history.html:61
-msgid "Dernières Séances"
+msgid "Dernières Performances"
 msgstr ""
 
-#: web/templates/web/workout/history.html:105
+#: web/templates/web/workout/history.html:64
+msgid "Nouvelle Ascension"
+msgstr ""
+
+#: web/templates/web/workout/history.html:102
 msgid "Détails"
 msgstr ""
 
-#: web/templates/web/workout/history.html:116
+#: web/templates/web/workout/history.html:113
 #, fuzzy
 #| msgid "Aucune transmission pour le moment."
 msgid "Aucune séance enregistrée pour le moment"
 msgstr "No transmission yet."
 
-#: web/templates/web/workout/history.html:119
-msgid "Démarrer ta première séance"
+#: web/templates/web/workout/history.html:159
+msgid "Volume (kg)"
 msgstr ""
 
-#: web/templates/web/workout/history.html:171
+#: web/templates/web/workout/history.html:177
 #, fuzzy
 #| msgid "Durée repos (sec)"
 msgid "Durée (min)"
 msgstr "Rest duration (sec)"
 
 #: web/templates/web/workout/session.html:5
-#: web/templates/web/workout/session.html:25
 #, fuzzy
 #| msgid "Série en cours"
 msgid "Séance en Cours"
 msgstr "Current Streak"
 
-#: web/templates/web/workout/session.html:36
-msgid "Sets"
-msgstr ""
+#: web/templates/web/workout/session.html:25
+#, fuzzy
+#| msgid "Série en cours"
+msgid "Séries"
+msgstr "Current Streak"
 
 #: web/templates/web/workout/session.html:44
-msgid "XP Estimé"
+msgid "Nouvelle Série"
 msgstr ""
 
-#: web/templates/web/workout/session.html:55
-#, fuzzy
-#| msgid "Ajouter une activité"
-msgid "Ajouter un Set"
-msgstr "Add Activity"
+#: web/templates/web/workout/session.html:51
+msgid "Ton Mouvement"
+msgstr ""
 
-#: web/templates/web/workout/session.html:62
-#, fuzzy
-#| msgid "Exercices"
-msgid "Exercice"
-msgstr "Exercises"
+#: web/templates/web/workout/session.html:53
+msgid "Choisir un mouvement"
+msgstr ""
 
-#: web/templates/web/workout/session.html:64
-#, fuzzy
-#| msgid "Sélectionnez vos exercices"
-msgid "Sélectionner un exercice"
-msgstr "Select your exercises"
-
-#: web/templates/web/workout/session.html:78
+#: web/templates/web/workout/session.html:67
 #, fuzzy
 #| msgid "Récupération"
 msgid "Répétitions"
 msgstr "Recovery"
 
-#: web/templates/web/workout/session.html:88
-msgid "Repos (secondes)"
+#: web/templates/web/workout/session.html:71
+msgid "Charge (kg)"
 msgstr ""
 
-#: web/templates/web/workout/session.html:93
+#: web/templates/web/workout/session.html:77
 #, fuzzy
-#| msgid "Ajouter une activité"
-msgid "Ajouter le Set"
-msgstr "Add Activity"
+#| msgid "Durée repos (sec)"
+msgid "Repos (sec)"
+msgstr "Rest duration (sec)"
 
-#: web/templates/web/workout/session.html:102
-#: web/templates/web/workout_session.html:87
+#: web/templates/web/workout/session.html:82
+msgid "Valider la série"
+msgstr ""
+
+#: web/templates/web/workout/session.html:91
+#: web/templates/web/workout_session.html:82
 msgid "Passer"
 msgstr "Skip"
 
-#: web/templates/web/workout/session.html:110
-msgid "Sets Effectués"
+#: web/templates/web/workout/session.html:99
+msgid "Séries Réalisées"
 msgstr ""
 
-#: web/templates/web/workout/session.html:131
-msgid "Aucun set pour le moment. Commence maintenant !"
+#: web/templates/web/workout/session.html:120
+msgid "Ta progression commence ici"
 msgstr ""
 
-#: web/templates/web/workout/session.html:141
-msgid "Terminer la Séance"
+#: web/templates/web/workout/session.html:130
+msgid "Finaliser ma Performance"
 msgstr ""
 
-#: web/templates/web/workout/session.html:262
+#: web/templates/web/workout/session.html:196
+msgid "Série ajoutée !"
+msgstr ""
+
+#: web/templates/web/workout/session.html:199
+msgid "Erreur lors de l\\'ajout de la série"
+msgstr ""
+
+#: web/templates/web/workout/session.html:251
 msgid "Terminer la séance maintenant ?"
 msgstr ""
 
-#: web/templates/web/workout/session.html:280
+#: web/templates/web/workout/session.html:269
 msgid "Erreur lors de la finalisation"
 msgstr ""
 
-#: web/templates/web/workout/start.html:5
-#, fuzzy
-#| msgid "Démarrer"
-msgid "Démarrer Séance"
-msgstr "Start"
-
 #: web/templates/web/workout/start.html:16
-msgid "Prêt à repousser tes limites ? Démarre ta session maintenant."
+msgid "Libère ton plein potentiel. Ta séance commence maintenant."
 msgstr ""
 
 #: web/templates/web/workout/start.html:27
-msgid "Notes de séance"
+msgid "Notes personnelles"
 msgstr ""
 
 #: web/templates/web/workout/start.html:27
@@ -2087,197 +2038,227 @@ msgid "optionnel"
 msgstr "Operational Contact"
 
 #: web/templates/web/workout/start.html:33
-msgid "Ex: Focus pectoraux, objectif 100kg au développé couché..."
+msgid "Tes objectifs du jour, ton état d\\"
 msgstr ""
 
 #: web/templates/web/workout/start.html:43
-#, fuzzy
-#| msgid "Démarrer"
-msgid "Démarrer la Séance"
-msgstr "Start"
+msgid "Entrer dans le Studio"
+msgstr ""
 
 #: web/templates/web/workout/start.html:53
 #, fuzzy
-#| msgid "Exercices clés"
-msgid "Exercices Suggérés"
-msgstr "Exercises"
+#| msgid "Inscription"
+msgid "Inspiration"
+msgstr "REGISTRATION"
 
-#: web/templates/web/workout/start.html:89
-msgid "Historique"
-msgstr ""
+#: web/templates/web/workout/start.html:91
+#, fuzzy
+#| msgid "Voir tout"
+msgid "Mon Historique"
+msgstr "View All"
+
+#: web/templates/web/workout/start.html:94
+#, fuzzy
+#| msgid "Bibliothèque"
+msgid "Bibliothèque Studio"
+msgstr "Library"
 
 #: web/templates/web/workout_session.html:4
-msgid "Session Tactique - J.A.R.V.I.S."
-msgstr "Tactical Session - J.A.R.V.I.S."
+msgid "Studio Live - Ton Mouvement"
+msgstr ""
 
 #: web/templates/web/workout_session.html:22
-msgid "Interface"
-msgstr "Interface"
+msgid "Mode Vie : Activé"
+msgstr ""
 
-#: web/templates/web/workout_session.html:26
-msgid "Système : en ligne"
-msgstr "System: Online"
+#: web/templates/web/workout_session.html:22
+#, fuzzy
+#| msgid "Athlète"
+msgid "Athlète :"
+msgstr "ATHLETE"
 
-#: web/templates/web/workout_session.html:26
-msgid "Opérateur :"
-msgstr "Operator:"
+#: web/templates/web/workout_session.html:27
+#, fuzzy
+#| msgid "Dépense totale (TDEE)"
+msgid "Durée totale"
+msgstr "Total Expenditure (TDEE)"
 
-#: web/templates/web/workout_session.html:31
-msgid "Temps total"
-msgstr "Total Time"
-
-#: web/templates/web/workout_session.html:68
+#: web/templates/web/workout_session.html:64
 msgid "Secondes"
 msgstr "Seconds"
 
-#: web/templates/web/workout_session.html:95
-msgid "Système activé."
-msgstr "System activated."
-
-#: web/templates/web/workout_session.html:107
-msgid "Mission"
+#: web/templates/web/workout_session.html:90
+msgid "Prêt pour ton mouvement."
 msgstr ""
 
-#: web/templates/web/workout_session.html:107
-msgid "Accomplie"
+#: web/templates/web/workout_session.html:102
+#, fuzzy
+#| msgid "Performance humaine"
+msgid "Performance"
+msgstr "Human Performance"
+
+#: web/templates/web/workout_session.html:102
+msgid "Validée"
 msgstr ""
 
-#: web/templates/web/workout_session.html:111
-msgid "Données tactiques sauvegardées."
+#: web/templates/web/workout_session.html:106
+msgid "Ton ascension continue. Félicitations."
 msgstr ""
 
-#: web/templates/web/workout_session.html:117
-msgid "Ravitaillement recommandé"
+#: web/templates/web/workout_session.html:112
+msgid "Post-Workout Idéal"
 msgstr ""
 
-#: web/templates/web/workout_session.html:134
-msgid "Optimisé pour la récupération musculaire et la recharge glycogénique."
+#: web/templates/web/workout_session.html:129
+msgid "Optimisé pour ta récupération et ton énergie quotidienne."
 msgstr ""
 
-#: web/templates/web/workout_session.html:146
-msgid "Voir la recette complète"
+#: web/templates/web/workout_session.html:141
+msgid "Voir la recette"
 msgstr ""
 
-#: web/templates/web/workout_session.html:153
-msgid "Retour au QG"
-msgstr "Return to HQ"
+#: web/templates/web/workout_session.html:148
+#, fuzzy
+#| msgid "Archives du protocole"
+msgid "Reprendre mon quotidien"
+msgstr "Protocol Archives"
 
-#: web/templates/web/workout_session.html:167
+#: web/templates/web/workout_session.html:162
 msgid "Récupération."
 msgstr "Recovery."
 
-#: web/templates/web/workout_session.html:168
-msgid "Terminé."
-msgstr "Complete."
+#: web/templates/web/workout_session.html:163
+msgid "C\\"
+msgstr ""
 
-#: web/templates/web/workout_session.html:169
-msgid "Session terminée. Excellent travail. Analyse de récupération prête."
+#: web/templates/web/workout_session.html:164
+#, fuzzy
+#| msgid "Session terminée. Excellent travail. Analyse de récupération prête."
+msgid ""
+"Session terminée. Excellent travail. Ton bilan de récupération est prêt."
 msgstr "Session complete. Excellent work. Recovery analysis ready."
 
-#: web/templates/web/workout_session.html:170
-msgid "Initialisation."
-msgstr "Initialization."
+#: web/templates/web/workout_session.html:165
+#, fuzzy
+#| msgid "Démarrer"
+msgid "Démarrage."
+msgstr "Start"
 
-#: web/templates/web/workout_session.html:171
+#: web/templates/web/workout_session.html:166
 msgid "Reprise."
 msgstr "Resume."
 
-#: web/templates/web/workout_session.html:172
+#: web/templates/web/workout_session.html:167
 msgid "Pause."
 msgstr "Pause."
 
-#: web/templates/web/workout_session.html:173
+#: web/templates/web/workout_session.html:168
 msgid "Suivant."
 msgstr "Next."
 
 #: web/templates/web/workout_setup.html:4
-msgid "Configuration Tactique - FitWell"
-msgstr "Tactical Configuration - FitWell"
+#, fuzzy
+#| msgid "Profil - FitWell"
+msgid "Studio Live - FitWell"
+msgstr "Profile - FitWell"
 
-#: web/templates/web/workout_setup.html:15
-msgid "CONFIGURATION"
+#: web/templates/web/workout_setup.html:14
+msgid "Configure ton expérience et dépasse tes limites dès maintenant"
 msgstr ""
 
-#: web/templates/web/workout_setup.html:15
-msgid "TACTIQUE"
+#: web/templates/web/workout_setup.html:33
+msgid "Ta Sélection de Mouvements"
 msgstr ""
 
-#: web/templates/web/workout_setup.html:19
-msgid "Définissez les paramètres de votre mission."
-msgstr ""
-
-#: web/templates/web/workout_setup.html:38
-msgid "Sélection des Exercices (Cochez pour inclure)"
-msgstr ""
-
-#: web/templates/web/workout_setup.html:54
-msgid "LANCER LA SÉQUENCE"
-msgstr ""
+#: web/templates/web/workout_setup.html:49
+#, fuzzy
+#| msgid "Points d'expérience"
+msgid "Lancer l'Expérience"
+msgstr "Experience Points"
 
 #: web/views/auth.py:28
 msgid "Identifiants invalides."
 msgstr "Invalid credentials."
 
 #: web/views/auth.py:60
-msgid "Bienvenue sur FitWell ! 🚀"
-msgstr ""
+#, fuzzy
+#| msgid "Connexion - FitWell"
+msgid "Bienvenue chez FitWell ! ✨"
+msgstr "Login - FitWell"
 
 #: web/views/auth.py:61
 #, python-format
 msgid ""
 "Salut %(username)s,\n"
 "\n"
-"Bienvenue dans l'élite. Ton voyage vers l'optimisation commence maintenant.\n"
+"Heureux de te compter parmi nous. Ton voyage vers un meilleur quotidien "
+"commence maintenant.\n"
 "\n"
-"Accède à ton QG : %(url)s\n"
+"Accède à ton espace : %(url)s\n"
 "\n"
+"À très vite,\n"
 "L'équipe FitWell"
 msgstr ""
 
 #: web/views/auth.py:72
-msgid "Bienvenue ! Ton compte a été créé avec succès."
+msgid "Heureux de te rencontrer ! Ton compte est prêt."
 msgstr ""
 
 #: web/views/auth.py:97
-msgid "Profil mis à jour avec succès."
-msgstr "Profile updated successfully."
+msgid "Tes réglages ont été enregistrés ! ✨"
+msgstr ""
 
 #: web/views/auth.py:110
-msgid "Votre mot de passe a été mis à jour avec succès."
-msgstr "Your password has been updated successfully."
+msgid "Ton nouveau mot de passe est actif. Ta sécurité est assurée. 🔒"
+msgstr ""
 
 #: web/views/auth.py:113
-msgid "Veuillez corriger les erreurs ci-dessous."
-msgstr "Please correct the errors below."
+msgid "Oups, vérifie les informations saisies."
+msgstr ""
 
-#: web/views/content.py:137
-msgid "Commentaire ajouté."
+#: web/views/content.py:134
+msgid "Ton avis a été partagé ! ✨"
+msgstr ""
+
+#: web/views/content.py:168
+#, fuzzy
+#| msgid "Commentaire ajouté."
+msgid "Ton commentaire a été retiré."
 msgstr "Comment added."
 
 #: web/views/content.py:171
-msgid "Commentaire supprimé."
-msgstr "Comment deleted."
-
-#: web/views/content.py:174
-msgid "Vous n'êtes pas autorisé à supprimer ce commentaire."
+#, fuzzy
+#| msgid "Vous n'êtes pas autorisé à supprimer ce commentaire."
+msgid "Tu n'as pas l'autorisation de retirer ce commentaire."
 msgstr "You are not authorized to delete this comment."
 
 #: web/views/dashboard.py:33
-msgid "Journal mis à jour ! +20 XP"
-msgstr "Log updated! +20 XP"
+msgid "Bien joué ! Ta journée est enregistrée. +20 d'énergie"
+msgstr ""
 
-#: web/views/planner.py:103
-msgid "Activité ajoutée au planning !"
+#: web/views/onboarding.py:85
+#, python-format
+msgid "Félicitations ! Ton équilibre est prêt. +%(xp)s"
+msgstr ""
+
+#: web/views/planner.py:58
+msgid "Ton programme est prêt ! +100 d'énergie"
+msgstr ""
+
+#: web/views/planner.py:99
+#, fuzzy
+#| msgid "Activité ajoutée au planning !"
+msgid "Activité ajoutée à ton planning !"
 msgstr "Activity added to schedule!"
 
-#: web/views/planner.py:118
+#: web/views/planner.py:114
 msgid "Activité supprimée."
 msgstr "Activity deleted."
 
-#: web/views/planner.py:144
+#: web/views/planner.py:140
 #, python-format
-msgid "Tâche complétée ! +%(xp)s XP"
-msgstr "Task completed! +%(xp)s XP"
+msgid "C'est fait ! +%(xp)s"
+msgstr ""
 
 #: web/views/workout.py:95
 msgid "Échauffement articulaire"
@@ -2291,30 +2272,25 @@ msgstr "Arm, wrist, ankle and hip rotations."
 msgid "Respirez profondément. Préparez-vous pour la suite."
 msgstr "Breathe deeply. Prepare for next."
 
-#: web/views/workout.py:120
-msgid "Retour au calme"
-msgstr "Cooldown"
-
 #: web/views/workout.py:122
 msgid "Étirements légers et respiration."
 msgstr "Light stretching and breathing."
 
 #: web/views/workout.py:152
-msgid "Séance Coach IA terminée"
+msgid "Session Studio terminée"
 msgstr ""
 
 #: web/views/workout.py:165
-#, fuzzy, python-format
-#| msgid "Tâche complétée ! +%(xp)s XP"
-msgid "Mission accomplie ! +%(xp)s XP"
-msgstr "Task completed! +%(xp)s XP"
+#, python-format
+msgid "Bien joué ! +%(xp)s d'énergie"
+msgstr ""
 
 #: web/views/workout.py:177
 msgid "Vous avez déjà une séance en cours. Terminez-la d'abord."
 msgstr ""
 
 #: web/views/workout.py:183
-msgid "Séance démarrée ! Bon entraînement ! 💪"
+msgid "C'est parti ! Profite de ton mouvement ! ✨"
 msgstr ""
 
 #: web/views/workout.py:203
@@ -2324,21 +2300,3 @@ msgstr ""
 #: web/views/workout.py:295
 msgid "Séance terminée avec succès ! 🎉"
 msgstr ""
-
-#~ msgid "Bien-être"
-#~ msgstr "Wellness"
-
-#~ msgid "Libérez"
-#~ msgstr "Unleash"
-
-#~ msgid "L'écosystème de référence pour l'optimisation biologique."
-#~ msgstr "The reference ecosystem for biological optimization."
-
-#~ msgid "VTraining Protocolotre plan actuel"
-#~ msgstr "Your Current Plan"
-
-#~ msgid "SRecoverycore santé"
-#~ msgstr "Health Score"
-
-#~ msgid "Tous droits réservés."
-#~ msgstr "All rights reserved."

@@ -19,7 +19,7 @@ class FlowTests(TestCase):
         # 1. Unauthenticated
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "VOIR LES PROGRAMMES")
+        self.assertContains(response, "Commencer maintenant")
         
         # 2. Authenticated, No Plan
         self.client.force_login(self.user)
@@ -122,7 +122,7 @@ class FlowTests(TestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(data['status'], 'success')
-        self.assertEqual(data['xp_gain'], 100)
+        self.assertEqual(data['energy_gain'], 100)
         
         # Verify DB updates
         self.user.stats.refresh_from_db()
@@ -133,4 +133,4 @@ class FlowTests(TestCase):
         from api.models import DailyLog
         from django.utils import timezone
         log = DailyLog.objects.get(user=self.user, date=timezone.now().date())
-        self.assertIn("Séance Coach IA terminée", log.notes)
+        self.assertIn("Session Studio terminée", log.notes)

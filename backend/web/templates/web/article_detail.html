@@ -4,180 +4,143 @@
 {% block title %}{{ article.title }} - FitWell{% endblock %}
 
 {% block content %}
-<div class="min-h-screen pb-20 relative bg-background transition-colors duration-300">
-    <!-- Hero Header -->
-    <div class="relative h-[60vh] w-full">
-        <div class="absolute inset-0">
-            <img src="{% if article.image %}{{ article.image }}{% else %}https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop{% endif %}" 
-                 alt="{{ article.title }}" 
-                 class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+<div class="bg-white min-h-screen pt-32 pb-20 px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Back Button -->
+        <div class="mb-12">
+            <a href="{% url 'blog_list' %}" class="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-tse_muted hover:text-tse_accent transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" /></svg>
+                {% trans "Retour aux conseils" %}
+            </a>
         </div>
 
-        <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 max-w-5xl mx-auto z-10">
-            <div class="flex items-center space-x-4 text-sm text-primary uppercase tracking-[0.2em] font-bold mb-6 font-mono">
-                <span class="bg-primary/10 px-3 py-1 rounded border border-primary/50 text-primary backdrop-blur-sm">{{ article.category.name }}</span>
-                <span class="text-white">•</span>
-                <span class="text-white">{{ article.created_at|date:"d F Y" }}</span>
+        <!-- Article Header -->
+        <div class="mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <span class="px-4 py-1 bg-tse_accent text-[10px] font-black uppercase tracking-widest rounded-tse-pill">
+                    {{ article.category.name }}
+                </span>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-tse_muted">
+                    {{ article.created_at|date:"d F Y" }}
+                </span>
             </div>
-            
-            <h1 class="text-4xl md:text-7xl font-display font-bold mb-8 leading-tight text-white shadow-none italic drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]">
+
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-10 leading-[0.9]">
                 {{ article.title }}
             </h1>
 
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 border border-white/20 flex items-center justify-center bg-black/50 backdrop-blur-md rounded-full">
-                        <span class="text-primary font-bold text-xl font-display">{{ article.author.username|make_list|first|upper }}</span>
+            <div class="flex flex-wrap items-center justify-between gap-8 pb-10 border-b border-gray-100">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center font-black text-xl italic overflow-hidden">
+                        {% if user.avatar %}
+                            <img src="{{ user.avatar }}" class="w-full h-full object-cover">
+                        {% else %}
+                            {{ article.author.username|slice:":1"|upper }}
+                        {% endif %}
                     </div>
                     <div>
-                        <p class="text-white font-display italic text-lg">{% trans "Par" %} {{ article.author.username }}</p>
-                        <p class="text-gray-400 text-xs uppercase tracking-widest font-mono">{% trans "Contributeur Élite" %}</p>
+                        <p class="text-sm font-black uppercase tracking-tighter italic">{% trans "Par" %} {{ article.author.username }}</p>
+                <p class="text-[10px] font-bold uppercase tracking-widest text-tse_muted">{% trans "Coach & Expert Lifestyle" %}</p>
                     </div>
                 </div>
 
-                <!-- Like Button -->
                 <div class="flex items-center gap-4">
-                    <a href="{% url 'like_article' article.slug %}" class="group flex items-center gap-3 px-6 py-3 rounded-full backdrop-blur-md border transition-all duration-300 font-mono {% if is_liked %}bg-accent/20 border-accent text-accent hover:bg-accent/30{% else %}bg-white/5 border-white/20 text-white hover:bg-white/10 hover:border-accent hover:text-accent{% endif %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{% if is_liked %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 transition-transform group-hover:scale-110">
-                            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                        </svg>
-                        <span class="font-bold uppercase tracking-widest text-xs">
-                            {% if is_liked %}{% trans "Approuvé" %}{% else %}{% trans "Approuver" %}{% endif %}
-                        </span>
-                        <span class="ml-1 text-xs opacity-70">({{ article.likes.count }})</span>
+                    <a href="{% url 'like_article' article.slug %}" class="flex items-center gap-2 px-6 py-3 rounded-tse-pill border-2 {% if is_liked %}bg-tse_accent border-tse_accent{% else %}border-gray-100 hover:border-tse_accent{% endif %} transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="{% if is_liked %}currentColor{% else %}none{% endif %}" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                        <span class="text-[10px] font-black uppercase tracking-widest">{{ article.likes.count }}</span>
                     </a>
-                    
-                    <button onclick="copyLink()" class="group flex items-center gap-3 px-4 py-3 rounded-full backdrop-blur-md border border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-primary hover:text-primary transition-all duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 transition-transform group-hover:scale-110">
-                            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-                            <polyline points="16 6 12 2 8 6" />
-                            <line x1="12" y1="2" x2="12" y2="15" />
-                        </svg>
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="max-w-4xl mx-auto px-6 -mt-10 relative z-20">
+        <!-- Featured Image -->
+        {% if article.image %}
+        <div class="aspect-video rounded-tse-card overflow-hidden shadow-soft mb-16">
+            <img src="{{ article.image }}" alt="{{ article.title }}" class="w-full h-full object-cover">
+        </div>
+        {% endif %}
 
         <!-- Article Content -->
-        <div class="glass-card p-6 md:p-16 mb-16 border-t-4 border-t-primary relative bg-surface/80 border border-white/10 shadow-2xl backdrop-blur-xl">
-            <div class="prose prose-lg max-w-none prose-headings:font-display prose-headings:italic prose-headings:text-primary prose-p:font-light prose-p:leading-loose prose-p:text-gray-300 prose-strong:text-white prose-blockquote:border-l-primary prose-blockquote:text-gray-400">
-                {{ article.content|safe|linebreaks }}
-            </div>
-        </div>
+        <article class="prose prose-lg max-w-none prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-headings:italic prose-p:text-tse_text prose-p:leading-relaxed prose-strong:font-black mb-20">
+            {{ article.content|safe|linebreaks }}
+        </article>
 
-        <!-- Related Articles -->
+        <!-- Related Content -->
         {% if related_articles %}
-        <div class="mb-16 border-t border-white/10 pt-16">
-            <h3 class="text-3xl font-display font-bold italic text-white mb-10 flex items-center uppercase">
-                <span class="text-primary mr-2">///</span> {% trans "Intel Similaire :" %} <span class="text-primary ml-2">{{ article.category.name }}</span>
-            </h3>
+        <div class="pt-20 border-t border-gray-100 mb-20">
+            <h2 class="text-3xl font-black uppercase tracking-tighter italic mb-10">{% trans "Continuer la lecture" %}</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {% for related in related_articles %}
-                <article class="glass-card group hover:border-primary/50 transition-all duration-300 flex flex-col h-full bg-surface border border-white/10">
-                    <div class="relative h-48 w-full overflow-hidden rounded-t-lg">
-                        <img src="{% if related.image %}{{ related.image }}{% else %}https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop{% endif %}" 
-                             alt="{{ related.title }}" 
-                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-80"></div>
-                        <div class="absolute bottom-4 left-4 right-4">
-                            <span class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1 block font-mono">{{ related.created_at|date:"d M Y" }}</span>
-                            <h4 class="text-lg font-display font-bold text-white leading-tight group-hover:text-primary transition-colors">
-                                <a href="{% url 'article_detail' related.slug %}">
-                                    {{ related.title|truncatechars:50 }}
-                                </a>
+                <a href="{% url 'article_detail' related.slug %}" class="group block">
+                    <div class="card-overlay aspect-[4/5] rounded-tse-card mb-4 shadow-soft overflow-hidden">
+                        <img src="{% if related.image %}{{ related.image }}{% else %}https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop{% endif %}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute bottom-6 left-6 right-6 z-10">
+                            <h4 class="text-lg font-black uppercase tracking-tighter italic text-white leading-tight">
+                                {{ related.title|truncatechars:40 }}
                             </h4>
                         </div>
                     </div>
-                </article>
+                </a>
                 {% endfor %}
             </div>
         </div>
         {% endif %}
 
+        <div class="bg-gray-50 rounded-tse-card p-10 md:p-16 border border-gray-100 text-center mb-20">
+            <h3 class="text-3xl font-black uppercase tracking-tighter italic mb-6">{% trans "Passe à l'action" %}</h3>
+            <p class="text-sm font-bold uppercase tracking-widest text-tse_muted mb-10 max-w-lg mx-auto">{% trans "Ne te contente pas de lire. Applique ces conseils et commence ta transformation dès aujourd'hui avec nos programmes sur-mesure." %}</p>
+            <a href="{% url 'register' %}" class="btn-tse py-5 px-16 text-sm inline-block">{% trans "Rejoindre l'élite" %}</a>
+        </div>
+
         <!-- Comments Section -->
-        <div class="max-w-3xl mx-auto mb-16">
-            <h3 class="text-2xl font-display font-bold text-white mb-8 italic border-b border-white/10 pb-4 uppercase tracking-wide">
-                {% trans "Transmission de Données" %} <span class="text-primary font-mono ml-2">({{ comments.count }})</span>
+        <div class="bg-white rounded-tse-card p-10 md:p-16 border border-gray-100">
+            <h3 class="text-3xl font-black uppercase tracking-tighter italic mb-10 flex items-center gap-4">
+                <span class="text-tse_accent">💬</span> {% trans "La Communauté" %} ({{ comments.count }})
             </h3>
 
-            <!-- Comment Form -->
             {% if user.is_authenticated %}
-            <div class="glass-card p-6 mb-10 border border-white/10 bg-surface/50">
-                <form method="post" action=".">
-                    {% csrf_token %}
-                    <div class="mb-4">
-                        <label for="{{ form.content.id_for_label }}" class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-mono">
-                            {% trans "Votre Analyse" %}
-                        </label>
-                        {{ form.content }}
-                        {% if form.content.errors %}
-                            <p class="text-accent text-xs mt-1 font-mono">{{ form.content.errors.0 }}</p>
-                        {% endif %}
-                    </div>
-                    <div class="text-right">
-                        <button type="submit" class="bg-primary text-black px-8 py-3 rounded font-display font-bold uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_15px_rgba(0,243,255,0.3)] text-xs">
-                            {% trans "Transmettre" %}
-                        </button>
-                    </div>
-                </form>
-            </div>
+            <form method="post" class="mb-12">
+                {% csrf_token %}
+                <div class="mb-6">
+                    <textarea name="content" rows="4" class="w-full rounded-2xl border-gray-100 focus:border-tse_accent focus:ring-0 text-sm p-6" placeholder="{% trans 'Partage ton avis...' %}"></textarea>
+                </div>
+                <div class="text-right">
+                    <button type="submit" class="btn-tse py-4 px-10 text-[10px]">{% trans "Publier" %}</button>
+                </div>
+            </form>
             {% else %}
-            <div class="bg-surface/30 p-6 rounded-lg text-center mb-10 border border-white/10 border-dashed">
-                <p class="text-gray-400 mb-4 font-mono text-sm">{% trans "Connectez-vous pour rejoindre le canal de communication." %}</p>
-                <a href="{% url 'login' %}?next={{ request.path }}" class="text-primary font-bold uppercase tracking-widest text-xs hover:text-white transition-colors border border-primary/30 px-4 py-2 rounded hover:bg-primary/10">
-                    {% trans "Connexion Requise" %}
-                </a>
+            <div class="text-center py-10 border-2 border-dashed border-gray-200 rounded-2xl mb-12">
+                <p class="text-[10px] font-black uppercase tracking-widest text-tse_muted mb-6">{% trans "Connecte-toi pour participer" %}</p>
+                <a href="{% url 'login' %}?next={{ request.path }}" class="btn-tse py-3 px-8 text-[10px]">{% trans "Connexion" %}</a>
             </div>
             {% endif %}
 
-            <!-- Comments List -->
-            <div class="space-y-6">
+            <div class="space-y-8">
                 {% for comment in comments %}
-                <div class="bg-surface/50 p-6 rounded-lg border border-white/10 shadow-sm">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-primary font-display border border-white/5">
-                                {{ comment.author.username|make_list|first|upper }}
-                            </div>
-                            <div>
-                                <span class="text-sm font-bold text-white block uppercase tracking-wide">{{ comment.author.username }}</span>
-                                <span class="text-[10px] text-gray-500 font-mono uppercase">{{ comment.created_at|date:"d/m/Y H:i" }}</span>
-                            </div>
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center font-black text-sm italic flex-shrink-0">
+                        {{ comment.author.username|slice:":1"|upper }}
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[10px] font-black uppercase tracking-tighter italic">{{ comment.author.username }}</span>
+                            <span class="text-[8px] font-bold text-gray-400 uppercase tracking-widest">{{ comment.created_at|date:"d/m/Y" }}</span>
                         </div>
-                        
+                        <p class="text-xs text-tse_muted leading-relaxed">{{ comment.content }}</p>
                         {% if user == comment.author %}
-                        <form action="{% url 'delete_comment' comment.id %}" method="post" onsubmit="return confirmDelete()">
+                        <form action="{% url 'delete_comment' comment.id %}" method="post" class="mt-2">
                             {% csrf_token %}
-                            <button type="submit" class="text-gray-500 hover:text-accent transition-colors p-2" title="{% trans "Supprimer" %}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                            </button>
+                            <button type="submit" class="text-[8px] font-black uppercase tracking-widest text-red-400 hover:text-red-600 transition-colors">{% trans "Supprimer" %}</button>
                         </form>
                         {% endif %}
                     </div>
-                    <p class="text-gray-300 text-sm leading-relaxed font-sans">
-                        {{ comment.content }}
-                    </p>
                 </div>
-                {% empty %}
-                <p class="text-gray-500 text-center italic text-sm font-mono">{% trans "Aucune transmission pour le moment." %}</p>
                 {% endfor %}
             </div>
         </div>
-
-        <!-- Back Button -->
-        <div class="text-center">
-            <a href="{% url 'blog_list' %}" class="inline-flex items-center text-gray-400 hover:text-white transition-colors uppercase tracking-widest text-xs font-bold font-mono">
-                ← {% trans "Retour aux Renseignements" %}
-            </a>
-        </div>
     </div>
 </div>
+{% endblock %}
 
 <script>
     window.articleConfig = {

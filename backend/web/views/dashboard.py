@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
 from django.utils.translation import gettext as _
-from django.db.models import Avg, Sum, Count, F, Q
+from django.db.models import Avg, Sum, Count, F, Q, Max
 from datetime import timedelta
 from web.forms import DailyLogForm
 from api.models import DailyLog, WorkoutSession, User, ExerciseSet, Exercise
@@ -28,9 +28,9 @@ def dashboard_view(request):
         form = DailyLogForm(request.POST, instance=today_log)
         if form.is_valid():
             form.save()
-            # XP Reward for logging (once per day fully)
+            # Reward for logging (once per day fully)
             request.user.stats.add_xp(20)
-            messages.success(request, _("Journal mis à jour ! +20 XP"))
+            messages.success(request, _("Bien joué ! Ta journée est enregistrée. +20 d'énergie"))
             return redirect('dashboard')
     else:
         form = DailyLogForm(instance=today_log)
@@ -162,17 +162,17 @@ def analytics_view(request):
     frequency_labels = ['Entraînement', 'Repos']
     frequency_values = [workouts_this_week, rest_days]
 
-    # 6. XP PROGRESSION
-    xp_dates = []
-    xp_values = []
+    # 6. ENERGY PROGRESSION
+    energy_dates = []
+    energy_values = []
     
-    current_xp = user.stats.xp
-    xp_dates.append(today.strftime('%d/%m'))
-    xp_values.append(current_xp)
+    current_energy = user.stats.xp
+    energy_dates.append(today.strftime('%d/%m'))
+    energy_values.append(current_energy)
     
     if user.date_joined.date() > last_30_days:
-        xp_dates.insert(0, user.date_joined.date().strftime('%d/%m'))
-        xp_values.insert(0, 0)
+        energy_dates.insert(0, user.date_joined.date().strftime('%d/%m'))
+        energy_values.insert(0, 0)
 
     context = {
         'total_workouts': total_workouts,
@@ -188,9 +188,9 @@ def analytics_view(request):
         'personal_records': personal_records,
         'frequency_labels': frequency_labels,
         'frequency_values': frequency_values,
-        'xp_dates': xp_dates,
-        'xp_values': xp_values,
-        'xp_progression': len(xp_values) > 1
+        'energy_dates': energy_dates,
+        'energy_values': energy_values,
+        'energy_progression': len(energy_values) > 1
     }
     
     return render(request, 'web/analytics.html', context)

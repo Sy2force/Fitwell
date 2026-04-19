@@ -4,79 +4,80 @@
 {% block title %}{% trans "Niveau" %} - FitWell{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-void flex items-center justify-center px-4">
+<div class="min-h-screen bg-white flex items-center justify-center px-6 lg:px-8">
     <div class="max-w-3xl w-full">
-        <div class="card-glass border-neon-secondary py-12 px-8">
-            <div class="text-center mb-8">
-                <div class="text-secondary text-sm font-mono mb-2">{% trans "ÉTAPE 2/4" %}</div>
-                <h1 class="text-4xl font-display text-white mb-4">
-                    {% trans "Quel est ton niveau d'activité ?" %}
+        <div class="bg-gray-50 rounded-tse-card border border-gray-100 py-16 px-10 shadow-soft">
+            <div class="text-center mb-12">
+                <div class="text-tse_accent text-[10px] font-black uppercase tracking-widest mb-4">{% trans "ÉTAPE 2/4" %}</div>
+                <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter italic text-tse_text mb-4">
+                    Ton <span class="text-tse_accent">{% trans "Engagement" %}</span>
                 </h1>
+                <p class="text-tse_muted text-[10px] font-bold uppercase tracking-widest">{% trans "Quelle place souhaites-tu accorder à ton bien-être ?" %}</p>
             </div>
 
-            <form method="POST" class="space-y-4">
+            <form method="POST" class="space-y-6">
                 {% csrf_token %}
                 
-                <div class="space-y-3">
-                    <label class="cursor-pointer block">
+                <div class="space-y-4">
+                    <label class="cursor-pointer block group">
                         <input type="radio" name="activity_level" value="sedentary" class="peer hidden" required>
-                        <div class="card-glass border-2 border-gray-700 peer-checked:border-primary peer-checked:bg-primary/10 p-5 transition-all hover:border-primary/50">
-                            <div class="flex items-center gap-4">
-                                <div class="text-3xl">🪑</div>
+                        <div class="bg-white rounded-2xl border-2 border-gray-100 peer-checked:border-tse_accent peer-checked:bg-gray-50 p-6 transition-all hover:border-gray-200">
+                            <div class="flex items-center gap-6">
+                                <div class="text-3xl group-hover:scale-110 transition-transform">🛋️</div>
                                 <div class="flex-1">
-                                    <div class="text-white font-semibold">{% trans "Sédentaire" %}</div>
-                                    <div class="text-gray-400 text-sm">{% trans "Peu ou pas d'exercice" %}</div>
+                                    <div class="text-tse_text font-black uppercase tracking-tighter italic text-sm">{% trans "Calme" %}</div>
+                                    <div class="text-tse_muted text-[8px] font-bold uppercase tracking-widest">{% trans "Journées de bureau, peu de mouvement" %}</div>
                                 </div>
                             </div>
                         </div>
                     </label>
 
-                    <label class="cursor-pointer block">
+                    <label class="cursor-pointer block group">
                         <input type="radio" name="activity_level" value="moderate" class="peer hidden">
-                        <div class="card-glass border-2 border-gray-700 peer-checked:border-secondary peer-checked:bg-secondary/10 p-5 transition-all hover:border-secondary/50">
-                            <div class="flex items-center gap-4">
-                                <div class="text-3xl">🚶</div>
+                        <div class="bg-white rounded-2xl border-2 border-gray-100 peer-checked:border-tse_accent peer-checked:bg-gray-50 p-6 transition-all hover:border-gray-200">
+                            <div class="flex items-center gap-6">
+                                <div class="text-3xl group-hover:scale-110 transition-transform">🚶</div>
                                 <div class="flex-1">
-                                    <div class="text-white font-semibold">{% trans "Modéré" %}</div>
-                                    <div class="text-gray-400 text-sm">{% trans "1-3 fois par semaine" %}</div>
+                                    <div class="text-tse_text font-black uppercase tracking-tighter italic text-sm">{% trans "Actif" %}</div>
+                                    <div class="text-tse_muted text-[8px] font-bold uppercase tracking-widest">{% trans "1 à 2 séances par semaine" %}</div>
                                 </div>
                             </div>
                         </div>
                     </label>
 
-                    <label class="cursor-pointer block">
+                    <label class="cursor-pointer block group">
                         <input type="radio" name="activity_level" value="active" class="peer hidden">
-                        <div class="card-glass border-2 border-gray-700 peer-checked:border-energy peer-checked:bg-energy/10 p-5 transition-all hover:border-energy/50">
-                            <div class="flex items-center gap-4">
-                                <div class="text-3xl">🏃</div>
+                        <div class="bg-white rounded-2xl border-2 border-gray-100 peer-checked:border-tse_accent peer-checked:bg-gray-50 p-6 transition-all hover:border-gray-200">
+                            <div class="flex items-center gap-6">
+                                <div class="text-3xl group-hover:scale-110 transition-transform">🏃</div>
                                 <div class="flex-1">
-                                    <div class="text-white font-semibold">{% trans "Actif" %}</div>
-                                    <div class="text-gray-400 text-sm">{% trans "3-5 fois par semaine" %}</div>
+                                    <div class="text-tse_text font-black uppercase tracking-tighter italic text-sm">{% trans "Régulier" %}</div>
+                                    <div class="text-tse_muted text-[8px] font-bold uppercase tracking-widest">{% trans "3 à 4 séances par semaine" %}</div>
                                 </div>
                             </div>
                         </div>
                     </label>
 
-                    <label class="cursor-pointer block">
+                    <label class="cursor-pointer block group">
                         <input type="radio" name="activity_level" value="elite" class="peer hidden">
-                        <div class="card-glass border-2 border-gray-700 peer-checked:border-health peer-checked:bg-health/10 p-5 transition-all hover:border-health/50">
-                            <div class="flex items-center gap-4">
-                                <div class="text-3xl">💪</div>
+                        <div class="bg-white rounded-2xl border-2 border-gray-100 peer-checked:border-tse_accent peer-checked:bg-gray-50 p-6 transition-all hover:border-gray-200">
+                            <div class="flex items-center gap-6">
+                                <div class="text-3xl group-hover:scale-110 transition-transform">⚡</div>
                                 <div class="flex-1">
-                                    <div class="text-white font-semibold">{% trans "Élite" %}</div>
-                                    <div class="text-gray-400 text-sm">{% trans "6-7 fois par semaine" %}</div>
+                                    <div class="text-tse_text font-black uppercase tracking-tighter italic text-sm">{% trans "Intense" %}</div>
+                                    <div class="text-tse_muted text-[8px] font-bold uppercase tracking-widest">{% trans "Plus de 5 séances par semaine" %}</div>
                                 </div>
                             </div>
                         </div>
                     </label>
                 </div>
 
-                <div class="flex justify-between pt-8">
-                    <a href="{% url 'onboarding_step1' %}" class="btn-secondary">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-6 pt-10 border-t border-gray-100">
+                    <a href="{% url 'onboarding_step1' %}" class="text-[10px] font-black uppercase tracking-widest text-tse_muted hover:text-tse_text transition-colors">
                         ← {% trans "Retour" %}
                     </a>
-                    <button type="submit" class="btn-primary">
-                        {% trans "Suivant" %} →
+                    <button type="submit" class="btn-tse py-4 px-12 text-sm w-full sm:w-auto">
+                        {% trans "Suivant" %}
                     </button>
                 </div>
             </form>

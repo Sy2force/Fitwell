@@ -4,19 +4,19 @@
 {% block title %}{% trans "Planificateur - FitWell" %}{% endblock %}
 
 {% block content %}
-<div class="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-background transition-colors duration-300 relative overflow-hidden">
+<div class="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-white transition-colors duration-300 relative overflow-hidden">
     <!-- Background Grid Effect -->
     <div class="absolute inset-0 z-0 opacity-10 pointer-events-none bg-grid bg-grid-energy">
     </div>
 
     <div class="max-w-5xl mx-auto relative z-10">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl md:text-6xl font-display font-bold italic text-white mb-4 uppercase tracking-wide">
-                {% trans "Planificateur" %} <span class="text-energy drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]">{% trans "Élite" %}</span>
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter italic text-tse_text mb-4">
+                {% trans "Ma" %} <span class="text-tse_accent">{% trans "Stratégie" %}</span>
             </h1>
-            <p class="text-gray-400 font-mono text-sm tracking-widest uppercase flex justify-center items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-energy animate-pulse"></span>
-                {% trans "Concevez votre feuille de route vers l'excellence" %}
+            <p class="text-tse_muted text-xs font-bold uppercase tracking-widest flex justify-center items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-tse_accent animate-pulse"></span>
+                {% trans "Ton architecture sur-mesure pour une vie plus forte" %}
             </p>
         </div>
 
@@ -33,36 +33,33 @@
         <!-- Results View -->
         <div id="results-view" class="{% if not plan %}hidden{% endif %}">
             {% if plan %}
-            <div class="glass-card p-8 border-l-4 border-energy mb-8 bg-surface/50 border-white/5 shadow-lg">
-                <div class="flex items-center justify-between mb-8 border-b border-white/10 pb-4">
-                    <h2 class="text-2xl font-display font-bold text-white italic uppercase">{% trans "Votre plan actuel" %}</h2>
-                    <span class="text-xs text-gray-500 font-mono">{% trans "Généré le" %} <span class="text-energy">{{ plan.created_at|date:"d/m/Y" }}</span></span>
+            <div class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 mb-12 shadow-soft">
+                <div class="flex items-center justify-between mb-10 border-b border-gray-200 pb-6">
+                    <h2 class="text-3xl font-black uppercase tracking-tighter italic">{% trans "Ma Stratégie de Vie" %}</h2>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-tse_muted">{% trans "Dernière mise à jour :" %} {{ plan.created_at|date:"d/m/Y" }}</span>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <!-- Workout Section -->
-                    <div class="bg-surface/50 p-6 rounded-lg border border-white/5 hover:border-primary/30 transition-colors">
-                        <h3 class="text-lg font-bold text-primary mb-4 uppercase tracking-widest border-b border-primary/20 pb-2 font-display">{% trans "Protocole d'entraînement" %}</h3>
-                        <div class="space-y-4 font-mono text-sm">
-                            <!-- Displaying workout plan details nicely -->
-                            <div class="mb-4">
-                                <span class="text-gray-500 text-[10px] uppercase tracking-wider">{% trans "Objectif" %}</span>
-                                <p class="text-white font-bold">{{ plan.get_goal_display }}</p>
-                            </div>
-                            <div class="mb-4">
-                                <span class="text-gray-500 text-[10px] uppercase tracking-wider">{% trans "Focus" %}</span>
-                                <p class="text-white font-bold">{{ plan.workout_plan.focus }}</p>
-                            </div>
-                            <div class="mb-4">
-                                <span class="text-gray-500 text-[10px] uppercase tracking-wider">{% trans "Programme" %}</span>
-                                <p class="text-gray-300">{{ plan.workout_plan.schedule }}</p>
-                            </div>
-                            
+                    <div>
+                        <h3 class="text-[10px] font-black uppercase tracking-widest text-tse_accent mb-6">{% trans "Action & Mouvement" %}</h3>
+                        <div class="space-y-6">
                             <div>
-                                <span class="text-gray-500 text-[10px] uppercase tracking-wider mb-2 block">{% trans "Exercices clés" %}</span>
-                                <ul class="list-disc list-inside space-y-1 text-gray-300">
+                                <span class="text-[8px] font-bold uppercase tracking-widest text-tse_muted">{% trans "Objectif" %}</span>
+                                <p class="text-lg font-black uppercase tracking-tighter italic">{{ plan.get_goal_display }}</p>
+                            </div>
+                            <div>
+                                <span class="text-[8px] font-bold uppercase tracking-widest text-tse_muted">{% trans "Focus" %}</span>
+                                <p class="text-sm font-bold uppercase tracking-widest">{{ plan.workout_plan.focus }}</p>
+                            </div>
+                            <div>
+                                <span class="text-[8px] font-bold uppercase tracking-widest text-tse_muted mb-4 block">{% trans "Tes séances" %}</span>
+                                <ul class="space-y-3">
                                     {% for exercise in plan.workout_plan.exercises %}
-                                    <li>{{ exercise }}</li>
+                                    <li class="flex items-center gap-3 text-xs font-medium text-tse_text">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-tse_accent"></span>
+                                        {{ exercise }}
+                                    </li>
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -70,98 +67,82 @@
                     </div>
 
                     <!-- Nutrition Section -->
-                    <div class="bg-surface/50 p-6 rounded-lg border border-white/5 hover:border-health/30 transition-colors">
-                        <h3 class="text-lg font-bold text-health mb-4 uppercase tracking-widest border-b border-health/20 pb-2 font-display">{% trans "Carburant nutritionnel" %}</h3>
-                        <div class="space-y-4 font-mono text-sm">
-                            <div class="flex justify-between items-center bg-black/20 p-3 rounded">
-                                <span class="text-gray-400">{% trans "Calories cibles" %}</span>
-                                <span class="text-white font-bold text-lg">{{ plan.nutrition_plan.calories }} <span class="text-xs text-gray-500">kcal</span></span>
-                            </div>
-                            <div class="grid grid-cols-3 gap-2 mt-4">
-                                <div class="text-center bg-surface p-2 rounded border border-white/5">
-                                    <span class="block text-secondary font-bold text-lg">{{ plan.nutrition_plan.macros.protein }}</span>
-                                    <span class="text-[10px] text-gray-500 uppercase tracking-widest">{% trans "Protéines" %}</span>
-                                </div>
-                                <div class="text-center bg-surface p-2 rounded border border-white/5">
-                                    <span class="block text-energy font-bold text-lg">{{ plan.nutrition_plan.macros.carbs }}</span>
-                                    <span class="text-[10px] text-gray-500 uppercase tracking-widest">{% trans "Glucides" %}</span>
-                                </div>
-                                <div class="text-center bg-surface p-2 rounded border border-white/5">
-                                    <span class="block text-primary font-bold text-lg">{{ plan.nutrition_plan.macros.fats }}</span>
-                                    <span class="text-[10px] text-gray-500 uppercase tracking-widest">{% trans "Lipides" %}</span>
-                                </div>
+                    <div>
+                        <h3 class="text-[10px] font-black uppercase tracking-widest text-tse_accent mb-6">{% trans "Carburant & Plaisir" %}</h3>
+                        <div class="space-y-6">
+                            <div class="bg-white p-6 rounded-2xl border border-gray-100">
+                                <span class="text-[8px] font-bold uppercase tracking-widest text-tse_muted mb-1 block">{% trans "Objectif Calories" %}</span>
+                                <span class="text-3xl font-black italic">{{ plan.nutrition_plan.calories }} <span class="text-xs uppercase tracking-widest not-italic">kcal</span></span>
                             </div>
                             
-                            <div class="mt-6">
-                                <span class="text-gray-500 text-[10px] uppercase tracking-wider mb-3 block">{% trans "Exemple de repas" %}</span>
-                                <div class="space-y-3">
-                                    <div class="flex flex-col border-l-2 border-white/10 pl-3">
-                                        <span class="text-gray-500 text-[10px] uppercase">{% trans "Petit déjeuner" %}</span>
-                                        <span class="text-gray-300">{{ plan.nutrition_plan.meals.breakfast }}</span>
-                                    </div>
-                                    <div class="flex flex-col border-l-2 border-white/10 pl-3">
-                                        <span class="text-gray-500 text-[10px] uppercase">{% trans "Déjeuner" %}</span>
-                                        <span class="text-gray-300">{{ plan.nutrition_plan.meals.lunch }}</span>
-                                    </div>
-                                    <div class="flex flex-col border-l-2 border-white/10 pl-3">
-                                        <span class="text-gray-500 text-[10px] uppercase">{% trans "Dîner" %}</span>
-                                        <span class="text-gray-300">{{ plan.nutrition_plan.meals.dinner }}</span>
-                                    </div>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center">
+                                    <span class="block text-sm font-black italic">{{ plan.nutrition_plan.macros.protein }}g</span>
+                                    <span class="text-[8px] font-bold uppercase tracking-widest text-tse_muted">Prot</span>
+                                </div>
+                                <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center">
+                                    <span class="block text-sm font-black italic">{{ plan.nutrition_plan.macros.carbs }}g</span>
+                                    <span class="text-[8px] font-bold uppercase tracking-widest text-tse_muted">Glu</span>
+                                </div>
+                                <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center">
+                                    <span class="block text-sm font-black italic">{{ plan.nutrition_plan.macros.fats }}g</span>
+                                    <span class="text-[8px] font-bold uppercase tracking-widest text-tse_muted">Lip</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
                 
-                <div class="mt-8 pt-6 border-t border-white/10">
-                    <h4 class="text-white font-bold mb-4 uppercase tracking-widest text-xs font-display">{% trans "Analyse du protocole IA" %}</h4>
-                    <p class="text-gray-400 text-sm italic mb-6 border-l-2 border-energy pl-4 font-mono">"{{ plan.workout_plan.analysis.message }}"</p>
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <h4 class="text-tse_text font-black mb-4 uppercase tracking-widest text-[10px] italic">{% trans "Lecture de ton Potentiel" %}</h4>
+                    <p class="text-tse_muted text-sm italic mb-8 border-l-2 border-tse_accent pl-4 font-medium">"{{ plan.workout_plan.analysis.message }}"</p>
                     
                     <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-                        <div class="bg-surface p-3 rounded border border-white/10 text-center hover:border-energy/50 transition-colors">
-                            <span class="block text-[10px] text-gray-500 uppercase tracking-widest mb-1 font-mono">{% trans "Score santé" %}</span>
-                            <span class="text-2xl font-sport font-bold text-energy">{{ plan.workout_plan.analysis.score }}</span>
+                        <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center hover:border-tse_accent transition-all shadow-soft">
+                            <span class="block text-[8px] text-tse_muted uppercase tracking-widest mb-1 font-bold">{% trans "Score Vitalité" %}</span>
+                            <span class="text-2xl font-black italic text-tse_accent">{{ plan.workout_plan.analysis.score }}</span>
                         </div>
-                        <div class="bg-surface p-3 rounded border border-white/10 text-center hover:border-primary/50 transition-colors">
-                            <span class="block text-[10px] text-gray-500 uppercase tracking-widest mb-1 font-mono">{% trans "Fitness" %}</span>
-                            <span class="text-2xl font-sport font-bold text-primary">{{ plan.workout_plan.analysis.breakdown.fitness }}</span>
+                        <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center hover:border-tse_accent transition-all shadow-soft">
+                            <span class="block text-[8px] text-tse_muted uppercase tracking-widest mb-1 font-bold">{% trans "Mouvement" %}</span>
+                            <span class="text-2xl font-black italic text-tse_text">{{ plan.workout_plan.analysis.breakdown.fitness }}</span>
                         </div>
-                        <div class="bg-surface p-3 rounded border border-white/10 text-center hover:border-secondary/50 transition-colors">
-                            <span class="block text-[10px] text-gray-500 uppercase tracking-widest mb-1 font-mono">{% trans "Récup" %}</span>
-                            <span class="text-2xl font-sport font-bold text-secondary">{{ plan.workout_plan.analysis.breakdown.recovery }}</span>
+                        <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center hover:border-tse_accent transition-all shadow-soft">
+                            <span class="block text-[8px] text-tse_muted uppercase tracking-widest mb-1 font-bold">{% trans "Repos" %}</span>
+                            <span class="text-2xl font-black italic text-tse_text">{{ plan.workout_plan.analysis.breakdown.recovery }}</span>
                         </div>
-                        <div class="bg-surface p-3 rounded border border-white/10 text-center">
-                            <span class="block text-[10px] text-gray-500 uppercase tracking-widest mb-1 font-mono">{% trans "Vie" %}</span>
-                            <span class="text-2xl font-sport font-bold text-white">{{ plan.workout_plan.analysis.breakdown.lifestyle }}</span>
+                        <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center shadow-soft">
+                            <span class="block text-[8px] text-tse_muted uppercase tracking-widest mb-1 font-bold">{% trans "Style de vie" %}</span>
+                            <span class="text-2xl font-black italic text-tse_text">{{ plan.workout_plan.analysis.breakdown.lifestyle }}</span>
                         </div>
-                        <div class="bg-surface p-3 rounded border border-white/10 text-center">
-                            <span class="block text-[10px] text-gray-500 uppercase tracking-widest mb-1 font-mono">{% trans "IMC" %}</span>
-                            <span class="text-2xl font-sport font-bold text-white">{{ plan.workout_plan.analysis.bmi }}</span>
+                        <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center shadow-soft">
+                            <span class="block text-[8px] text-tse_muted uppercase tracking-widest mb-1 font-bold">{% trans "IMC" %}</span>
+                            <span class="text-2xl font-black italic text-tse_text">{{ plan.workout_plan.analysis.bmi }}</span>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="text-center">
-                <button onclick="toggleForm()" class="bg-surface hover:bg-white/10 text-white transition-colors px-8 py-3 rounded uppercase tracking-widest font-bold text-xs border border-white/20 font-mono">
-                    {% trans "Générer un nouveau plan" %}
+                <button onclick="toggleForm()" class="btn-tse py-4 px-12 text-xs">
+                    {% trans "Redéfinir ma Stratégie" %}
                 </button>
             </div>
 
             <!-- Plan Archives -->
             {% if plans|length > 1 %}
-            <div class="mt-16 pt-12 border-t border-white/10">
-                <h3 class="text-xl font-display font-bold text-white mb-6 italic text-center uppercase tracking-wide">{% trans "Archives du protocole" %}</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="mt-20 pt-16 border-t border-gray-100">
+                <h3 class="text-2xl font-black uppercase tracking-tighter italic text-center mb-10">{% trans "Mon Historique d'Évolution" %}</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {% for p in plans %}
                         {% if p.id != plan.id %}
-                        <div class="bg-surface p-4 rounded border border-white/10 hover:border-energy/50 transition-colors shadow-sm cursor-pointer group">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="text-energy font-bold text-xs uppercase font-mono group-hover:text-white transition-colors">{{ p.created_at|date:"d M Y" }}</span>
-                                <span class="text-[10px] text-gray-500 uppercase tracking-wider">{{ p.get_goal_display }}</span>
+                        <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:border-tse_accent transition-all cursor-pointer group">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-tse_accent">{{ p.created_at|date:"d M Y" }}</span>
+                                <span class="text-[8px] font-bold uppercase tracking-widest text-tse_muted">{{ p.get_goal_display }}</span>
                             </div>
-                            <div class="text-xs text-gray-400 font-mono">
-                                {% trans "Score santé:" %} <span class="text-white font-bold">{{ p.workout_plan.analysis.score }}</span>
+                            <div class="text-[10px] font-black uppercase tracking-widest text-tse_text">
+                                {% trans "Bien-être:" %} <span class="text-tse_accent">{{ p.workout_plan.analysis.score }}%</span>
                             </div>
                         </div>
                         {% endif %}
@@ -172,74 +153,47 @@
             {% endif %}
         </div>
 
-        <!-- Generation Form -->
-        <div id="generation-form" class="{% if plan %}hidden{% endif %}">
-            <div class="glass-card p-8 md:p-12 border border-white/10 bg-surface/50 shadow-lg relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-energy/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
-                
-                <div class="w-16 h-16 bg-energy/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-energy/30 shadow-[0_0_15px_rgba(234,179,8,0.2)]">
-                    <span class="text-3xl">⚡️</span>
+            <div class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft relative overflow-hidden">
+                <div class="w-16 h-16 bg-tse_accent rounded-full flex items-center justify-center mx-auto mb-8 shadow-soft">
+                    <span class="text-3xl">✨</span>
                 </div>
-                <h3 class="text-2xl font-bold text-white mb-2 text-center font-display uppercase tracking-wide">{% trans "Initialisation du protocole" %}</h3>
-                <p class="text-gray-400 mb-8 max-w-md mx-auto text-center font-mono text-sm">{% trans "Entrez vos données biométriques pour permettre à l'algorithme de générer votre programme optimal." %}</p>
+                <h3 class="text-3xl font-black uppercase tracking-tighter italic text-center mb-4">{% trans "Forger ma Stratégie" %}</h3>
+                <p class="text-tse_muted mb-12 max-w-md mx-auto text-center text-[10px] font-bold uppercase tracking-widest">{% trans "Quelques métriques pour une architecture sur-mesure." %}</p>
                 
-                <form method="post" class="space-y-6 max-w-2xl mx-auto relative z-10">
+                <form method="post" class="space-y-8 max-w-2xl mx-auto relative z-10">
                     {% csrf_token %}
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 font-mono">{% trans "Âge" %}</label>
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-tse_muted mb-3">{% trans "Âge" %}</label>
                             {{ form.age }}
-                            {% if form.age.errors %}
-                                <p class="text-accent text-xs mt-1 font-mono">{{ form.age.errors.0 }}</p>
-                            {% endif %}
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 font-mono">{% trans "Genre" %}</label>
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-tse_muted mb-3">{% trans "Genre" %}</label>
                             {{ form.gender }}
-                            {% if form.gender.errors %}
-                                <p class="text-accent text-xs mt-1 font-mono">{{ form.gender.errors.0 }}</p>
-                            {% endif %}
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 font-mono">{% trans "Taille (cm)" %}</label>
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-tse_muted mb-3">{% trans "Taille (cm)" %}</label>
                             {{ form.height }}
-                            {% if form.height.errors %}
-                                <p class="text-accent text-xs mt-1 font-mono">{{ form.height.errors.0 }}</p>
-                            {% endif %}
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 font-mono">{% trans "Poids (kg)" %}</label>
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-tse_muted mb-3">{% trans "Poids (kg)" %}</label>
                             {{ form.weight }}
-                            {% if form.weight.errors %}
-                                <p class="text-accent text-xs mt-1 font-mono">{{ form.weight.errors.0 }}</p>
-                            {% endif %}
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 font-mono">{% trans "Objectif" %}</label>
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-tse_muted mb-3">{% trans "Ton Objectif" %}</label>
                             {{ form.goal }}
-                            {% if form.goal.errors %}
-                                <p class="text-accent text-xs mt-1 font-mono">{{ form.goal.errors.0 }}</p>
-                            {% endif %}
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 font-mono">{% trans "Niveau d'activité" %}</label>
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-tse_muted mb-3">{% trans "Activité" %}</label>
                             {{ form.activity_level }}
-                            {% if form.activity_level.errors %}
-                                <p class="text-accent text-xs mt-1 font-mono">{{ form.activity_level.errors.0 }}</p>
-                            {% endif %}
                         </div>
                     </div>
 
-                    <div class="pt-6 text-center">
-                        <button type="submit" class="bg-energy text-black px-10 py-4 rounded font-display font-bold uppercase tracking-widest hover:bg-yellow-400 transition-all transform hover:scale-105 w-full md:w-auto shadow-[0_0_20px_rgba(234,179,8,0.4)] text-sm">
-                            {% trans "Générer le programme" %}
+                    <div class="pt-8 text-center">
+                        <button type="submit" class="btn-tse py-5 px-16 text-sm w-full md:w-auto">
+                            {% trans "Générer ma Stratégie" %}
                         </button>
-                        {% if plan %}
-                        <button type="button" onclick="toggleForm()" class="block mt-6 text-gray-500 hover:text-white text-xs uppercase tracking-widest mx-auto font-mono transition-colors">
-                            {% trans "Annuler" %}
-                        </button>
-                        {% endif %}
                     </div>
                 </form>
             </div>

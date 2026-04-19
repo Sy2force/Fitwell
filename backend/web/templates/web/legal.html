@@ -4,57 +4,56 @@
 {% block title %}{% trans "Mentions légales - FitWell" %}{% endblock %}
 
 {% block content %}
-<div class="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden transition-colors duration-300">
-    <!-- Background Grid Effect -->
-    <div class="absolute inset-0 z-0 opacity-10 pointer-events-none bg-grid bg-grid-white">
-    </div>
-
-    <div class="max-w-4xl mx-auto relative z-10">
+<div class="bg-white min-h-screen pt-32 pb-20 px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
         <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-5xl font-display font-bold italic text-white mb-4 uppercase tracking-wide">
-                {% trans "Protocole" %} <span class="text-gray-500">{% trans "Légal" %}</span>
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-4 leading-none">
+                Cadrage <span class="text-tse_accent">Légal</span>
             </h1>
-            <p class="text-gray-400 font-mono text-sm tracking-widest uppercase flex justify-center items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-white/20 animate-pulse"></span>
-                {% trans "Conditions d'utilisation et confidentialité" %}
+            <p class="text-sm font-bold uppercase tracking-widest text-tse_muted">
+                {% trans "Confidentialité, transparence et confiance pour ton quotidien" %}
             </p>
         </div>
 
-        <div class="space-y-8 text-gray-300 font-light leading-relaxed">
-            <div id="privacy" class="glass-card p-8 border border-white/10 bg-surface/50 hover:border-primary/30 transition-colors shadow-lg">
-                <h2 class="text-2xl font-display font-bold text-white mb-4 italic uppercase tracking-wide flex items-center">
-                    <span class="text-primary mr-3">01.</span> {% trans "Confidentialité des données" %}
+        <div class="space-y-12">
+            <div id="privacy" class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft">
+                <h2 class="text-2xl font-black uppercase tracking-tighter italic text-tse_text mb-6 flex items-center gap-4">
+                    <span class="text-tse_accent">01.</span> {% trans "Tes Données" %}
                 </h2>
-                <p class="mb-4 font-sans">
-                    {% trans "Chez FitWell, la sécurité de vos données biométriques est une priorité absolue. Nous utilisons des protocoles de chiffrement avancés pour garantir que vos performances restent confidentielles." %}
-                </p>
-                <p class="font-sans">
-                    {% trans "Vos données ne sont jamais vendues à des tiers. Elles sont utilisées exclusivement pour générer vos plans d'entraînement et optimiser votre expérience sur la plateforme." %}
-                </p>
-            </div>
-
-            <div id="terms" class="glass-card p-8 border border-white/10 bg-surface/50 hover:border-energy/30 transition-colors shadow-lg">
-                <h2 class="text-2xl font-display font-bold text-white mb-4 italic uppercase tracking-wide flex items-center">
-                    <span class="text-energy mr-3">02.</span> {% trans "Conditions d'utilisation" %}
-                </h2>
-                <p class="mb-4 font-sans">
-                    {% trans "L'utilisation de FitWell est réservée aux individus engagés dans une démarche d'optimisation personnelle. En accédant à nos services, vous acceptez de respecter les standards de la communauté." %}
-                </p>
-                <p class="font-sans">
-                    {% trans "FitWell n'est pas un dispositif médical. Consultez toujours un professionnel de santé avant de commencer un nouveau programme d'entraînement ou de nutrition." %}
-                </p>
-            </div>
-
-            <div id="contact" class="glass-card p-8 border border-white/10 bg-surface/50 hover:border-secondary/30 transition-colors shadow-lg">
-                <h2 class="text-2xl font-display font-bold text-white mb-4 italic uppercase tracking-wide flex items-center">
-                    <span class="text-secondary mr-3">03.</span> {% trans "Contact opérationnel" %}
-                </h2>
-                <p class="font-sans mb-4">
-                    {% trans "Pour toute requête technique ou administrative, veuillez contacter notre centre de commande :" %}
-                </p>
-                <div class="mt-4 font-mono text-primary bg-black/30 p-4 rounded border border-white/5 inline-block">
-                    <span class="text-gray-500 mr-2">></span> <a href="mailto:support@fitwell.local" class="hover:text-white transition-colors">support@fitwell.local</a>
+                <div class="prose prose-sm prose-p:text-tse_muted prose-p:leading-relaxed font-medium">
+                    <p class="mb-4">
+                        {% trans "Ta vie privée est sacrée. Chez FitWell, nous protégeons tes données personnelles avec la plus grande rigueur. Elles ne servent qu'à une chose : t'offrir l'expérience la plus personnalisée possible." %}
+                    </p>
+                    <p>
+                        {% trans "Aucune revente, aucun partage non sollicité. Tes mesures et tes progrès t'appartiennent, nous ne sommes que les outils de ta réussite." %}
+                    </p>
                 </div>
+            </div>
+
+            <div id="terms" class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft">
+                <h2 class="text-2xl font-black uppercase tracking-tighter italic text-tse_text mb-6 flex items-center gap-4">
+                    <span class="text-tse_accent">02.</span> {% trans "Engagement" %}
+                </h2>
+                <div class="prose prose-sm prose-p:text-tse_muted prose-p:leading-relaxed font-medium">
+                    <p class="mb-4">
+                        {% trans "En utilisant FitWell, tu rejoins une communauté basée sur le respect et l'amélioration de soi. Nous demandons à chacun de nos membres de cultiver cet esprit positif." %}
+                    </p>
+                    <p>
+                        {% trans "Attention : FitWell est un guide, pas un médecin. Consulte toujours un professionnel de santé pour valider que ton nouveau rythme de vie est adapté à ta condition physique." %}
+                    </p>
+                </div>
+            </div>
+
+            <div id="contact" class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft">
+                <h2 class="text-2xl font-black uppercase tracking-tighter italic text-tse_text mb-6 flex items-center gap-4">
+                    <span class="text-tse_accent">03.</span> {% trans "Nous Contacter" %}
+                </h2>
+                <p class="text-sm text-tse_muted font-medium mb-8">
+                    {% trans "Une question, une suggestion ou juste envie de partager ton succès ? Notre équipe est là pour toi." %}
+                </p>
+                <a href="mailto:support@fitwell.local" class="btn-tse py-4 px-10 text-[10px] inline-block">
+                    support@fitwell.local
+                </a>
             </div>
         </div>
     </div>

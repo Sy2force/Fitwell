@@ -4,54 +4,55 @@
 {% block title %}{% trans "Objectif" %} - FitWell{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-void flex items-center justify-center px-4">
+<div class="min-h-screen bg-white flex items-center justify-center px-6 lg:px-8">
     <div class="max-w-3xl w-full">
-        <div class="card-glass border-neon-primary py-12 px-8">
-            <div class="text-center mb-8">
-                <div class="text-primary text-sm font-mono mb-2">{% trans "ÉTAPE 1/4" %}</div>
-                <h1 class="text-4xl font-display text-white mb-4">
-                    {% trans "Quel est ton objectif principal ?" %}
+        <div class="bg-gray-50 rounded-tse-card border border-gray-100 py-16 px-10 shadow-soft">
+            <div class="text-center mb-12">
+                <div class="text-tse_accent text-[10px] font-black uppercase tracking-widest mb-4">{% trans "ÉTAPE 1/4" %}</div>
+                <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter italic text-tse_text mb-4">
+                    {% trans "Quelle est ta" %} <span class="text-tse_accent">{% trans "Vision" %}</span> ?
                 </h1>
+                <p class="text-tse_muted text-[10px] font-bold uppercase tracking-widest">{% trans "Définis le cap de ta transformation" %}</p>
             </div>
 
-            <form method="POST" class="space-y-4">
+            <form method="POST" class="space-y-8">
                 {% csrf_token %}
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <label class="cursor-pointer">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <label class="cursor-pointer group">
                         <input type="radio" name="goal" value="weight_loss" class="peer hidden" required>
-                        <div class="card-glass border-2 border-gray-700 peer-checked:border-primary peer-checked:bg-primary/10 p-6 text-center transition-all hover:border-primary/50">
-                            <div class="text-4xl mb-3">🔥</div>
-                            <div class="text-white font-semibold mb-2">{% trans "Perte de Poids" %}</div>
-                            <div class="text-gray-400 text-sm">{% trans "Brûler les graisses" %}</div>
+                        <div class="bg-white rounded-2xl border-2 border-gray-100 peer-checked:border-tse_accent peer-checked:bg-gray-50 p-8 text-center transition-all hover:border-gray-200">
+                            <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🔥</div>
+                            <div class="text-tse_text font-black uppercase tracking-tighter italic mb-2">{% trans "S'affiner" %}</div>
+                            <div class="text-tse_muted text-[8px] font-bold uppercase tracking-widest">{% trans "Brûler & Tonifier" %}</div>
                         </div>
                     </label>
 
-                    <label class="cursor-pointer">
+                    <label class="cursor-pointer group">
                         <input type="radio" name="goal" value="muscle_gain" class="peer hidden">
-                        <div class="card-glass border-2 border-gray-700 peer-checked:border-secondary peer-checked:bg-secondary/10 p-6 text-center transition-all hover:border-secondary/50">
-                            <div class="text-4xl mb-3">💪</div>
-                            <div class="text-white font-semibold mb-2">{% trans "Prise de Masse" %}</div>
-                            <div class="text-gray-400 text-sm">{% trans "Construire du muscle" %}</div>
+                        <div class="bg-white rounded-2xl border-2 border-gray-100 peer-checked:border-tse_accent peer-checked:bg-gray-50 p-8 text-center transition-all hover:border-gray-200">
+                            <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">💪</div>
+                            <div class="text-tse_text font-black uppercase tracking-tighter italic mb-2">{% trans "Se Renforcer" %}</div>
+                            <div class="text-tse_muted text-[8px] font-bold uppercase tracking-widest">{% trans "Bâtir & Sculpter" %}</div>
                         </div>
                     </label>
 
-                    <label class="cursor-pointer">
+                    <label class="cursor-pointer group">
                         <input type="radio" name="goal" value="maintenance" class="peer hidden">
-                        <div class="card-glass border-2 border-gray-700 peer-checked:border-energy peer-checked:bg-energy/10 p-6 text-center transition-all hover:border-energy/50">
-                            <div class="text-4xl mb-3">⚖️</div>
-                            <div class="text-white font-semibold mb-2">{% trans "Maintien" %}</div>
-                            <div class="text-gray-400 text-sm">{% trans "Rester en forme" %}</div>
+                        <div class="bg-white rounded-2xl border-2 border-gray-100 peer-checked:border-tse_accent peer-checked:bg-gray-50 p-8 text-center transition-all hover:border-gray-200">
+                            <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">⚖️</div>
+                            <div class="text-tse_text font-black uppercase tracking-tighter italic mb-2">{% trans "Équilibre" %}</div>
+                            <div class="text-tse_muted text-[8px] font-bold uppercase tracking-widest">{% trans "Santé & Énergie" %}</div>
                         </div>
                     </label>
                 </div>
 
-                <div class="flex justify-between pt-8">
-                    <a href="{% url 'onboarding_welcome' %}" class="btn-secondary">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-6 pt-10 border-t border-gray-100">
+                    <a href="{% url 'onboarding_welcome' %}" class="text-[10px] font-black uppercase tracking-widest text-tse_muted hover:text-tse_text transition-colors">
                         ← {% trans "Retour" %}
                     </a>
-                    <button type="submit" class="btn-primary">
-                        {% trans "Suivant" %} →
+                    <button type="submit" class="btn-tse py-4 px-12 text-sm w-full sm:w-auto">
+                        {% trans "Continuer" %}
                     </button>
                 </div>
             </form>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import gettext as _
 from api.models import WellnessPlan
 from api.services import generate_wellness_plan
 from api.services.gamification import check_and_award_badges
@@ -70,9 +71,8 @@ def onboarding_step3(request):
                 if 'consistency' in breakdown:
                     request.user.stats.consistency_score = breakdown.get('consistency', 0)
 
-            request.user.stats.add_xp(50)
+            request.user.stats.add_xp(100)
             request.user.stats.update_streak()
-            request.user.stats.save()
         
         new_badges = check_and_award_badges(request.user)
         
@@ -83,6 +83,7 @@ def onboarding_step3(request):
         request.session.pop('onboarding_activity', None)
         
         return render(request, 'web/onboarding/complete.html', {
+            'message': _("Félicitations ! Ton équilibre est prêt. +%(xp)s") % {'xp': 100},
             'plan': plan,
             'new_badges': new_badges
         })

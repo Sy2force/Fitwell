@@ -157,7 +157,7 @@ function finishSession() {
     })
     .then(response => response.json())
     .then(data => {
-        // We could display the XP gain here if we wanted to dynamically update the UI
+        // We could display the energy gain here if we wanted to dynamically update the UI
     })
     .catch(error => console.error('Error recording workout:', error));
     

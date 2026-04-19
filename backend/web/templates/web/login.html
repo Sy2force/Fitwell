@@ -4,30 +4,31 @@
 {% block title %}{% trans "Connexion - FitWell" %}{% endblock %}
 
 {% block content %}
-<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-background transition-colors duration-300">
-    <!-- Background Elements -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 blur-[150px] rounded-full -z-10 animate-pulse-slow"></div>
-    <div class="absolute inset-0 z-0 opacity-20 pointer-events-none bg-grid bg-grid-primary">
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-white transition-colors duration-300">
+    <!-- Background Design -->
+    <div class="absolute inset-0 z-0 opacity-5 pointer-events-none bg-gray-50">
     </div>
 
-    <div class="max-w-md w-full space-y-8 glass-card p-8 md:p-12 border-l-4 border-primary relative shadow-[0_0_30px_rgba(0,243,255,0.1)] bg-surface/50 border-white/5">
+    <div class="max-w-md w-full space-y-8 bg-gray-50 rounded-tse-card p-8 md:p-12 border border-gray-100 relative shadow-soft">
         <div>
-            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-primary/30 shadow-[0_0_15px_rgba(0,243,255,0.2)]">
-                <span class="text-3xl">🔓</span>
+            <div class="w-16 h-16 bg-tse_accent rounded-full flex items-center justify-center mx-auto mb-6 shadow-soft">
+                <span class="text-3xl">✨</span>
             </div>
-            <h2 class="mt-2 text-center text-4xl font-display font-bold italic text-white tracking-wide uppercase">
-                {% trans "Bon" %} <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">{% trans "Retour" %}</span>
+            <h2 class="mt-2 text-center text-4xl font-black uppercase tracking-tighter italic text-tse_text">
+                {% trans "Ravi de" %} <span class="text-tse_accent">{% trans "te Revoir" %}</span>
             </h2>
-            <p class="mt-2 text-center text-xs text-gray-400 font-mono uppercase tracking-[0.3em] flex justify-center items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                {% trans "Accès terminal sécurisé" %}
+            <p class="mt-4 text-center text-[10px] text-tse_muted font-black uppercase tracking-widest flex justify-center items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-tse_accent animate-pulse"></span>
+                {% trans "Reprends ton ascension maintenant" %}
             </p>
         </div>
         
         {% if messages %}
-        <div class="bg-accent/10 border border-accent/50 text-accent px-4 py-3 rounded relative font-mono text-sm" role="alert">
+        <div class="space-y-2">
             {% for message in messages %}
-                <span class="block sm:inline">{{ message }}</span>
+            <div class="p-4 rounded-2xl text-[10px] font-black uppercase tracking-widest bg-white border border-gray-100 text-tse_text shadow-soft" role="alert">
+                {{ message }}
+            </div>
             {% endfor %}
         </div>
         {% endif %}
@@ -40,10 +41,9 @@
                     <label for="{{ field.id_for_label }}" class="sr-only">{{ field.label }}</label>
                     <div class="relative group">
                         {{ field }}
-                        <div class="absolute inset-0 border border-primary/0 rounded pointer-events-none group-focus-within:border-primary/50 transition-all duration-300"></div>
                     </div>
                     {% if field.errors %}
-                        <p class="text-accent text-xs mt-1 font-mono pl-1">{{ field.errors.0 }}</p>
+                        <p class="text-red-500 text-[8px] mt-2 font-black uppercase tracking-widest">{{ field.errors.0 }}</p>
                     {% endif %}
                 </div>
                 {% endfor %}
@@ -51,26 +51,21 @@
 
             <div class="flex items-center justify-end">
                 <div class="text-sm">
-                    <a href="{% url 'password_reset' %}" class="font-bold text-[10px] uppercase tracking-widest text-gray-500 hover:text-primary transition-colors font-mono border-b border-transparent hover:border-primary">
+                    <a href="{% url 'password_reset' %}" class="font-black text-[10px] uppercase tracking-widest text-tse_muted hover:text-tse_accent transition-colors">
                         {% trans "Mot de passe oublié ?" %}
                     </a>
                 </div>
             </div>
 
             <div>
-                <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-primary hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary shadow-[0_0_20px_rgba(0,243,255,0.3)] hover:shadow-[0_0_30px_rgba(0,243,255,0.5)] transition-all uppercase tracking-widest font-display italic">
-                    <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                        <svg class="h-5 w-5 text-black/50 group-hover:text-black transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                        </svg>
-                    </span>
-                    {% trans "Initier session" %}
+                <button type="submit" class="btn-tse w-full py-4 text-sm">
+                    {% trans "Me connecter" %}
                 </button>
             </div>
         </form>
         
-        <div class="text-center mt-4">
-            <p class="text-gray-500 text-sm font-mono">{% trans "Pas encore membre ?" %} <a href="{% url 'register' %}" class="text-primary hover:text-white font-bold transition-colors uppercase tracking-wider text-xs">{% trans "Rejoindre l'élite" %}</a></p>
+        <div class="text-center mt-8">
+            <p class="text-tse_muted text-[10px] font-bold uppercase tracking-widest">{% trans "Pas encore membre ?" %} <a href="{% url 'register' %}" class="text-tse_text hover:text-tse_accent font-black transition-colors">{% trans "Commencer l'expérience" %}</a></p>
         </div>
     </div>
 </div>

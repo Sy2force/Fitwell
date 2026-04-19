@@ -50,7 +50,7 @@ class WellnessPlanViewSet(viewsets.ModelViewSet):
                 stats.consistency_score = breakdown.get('consistency', 0)
             
             # Gamification: +100 XP
-            stats.xp += 100
-            stats.level = 1 + (stats.xp // 500)
-            
-            stats.save()
+            stats.add_xp(100)
+
+    def get_serializer_class(self):
+        return WellnessPlanSerializer

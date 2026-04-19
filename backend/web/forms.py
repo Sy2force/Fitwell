@@ -28,9 +28,9 @@ class DailyLogForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        common_classes = 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white focus:border-energy focus:outline-none dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white'
+        common_classes = 'w-full bg-white border border-gray-100 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-tse_accent focus:ring-0 transition-all font-medium'
         for field_name, field in self.fields.items():
-            if field_name != 'mood': # Range input styling is different usually
+            if field_name != 'mood': # Range input styling is different
                 field.widget.attrs.update({'class': common_classes})
 
 class CustomEventForm(forms.ModelForm):
@@ -41,7 +41,7 @@ class CustomEventForm(forms.ModelForm):
         model = CustomEvent
         fields = ['title', 'event_type', 'day_of_week', 'start_time', 'end_time', 'priority']
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': _('Ex: Séance Pecs, Réunion Projet X')}),
+            'title': forms.TextInput(attrs={'placeholder': _('Ex: Séance Fitness, Routine Matinale')}),
             'day_of_week': forms.Select(choices=[
                 ('monday', _('Lundi')),
                 ('tuesday', _('Mardi')),
@@ -65,7 +65,7 @@ class CustomEventForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        common_classes = 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white focus:border-energy focus:outline-none dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white'
+        common_classes = 'w-full bg-white border border-gray-100 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-tse_accent focus:ring-0 transition-all font-medium'
         for field in self.fields.values():
             field.widget.attrs.update({'class': common_classes})
 
@@ -82,12 +82,12 @@ class CustomUserCreationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs.update({
-                'class': 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white placeholder-gray-500 focus:border-energy focus:outline-none focus:ring-1 focus:ring-energy transition-colors dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white',
+                'class': 'w-full bg-white border border-gray-100 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-tse_accent focus:ring-0 transition-all font-medium',
             })
             if field_name == 'username':
-                field.widget.attrs['placeholder'] = _("Nom d'utilisateur")
+                field.widget.attrs['placeholder'] = _("Ton nom")
             elif field_name == 'email':
-                field.widget.attrs['placeholder'] = _("adresse@email.com")
+                field.widget.attrs['placeholder'] = _("ton@email.com")
 
 class CustomAuthenticationForm(AuthenticationForm):
     """
@@ -97,10 +97,10 @@ class CustomAuthenticationForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
-                'class': 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white',
+                'class': 'w-full bg-white border border-gray-100 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-tse_accent focus:ring-0 transition-all font-medium',
             })
-        self.fields['username'].widget.attrs['placeholder'] = _("Nom d'utilisateur / Email")
-        self.fields['password'].widget.attrs['placeholder'] = _("Mot de passe")
+        self.fields['username'].widget.attrs['placeholder'] = _("Nom ou Email")
+        self.fields['password'].widget.attrs['placeholder'] = _("Ton mot de passe")
 
 class CustomPasswordResetForm(PasswordResetForm):
     """
@@ -110,8 +110,8 @@ class CustomPasswordResetForm(PasswordResetForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
-                'class': 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white',
-                'placeholder': _('votre@email.com')
+                'class': 'w-full bg-white border border-gray-100 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-tse_accent focus:ring-0 transition-all font-medium',
+                'placeholder': _('ton@email.com')
             })
 
 class CustomSetPasswordForm(SetPasswordForm):
@@ -122,7 +122,7 @@ class CustomSetPasswordForm(SetPasswordForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
-                'class': 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white',
+                'class': 'w-full bg-white border border-gray-100 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-tse_accent focus:ring-0 transition-all font-medium',
             })
 
 class WellnessPlanForm(forms.ModelForm):
@@ -145,7 +145,7 @@ class WellnessPlanForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Definition des classes communes
-        common_classes = 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white focus:border-energy focus:outline-none dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white'
+        common_classes = 'w-full bg-white border border-gray-100 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-tse_accent focus:ring-0 transition-all font-bold appearance-none'
         
         for field_name, field in self.fields.items():
             field.widget.attrs.update({'class': common_classes})
@@ -181,9 +181,9 @@ class CommentForm(forms.ModelForm):
         fields = ['content']
         widgets = {
             'content': forms.Textarea(attrs={
-                'class': 'w-full bg-gray-900 border border-white/10 p-4 rounded text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white',
+                'class': 'w-full bg-white border border-gray-100 p-6 rounded-2xl text-tse_text placeholder-gray-300 focus:border-tse_accent focus:ring-0 transition-all font-medium',
                 'rows': 4,
-                'placeholder': _('Partagez votre analyse...')
+                'placeholder': _('Partage ton avis...')
             })
         }
         labels = {
@@ -199,17 +199,17 @@ class UserUpdateForm(forms.ModelForm):
         fields = ['email', 'bio', 'avatar']
         widgets = {
             'email': forms.EmailInput(attrs={
-                'class': 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white',
-                'placeholder': _('votre@email.com')
+                'class': 'w-full bg-white border border-gray-100 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-tse_accent focus:ring-0 transition-all font-medium',
+                'placeholder': _('ton@email.com')
             }),
             'bio': forms.Textarea(attrs={
-                'class': 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white',
+                'class': 'w-full bg-white border border-gray-100 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-tse_accent focus:ring-0 transition-all font-medium',
                 'rows': 3,
-                'placeholder': _('Parlez-nous de vos objectifs...')
+                'placeholder': _('Parle-nous de tes objectifs...')
             }),
             'avatar': forms.TextInput(attrs={
-                'class': 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white',
-                'placeholder': _('URL de votre image')
+                'class': 'w-full bg-white border border-gray-100 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-tse_accent focus:ring-0 transition-all font-medium',
+                'placeholder': _('URL de ton image')
             })
         }
         labels = {
@@ -226,7 +226,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
-                'class': 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors dark:bg-black/30 dark:border-white/10 bg-white border-gray-300 text-gray-900 dark:text-white',
+                'class': 'w-full bg-white border border-gray-100 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-tse_accent focus:ring-0 transition-all font-medium',
             })
 
 class CustomWorkoutForm(forms.Form):
@@ -237,21 +237,21 @@ class CustomWorkoutForm(forms.Form):
     exercises = forms.ModelMultipleChoiceField(
         queryset=Exercise.objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        label=_('Sélectionnez vos exercices')
+        label=_('Choisis tes mouvements')
     )
     work_duration = forms.IntegerField(
         initial=45,
         min_value=10,
         max_value=300,
         label=_('Durée effort (sec)'),
-        widget=forms.NumberInput(attrs={'class': 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white focus:border-energy focus:outline-none'})
+        widget=forms.NumberInput(attrs={'class': 'w-full bg-white border border-gray-100 p-4 rounded-2xl text-tse_text focus:border-tse_accent focus:ring-0 transition-all font-bold'})
     )
     rest_duration = forms.IntegerField(
         initial=15,
         min_value=5,
         max_value=300,
         label=_('Durée repos (sec)'),
-        widget=forms.NumberInput(attrs={'class': 'w-full bg-gray-900 border border-white/10 p-3 rounded text-white focus:border-energy focus:outline-none'})
+        widget=forms.NumberInput(attrs={'class': 'w-full bg-white border border-gray-100 p-4 rounded-2xl text-tse_text focus:border-tse_accent focus:ring-0 transition-all font-bold'})
     )
 
     def __init__(self, *args, **kwargs):

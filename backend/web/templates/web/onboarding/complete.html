@@ -4,33 +4,33 @@
 {% block title %}{% trans "Prêt" %} - FitWell{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-void flex items-center justify-center px-4">
+<div class="min-h-screen bg-white flex items-center justify-center px-6 lg:px-8">
     <div class="max-w-2xl w-full">
-        <div class="card-glass border-neon-health text-center py-16 px-8">
-            <div class="text-6xl mb-6">✅</div>
-            <h1 class="text-5xl font-display text-white mb-6">
-                {% trans "Ton Plan est Prêt !" %}
+        <div class="bg-gray-50 rounded-tse-card border border-gray-100 text-center py-20 px-10 shadow-soft">
+            <div class="text-6xl mb-10">✅</div>
+            <h1 class="text-5xl md:text-6xl font-black uppercase tracking-tighter italic text-tse_text mb-6 leading-none">
+                L'aventure <span class="text-tse_accent">Commence</span>
             </h1>
-            <p class="text-gray-400 text-lg mb-8">
-                {% trans "Ton profil est configuré. Tu as gagné" %} <span class="text-energy font-bold">+100 XP</span> !
+            <p class="text-tse_muted text-sm font-bold uppercase tracking-widest mb-12">
+                {% trans "Ton profil est optimisé. Ton énergie vitale a augmenté de" %} <span class="text-tse_accent font-black">+100</span> !
             </p>
 
             {% if new_badges %}
-            <div class="mb-8">
-                <div class="text-white font-semibold mb-4">{% trans "Badges Débloqués" %}</div>
-                <div class="flex justify-center gap-4">
+            <div class="mb-12">
+                <div class="text-[10px] font-black uppercase tracking-widest text-tse_muted mb-6">{% trans "Succès Débloqués" %}</div>
+                <div class="flex justify-center gap-6">
                     {% for badge in new_badges %}
-                    <div class="bg-gray-900 rounded-lg p-4 border border-primary">
-                        <div class="text-4xl mb-2">{{ badge.icon }}</div>
-                        <div class="text-white text-sm">{{ badge.name }}</div>
+                    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-soft group hover:border-tse_accent transition-all">
+                        <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">{{ badge.icon }}</div>
+                        <div class="text-tse_text font-black uppercase tracking-tighter italic text-[10px]">{{ badge.name }}</div>
                     </div>
                     {% endfor %}
                 </div>
             </div>
             {% endif %}
 
-            <a href="{% url 'dashboard' %}" class="btn-primary text-xl px-12 py-4 inline-block">
-                {% trans "Accéder au Dashboard" %} 🎯
+            <a href="{% url 'dashboard' %}" class="btn-tse py-5 px-16 text-sm inline-block">
+                {% trans "Découvrir mon nouvel univers" %}
             </a>
         </div>
     </div>

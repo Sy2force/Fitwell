@@ -31,7 +31,7 @@ class WebTests(TestCase):
         self.client.force_login(self.user)
         response = self.client.get(reverse('planner'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Initialisation du protocole")
+        self.assertContains(response, "Stratégie")
 
     def test_blog_comment_submission(self):
         """

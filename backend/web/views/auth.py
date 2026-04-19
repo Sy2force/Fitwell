@@ -57,8 +57,8 @@ def register_view(request):
             # Send Welcome Email
             try:
                 send_mail(
-                    subject=_("Bienvenue sur FitWell ! 🚀"),
-                    message=_("Salut %(username)s,\n\nBienvenue dans l'élite. Ton voyage vers l'optimisation commence maintenant.\n\nAccède à ton QG : %(url)s\n\nL'équipe FitWell") % {
+                    subject=_("Bienvenue chez FitWell ! ✨"),
+                    message=_("Salut %(username)s,\n\nHeureux de te compter parmi nous. Ton voyage vers un meilleur quotidien commence maintenant.\n\nAccède à ton espace : %(url)s\n\nÀ très vite,\nL'équipe FitWell") % {
                         'username': user.username,
                         'url': request.build_absolute_uri(reverse('dashboard'))
                     },
@@ -69,7 +69,7 @@ def register_view(request):
             except Exception:
                 pass # Don't block registration if email fails
 
-            messages.success(request, _("Bienvenue ! Ton compte a été créé avec succès."))
+            messages.success(request, _("Heureux de te rencontrer ! Ton compte est prêt."))
             return redirect('home')
         else:
             for field, errors in form.errors.items():
@@ -94,7 +94,7 @@ def edit_profile(request):
         form = UserUpdateForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request, _("Profil mis à jour avec succès."))
+            messages.success(request, _("Tes réglages ont été enregistrés ! ✨"))
             return redirect('profile')
     else:
         form = UserUpdateForm(instance=request.user)
@@ -107,10 +107,10 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            messages.success(request, _('Votre mot de passe a été mis à jour avec succès.'))
+            messages.success(request, _('Ton nouveau mot de passe est actif. Ta sécurité est assurée. 🔒'))
             return redirect('profile')
         else:
-            messages.error(request, _('Veuillez corriger les erreurs ci-dessous.'))
+            messages.error(request, _('Oups, vérifie les informations saisies.'))
     else:
         form = CustomPasswordChangeForm(request.user)
     return render(request, 'web/change_password.html', {

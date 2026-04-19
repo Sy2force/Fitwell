@@ -50,6 +50,7 @@ class UserStats(models.Model):
         Adds XP and handles leveling up.
         """
         self.xp += amount
+        
         # Formula: Level N requires N * 500 XP
         required_xp = self.level * 500
         

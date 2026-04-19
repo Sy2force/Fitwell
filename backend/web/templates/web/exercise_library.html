@@ -2,160 +2,75 @@
 {% load i18n %}
 
 {% block content %}
-<!-- Page Exercices Style HomePark -->
-<div class="min-h-screen bg-gray-900">
-    <!-- Header avec bouton VOD -->
-    <div class="bg-black py-8">
-        <div class="max-w-7xl mx-auto px-8 flex items-center justify-between">
-            <div>
-                <div class="text-gray-400 text-sm mb-2">{% trans "Accueil" %} > {% trans "VOD" %}</div>
-                <div class="inline-block bg-yellow-400 text-black px-8 py-3 rounded-full font-black text-xl">
-                    {% trans "VOD" %}
-                </div>
-            </div>
-            <button class="bg-gray-800 text-white px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-gray-700 transition-all">
-                <span>☰</span>
-                <span class="font-bold">{% trans "FILTRER" %}</span>
-            </button>
-        </div>
-    </div>
-    
-    <!-- Filtres Programmes -->
-    <div class="bg-black py-6 border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-8">
-            <div class="text-white text-sm font-bold mb-4">{% trans "PROGRAMMES :" %}</div>
-            <div class="flex flex-wrap gap-3">
-                <a href="?muscle=" class="px-4 py-2 {% if not current_muscle %}bg-yellow-400 text-black{% else %}bg-gray-800 text-white{% endif %} rounded font-bold text-xs uppercase hover:bg-yellow-300 transition-all">{% trans "SCULPT" %}</a>
-                <a href="?muscle=chest" class="px-4 py-2 {% if current_muscle == 'chest' %}bg-yellow-400 text-black{% else %}bg-gray-800 text-white{% endif %} rounded font-bold text-xs uppercase hover:bg-gray-700 transition-all">{% trans "PECTORAUX" %}</a>
-                <a href="?muscle=legs" class="px-4 py-2 {% if current_muscle == 'legs' %}bg-yellow-400 text-black{% else %}bg-gray-800 text-white{% endif %} rounded font-bold text-xs uppercase hover:bg-gray-700 transition-all">{% trans "JAMBES" %}</a>
-                <a href="?muscle=back" class="px-4 py-2 {% if current_muscle == 'back' %}bg-yellow-400 text-black{% else %}bg-gray-800 text-white{% endif %} rounded font-bold text-xs uppercase hover:bg-gray-700 transition-all">{% trans "DOS" %}</a>
-                <a href="?muscle=shoulders" class="px-4 py-2 {% if current_muscle == 'shoulders' %}bg-yellow-400 text-black{% else %}bg-gray-800 text-white{% endif %} rounded font-bold text-xs uppercase hover:bg-gray-700 transition-all">{% trans "ÉPAULES" %}</a>
-                <a href="?muscle=arms" class="px-4 py-2 {% if current_muscle == 'arms' %}bg-yellow-400 text-black{% else %}bg-gray-800 text-white{% endif %} rounded font-bold text-xs uppercase hover:bg-gray-700 transition-all">{% trans "BRAS" %}</a>
-                <a href="?muscle=abs" class="px-4 py-2 {% if current_muscle == 'abs' %}bg-yellow-400 text-black{% else %}bg-gray-800 text-white{% endif %} rounded font-bold text-xs uppercase hover:bg-gray-700 transition-all">{% trans "ABDOS" %}</a>
-                <a href="?muscle=cardio" class="px-4 py-2 {% if current_muscle == 'cardio' %}bg-yellow-400 text-black{% else %}bg-gray-800 text-white{% endif %} rounded font-bold text-xs uppercase hover:bg-gray-700 transition-all">{% trans "CARDIO" %}</a>
-            </div>
-        </div>
-    </div>
-    
-    <div class="max-w-7xl mx-auto px-8 py-12">
-        <!-- Section S'AFFINER -->
+<div class="bg-white min-h-screen pt-32 pb-20 px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
         <div class="mb-16">
-            <h2 class="text-4xl font-black text-white mb-8 italic">{% trans "S'AFFINER" %}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
-                {% for exercise in exercises|slice:":4" %}
-                <div class="group relative overflow-hidden rounded-lg bg-gray-800 hover:transform hover:scale-105 transition-all duration-300 cursor-pointer">
-                    <div class="relative h-64">
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-4 leading-none">
+                {% trans "Studio" %} <span class="text-tse_accent">{% trans "Live" %}</span>
+            </h1>
+            <p class="text-sm font-bold uppercase tracking-widest text-tse_muted">
+                {% trans "L'art du mouvement. Des séances immersives pour sculpter ton corps et libérer ton esprit." %}
+            </p>
+        </div>
+
+        <!-- Filtres TSE -->
+        <div class="flex flex-wrap gap-4 mb-16">
+            <a href="?muscle=" class="{% if not current_muscle %}bg-tse_accent{% else %}bg-gray-100{% endif %} px-6 py-2 rounded-tse-pill text-[10px] font-black uppercase tracking-widest transition-all">
+                {% trans "Tous" %}
+            </a>
+            {% for code, name in muscle_choices %}
+            <a href="?muscle={{ code }}" class="{% if current_muscle == code %}bg-tse_accent{% else %}bg-gray-100{% endif %} px-6 py-2 rounded-tse-pill text-[10px] font-black uppercase tracking-widest transition-all">
+                {{ name }}
+            </a>
+            {% endfor %}
+        </div>
+
+        {% if exercises %}
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                {% for exercise in exercises %}
+                <div class="group block cursor-pointer">
+                    <div class="card-overlay aspect-video mb-4 shadow-soft group-hover:transform group-hover:scale-[1.02] transition-all duration-500 relative">
                         <img src="{{ exercise.image_url }}" 
                              alt="{{ exercise.name }}" 
                              class="w-full h-full object-cover">
-                        <div class="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-yellow-400 transition-all">
-                            <span>❤️</span>
+                        
+                        <div class="absolute top-4 left-4 z-10">
+                            <span class="px-3 py-1 bg-white/20 backdrop-blur-md text-white text-[8px] font-black uppercase tracking-widest rounded-tse-pill">
+                                {{ exercise.get_difficulty_display }}
+                            </span>
                         </div>
-                        <div class="absolute top-4 left-4 bg-black/80 text-white px-3 py-1 rounded text-xs font-bold">
-                            30 MIN
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4">
-                            <div class="flex items-center gap-1 text-yellow-400 text-sm mb-2">
-                                <span>🔥</span>
-                                <span>🔥</span>
-                                <span>🔥</span>
-                            </div>
-                            <div class="text-white font-bold text-sm">{{ exercise.name }}</div>
-                            <div class="text-gray-400 text-xs">{{ exercise.description|truncatewords:5 }}</div>
+
+                        <div class="absolute bottom-6 left-6 right-6 z-10">
+                            <h3 class="text-lg font-black uppercase tracking-tighter italic text-white leading-tight">
+                                {{ exercise.name }}
+                            </h3>
                         </div>
                     </div>
-                </div>
-                {% endfor %}
-                
-                <!-- Overlay invitation inscription pour non-connectés -->
-                {% if not user.is_authenticated %}
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/95 to-transparent flex items-center justify-center z-50">
-                    <div class="text-center max-w-2xl px-8">
-                        <div class="text-6xl mb-6">🔒</div>
-                        <h3 class="text-4xl font-black text-white mb-4">{% trans "Découvre 101 Exercices" %}</h3>
-                        <p class="text-xl text-gray-300 mb-8">{% trans "Crée ton compte gratuit pour accéder à tous les exercices, programmes personnalisés et bien plus !" %}</p>
-                        <div class="flex gap-4 justify-center">
-                            <a href="{% url 'register' %}" class="bg-yellow-400 text-black px-12 py-4 rounded-lg font-black uppercase hover:bg-yellow-300 transition-all text-lg">
-                                {% trans "CRÉER MON COMPTE GRATUIT" %}
-                            </a>
-                            <a href="{% url 'login' %}" class="bg-white/10 backdrop-blur-md border-2 border-white text-white px-12 py-4 rounded-lg font-bold uppercase hover:bg-white/20 transition-all">
-                                {% trans "J'ai déjà un compte" %}
-                            </a>
-                        </div>
-                        <p class="text-sm text-gray-400 mt-6">✨ {% trans "Gratuit • Sans engagement • Accès immédiat" %}</p>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-        
-        <!-- Section RÉCUPÉRER -->
-        <div class="mb-16">
-            <h2 class="text-4xl font-black text-white mb-8 italic">{% trans "RÉCUPÉRER" %}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                {% for exercise in exercises|slice:"4:8" %}
-                <div class="group relative overflow-hidden rounded-lg bg-gray-800 hover:transform hover:scale-105 transition-all duration-300 cursor-pointer">
-                    <div class="relative h-64">
-                        <img src="{{ exercise.image_url }}" 
-                             alt="{{ exercise.name }}" 
-                             class="w-full h-full object-cover">
-                        <div class="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-yellow-400 transition-all">
-                            <span>❤️</span>
-                        </div>
-                        <div class="absolute top-4 left-4 bg-black/80 text-white px-3 py-1 rounded text-xs font-bold">
-                            20 MIN
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4">
-                            <div class="flex items-center gap-1 text-yellow-400 text-sm mb-2">
-                                <span>🔥</span>
-                            </div>
-                            <div class="text-white font-bold text-sm">{{ exercise.name }}</div>
-                            <div class="text-gray-400 text-xs">{% trans "Récupérer" %}</div>
-                        </div>
+                    <div class="px-1">
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-tse_accent">
+                            {{ exercise.get_muscle_group_display }} • {{ exercise.equipment }}
+                        </p>
                     </div>
                 </div>
                 {% endfor %}
             </div>
-        </div>
-        
-        <!-- Section SE MUSCLER -->
-        <div class="mb-16">
-            <h2 class="text-4xl font-black text-white mb-8 italic">{% trans "SE MUSCLER" %}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                {% for exercise in exercises|slice:"8:" %}
-                <div class="group relative overflow-hidden rounded-lg hover:transform hover:scale-105 transition-all duration-300 cursor-pointer">
-                    <div class="relative h-64 bg-gradient-to-br from-red-500 to-orange-400">
-                        <img src="{{ exercise.image_url }}" 
-                             alt="{{ exercise.name }}" 
-                             class="w-full h-full object-cover mix-blend-overlay opacity-80">
-                        <div class="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-yellow-400 transition-all">
-                            <span>❤️</span>
-                        </div>
-                        <div class="absolute top-4 left-4">
-                            <div class="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold mb-1">{% trans "PROGRAMME" %}</div>
-                            <div class="bg-black text-white px-2 py-1 rounded text-xs font-bold">30 MIN</div>
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 p-4">
-                            <div class="flex items-center gap-1 text-yellow-400 text-sm mb-2">
-                                <span>🔥</span>
-                                <span>🔥</span>
-                                <span>🔥</span>
-                            </div>
-                            <div class="text-white font-black text-lg">{{ exercise.name|upper }}</div>
-                            <div class="text-white text-xs">{{ exercise.description|truncatewords:3 }}</div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
+        {% else %}
+            <div class="text-center py-32 border-2 border-dashed border-gray-100 rounded-tse-card">
+                <p class="text-xl font-black uppercase tracking-tighter italic text-gray-300">{% trans "Aucun exercice trouvé" %}</p>
+            </div>
+        {% endif %}
+
+        {% if not user.is_authenticated %}
+        <!-- CTA Inscription TSE -->
+        <div class="mt-20 bg-gray-50 rounded-tse-card p-12 text-center border border-gray-100">
+            <h2 class="text-3xl font-black uppercase tracking-tighter italic mb-6">{% trans "Révèle ton plein potentiel" %}</h2>
+            <p class="text-sm font-bold uppercase tracking-widest text-tse_muted mb-10">{% trans "Accède à l'intégralité de notre Studio et commence ta transformation dès aujourd'hui." %}</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="{% url 'register' %}" class="btn-tse py-4 px-12">{% trans "Rejoindre l'élite" %}</a>
+                <a href="{% url 'login' %}" class="bg-white border-2 border-gray-100 text-[10px] font-black uppercase tracking-widest py-4 px-12 rounded-tse-pill hover:border-tse_accent transition-all">{% trans "Me connecter" %}</a>
             </div>
         </div>
-        
-        <!-- Bouton Voir Plus -->
-        <div class="text-center mt-12">
-            <button class="bg-yellow-400 text-black px-12 py-4 rounded font-black uppercase hover:bg-yellow-300 transition-all text-lg">
-                {% trans "VOIR LES 5000 RÉSULTATS" %}
-            </button>
-        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
