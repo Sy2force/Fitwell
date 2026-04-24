@@ -12,7 +12,7 @@ services:
     name: fitwell-monolith
     env: python
     plan: free
-    buildCommand: "./backend/build_files.sh"
+    buildCommand: "cd backend && ./build_files.sh"
     startCommand: "cd backend && gunicorn config.wsgi:application --bind 0.0.0.0:$PORT"
     envVars:
       - key: SECRET_KEY
