@@ -4,9 +4,9 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from .views import (ArticleViewSet, CommentViewSet, CategoryViewSet, UserViewSet, 
+from .views import (ArticleViewSet, CommentViewSet, CategoryViewSet, UserViewSet,
                     WellnessPlanViewSet, EmailTokenObtainPairView, WorkoutSessionViewSet,
-                    ExerciseSetViewSet, ExerciseViewSet)
+                    ExerciseSetViewSet, ExerciseViewSet, TagViewSet)
 
 app_name = 'api'
 
@@ -14,6 +14,7 @@ router = DefaultRouter()
 router.register(r'articles', ArticleViewSet)
 router.register(r'comments', CommentViewSet)
 router.register(r'categories', CategoryViewSet)
+router.register(r'tags', TagViewSet)
 router.register(r'users', UserViewSet)
 router.register(r'wellness/plans', WellnessPlanViewSet, basename='wellness-plans')
 router.register(r'workouts/sessions', WorkoutSessionViewSet, basename='workout-sessions')

@@ -1,5 +1,5 @@
 from .auth import EmailTokenObtainPairSerializer, UserSerializer, UserStatsSerializer
-from .content import ArticleSerializer, CommentSerializer, CategorySerializer
+from .content import ArticleSerializer, CommentSerializer, CategorySerializer, TagSerializer
 from .wellness import WellnessPlanSerializer
 from .workout import ExerciseSerializer, ExerciseSetSerializer, WorkoutSessionSerializer, WorkoutSessionCreateSerializer, ExerciseSetCreateSerializer
 
@@ -10,6 +10,7 @@ __all__ = [
     'ArticleSerializer',
     'CommentSerializer',
     'CategorySerializer',
+    'TagSerializer',
     'WellnessPlanSerializer',
     'ExerciseSerializer',
     'ExerciseSetSerializer',

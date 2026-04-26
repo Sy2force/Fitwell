@@ -2,9 +2,24 @@ from rest_framework import viewsets, permissions, status, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
-from api.models import Article, Category, Comment
-from api.serializers import ArticleSerializer, CategorySerializer, CommentSerializer
+from api.models import Article, Category, Comment, Tag
+from api.serializers import ArticleSerializer, CategorySerializer, CommentSerializer, TagSerializer
 from api.permissions import IsAdminOrReadOnly, IsAuthorOrReadOnly
+
+
+class TagViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Liste les tags disponibles. Lecture seule (les tags sont créés
+    automatiquement à la création d'articles/commentaires).
+    URL: /api/tags/
+    """
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = [permissions.AllowAny]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['name']
+    ordering_fields = ['name', 'created_at']
+    pagination_class = None
 
 class CategoryViewSet(viewsets.ModelViewSet):
     """
@@ -33,19 +48,25 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class ArticleViewSet(viewsets.ModelViewSet):
     """
     API principale pour les articles.
-    - Lecture : Pour tout le monde.
-    - Écriture / Modification : Seulement Admin.
+    - Lecture : tout le monde (anonyme inclus).
+    - Création : tout utilisateur authentifié.
+    - Modification / Suppression : seul l'auteur (ou admin).
     """
     # On charge l'auteur et la catégorie direct pour éviter de faire 50 requêtes SQL
-    queryset = Article.objects.select_related('author', 'category').prefetch_related('comments').order_by('-created_at')
+    queryset = (Article.objects
+                .select_related('author', 'category')
+                .prefetch_related('comments', 'tags')
+                .order_by('-created_at'))
     serializer_class = ArticleSerializer
-    permission_classes = [IsAdminOrReadOnly]
-    
-    # Filtres puissants : par catégorie, auteur, recherche texte
+    # Cahier des charges : utilisateur authentifié peut créer,
+    # seul l'auteur (ou admin) peut modifier/supprimer.
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
+
+    # Filtres : par catégorie, auteur, tag, recherche texte
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['category', 'author', 'category__slug']
-    search_fields = ['title', 'content']
-    ordering_fields = ['created_at', 'title']
+    filterset_fields = ['category', 'author', 'category__slug', 'tags__name', 'tags__slug']
+    search_fields = ['title', 'content', 'tags__name']
+    ordering_fields = ['created_at', 'title', 'author__username']
 
     def perform_create(self, serializer):
         # On assigne automatiquement l'auteur à l'utilisateur connecté
@@ -91,8 +112,9 @@ class ArticleViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
         
         elif request.method == 'POST':
-            # Create comment
-            serializer = CommentSerializer(data=request.data)
+            # Injection de l'article via l'URL (route imbriquée)
+            data = {**request.data, 'article': article.id}
+            serializer = CommentSerializer(data=data)
             if serializer.is_valid():
                 serializer.save(author=request.user, article=article)
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -103,12 +125,16 @@ class CommentViewSet(viewsets.ModelViewSet):
     Gestion des commentaires sur les articles.
     Même logique : tu ne peux modifier que TES commentaires.
     """
-    queryset = Comment.objects.select_related('author', 'article').order_by('-created_at')
+    queryset = (Comment.objects
+                .select_related('author', 'article')
+                .prefetch_related('tags')
+                .order_by('-created_at'))
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ['article', 'author']
-    ordering_fields = ['created_at']
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['article', 'author', 'tags__name', 'tags__slug']
+    search_fields = ['content', 'tags__name']
+    ordering_fields = ['created_at', 'author__username']
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)

@@ -3,6 +3,29 @@ from django.utils.text import slugify
 from .user import User
 
 # -----------------------------------------------------------------------------
+# TAGS
+# -----------------------------------------------------------------------------
+class Tag(models.Model):
+    """
+    Étiquettes libres attachées à un Article ou un Comment.
+    Permet de filtrer/chercher des contenus par sujet (ex: 'python', 'fitness').
+    """
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=60, unique=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['name']
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+# -----------------------------------------------------------------------------
 # CATÉGORIES
 # -----------------------------------------------------------------------------
 class Category(models.Model):
@@ -40,6 +63,7 @@ class Article(models.Model):
     image = models.CharField(max_length=500, blank=True, null=True) # Changed to CharField for URL support
     is_published = models.BooleanField(default=True)
     likes = models.ManyToManyField(User, related_name='liked_articles', blank=True)
+    tags = models.ManyToManyField(Tag, related_name='articles', blank=True)
     
     # Dates auto-gérées
     created_at = models.DateTimeField(auto_now_add=True)
@@ -64,6 +88,7 @@ class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
+    tags = models.ManyToManyField(Tag, related_name='comments', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

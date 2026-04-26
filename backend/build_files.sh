@@ -21,5 +21,6 @@ python manage.py migrate --noinput
 echo "==> [5/5] Seeding (idempotent)..."
 python manage.py seed_db || echo "Info: seed_db a échoué (peut-être déjà fait)"
 python manage.py seed_badges || echo "Info: seed_badges a échoué"
+python manage.py seed_assignment || echo "Info: seed_assignment a échoué"
 
 echo "==> Build terminé avec succès."
