@@ -1,108 +1,106 @@
-# 🚀 Guide de Déploiement FitWell - Render
+# 🚀 Déploiement FitWell sur Render
 
-## Problème Actuel
-FitWell est actuellement déployé sur **Vercel** (`fitwell-moche.vercel.app`) qui provoque une erreur 404 car Vercel est conçu pour les applications frontend (React, Next.js, etc.).
+FitWell est une application Django monolithique. Elle se déploie sur **Render** via un Blueprint.
 
-**FitWell est une application Django monolithique** qui doit être déployée sur **Render**.
+## Prérequis
 
-## Solution : Migration vers Render
+- Compte GitHub avec accès au repo `Sy2force/Fitwell`
+- Compte Render (plan gratuit suffisant) : https://render.com
 
-### 1. Prérequis
-- Compte GitHub avec le repo FitWell
-- Compte Render (gratuit) : https://render.com
+## Déploiement via Blueprint (recommandé)
 
-### 2. Déploiement Automatique via Blueprint
+Render lit automatiquement `render.yaml` à la racine et crée tout ce qu'il faut.
 
-#### Étape 1 : Push du fichier render.yaml
+### 1. S'assurer que le code est à jour
+
 ```bash
-git add render.yaml
-git commit -m "Add Render deployment configuration"
 git push origin main
 ```
 
-#### Étape 2 : Déployer sur Render
+### 2. Créer le Blueprint sur Render
+
 1. Aller sur https://dashboard.render.com
-2. Cliquer **"New +"** → **"Blueprint"**
-3. Connecter le repository GitHub : `Sy2force/Fitwell`
-4. Branch : `main`
-5. Cliquer **"Apply"**
+2. **New +** → **Blueprint**
+3. Sélectionner le repo `Sy2force/Fitwell`, branche `main`
+4. Render détecte `render.yaml` → cliquer **Apply**
 
-#### Étape 3 : Attendre le Déploiement (5-10 minutes)
 Render va automatiquement :
-- Créer la base PostgreSQL (`fitwell-db`)
-- Créer le service web (`fitwell-monolith`) 
-- Exécuter `build_files.sh`
-- Peupler la base avec les données de seed
-- Démarrer l'application
 
-### 3. URLs de Production
+- créer la base PostgreSQL `fitwell-db`
+- créer le service web `fitwell-monolith` (Python 3.11.9, root dir `backend`)
+- lier `DATABASE_URL` à l'Internal Connection String de la DB
+- générer `SECRET_KEY`
+- exécuter `./build_files.sh` (pip install, collectstatic, migrate, compilemessages, seed)
+- démarrer `gunicorn config.wsgi:application`
 
-**Application :** `https://fitwell-monolith.onrender.com`
+### 3. Attendre
 
-**Accès Admin :**
-- URL : `https://fitwell-monolith.onrender.com/fr/admin/`
-- Username : `admin`
-- Password : `adminpassword`
+Le premier build prend 8 à 12 minutes sur le plan free.
+Quand le statut passe à **Live** (point vert), l'URL est :
+`https://fitwell-monolith.onrender.com/fr/`
 
-### 4. Nettoyer Vercel
+## Variables d'environnement
 
-#### Supprimer le Projet Vercel
-1. Aller sur https://vercel.com/dashboard
-2. Sélectionner le projet `fitwell-moche`
-3. Settings → Advanced → Delete Project
+Toutes définies par `render.yaml` — ne pas les modifier manuellement sauf besoin :
 
-### 5. Variables d'Environnement (Auto-configurées)
+| Variable | Source | Valeur |
+|---|---|---|
+| `SECRET_KEY` | générée par Render | aléatoire |
+| `DEBUG` | render.yaml | `False` |
+| `ALLOWED_HOSTS` | render.yaml | `.onrender.com` |
+| `LANGUAGE_CODE` | render.yaml | `fr` |
+| `TIME_ZONE` | render.yaml | `UTC` |
+| `PYTHON_VERSION` | render.yaml | `3.11.9` |
+| `DATABASE_URL` | lié auto à `fitwell-db` | `postgresql://...` |
 
-Le fichier `render.yaml` configure automatiquement :
-```env
-SECRET_KEY=<généré automatiquement>
-DEBUG=False
-ALLOWED_HOSTS=*
-LANGUAGE_CODE=fr-fr
-TIME_ZONE=Europe/Paris
-DATABASE_URL=<lié à PostgreSQL>
+## Re-déploiement
+
+À chaque push sur `main`, Render redéploie automatiquement.
+
+Pour forcer un redeploy : Service → **Manual Deploy** → **Clear build cache & deploy**.
+
+## Dépannage
+
+### `dj_database_url.UnknownSchemeError`
+
+`DATABASE_URL` ne commence pas par `postgresql://`. Vérifier dans Service → Environment que la variable est bien liée via "Add from Database" → `fitwell-db` → Internal Connection String.
+
+### `ModuleNotFoundError`
+
+Ajouter le paquet manquant dans `backend/requirements.txt` puis push.
+
+### Page d'accueil 404
+
+Vérifier que `healthCheckPath` (défaut `/fr/`) est accessible et que `LANGUAGE_CODE=fr`.
+
+### Build n'exécute pas le script
+
+Service → Settings : `Root Directory` doit être `backend`, `Build Command` = `./build_files.sh`.
+
+## Compte admin
+
+Créé via le seed. Identifiants par défaut (à changer en production) :
+
+- username : `admin`
+- password : `adminpassword`
+- URL : `/admin/`
+
+Pour changer le mot de passe :
+
+```bash
+python manage.py changepassword admin
 ```
 
-### 6. Vérification du Déploiement
+## Lancer en local
 
-Une fois déployé, vérifier :
-- ✅ Page d'accueil : `/fr/`
-- ✅ Login : `/fr/login/`
-- ✅ Admin : `/fr/admin/`
-- ✅ API : `/api/`
-- ✅ Swagger : `/swagger/`
-
-### 7. Avantages de Render vs Vercel
-
-| Feature | Render | Vercel |
-|---------|--------|--------|
-| Django Support | ✅ Natif | ❌ Non supporté |
-| PostgreSQL | ✅ Intégré | ❌ Externe requis |
-| Build Scripts | ✅ Bash supporté | ❌ Limité |
-| Static Files | ✅ WhiteNoise | ❌ Configuration complexe |
-| Free Tier | ✅ 500h/mois | ❌ Fonction serverless seulement |
-
-## Résolution de Problèmes
-
-### Build Failed
 ```bash
-# Vérifier localement
 cd backend
-./build_files.sh
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py seed_db
+python manage.py seed_badges
 python manage.py runserver
 ```
 
-### Database Issues
-Les commandes seed sont idempotentes. En cas d'erreur, Render va retry automatiquement.
-
-### Logs de Déploiement
-Dans Render Dashboard → Service → Logs pour voir les détails du build.
-
-## Support
-- **Repository :** https://github.com/Sy2force/Fitwell
-- **Issues :** https://github.com/Sy2force/Fitwell/issues
-- **Render Docs :** https://render.com/docs/django
-
----
-
-**Note :** Une fois migré vers Render, l'URL `fitwell-moche.vercel.app` cessera de fonctionner. La nouvelle URL sera `fitwell-monolith.onrender.com`.
+Site disponible sur http://localhost:8000/fr/
