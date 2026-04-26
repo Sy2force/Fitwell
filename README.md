@@ -374,52 +374,111 @@ Variables auto-configurées :
 
 ---
 
-## 🔌 API REST
+## 🔌 API REST — Blog (conforme au cahier des charges Django Final Project)
 
-### Documentation
-**Swagger UI :** `/swagger/`
+### Documentation interactive
+- **Browsable API DRF** : http://localhost:8000/api/
+- **Swagger UI** : http://localhost:8000/swagger/
+- **Redoc** : http://localhost:8000/redoc/
 
-### Endpoints Principaux
+### Authentification (JWT)
 
-#### Authentification
-```http
-POST /api/register/
-POST /api/token/
-POST /api/token/refresh/
-```
+| Méthode | Endpoint | Description |
+|---|---|---|
+| `POST` | `/api/register/` | Inscription d'un nouvel utilisateur |
+| `POST` | `/api/token/` | Connexion : retourne `access` + `refresh` |
+| `POST` | `/api/token/refresh/` | Rafraîchir le token d'accès |
 
-#### Contenu
-```http
-GET    /api/articles/
-GET    /api/categories/
-GET    /api/exercises/
-POST   /api/comments/
-```
+### Articles
 
-#### Wellness
-```http
-GET    /api/wellness/plans/
-POST   /api/wellness/plans/
-```
+| Méthode | Endpoint | Description | Permission |
+|---|---|---|---|
+| `GET` | `/api/articles/` | Liste paginée des articles | Anonyme OK |
+| `GET` | `/api/articles/?search=<query>` | Recherche par titre, contenu ou tag | Anonyme OK |
+| `GET` | `/api/articles/?tags__name=<tag>` | Filtre par tag | Anonyme OK |
+| `GET` | `/api/articles/?ordering=author__username` | Tri par auteur | Anonyme OK |
+| `GET` | `/api/articles/<id>/` | Détail d'un article + ses commentaires | Anonyme OK |
+| `POST` | `/api/articles/` | Créer un article | Authentifié |
+| `PUT` / `PATCH` | `/api/articles/<id>/` | Modifier un article | **Auteur uniquement** |
+| `DELETE` | `/api/articles/<id>/` | Supprimer un article | **Auteur uniquement** |
 
-#### Workout
-```http
-GET    /api/workouts/sessions/
-POST   /api/workouts/sessions/
-POST   /api/workouts/sets/
-```
+### Commentaires
 
-### Authentification API
+| Méthode | Endpoint | Description | Permission |
+|---|---|---|---|
+| `GET` | `/api/articles/<id>/comments/` | Liste des commentaires d'un article | Anonyme OK |
+| `POST` | `/api/articles/<id>/comments/` | Poster un commentaire | Authentifié |
+| `DELETE` | `/api/comments/<id>/` | Supprimer son commentaire | **Auteur uniquement** |
+
+### Tags
+
+| Méthode | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/tags/` | Liste de tous les tags |
+| `GET` | `/api/tags/?search=<q>` | Recherche tag par nom |
+
+### Modèles de données
+
+| Modèle | Champs clés | Relations |
+|---|---|---|
+| **User** | `username` (unique), `email` (unique), `password` | → articles, comments |
+| **Article** | `title`, `content`, `created_at` (auto), `updated_at` (auto) | FK `author`, M2M `tags`, M2M `likes`, FK `category` |
+| **Comment** | `content`, `created_at` (auto) | FK `article`, FK `author`, M2M `tags` |
+| **Tag** | `name` (unique), `slug` (auto) | M2M articles, M2M comments |
+
+### Exemple d'utilisation (curl)
 
 ```bash
-# Obtenir token
-curl -X POST http://localhost:8000/api/token/ \
+# 1. Inscription
+curl -X POST http://localhost:8000/api/register/ \
   -H "Content-Type: application/json" \
-  -d '{"email": "user@example.com", "password": "password"}'
+  -d '{"username":"charlie","email":"c@x.com","password":"charliepass"}'
 
-# Utiliser token
-curl -X GET http://localhost:8000/api/wellness/plans/ \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+# 2. Connexion → obtenir le token
+TOKEN=$(curl -s -X POST http://localhost:8000/api/token/ \
+  -H "Content-Type: application/json" \
+  -d '{"email":"alice@example.com","password":"alicepass123"}' \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['access'])")
+
+# 3. Créer un article avec tags
+curl -X POST http://localhost:8000/api/articles/ \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Mon article","content":"Hello","tags":["python","django"]}'
+
+# 4. Lister les articles filtrés par tag
+curl "http://localhost:8000/api/articles/?tags__name=python"
+
+# 5. Commenter un article
+curl -X POST http://localhost:8000/api/articles/1/comments/ \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"content":"Bel article !","tags":["feedback"]}'
+```
+
+### Comptes de test (seed automatique)
+
+| Username | Password | Rôle |
+|---|---|---|
+| `alice` | `alicepass123` | Utilisateur standard |
+| `bob` | `bobpass123` | Utilisateur standard |
+| `admin` | `adminpassword` | Administrateur |
+
+Relancer le seed à tout moment :
+```bash
+python manage.py seed_assignment
+```
+
+### Pagination
+
+Toutes les listes sont paginées (`page_size=10` par défaut) :
+```json
+{
+  "count": 42,
+  "next": "http://localhost:8000/api/articles/?page=2",
+  "previous": null,
+  "results": [ ... ]
+}
 ```
 
 ---
