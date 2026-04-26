@@ -173,10 +173,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # -----------------------------------------------------------------------------
 # BASE DE DONNÉES
 # -----------------------------------------------------------------------------
-# Utilise SQLite en local, ou PostgreSQL si DATABASE_URL est défini (ex: sur Render)
+# Règle : SQLite uniquement en local (DEBUG=True ET pas sur Render).
+# En production (DEBUG=False OU variable RENDER présente), DATABASE_URL est
+# OBLIGATOIRE et doit pointer vers une base PostgreSQL valide.
 DATABASE_URL = os.environ.get('DATABASE_URL', '')
-
-# Configuration base de données
+_IS_RENDER = bool(os.environ.get('RENDER'))  # Render set cette var automatiquement
+_IS_PRODUCTION = (not DEBUG) or _IS_RENDER
 _VALID_DB_SCHEMES = ('postgres://', 'postgresql://', 'sqlite://', 'mysql://')
 
 if DATABASE_URL and DATABASE_URL.startswith(_VALID_DB_SCHEMES):
@@ -199,8 +201,18 @@ elif DATABASE_URL:
         f"Attendu: postgresql://, postgres://, sqlite:// ou mysql://. "
         f"Sur Render, utilisez le bouton 'Connect' pour lier l'Internal Connection String de la database PostgreSQL."
     )
+elif _IS_PRODUCTION:
+    # Production sans DATABASE_URL -> on refuse de démarrer (évite fallback SQLite
+    # silencieux qui provoque des erreurs "no such table" en runtime).
+    raise ValueError(
+        "DATABASE_URL manquant en production. "
+        "Sur Render : créez une database PostgreSQL puis ajoutez la variable "
+        "d'environnement DATABASE_URL (Internal Database URL) dans les settings du service. "
+        "Ou utilisez le Blueprint (render.yaml) qui lie la DB automatiquement. "
+        "Pour développer en local, mettre DEBUG=True dans .env (SQLite sera utilisée)."
+    )
 else:
-    # SQLite en local
+    # Développement local uniquement (DEBUG=True et pas sur Render) -> SQLite
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
