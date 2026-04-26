@@ -177,11 +177,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASE_URL = os.environ.get('DATABASE_URL', '')
 
 # Configuration base de données
-if DATABASE_URL:
+_VALID_DB_SCHEMES = ('postgres://', 'postgresql://', 'sqlite://', 'mysql://')
+
+if DATABASE_URL and DATABASE_URL.startswith(_VALID_DB_SCHEMES):
     # Support pour Render (convertit postgres:// en postgresql:// si nécessaire)
     if DATABASE_URL.startswith('postgres://'):
         DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
-    
+
     DATABASES = {
         'default': dj_database_url.parse(
             DATABASE_URL,
@@ -190,6 +192,13 @@ if DATABASE_URL:
             ssl_require=not DEBUG,
         )
     }
+elif DATABASE_URL:
+    # DATABASE_URL est défini mais malformé (ex: 'https://...') -> erreur explicite
+    raise ValueError(
+        f"DATABASE_URL invalide: scheme '{DATABASE_URL.split('://')[0] if '://' in DATABASE_URL else DATABASE_URL}'. "
+        f"Attendu: postgresql://, postgres://, sqlite:// ou mysql://. "
+        f"Sur Render, utilisez le bouton 'Connect' pour lier l'Internal Connection String de la database PostgreSQL."
+    )
 else:
     # SQLite en local
     DATABASES = {
