@@ -1,39 +1,25 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # ==============================================================================
-# Script de Build FitWell (Optimisé pour Render)
+# Script de build FitWell pour Render
+# Exécuté avec rootDir=backend, donc le pwd est déjà /backend
 # ==============================================================================
-# Ce script peut être exécuté depuis la racine du repo ou depuis /backend.
-# ==============================================================================
-set -e
+set -o errexit
 
-# Détection et bascule vers le dossier backend
-if [ -d "backend" ]; then
-    echo "==> Passage dans le répertoire backend..."
-    cd backend
-fi
+echo "==> [1/5] Installation des dépendances..."
+python -m pip install --upgrade pip
+pip install -r requirements.txt
 
-echo "==> [1/6] Installation des dépendances..."
-python3 -m pip install --upgrade pip
-python3 -m pip install -r requirements.txt
+echo "==> [2/5] Collecte des fichiers statiques..."
+python manage.py collectstatic --noinput
 
-echo "==> [2/6] Collecte des fichiers statiques..."
-# Nécessaire avant tout pour WhiteNoise
-python3 manage.py collectstatic --noinput --clear
+echo "==> [3/5] Compilation des traductions (si gettext disponible)..."
+python manage.py compilemessages || echo "Info: compilemessages skipped (gettext absent)"
 
-echo "==> [3/6] Compilation des traductions (i18n)..."
-python3 manage.py compilemessages || echo "Info: Aucune traduction à compiler ou gettext manquant."
+echo "==> [4/5] Migrations base de données..."
+python manage.py migrate --noinput
 
-echo "==> [4/6] Vérification des migrations en attente..."
-python3 manage.py showmigrations
+echo "==> [5/5] Seeding (idempotent)..."
+python manage.py seed_db || echo "Info: seed_db a échoué (peut-être déjà fait)"
+python manage.py seed_badges || echo "Info: seed_badges a échoué"
 
-echo "==> [5/6] Application des migrations..."
-python3 manage.py migrate --noinput
-
-echo "==> [6/6] Peuplement de la base de données (Seeding)..."
-# Les commandes de seed sont conçues pour être idempotentes (update_or_create)
-python3 manage.py seed_db || echo "Attention: seed_db a rencontré un problème."
-# Note: seed_db appelle déjà en interne seed_blog, seed_exercises et seed_recipes
-# On s'assure que les badges sont là aussi
-python3 manage.py seed_badges || echo "Attention: seed_badges a rencontré un problème."
-
-echo "==> [SUCCÈS] Build terminé avec succès !"
+echo "==> Build terminé avec succès."

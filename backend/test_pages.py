@@ -109,8 +109,9 @@ if errors:
         print(f"  {msg}")
     print()
 
-print("="*80)
-print(f"Total: {len(success)} OK | {len(warnings)} Warnings | {len(errors)} Errors")
-print("="*80 + "\n")
+if __name__ == "__main__":
+    print("="*80)
+    print(f"Total: {len(success)} OK | {len(warnings)} Warnings | {len(errors)} Errors")
+    print("="*80 + "\n")
 
-sys.exit(0 if len(errors) == 0 else 1)
+    sys.exit(0 if len(errors) == 0 else 1)
