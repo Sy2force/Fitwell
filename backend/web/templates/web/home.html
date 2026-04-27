@@ -2,124 +2,302 @@
 {% load i18n %}
 
 {% block content %}
-<!-- Hero Section TSE -->
+<!-- Hero Section : 1 seule photo, texte explicatif -->
 <div class="relative min-h-[90vh] flex items-center bg-white pt-20">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div class="relative z-10">
-            <h1 class="text-6xl md:text-8xl font-black leading-[0.9] text-tse_text mb-8 uppercase tracking-tighter italic">
-                {% trans "Révèle" %}<br/>
-                <span class="text-tse_accent">{% trans "Ton" %}</span><br/>
-                {% trans "Potentiel" %}
+            <span class="inline-block px-4 py-1.5 bg-tse_accent/10 text-tse_accent text-[10px] font-black uppercase tracking-widest rounded-tse-pill mb-6">
+                {% trans "Bienvenue sur FitWell" %}
+            </span>
+            <h1 class="text-5xl md:text-7xl font-black leading-[0.95] text-tse_text mb-8 uppercase tracking-tighter italic">
+                {% trans "Bouge mieux." %}<br/>
+                <span class="text-tse_accent">{% trans "Mange bien." %}</span><br/>
+                {% trans "Vis plus fort." %}
             </h1>
-            
-            <p class="text-xl font-bold uppercase tracking-widest text-tse_muted mb-10 max-w-md leading-relaxed">
-                {% trans "L'expérience fitness ultime pour transformer ton corps et ton esprit. Rejoins une communauté de passionnés." %}
+
+            <p class="text-base md:text-lg text-tse_text mb-6 leading-relaxed max-w-xl">
+                {% blocktrans %}FitWell réunit deux idées simples : <strong>Fit</strong>, être en forme physiquement, et <strong>Well</strong>, se sentir bien mentalement. C'est un site de sport et de bien-être qui t'accompagne jour après jour avec des conseils concrets, des entraînements guidés et une nutrition intelligente.{% endblocktrans %}
+            </p>
+            <p class="text-sm text-tse_muted mb-10 leading-relaxed max-w-xl">
+                {% trans "Pas de promesses miracles. Juste des méthodes éprouvées, du contenu créé par des passionnés, et des outils qui marchent vraiment pour améliorer ta vie, un petit pas à la fois." %}
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4">
                 <a href="{% url 'register' %}" class="btn-tse py-5 px-10 text-sm">
-                    {% trans "Commencer maintenant" %}
+                    {% trans "Créer mon compte gratuit" %}
                 </a>
-                <a href="{% url 'exercise_library' %}" class="bg-white border-2 border-gray-100 py-5 px-10 rounded-tse-pill text-[10px] font-black uppercase tracking-widest hover:border-tse_accent transition-all text-center">
-                    {% trans "Explorer le Studio" %}
+                <a href="{% url 'blog_list' %}" class="bg-white border-2 border-gray-100 py-5 px-10 rounded-tse-pill text-[10px] font-black uppercase tracking-widest hover:border-tse_accent transition-all text-center">
+                    {% trans "Lire nos conseils" %}
                 </a>
             </div>
         </div>
 
         <div class="relative aspect-square rounded-tse-card overflow-hidden shadow-soft transform rotate-2">
-            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2400&auto=format&fit=crop" 
-                 alt="Fitness" 
+            <img loading="eager" decoding="async"
+                 src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1600&auto=format&fit=crop"
+                 alt="{% trans 'Personne en pleine séance de sport' %}"
                  class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
         </div>
     </div>
 </div>
 
-<!-- Section Stats / Social Proof -->
-<div class="py-20 bg-gray-50">
+<!-- Section : Qu'est-ce que FitWell ? (texte seul, pas d'images) -->
+<div class="py-24 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+        <span class="text-[10px] font-black uppercase tracking-widest text-tse_accent mb-4 block">{% trans "Notre mission" %}</span>
+        <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter italic text-tse_text mb-8">
+            {% trans "Le sport n'est pas une punition." %}<br/>
+            <span class="text-tse_accent">{% trans "C'est un cadeau que tu te fais." %}</span>
+        </h2>
+        <div class="space-y-5 text-base md:text-lg text-tse_text leading-relaxed">
+            <p>
+                {% trans "Trop de gens abandonnent le sport parce qu'ils ne savent pas par où commencer, ils se blessent, ou ils n'ont pas le temps. FitWell existe pour résoudre ça." %}
+            </p>
+            <p>
+                {% trans "Ici, tu trouves des exercices expliqués clairement, des recettes équilibrées pour manger sans te priver, des plans d'entraînement adaptés à ton niveau, et des articles qui démystifient ce qui marche vraiment pour être en bonne santé." %}
+            </p>
+            <p class="font-bold text-tse_text">
+                {% trans "Parce que se sentir bien dans son corps change tout : ton énergie, ton sommeil, ton humeur, ta confiance." %}
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Section Stats + courte explication -->
+<div class="py-20 bg-white border-y border-gray-100">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h3 class="text-xl md:text-2xl font-black uppercase tracking-tighter italic text-tse_text">
+                {% trans "Des chiffres, mais surtout des résultats concrets" %}
+            </h3>
+        </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div class="text-center">
-                <span class="block text-4xl font-black italic">500+</span>
-                <span class="text-[10px] font-black uppercase tracking-widest text-tse_muted">{% trans "Outils de Progression" %}</span>
+                <span class="block text-4xl md:text-5xl font-black italic text-tse_accent">100+</span>
+                <span class="text-[10px] font-black uppercase tracking-widest text-tse_muted mt-2 block">{% trans "Exercices expliqués" %}</span>
+                <p class="text-xs text-tse_muted mt-3">{% trans "Technique, muscles ciblés, niveau" %}</p>
             </div>
             <div class="text-center">
-                <span class="block text-4xl font-black italic">50+</span>
-                <span class="text-[10px] font-black uppercase tracking-widest text-tse_muted">{% trans "Plaisirs Sains" %}</span>
+                <span class="block text-4xl md:text-5xl font-black italic text-tse_accent">40+</span>
+                <span class="text-[10px] font-black uppercase tracking-widest text-tse_muted mt-2 block">{% trans "Recettes saines" %}</span>
+                <p class="text-xs text-tse_muted mt-3">{% trans "Simples, rapides, délicieuses" %}</p>
             </div>
             <div class="text-center">
-                <span class="block text-4xl font-black italic">10k+</span>
-                <span class="text-[10px] font-black uppercase tracking-widest text-tse_muted">{% trans "Passionnés" %}</span>
+                <span class="block text-4xl md:text-5xl font-black italic text-tse_accent">7</span>
+                <span class="text-[10px] font-black uppercase tracking-widest text-tse_muted mt-2 block">{% trans "Articles conseils" %}</span>
+                <p class="text-xs text-tse_muted mt-3">{% trans "Nutrition, motivation, progression" %}</p>
             </div>
             <div class="text-center">
-                <span class="block text-4xl font-black italic">24/7</span>
-                <span class="text-[10px] font-black uppercase tracking-widest text-tse_muted">{% trans "Ton Studio Partout" %}</span>
+                <span class="block text-4xl md:text-5xl font-black italic text-tse_accent">24/7</span>
+                <span class="text-[10px] font-black uppercase tracking-widest text-tse_muted mt-2 block">{% trans "Accessible partout" %}</span>
+                <p class="text-xs text-tse_muted mt-3">{% trans "Sur ton téléphone, ton ordi, où tu veux" %}</p>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Section Pillars -->
-<div class="py-32 bg-white">
+<!-- Section Piliers : 3 cartes sans images, icônes + texte fort -->
+<div class="py-24 bg-gray-50">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-24">
-            <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter italic mb-6">
-                {% trans "Ton" %} <span class="text-tse_accent">{% trans "Nouveau Départ" %}</span>
+        <div class="text-center mb-16 max-w-3xl mx-auto">
+            <span class="text-[10px] font-black uppercase tracking-widest text-tse_accent mb-4 block">{% trans "Trois piliers, un équilibre" %}</span>
+            <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter italic mb-6">
+                {% trans "Ce que FitWell t'apporte" %}
             </h2>
-            <p class="text-sm font-bold uppercase tracking-widest text-tse_muted">{% trans "Tout ce dont tu as besoin pour une transformation durable" %}</p>
+            <p class="text-base text-tse_muted leading-relaxed">
+                {% trans "Une vie saine repose sur trois piliers indissociables. Négliger un seul déséquilibre tout le reste. C'est pourquoi nous t'accompagnons sur chacun." %}
+            </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
-            <a href="{% url 'exercise_library' %}" class="group block">
-                <div class="aspect-[4/5] rounded-tse-card overflow-hidden mb-8 shadow-soft relative">
-                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-black/20"></div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Pilier 1 : Bouger -->
+            <a href="{% url 'exercise_library' %}" class="group block bg-white rounded-tse-card p-10 shadow-soft hover:shadow-lg transition-all border border-gray-100 hover:border-tse_accent">
+                <div class="w-14 h-14 rounded-2xl bg-tse_accent/10 flex items-center justify-center mb-6 group-hover:bg-tse_accent transition-colors">
+                    <svg class="w-7 h-7 text-tse_accent group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
                 </div>
-                <h3 class="text-2xl font-black uppercase tracking-tighter italic mb-4">{% trans "Studio Live" %}</h3>
-                <p class="text-xs font-bold uppercase tracking-widest text-tse_muted leading-relaxed">
-                    {% trans "Accède à des centaines de séances immersives conçues par des experts pour des résultats visibles." %}
+                <span class="text-[10px] font-black uppercase tracking-widest text-tse_muted block mb-2">{% trans "Pilier 1" %}</span>
+                <h3 class="text-2xl font-black uppercase tracking-tighter italic mb-4">{% trans "Bouger avec intelligence" %}</h3>
+                <p class="text-sm text-tse_text leading-relaxed mb-6">
+                    {% trans "Pas besoin de 2h de salle par jour. 30 minutes ciblées, 3 fois par semaine, changent déjà ta vie. On t'apprend les bons mouvements." %}
                 </p>
+                <span class="text-xs font-black uppercase tracking-widest text-tse_accent group-hover:underline">{% trans "Voir les exercices →" %}</span>
             </a>
 
-            <a href="{% url 'recipe_list' %}" class="group block mt-12 md:mt-24">
-                <div class="aspect-[4/5] rounded-tse-card overflow-hidden mb-8 shadow-soft relative border-4 border-tse_accent">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-black/20"></div>
+            <!-- Pilier 2 : Manger -->
+            <a href="{% url 'recipe_list' %}" class="group block bg-white rounded-tse-card p-10 shadow-soft hover:shadow-lg transition-all border border-gray-100 hover:border-tse_accent md:mt-8">
+                <div class="w-14 h-14 rounded-2xl bg-tse_accent/10 flex items-center justify-center mb-6 group-hover:bg-tse_accent transition-colors">
+                    <svg class="w-7 h-7 text-tse_accent group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v4H3zM3 11h18v10H3z"/>
+                    </svg>
                 </div>
-                <h3 class="text-2xl font-black uppercase tracking-tighter italic mb-4">{% trans "Cuisine Plaisir" %}</h3>
-                <p class="text-xs font-bold uppercase tracking-widest text-tse_muted leading-relaxed">
-                    {% trans "Nourris tes ambitions avec des recettes gourmandes et saines. Parce que bien manger est un plaisir." %}
+                <span class="text-[10px] font-black uppercase tracking-widest text-tse_muted block mb-2">{% trans "Pilier 2" %}</span>
+                <h3 class="text-2xl font-black uppercase tracking-tighter italic mb-4">{% trans "Manger pour se nourrir" %}</h3>
+                <p class="text-sm text-tse_text leading-relaxed mb-6">
+                    {% trans "Fini les régimes restrictifs qui ne tiennent pas. Nos recettes sont simples, complètes, et rassasiantes. Le plaisir de manger, sans la culpabilité." %}
                 </p>
+                <span class="text-xs font-black uppercase tracking-widest text-tse_accent group-hover:underline">{% trans "Voir les recettes →" %}</span>
             </a>
 
-            <a href="{% url 'blog_list' %}" class="group block">
-                <div class="aspect-[4/5] rounded-tse-card overflow-hidden mb-8 shadow-soft relative">
-                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-black/20"></div>
+            <!-- Pilier 3 : Savoir -->
+            <a href="{% url 'blog_list' %}" class="group block bg-white rounded-tse-card p-10 shadow-soft hover:shadow-lg transition-all border border-gray-100 hover:border-tse_accent">
+                <div class="w-14 h-14 rounded-2xl bg-tse_accent/10 flex items-center justify-center mb-6 group-hover:bg-tse_accent transition-colors">
+                    <svg class="w-7 h-7 text-tse_accent group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
                 </div>
-                <h3 class="text-2xl font-black uppercase tracking-tighter italic mb-4">{% trans "Art de Vivre" %}</h3>
-                <p class="text-xs font-bold uppercase tracking-widest text-tse_muted leading-relaxed">
-                    {% trans "Plus qu'un sport, une discipline pour forger un mental d'acier et rayonner au quotidien." %}
+                <span class="text-[10px] font-black uppercase tracking-widest text-tse_muted block mb-2">{% trans "Pilier 3" %}</span>
+                <h3 class="text-2xl font-black uppercase tracking-tighter italic mb-4">{% trans "Comprendre son corps" %}</h3>
+                <p class="text-sm text-tse_text leading-relaxed mb-6">
+                    {% trans "Le savoir est ton meilleur entraîneur. Nos articles décryptent la science du sport, la nutrition, la récupération, et le mental." %}
                 </p>
+                <span class="text-xs font-black uppercase tracking-widest text-tse_accent group-hover:underline">{% trans "Lire les articles →" %}</span>
             </a>
         </div>
     </div>
 </div>
 
-<!-- CTA Final -->
+<!-- Section : 4 conseils FitWell (texte riche, pas d'images) -->
+<div class="py-24 bg-white">
+    <div class="max-w-5xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="text-[10px] font-black uppercase tracking-widest text-tse_accent mb-4 block">{% trans "Nos conseils de base" %}</span>
+            <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter italic">
+                {% trans "Commence par ces" %} <span class="text-tse_accent">{% trans "4 habitudes" %}</span>
+            </h2>
+            <p class="text-base text-tse_muted mt-6 max-w-2xl mx-auto leading-relaxed">
+                {% trans "Tu n'as pas besoin de tout révolutionner d'un coup. Adopte ces 4 habitudes simples et tu sentiras la différence en moins de 30 jours." %}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gray-50 rounded-tse-card p-8 border-l-4 border-tse_accent">
+                <div class="flex items-start gap-4">
+                    <span class="text-4xl font-black italic text-tse_accent leading-none">01</span>
+                    <div>
+                        <h3 class="text-lg font-black uppercase tracking-tighter italic mb-2">{% trans "Bouge 30 minutes par jour" %}</h3>
+                        <p class="text-sm text-tse_text leading-relaxed">
+                            {% trans "Marche, vélo, étirements, montée d'escaliers. Peu importe la forme, l'important c'est la régularité. Ton corps est fait pour le mouvement." %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-tse-card p-8 border-l-4 border-tse_accent">
+                <div class="flex items-start gap-4">
+                    <span class="text-4xl font-black italic text-tse_accent leading-none">02</span>
+                    <div>
+                        <h3 class="text-lg font-black uppercase tracking-tighter italic mb-2">{% trans "Bois 1,5 litre d'eau" %}</h3>
+                        <p class="text-sm text-tse_text leading-relaxed">
+                            {% trans "80 % des gens sont déshydratés sans le savoir. Fatigue, faim, mal de tête : souvent c'est un simple manque d'eau. Garde une bouteille avec toi." %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-tse-card p-8 border-l-4 border-tse_accent">
+                <div class="flex items-start gap-4">
+                    <span class="text-4xl font-black italic text-tse_accent leading-none">03</span>
+                    <div>
+                        <h3 class="text-lg font-black uppercase tracking-tighter italic mb-2">{% trans "Dors 7 à 8 heures" %}</h3>
+                        <p class="text-sm text-tse_text leading-relaxed">
+                            {% trans "C'est pendant la nuit que ton corps se répare, que ton esprit consolide ce que tu as appris, que tes muscles grandissent. Le sommeil n'est pas une perte de temps." %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-tse-card p-8 border-l-4 border-tse_accent">
+                <div class="flex items-start gap-4">
+                    <span class="text-4xl font-black italic text-tse_accent leading-none">04</span>
+                    <div>
+                        <h3 class="text-lg font-black uppercase tracking-tighter italic mb-2">{% trans "Mange des vrais aliments" %}</h3>
+                        <p class="text-sm text-tse_text leading-relaxed">
+                            {% trans "Fruits, légumes, viandes, poissons, céréales complètes, légumineuses. Si ça a été transformé en usine, c'est rarement un ami. Simplifie ton assiette." %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section : Pourquoi nous faire confiance (texte seul) -->
+<div class="py-24 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="text-[10px] font-black uppercase tracking-widest text-tse_accent mb-4 block">{% trans "Notre engagement" %}</span>
+            <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter italic">
+                {% trans "Pourquoi FitWell est différent" %}
+            </h2>
+        </div>
+
+        <div class="space-y-4">
+            <div class="bg-white rounded-2xl p-6 border border-gray-100 flex items-start gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-tse_accent/10 flex items-center justify-center">
+                    <span class="text-tse_accent font-black">✓</span>
+                </div>
+                <div>
+                    <h3 class="font-black text-tse_text mb-1">{% trans "Pas de publicités déguisées" %}</h3>
+                    <p class="text-sm text-tse_muted leading-relaxed">{% trans "On ne te vend pas de compléments miracles ni de bruléurs de graisse. Uniquement des conseils honnêtes." %}</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 border border-gray-100 flex items-start gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-tse_accent/10 flex items-center justify-center">
+                    <span class="text-tse_accent font-black">✓</span>
+                </div>
+                <div>
+                    <h3 class="font-black text-tse_text mb-1">{% trans "Du contenu pour tous les niveaux" %}</h3>
+                    <p class="text-sm text-tse_muted leading-relaxed">{% trans "Débutant complet ou sportif expérimenté, tu trouveras toujours du contenu adapté à ton niveau et tes objectifs." %}</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 border border-gray-100 flex items-start gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-tse_accent/10 flex items-center justify-center">
+                    <span class="text-tse_accent font-black">✓</span>
+                </div>
+                <div>
+                    <h3 class="font-black text-tse_text mb-1">{% trans "Des méthodes basées sur la science" %}</h3>
+                    <p class="text-sm text-tse_muted leading-relaxed">{% trans "Chaque conseil s'appuie sur des études reconnues et l'expérience de professionnels du sport et de la santé." %}</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 border border-gray-100 flex items-start gap-4">
+                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-tse_accent/10 flex items-center justify-center">
+                    <span class="text-tse_accent font-black">✓</span>
+                </div>
+                <div>
+                    <h3 class="font-black text-tse_text mb-1">{% trans "Gratuit pour commencer" %}</h3>
+                    <p class="text-sm text-tse_muted leading-relaxed">{% trans "Crée ton compte sans payer. Accède à la bibliothèque, aux recettes, au blog, à ton planning personnalisé." %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Final : texte plus parlant -->
 <div class="py-32 bg-black text-white overflow-hidden relative">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center">
-        <h2 class="text-5xl md:text-8xl font-black uppercase tracking-tighter italic mb-12 leading-none">
-            {% trans "Fais de toi ta" %}<br/>
-            <span class="text-tse_accent">{% trans "Priorité" %}</span>
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 relative z-10 text-center">
+        <span class="text-[10px] font-black uppercase tracking-widest text-tse_accent mb-6 block">{% trans "Commence aujourd'hui" %}</span>
+        <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter italic mb-8 leading-none">
+            {% trans "Ton corps te dira merci" %}<br/>
+            <span class="text-tse_accent">{% trans "dans 30 jours." %}</span>
         </h2>
-        <a href="{% url 'register' %}" class="btn-tse py-6 px-16 text-lg">
-            {% trans "Rejoindre l'aventure" %}
-        </a>
+        <p class="text-base md:text-lg text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+            {% trans "Chaque journée passée à attendre est une journée perdue. Rejoins des milliers de personnes qui ont décidé de reprendre leur santé en main avec FitWell. C'est gratuit, c'est simple, et ça peut changer ta vie." %}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'register' %}" class="btn-tse py-5 px-12 text-sm">
+                {% trans "Créer mon compte gratuit" %}
+            </a>
+            <a href="{% url 'login' %}" class="border-2 border-white/20 py-5 px-12 rounded-tse-pill text-[10px] font-black uppercase tracking-widest hover:border-tse_accent hover:text-tse_accent transition-all">
+                {% trans "J'ai déjà un compte" %}
+            </a>
+        </div>
     </div>
     <!-- Background Deco -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-black italic text-white/[0.03] whitespace-nowrap pointer-events-none uppercase">
-        TRAIN SWEAT EAT
+        FIT WELL
     </div>
 </div>
 {% endblock %}
