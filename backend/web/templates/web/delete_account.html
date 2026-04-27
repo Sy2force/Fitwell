@@ -1,0 +1,92 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Supprimer mon compte - FitWell" %}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-xl mx-auto">
+
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <div class="text-5xl mb-4">⚠️</div>
+            <h1 class="text-3xl md:text-5xl font-black uppercase tracking-tighter italic text-tse_text mb-3">
+                {% trans "Supprimer" %} <span class="text-red-500">{% trans "mon compte" %}</span>
+            </h1>
+            <p class="text-tse_muted text-xs font-bold uppercase tracking-widest">
+                {% trans "Cette action est définitive et irréversible" %}
+            </p>
+        </div>
+
+        <!-- Messages -->
+        {% if messages %}
+        <div class="mb-6 space-y-2">
+            {% for message in messages %}
+            <div class="px-4 py-3 rounded-2xl text-sm font-bold {% if message.tags == 'success' %}bg-green-50 text-green-800 border border-green-200{% elif message.tags == 'error' %}bg-red-50 text-red-800 border border-red-200{% else %}bg-blue-50 text-blue-800 border border-blue-200{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Avertissement -->
+        <div class="bg-red-50 border-2 border-red-200 rounded-3xl p-6 mb-6">
+            <h2 class="text-sm font-black uppercase tracking-widest text-red-700 mb-3">
+                {% trans "Ce qui sera supprimé" %}
+            </h2>
+            <ul class="space-y-2 text-sm text-red-900 font-medium">
+                <li class="flex items-start gap-2"><span>×</span> {% trans "Ton profil et tes informations" %}</li>
+                <li class="flex items-start gap-2"><span>×</span> {% trans "Tes articles, commentaires et likes" %}</li>
+                <li class="flex items-start gap-2"><span>×</span> {% trans "Tes plans bien-être et historiques d'entraînement" %}</li>
+                <li class="flex items-start gap-2"><span>×</span> {% trans "Toutes tes données associées" %}</li>
+            </ul>
+            <p class="mt-4 text-xs font-bold text-red-700">
+                {% trans "Cette action ne peut pas être annulée. Aucune restauration possible." %}
+            </p>
+        </div>
+
+        <!-- Formulaire -->
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+
+            <div>
+                <label class="block text-xs font-black uppercase tracking-widest text-tse_text mb-2">
+                    {% trans "Confirme ton mot de passe" %}
+                </label>
+                <input
+                    type="password"
+                    name="password"
+                    required
+                    autocomplete="current-password"
+                    class="w-full bg-white border border-gray-200 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-red-500 focus:ring-0 transition-all font-medium"
+                    placeholder="••••••••"
+                />
+            </div>
+
+            <div>
+                <label class="block text-xs font-black uppercase tracking-widest text-tse_text mb-2">
+                    {% trans 'Tape "SUPPRIMER" pour confirmer' %}
+                </label>
+                <input
+                    type="text"
+                    name="confirm"
+                    required
+                    autocomplete="off"
+                    class="w-full bg-white border border-gray-200 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-red-500 focus:ring-0 transition-all font-medium uppercase"
+                    placeholder="SUPPRIMER"
+                />
+            </div>
+
+            <div class="flex flex-col-reverse sm:flex-row gap-3 pt-4">
+                <a href="{% url 'profile' %}" class="flex-1 text-center py-4 px-8 bg-gray-100 text-tse_text text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-gray-200 transition-colors">
+                    {% trans "Annuler" %}
+                </a>
+                <button type="submit" class="flex-1 py-4 px-8 bg-red-500 text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-red-600 transition-colors shadow-soft">
+                    {% trans "Supprimer définitivement" %}
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

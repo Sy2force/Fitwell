@@ -116,3 +116,37 @@ def change_password(request):
     return render(request, 'web/change_password.html', {
         'form': form
     })
+
+
+@login_required(login_url='login')
+def delete_account(request):
+    """
+    Permet à l'utilisateur de supprimer définitivement son propre compte.
+    Sécurité : exige confirmation par mot de passe + checkbox.
+    Le super-utilisateur ne peut pas se supprimer ainsi (sécurité plateforme).
+    """
+    if request.method != 'POST':
+        return render(request, 'web/delete_account.html')
+
+    # Validation
+    password = request.POST.get('password', '')
+    confirm = request.POST.get('confirm', '')
+
+    if request.user.is_superuser:
+        messages.error(request, _("Le super-utilisateur ne peut pas se supprimer via cette page (sécurité)."))
+        return redirect('profile')
+
+    if confirm != 'SUPPRIMER':
+        messages.error(request, _("Tape exactement SUPPRIMER pour confirmer."))
+        return redirect('delete_account')
+
+    if not request.user.check_password(password):
+        messages.error(request, _("Mot de passe incorrect."))
+        return redirect('delete_account')
+
+    # Suppression
+    username = request.user.username
+    logout(request)
+    User.objects.filter(username=username).delete()
+    messages.success(request, _("Ton compte %(u)s a été supprimé définitivement. À bientôt peut-être.") % {'u': username})
+    return redirect('home')

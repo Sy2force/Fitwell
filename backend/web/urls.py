@@ -41,6 +41,12 @@ urlpatterns = [
     path('profile/', views.profile_view, name='profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('profile/password/', views.change_password, name='change_password'),
+    path('profile/delete/', views.delete_account, name='delete_account'),
+
+    # Dashboard Admin custom (super-utilisateur uniquement)
+    path('admin-panel/', views.admin_panel, name='admin_panel'),
+    path('admin-panel/users/<int:user_id>/toggle-hide/', views.admin_toggle_hide, name='admin_toggle_hide'),
+    path('admin-panel/users/<int:user_id>/delete/', views.admin_delete_user, name='admin_delete_user'),
     path('planner/', views.planner_view, name='planner'),
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('agenda/', views.custom_planner_view, name='custom_planner'),

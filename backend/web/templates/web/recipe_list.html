@@ -43,8 +43,8 @@
                 {% endif %}
 
                 <a href="{% url 'recipe_detail' recipe.id %}" class="group block h-full">
-                    <div class="card-overlay aspect-square mb-6 shadow-soft group-hover:transform group-hover:scale-[1.02] transition-all duration-500">
-                        <img src="{% if recipe.image_url %}{{ recipe.image_url }}{% else %}https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2000&auto=format&fit=crop{% endif %}" 
+                    <div class="card-overlay aspect-[4/5] mb-6 shadow-soft group-hover:transform group-hover:scale-[1.02] transition-all duration-500">
+                        <img loading="lazy" decoding="async" src="{% if recipe.image_url %}{{ recipe.image_url }}{% else %}https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2000&auto=format&fit=crop{% endif %}" 
                              alt="{{ recipe.title }}" 
                              class="w-full h-full object-cover">
                         

@@ -24,6 +24,19 @@
                     <a href="{% url 'edit_profile' %}" class="btn-tse py-2 px-6 text-[10px]">
                         {% trans "Modifier mon profil" %}
                     </a>
+                    <a href="{% url 'change_password' %}" class="px-6 py-2 bg-gray-50 rounded-tse-pill text-[10px] font-black uppercase tracking-widest text-tse_text border border-gray-100 hover:bg-gray-100 transition-colors">
+                        {% trans "Changer mot de passe" %}
+                    </a>
+                    {% if user.is_superuser %}
+                    <a href="{% url 'admin_panel' %}" class="px-6 py-2 bg-purple-50 rounded-tse-pill text-[10px] font-black uppercase tracking-widest text-purple-700 border border-purple-200 hover:bg-purple-100 transition-colors">
+                        🛠 {% trans "Admin Panel" %}
+                    </a>
+                    {% endif %}
+                    {% if not user.is_superuser %}
+                    <a href="{% url 'delete_account' %}" class="px-6 py-2 bg-red-50 rounded-tse-pill text-[10px] font-black uppercase tracking-widest text-red-600 border border-red-100 hover:bg-red-100 transition-colors">
+                        {% trans "Supprimer mon compte" %}
+                    </a>
+                    {% endif %}
                     {% if plan %}
                     <span class="px-4 py-2 bg-gray-50 rounded-tse-pill text-[10px] font-black uppercase tracking-widest text-tse_muted border border-gray-100">
                         {% trans "Objectif:" %} {{ plan.get_goal_display }}

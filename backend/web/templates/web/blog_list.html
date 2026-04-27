@@ -33,7 +33,7 @@
                 {% for article in articles %}
                 <a href="{% url 'article_detail' article.slug %}" class="group block">
                     <div class="card-overlay aspect-[4/5] mb-6 shadow-soft group-hover:transform group-hover:scale-[1.02] transition-all duration-500">
-                        <img src="{% if article.image %}{{ article.image }}{% else %}https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop{% endif %}" 
+                        <img loading="lazy" decoding="async" src="{% if article.image %}{{ article.image }}{% else %}https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop{% endif %}" 
                              alt="{{ article.title }}" 
                              class="w-full h-full object-cover">
                         

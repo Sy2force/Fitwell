@@ -1,0 +1,184 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Admin Panel - FitWell" %}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-7xl mx-auto">
+
+        <!-- Header -->
+        <div class="mb-12 pb-6 border-b border-gray-100">
+            <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter italic text-tse_text mb-2">
+                {% trans "Admin" %} <span class="text-tse_accent">{% trans "Panel" %}</span>
+            </h1>
+            <p class="text-tse_muted text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                {% trans "Surveillance temps réel des utilisateurs" %}
+            </p>
+        </div>
+
+        <!-- Messages -->
+        {% if messages %}
+        <div class="mb-8 space-y-2">
+            {% for message in messages %}
+            <div class="px-4 py-3 rounded-2xl text-sm font-bold {% if message.tags == 'success' %}bg-green-50 text-green-800 border border-green-200{% elif message.tags == 'error' %}bg-red-50 text-red-800 border border-red-200{% else %}bg-blue-50 text-blue-800 border border-blue-200{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Stats temps réel -->
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-4 mb-12">
+            <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-soft">
+                <div class="text-[10px] font-black uppercase tracking-widest text-tse_muted mb-1">{% trans "Total" %}</div>
+                <div class="text-3xl font-black text-tse_text">{{ stats.total }}</div>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-soft">
+                <div class="text-[10px] font-black uppercase tracking-widest text-tse_muted mb-1 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    {% trans "En ligne" %}
+                </div>
+                <div class="text-3xl font-black text-green-600">{{ stats.online_now }}</div>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-soft">
+                <div class="text-[10px] font-black uppercase tracking-widest text-tse_muted mb-1">{% trans "Actifs aujourd'hui" %}</div>
+                <div class="text-3xl font-black text-tse_accent">{{ stats.active_today }}</div>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-soft">
+                <div class="text-[10px] font-black uppercase tracking-widest text-tse_muted mb-1">{% trans "Vérifiés" %}</div>
+                <div class="text-3xl font-black text-tse_text">{{ stats.verified }}</div>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-soft">
+                <div class="text-[10px] font-black uppercase tracking-widest text-tse_muted mb-1">{% trans "Staff" %}</div>
+                <div class="text-3xl font-black text-tse_text">{{ stats.staff }}</div>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-soft">
+                <div class="text-[10px] font-black uppercase tracking-widest text-tse_muted mb-1">{% trans "Masqués" %}</div>
+                <div class="text-3xl font-black text-orange-500">{{ stats.hidden }}</div>
+            </div>
+        </div>
+
+        <!-- Search + filtres -->
+        <form method="get" class="mb-8 flex flex-col md:flex-row items-stretch gap-3">
+            <input
+                type="text"
+                name="q"
+                value="{{ q }}"
+                placeholder="{% trans 'Rechercher par nom, email ou IP…' %}"
+                class="flex-1 bg-white border border-gray-100 p-4 rounded-2xl text-tse_text placeholder-gray-300 focus:border-tse_accent focus:ring-0 transition-all font-medium"
+            />
+            <label class="flex items-center gap-2 px-4 bg-white border border-gray-100 rounded-2xl cursor-pointer">
+                <input type="checkbox" name="show_hidden" value="1" {% if show_hidden %}checked{% endif %} class="rounded">
+                <span class="text-xs font-black uppercase tracking-widest">{% trans "Afficher masqués" %}</span>
+            </label>
+            <button type="submit" class="btn-tse py-4 px-8 text-xs">{% trans "Filtrer" %}</button>
+        </form>
+
+        <!-- Table users -->
+        <div class="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-soft">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="text-left p-4 text-[10px] font-black uppercase tracking-widest text-tse_muted">{% trans "Utilisateur" %}</th>
+                            <th class="text-left p-4 text-[10px] font-black uppercase tracking-widest text-tse_muted">{% trans "Email" %}</th>
+                            <th class="text-left p-4 text-[10px] font-black uppercase tracking-widest text-tse_muted">{% trans "Statut" %}</th>
+                            <th class="text-left p-4 text-[10px] font-black uppercase tracking-widest text-tse_muted">{% trans "Dernière connexion" %}</th>
+                            <th class="text-left p-4 text-[10px] font-black uppercase tracking-widest text-tse_muted">{% trans "IP" %}</th>
+                            <th class="text-left p-4 text-[10px] font-black uppercase tracking-widest text-tse_muted">{% trans "Logins" %}</th>
+                            <th class="text-left p-4 text-[10px] font-black uppercase tracking-widest text-tse_muted">{% trans "Inscrit le" %}</th>
+                            <th class="text-right p-4 text-[10px] font-black uppercase tracking-widest text-tse_muted">{% trans "Actions" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for u in users %}
+                        <tr class="border-t border-gray-50 hover:bg-gray-50 transition-colors {% if u.is_hidden %}opacity-50{% endif %}">
+                            <td class="p-4">
+                                <div class="flex items-center gap-3">
+                                    {% if u.is_online %}
+                                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse" title="En ligne"></span>
+                                    {% else %}
+                                    <span class="w-2 h-2 rounded-full bg-gray-200" title="Hors ligne"></span>
+                                    {% endif %}
+                                    <div>
+                                        <div class="font-black text-sm text-tse_text">{{ u.username }}</div>
+                                        {% if u.first_name or u.last_name %}
+                                        <div class="text-xs text-tse_muted">{{ u.first_name }} {{ u.last_name }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-4 text-xs text-tse_muted">{{ u.email|default:"—" }}</td>
+                            <td class="p-4">
+                                <div class="flex flex-wrap gap-1">
+                                    {% if u.is_superuser %}<span class="px-2 py-1 bg-purple-100 text-purple-700 text-[10px] font-black uppercase rounded">Super</span>{% endif %}
+                                    {% if u.is_staff %}<span class="px-2 py-1 bg-blue-100 text-blue-700 text-[10px] font-black uppercase rounded">Staff</span>{% endif %}
+                                    {% if u.is_verified %}<span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-black uppercase rounded">✓</span>{% endif %}
+                                    {% if u.is_hidden %}<span class="px-2 py-1 bg-orange-100 text-orange-700 text-[10px] font-black uppercase rounded">Masqué</span>{% endif %}
+                                    {% if not u.is_active %}<span class="px-2 py-1 bg-red-100 text-red-700 text-[10px] font-black uppercase rounded">Inactif</span>{% endif %}
+                                </div>
+                            </td>
+                            <td class="p-4 text-xs text-tse_muted">{% if u.last_login %}{{ u.last_login|date:"d/m/Y H:i" }}{% else %}—{% endif %}</td>
+                            <td class="p-4 text-xs font-mono text-tse_text">{{ u.last_login_ip|default:"—" }}</td>
+                            <td class="p-4 text-xs font-black text-tse_text">{{ u.login_count }}</td>
+                            <td class="p-4 text-xs text-tse_muted">{{ u.date_joined|date:"d/m/Y" }}</td>
+                            <td class="p-4">
+                                <div class="flex justify-end gap-2">
+                                    <form method="post" action="{% url 'admin_toggle_hide' u.id %}" class="inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="px-3 py-1.5 bg-orange-50 text-orange-700 text-[10px] font-black uppercase rounded-xl hover:bg-orange-100 transition-colors">
+                                            {% if u.is_hidden %}{% trans "Réafficher" %}{% else %}{% trans "Masquer" %}{% endif %}
+                                        </button>
+                                    </form>
+                                    {% if not u.is_superuser %}
+                                    <form method="post" action="{% url 'admin_delete_user' u.id %}" class="inline" onsubmit="return confirm('{% trans 'Supprimer définitivement cet utilisateur ?' %}');">
+                                        {% csrf_token %}
+                                        <button type="submit" class="px-3 py-1.5 bg-red-50 text-red-700 text-[10px] font-black uppercase rounded-xl hover:bg-red-100 transition-colors">
+                                            {% trans "Supprimer" %}
+                                        </button>
+                                    </form>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="p-8 text-center text-tse_muted">{% trans "Aucun utilisateur trouvé." %}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- User Agent details (collapsible) -->
+        {% if users %}
+        <details class="mt-8 bg-white border border-gray-100 rounded-2xl p-5 shadow-soft">
+            <summary class="cursor-pointer text-xs font-black uppercase tracking-widest text-tse_muted">
+                {% trans "Voir les User-Agents (informations techniques)" %}
+            </summary>
+            <div class="mt-4 space-y-2">
+                {% for u in users %}
+                {% if u.last_user_agent %}
+                <div class="text-[10px] font-mono text-tse_muted border-b border-gray-50 pb-2">
+                    <span class="font-black text-tse_text">{{ u.username }}:</span> {{ u.last_user_agent|truncatechars:120 }}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </details>
+        {% endif %}
+
+        <p class="mt-8 text-[10px] text-tse_muted text-center">
+            {% trans "Auto-rafraîchi à chaque chargement. Indicateur vert = session active maintenant." %}
+        </p>
+    </div>
+</div>
+
+<!-- Auto-refresh toutes les 30s pour avoir les sessions à jour -->
+<script>
+    setTimeout(function() { window.location.reload(); }, 30000);
+</script>
+{% endblock %}
