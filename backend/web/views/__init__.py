@@ -1,4 +1,4 @@
-from .static import home, tools_view, legal_view, custom_404, custom_500
+from .static import home, tools_view, legal_view, about_view, custom_404, custom_500
 from .auth import login_view, logout_view, register_view, profile_view, edit_profile, change_password, delete_account
 from .dashboard import dashboard_view, analytics_view, leaderboard_view
 from .planner import planner_view, custom_planner_view, delete_custom_event, complete_custom_event

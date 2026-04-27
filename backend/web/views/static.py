@@ -30,6 +30,13 @@ def legal_view(request):
     """
     return render(request, 'web/legal.html')
 
+
+def about_view(request):
+    """
+    Page "À propos" : mission, valeurs, histoire de FitWell.
+    """
+    return render(request, 'web/about.html')
+
 def custom_404(request, exception):
     """
     Page d'erreur 404 personnalisée (Page non trouvée).

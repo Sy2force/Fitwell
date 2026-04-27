@@ -6,13 +6,19 @@
 {% block content %}
 <div class="bg-white min-h-screen pt-32 pb-20 px-6 lg:px-8">
     <div class="max-w-7xl mx-auto">
-        <!-- Header TSE -->
-        <div class="mb-16">
-            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-4 leading-none">
-                {% trans "L'Art de" %} <span class="text-tse_accent">{% trans "Vivre" %}</span>
+        <!-- Header avec intro riche -->
+        <div class="mb-12 max-w-4xl">
+            <span class="inline-block px-3 py-1 bg-tse_accent/10 text-tse_accent text-[10px] font-black uppercase tracking-widest rounded-tse-pill mb-4">
+                {% trans "Articles & conseils" %}
+            </span>
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-6 leading-none">
+                {% trans "Le savoir," %} <span class="text-tse_accent">{% trans "ton allié" %}</span>
             </h1>
-            <p class="text-sm font-bold uppercase tracking-widest text-tse_muted">
-                {% trans "Mindset, nutrition et secrets d'experts. Découvre les clés d'un épanouissement total." %}
+            <p class="text-base md:text-lg text-tse_text leading-relaxed mb-4">
+                {% trans "Bienvenue dans la bibliothèque de FitWell. Ici, tu trouves des articles écrits par des passionnés qui pratiquent le sport et la nutrition tous les jours." %}
+            </p>
+            <p class="text-sm text-tse_muted leading-relaxed">
+                {% trans "Pas de blabla, pas de promesses miracles. Chaque article répond à une question concrète : comment progresser sans se blesser, comment manger sans se priver, comment rester motivé même quand c'est dur. Lis, applique, progresse." %}
             </p>
         </div>
 

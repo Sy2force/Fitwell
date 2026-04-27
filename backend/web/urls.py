@@ -83,4 +83,5 @@ urlpatterns = [
     
     # Pages Statiques
     path('legal/', views.legal_view, name='legal'),
+    path('about/', views.about_view, name='about'),
 ]

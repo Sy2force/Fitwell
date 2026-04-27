@@ -1,0 +1,194 @@
+{% extends 'web/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "À propos - FitWell" %}{% endblock %}
+
+{% block content %}
+<div class="bg-white">
+
+    <!-- Hero About -->
+    <section class="py-24 md:py-32 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+            <span class="inline-block px-4 py-1.5 bg-tse_accent/10 text-tse_accent text-[10px] font-black uppercase tracking-widest rounded-tse-pill mb-6">
+                {% trans "À propos de nous" %}
+            </span>
+            <h1 class="text-4xl md:text-7xl font-black uppercase tracking-tighter italic text-tse_text mb-8 leading-[0.95]">
+                {% trans "Le sport accessible." %}<br/>
+                <span class="text-tse_accent">{% trans "Pour de vrai." %}</span>
+            </h1>
+            <p class="text-base md:text-lg text-tse_muted leading-relaxed max-w-2xl mx-auto">
+                {% trans "FitWell n'est pas un site de plus sur le fitness. C'est une plateforme conçue par des passionnés, pour ceux qui veulent prendre soin de leur corps et de leur esprit, sans se faire arnaquer ni se faire mal." %}
+            </p>
+        </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="py-20 max-w-4xl mx-auto px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-8 items-start">
+            <div class="md:col-span-1">
+                <span class="text-[10px] font-black uppercase tracking-widest text-tse_accent block mb-2">{% trans "01." %}</span>
+                <h2 class="text-2xl md:text-3xl font-black uppercase tracking-tighter italic text-tse_text">
+                    {% trans "Notre mission" %}
+                </h2>
+            </div>
+            <div class="md:col-span-2 space-y-4 text-base text-tse_text leading-relaxed">
+                <p>
+                    {% trans "On vit dans un monde où l'industrie du fitness vend du rêve : des packs de protéines miracles, des programmes en 21 jours qui transforment ton corps, des influenceurs qui prétendent avoir trouvé LE secret." %}
+                </p>
+                <p>
+                    {% trans "La vérité, c'est qu'il n'y a pas de secret. Juste des principes simples : bouger régulièrement, manger des aliments entiers, dormir suffisamment, gérer son stress." %}
+                </p>
+                <p class="font-bold">
+                    {% trans "Notre mission est de te donner ces principes, expliqués clairement, sans bullshit, gratuitement." %}
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Histoire -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 items-start">
+                <div class="md:col-span-1">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-tse_accent block mb-2">{% trans "02." %}</span>
+                    <h2 class="text-2xl md:text-3xl font-black uppercase tracking-tighter italic text-tse_text">
+                        {% trans "Notre histoire" %}
+                    </h2>
+                </div>
+                <div class="md:col-span-2 space-y-4 text-base text-tse_text leading-relaxed">
+                    <p>
+                        {% trans "FitWell est né d'un constat simple : trop de gens veulent se mettre au sport mais abandonnent dans les premières semaines." %}
+                    </p>
+                    <p>
+                        {% trans "Pourquoi ? Parce qu'ils ne savent pas par où commencer, parce qu'ils se blessent à cause d'une mauvaise technique, parce qu'ils suivent des régimes impossibles à tenir, ou parce qu'ils n'ont pas le temps de tout comprendre eux-mêmes." %}
+                    </p>
+                    <p>
+                        {% trans "Nous avons créé FitWell pour rassembler en un seul endroit ce qu'il faut savoir : les bons exercices, les recettes saines, les principes de récupération, et les conseils mentaux." %}
+                    </p>
+                    <p>
+                        {% trans "Tout est gratuit. Tout est accessible. Tout est expliqué pour les débutants, mais assez précis pour les sportifs avancés." %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Valeurs -->
+    <section class="py-24">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-[10px] font-black uppercase tracking-widest text-tse_accent mb-4 block">{% trans "03." %}</span>
+                <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter italic text-tse_text">
+                    {% trans "Nos valeurs" %}
+                </h2>
+                <p class="text-base text-tse_muted mt-4 max-w-2xl mx-auto">
+                    {% trans "Quatre principes qui guident chaque ligne de contenu publiée sur FitWell." %}
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gray-50 rounded-tse-card p-8 border-l-4 border-tse_accent">
+                    <h3 class="text-xl font-black uppercase tracking-tighter italic mb-3">{% trans "Honnêteté radicale" %}</h3>
+                    <p class="text-sm text-tse_text leading-relaxed">
+                        {% trans "Si quelque chose ne marche pas, on te le dit. Si une étude est faible, on te le précise. On ne vendra jamais de complément alimentaire ni de programme à 297€ qui te promet la lune." %}
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 rounded-tse-card p-8 border-l-4 border-tse_accent">
+                    <h3 class="text-xl font-black uppercase tracking-tighter italic mb-3">{% trans "Simplicité" %}</h3>
+                    <p class="text-sm text-tse_text leading-relaxed">
+                        {% trans "Le fitness n'est pas compliqué. C'est l'industrie qui le rend compliqué pour te vendre des solutions. Nos contenus sont écrits pour être compris en 5 minutes, applicables tout de suite." %}
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 rounded-tse-card p-8 border-l-4 border-tse_accent">
+                    <h3 class="text-xl font-black uppercase tracking-tighter italic mb-3">{% trans "Inclusivité" %}</h3>
+                    <p class="text-sm text-tse_text leading-relaxed">
+                        {% trans "Que tu sois jeune ou senior, débutant complet ou athlète expérimenté, en surpoids ou maigre, FitWell est pour toi. Le sport ne devrait pas être réservé à une élite." %}
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 rounded-tse-card p-8 border-l-4 border-tse_accent">
+                    <h3 class="text-xl font-black uppercase tracking-tighter italic mb-3">{% trans "Long terme" %}</h3>
+                    <p class="text-sm text-tse_text leading-relaxed">
+                        {% trans "On ne cherche pas à te faire perdre 10 kilos en 3 semaines. On veut te construire une santé qui dure 50 ans. Chaque conseil est pensé pour être tenable durablement." %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ce qui nous différencie -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 items-start">
+                <div class="md:col-span-1">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-tse_accent block mb-2">{% trans "04." %}</span>
+                    <h2 class="text-2xl md:text-3xl font-black uppercase tracking-tighter italic text-tse_text">
+                        {% trans "Ce qui nous différencie" %}
+                    </h2>
+                </div>
+                <div class="md:col-span-2 space-y-6">
+                    <div class="flex items-start gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-tse_accent flex items-center justify-center text-white font-black text-sm">✓</span>
+                        <div>
+                            <h3 class="font-black text-tse_text mb-1">{% trans "Du contenu créé par des gens qui pratiquent" %}</h3>
+                            <p class="text-sm text-tse_muted leading-relaxed">
+                                {% trans "Nos articles ne sont pas générés à la chaîne. Ils sont écrits par des passionnés de sport et de nutrition qui appliquent eux-mêmes ce qu'ils recommandent." %}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-tse_accent flex items-center justify-center text-white font-black text-sm">✓</span>
+                        <div>
+                            <h3 class="font-black text-tse_text mb-1">{% trans "Tu progresses à ton rythme" %}</h3>
+                            <p class="text-sm text-tse_muted leading-relaxed">
+                                {% trans "Pas de coach virtuel qui te juge. Tu choisis ce que tu lis, ce que tu fais, quand tu le fais. C'est ton parcours, on est juste là pour t'éclairer." %}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-tse_accent flex items-center justify-center text-white font-black text-sm">✓</span>
+                        <div>
+                            <h3 class="font-black text-tse_text mb-1">{% trans "Une plateforme évolutive" %}</h3>
+                            <p class="text-sm text-tse_muted leading-relaxed">
+                                {% trans "FitWell s'enrichit chaque semaine de nouveaux articles, exercices, recettes. Inscris-toi gratuitement et reviens quand tu veux : il y aura toujours du nouveau contenu utile." %}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-tse_accent flex items-center justify-center text-white font-black text-sm">✓</span>
+                        <div>
+                            <h3 class="font-black text-tse_text mb-1">{% trans "Open source dans l'esprit" %}</h3>
+                            <p class="text-sm text-tse_muted leading-relaxed">
+                                {% trans "Aucune information cachée derrière un paywall. Tout est gratuit, tout est documenté, tout est partageable. Le savoir doit circuler." %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engagement final -->
+    <section class="py-24">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+            <span class="text-[10px] font-black uppercase tracking-widest text-tse_accent mb-4 block">{% trans "Notre promesse" %}</span>
+            <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter italic text-tse_text mb-8 leading-tight">
+                {% trans "On ne te promet pas de te transformer." %}<br/>
+                <span class="text-tse_accent">{% trans "On te donne les outils pour le faire toi-même." %}</span>
+            </h2>
+            <p class="text-base md:text-lg text-tse_muted leading-relaxed max-w-2xl mx-auto mb-10">
+                {% trans "Le changement vient de toi, pas de nous. Mais avec les bons conseils, les bonnes méthodes, et un peu de constance, tu peux faire des choses incroyables. C'est pour ça que FitWell existe." %}
+            </p>
+            <a href="{% url 'register' %}" class="btn-tse py-5 px-12 text-sm">
+                {% trans "Rejoindre l'aventure (gratuit)" %}
+            </a>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

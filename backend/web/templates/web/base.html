@@ -176,10 +176,12 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-xs font-black uppercase tracking-widest mb-6">{% trans "Légal" %}</h4>
+                    <h4 class="text-xs font-black uppercase tracking-widest mb-6">{% trans "FitWell" %}</h4>
                     <ul class="space-y-4 text-xs font-bold uppercase tracking-widest text-gray-400">
+                        <li><a href="{% url 'about' %}" class="hover:text-tse_text transition-colors">{% trans "À propos" %}</a></li>
                         <li><a href="{% url 'legal' %}#privacy" class="hover:text-tse_text transition-colors">{% trans "Confidentialité" %}</a></li>
-                        <li><a href="{% url 'legal' %}#terms" class="hover:text-tse_text transition-colors">{% trans "Conditions" %}</a></li>
+                        <li><a href="{% url 'legal' %}#cookies" class="hover:text-tse_text transition-colors">{% trans "Cookies" %}</a></li>
+                        <li><a href="{% url 'legal' %}#medical" class="hover:text-tse_text transition-colors">{% trans "Avertissement" %}</a></li>
                         <li><a href="{% url 'legal' %}#contact" class="hover:text-tse_text transition-colors">{% trans "Contact" %}</a></li>
                     </ul>
                 </div>

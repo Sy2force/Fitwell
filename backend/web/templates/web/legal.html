@@ -16,45 +16,156 @@
         </div>
 
         <div class="space-y-12">
+
+            <!-- 01. Mentions légales -->
+            <div id="legal" class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft">
+                <h2 class="text-2xl font-black uppercase tracking-tighter italic text-tse_text mb-6 flex items-center gap-4">
+                    <span class="text-tse_accent">01.</span> {% trans "Mentions légales" %}
+                </h2>
+                <div class="space-y-4 text-sm text-tse_text leading-relaxed">
+                    <p>
+                        <strong>{% trans "Éditeur du site :" %}</strong> {% trans "FitWell — projet pédagogique de développement web" %}
+                    </p>
+                    <p>
+                        <strong>{% trans "Responsable de la publication :" %}</strong> {% trans "Équipe FitWell" %}
+                    </p>
+                    <p>
+                        <strong>{% trans "Hébergement :" %}</strong> {% trans "Render.com (San Francisco, États-Unis)" %}
+                    </p>
+                    <p>
+                        <strong>{% trans "Contact :" %}</strong> support@fitwell.local
+                    </p>
+                </div>
+            </div>
+
+            <!-- 02. Données personnelles (RGPD) -->
             <div id="privacy" class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft">
                 <h2 class="text-2xl font-black uppercase tracking-tighter italic text-tse_text mb-6 flex items-center gap-4">
-                    <span class="text-tse_accent">01.</span> {% trans "Tes Données" %}
+                    <span class="text-tse_accent">02.</span> {% trans "Données personnelles & RGPD" %}
                 </h2>
-                <div class="prose prose-sm prose-p:text-tse_muted prose-p:leading-relaxed font-medium">
-                    <p class="mb-4">
-                        {% trans "Ta vie privée est sacrée. Chez FitWell, nous protégeons tes données personnelles avec la plus grande rigueur. Elles ne servent qu'à une chose : t'offrir l'expérience la plus personnalisée possible." %}
-                    </p>
+                <div class="space-y-4 text-sm text-tse_text leading-relaxed">
                     <p>
-                        {% trans "Aucune revente, aucun partage non sollicité. Tes mesures et tes progrès t'appartiennent, nous ne sommes que les outils de ta réussite." %}
+                        {% trans "Conformément au Règlement Général sur la Protection des Données (RGPD), FitWell collecte uniquement les informations strictement nécessaires au fonctionnement du service." %}
+                    </p>
+                    <p><strong>{% trans "Données collectées :" %}</strong></p>
+                    <ul class="list-disc list-inside space-y-1 ml-2 text-tse_muted">
+                        <li>{% trans "Identifiants de connexion (nom d'utilisateur, email)" %}</li>
+                        <li>{% trans "Informations de profil que tu choisis de fournir (âge, poids, objectif sportif)" %}</li>
+                        <li>{% trans "Historique de tes sessions d'entraînement" %}</li>
+                        <li>{% trans "Adresse IP et type de navigateur (sécurité, statistiques anonymes)" %}</li>
+                    </ul>
+                    <p><strong>{% trans "Tes droits :" %}</strong></p>
+                    <ul class="list-disc list-inside space-y-1 ml-2 text-tse_muted">
+                        <li>{% trans "Accès à tes données : visibles dans ton profil à tout moment" %}</li>
+                        <li>{% trans "Rectification : tu peux modifier ton profil quand tu veux" %}</li>
+                        <li>{% trans "Suppression : bouton 'Supprimer mon compte' dans les paramètres" %}</li>
+                        <li>{% trans "Portabilité : tes données peuvent t'être envoyées sur demande" %}</li>
+                    </ul>
+                    <p>
+                        <strong>{% trans "Aucune revente, aucun partage commercial." %}</strong>
+                        {% trans "Tes données restent privées et ne sont jamais cédées à des tiers." %}
                     </p>
                 </div>
             </div>
 
-            <div id="terms" class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft">
+            <!-- 03. Cookies -->
+            <div id="cookies" class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft">
                 <h2 class="text-2xl font-black uppercase tracking-tighter italic text-tse_text mb-6 flex items-center gap-4">
-                    <span class="text-tse_accent">02.</span> {% trans "Engagement" %}
+                    <span class="text-tse_accent">03.</span> {% trans "Cookies" %}
                 </h2>
-                <div class="prose prose-sm prose-p:text-tse_muted prose-p:leading-relaxed font-medium">
-                    <p class="mb-4">
-                        {% trans "En utilisant FitWell, tu rejoins une communauté basée sur le respect et l'amélioration de soi. Nous demandons à chacun de nos membres de cultiver cet esprit positif." %}
-                    </p>
+                <div class="space-y-4 text-sm text-tse_text leading-relaxed">
                     <p>
-                        {% trans "Attention : FitWell est un guide, pas un médecin. Consulte toujours un professionnel de santé pour valider que ton nouveau rythme de vie est adapté à ta condition physique." %}
+                        {% trans "FitWell utilise uniquement des cookies techniques essentiels au fonctionnement du site :" %}
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 ml-2 text-tse_muted">
+                        <li><strong>sessionid</strong> : {% trans "garde ta session active après connexion" %}</li>
+                        <li><strong>csrftoken</strong> : {% trans "protège contre les attaques CSRF (sécurité)" %}</li>
+                        <li><strong>django_language</strong> : {% trans "mémorise ta langue préférée" %}</li>
+                    </ul>
+                    <p>
+                        <strong>{% trans "Aucun cookie publicitaire, aucun tracker tiers." %}</strong>
+                        {% trans "Pas de Google Analytics, pas de Facebook Pixel, pas de remarketing." %}
                     </p>
                 </div>
             </div>
 
+            <!-- 04. Propriété intellectuelle -->
+            <div id="ip" class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft">
+                <h2 class="text-2xl font-black uppercase tracking-tighter italic text-tse_text mb-6 flex items-center gap-4">
+                    <span class="text-tse_accent">04.</span> {% trans "Propriété intellectuelle" %}
+                </h2>
+                <div class="space-y-4 text-sm text-tse_text leading-relaxed">
+                    <p>
+                        {% trans "Tous les textes, articles, recettes, descriptions d'exercices et plans d'entraînement présents sur FitWell sont la propriété de leurs auteurs respectifs." %}
+                    </p>
+                    <p>
+                        {% trans "Tu peux librement consulter et partager nos articles avec un lien retour. La reproduction commerciale ou la republication sans accord est interdite." %}
+                    </p>
+                    <p>
+                        {% trans "Les images proviennent de Unsplash sous licence libre, ou ont été générées spécifiquement pour ce site." %}
+                    </p>
+                </div>
+            </div>
+
+            <!-- 05. Avertissement médical -->
+            <div id="medical" class="bg-orange-50 rounded-tse-card p-10 border-2 border-orange-200">
+                <h2 class="text-2xl font-black uppercase tracking-tighter italic text-tse_text mb-6 flex items-center gap-4">
+                    <span class="text-orange-500">05.</span> {% trans "Avertissement médical important" %}
+                </h2>
+                <div class="space-y-4 text-sm text-tse_text leading-relaxed">
+                    <p class="font-bold">
+                        {% trans "FitWell n'est pas un service médical. Nos contenus sont éducatifs, pas thérapeutiques." %}
+                    </p>
+                    <p>
+                        {% trans "Avant de commencer un nouveau programme sportif ou nutritionnel :" %}
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 ml-2 text-tse_muted">
+                        <li>{% trans "Consulte ton médecin si tu as une condition médicale (diabète, hypertension, etc.)" %}</li>
+                        <li>{% trans "Demande l'avis d'un kinésithérapeute si tu as des douleurs articulaires" %}</li>
+                        <li>{% trans "Va voir un nutritionniste pour les régimes spécifiques" %}</li>
+                        <li>{% trans "Arrête immédiatement et consulte en cas de douleur aiguë" %}</li>
+                    </ul>
+                    <p>
+                        {% trans "FitWell décline toute responsabilité en cas de blessure consécutive à une mauvaise application des conseils. Le sport doit toujours être pratiqué avec bon sens et progression." %}
+                    </p>
+                </div>
+            </div>
+
+            <!-- 06. Responsabilité -->
+            <div id="liability" class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft">
+                <h2 class="text-2xl font-black uppercase tracking-tighter italic text-tse_text mb-6 flex items-center gap-4">
+                    <span class="text-tse_accent">06.</span> {% trans "Limites de responsabilité" %}
+                </h2>
+                <div class="space-y-4 text-sm text-tse_text leading-relaxed">
+                    <p>
+                        {% trans "FitWell est fourni « tel quel ». Bien que nous mettions tout en œuvre pour publier des informations fiables et vérifiées, nous ne pouvons garantir leur exactitude absolue ni leur applicabilité à ta situation personnelle." %}
+                    </p>
+                    <p>
+                        {% trans "Le service peut être indisponible temporairement pour maintenance. Nous nous efforçons de minimiser ces interruptions." %}
+                    </p>
+                </div>
+            </div>
+
+            <!-- 07. Contact -->
             <div id="contact" class="bg-gray-50 rounded-tse-card p-10 border border-gray-100 shadow-soft">
                 <h2 class="text-2xl font-black uppercase tracking-tighter italic text-tse_text mb-6 flex items-center gap-4">
-                    <span class="text-tse_accent">03.</span> {% trans "Nous Contacter" %}
+                    <span class="text-tse_accent">07.</span> {% trans "Nous Contacter" %}
                 </h2>
+                <p class="text-sm text-tse_muted font-medium mb-4">
+                    {% trans "Une question juridique, un signalement, une demande de suppression de données, ou simplement envie de discuter ?" %}
+                </p>
                 <p class="text-sm text-tse_muted font-medium mb-8">
-                    {% trans "Une question, une suggestion ou juste envie de partager ton succès ? Notre équipe est là pour toi." %}
+                    {% trans "Notre équipe répond sous 72 heures ouvrées." %}
                 </p>
                 <a href="mailto:support@fitwell.local" class="btn-tse py-4 px-10 text-[10px] inline-block">
                     support@fitwell.local
                 </a>
             </div>
+
+            <!-- Date dernière maj -->
+            <p class="text-xs text-center text-tse_muted">
+                {% trans "Dernière mise à jour : avril 2026" %}
+            </p>
         </div>
     </div>
 </div>
