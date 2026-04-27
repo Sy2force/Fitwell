@@ -160,7 +160,7 @@
     window.workoutConfig = {
         csrfToken: "{{ csrf_token }}",
         textRest: "{% trans 'Récupération.'|escapejs %}",
-        textDone: "{% trans 'C\'est fait.'|escapejs %}",
+        textDone: "{% blocktrans %}C'est fait.{% endblocktrans %}",
         textSessionDone: "{% trans 'Session terminée. Excellent travail. Ton bilan de récupération est prêt.'|escapejs %}",
         textInit: "{% trans 'Démarrage.'|escapejs %}",
         textResume: "{% trans 'Reprise.'|escapejs %}",

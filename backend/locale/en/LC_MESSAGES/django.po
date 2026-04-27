@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-15 11:24+0000\n"
+"POT-Creation-Date: 2026-04-27 22:35+0000\n"
 "PO-Revision-Date: 2026-03-09 19:40+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Entraînement"
 msgstr "Training"
 
-#: api/models/gamification.py:89 web/templates/web/profile.html:105
+#: api/models/gamification.py:89 web/templates/web/profile.html:118
 msgid "Constance"
 msgstr "Consistency"
 
@@ -77,8 +77,8 @@ msgstr "Work & Career"
 msgid "Vie perso & loisirs"
 msgstr "Personal Life & Leisure"
 
-#: api/models/plan.py:16 web/templates/web/base.html:51
-#: web/templates/web/base.html:96 web/templates/web/base.html:159
+#: api/models/plan.py:16 web/templates/web/base.html:52
+#: web/templates/web/base.html:104 web/templates/web/base.html:173
 msgid "Nutrition"
 msgstr "Nutrition"
 
@@ -255,11 +255,11 @@ msgstr "Mobility (10 min before session)"
 msgid "Cardio zone 2 (2x 30min)"
 msgstr "Zone 2 Cardio (2x 30min)"
 
-#: config/settings.py:225
+#: config/settings.py:248
 msgid "Français"
 msgstr "French"
 
-#: config/settings.py:226
+#: config/settings.py:249
 msgid "English"
 msgstr "English"
 
@@ -342,7 +342,7 @@ msgstr "Start"
 msgid "Fin"
 msgstr "End"
 
-#: web/forms.py:63 web/templates/web/home.html:114
+#: web/forms.py:63
 msgid "Priorité"
 msgstr "Priority"
 
@@ -427,7 +427,7 @@ msgstr "Tell us about your goals..."
 msgid "URL de ton image"
 msgstr "Your image URL"
 
-#: web/forms.py:216
+#: web/forms.py:216 web/templates/web/admin_panel.html:86
 msgid "Email"
 msgstr "Email"
 
@@ -464,6 +464,8 @@ msgid ""
 "La page que tu cherches a pris un autre chemin. Repartons du bon pied pour "
 "ton prochain mouvement."
 msgstr ""
+"The page you're looking for has taken another path. Let's start fresh for "
+"your next move."
 
 #: web/templates/404.html:25
 #, fuzzy
@@ -484,10 +486,403 @@ msgid ""
 "Une petite erreur de parcours. Notre équipe travaille à rétablir "
 "l'équilibre. Merci de ta patience."
 msgstr ""
+"A small bump on the road. Our team is working to restore balance. Thank you "
+"for your patience."
 
 #: web/templates/500.html:25 web/views/workout.py:120
 msgid "Retour au calme"
 msgstr "Cooldown"
+
+#: web/templates/web/about.html:4
+#, fuzzy
+#| msgid "Outils - FitWell"
+msgid "À propos - FitWell"
+msgstr "Tools - FitWell"
+
+#: web/templates/web/about.html:13
+msgid "À propos de nous"
+msgstr "About us"
+
+#: web/templates/web/about.html:16
+msgid "Le sport accessible."
+msgstr "Accessible fitness."
+
+#: web/templates/web/about.html:17
+msgid "Pour de vrai."
+msgstr "For real."
+
+#: web/templates/web/about.html:20
+msgid ""
+"FitWell n'est pas un site de plus sur le fitness. C'est une plateforme "
+"conçue par des passionnés, pour ceux qui veulent prendre soin de leur corps "
+"et de leur esprit, sans se faire arnaquer ni se faire mal."
+msgstr ""
+"FitWell is not just another fitness site. It's a platform designed by "
+"passionate people, for those who want to take care of their body and mind, "
+"without getting scammed or hurt."
+
+#: web/templates/web/about.html:29
+msgid "01."
+msgstr "01."
+
+#: web/templates/web/about.html:31 web/templates/web/home.html:48
+#, fuzzy
+#| msgid "Progression"
+msgid "Notre mission"
+msgstr "Progression"
+
+#: web/templates/web/about.html:36
+msgid ""
+"On vit dans un monde où l'industrie du fitness vend du rêve : des packs de "
+"protéines miracles, des programmes en 21 jours qui transforment ton corps, "
+"des influenceurs qui prétendent avoir trouvé LE secret."
+msgstr ""
+"We live in a world where the fitness industry sells a dream: miracle protein"
+" packs, 21-day programs that transform your body, influencers who claim to "
+"have found THE secret."
+
+#: web/templates/web/about.html:39
+msgid ""
+"La vérité, c'est qu'il n'y a pas de secret. Juste des principes simples : "
+"bouger régulièrement, manger des aliments entiers, dormir suffisamment, "
+"gérer son stress."
+msgstr ""
+"The truth is there is no secret. Just simple principles: move regularly, eat"
+" whole foods, sleep enough, manage stress."
+
+#: web/templates/web/about.html:42
+msgid ""
+"Notre mission est de te donner ces principes, expliqués clairement, sans "
+"bullshit, gratuitement."
+msgstr ""
+"Our mission is to give you these principles, clearly explained, without "
+"bullshit, for free."
+
+#: web/templates/web/about.html:53
+msgid "02."
+msgstr "02."
+
+#: web/templates/web/about.html:55
+#, fuzzy
+#| msgid "Voir tout"
+msgid "Notre histoire"
+msgstr "View All"
+
+#: web/templates/web/about.html:60
+msgid ""
+"FitWell est né d'un constat simple : trop de gens veulent se mettre au sport"
+" mais abandonnent dans les premières semaines."
+msgstr ""
+"FitWell was born from a simple observation: too many people want to start "
+"sport but give up in the first weeks."
+
+#: web/templates/web/about.html:63
+msgid ""
+"Pourquoi ? Parce qu'ils ne savent pas par où commencer, parce qu'ils se "
+"blessent à cause d'une mauvaise technique, parce qu'ils suivent des régimes "
+"impossibles à tenir, ou parce qu'ils n'ont pas le temps de tout comprendre "
+"eux-mêmes."
+msgstr ""
+"Why? Because they don't know where to start, because they get injured due to"
+" bad technique, because they follow impossible diets, or because they don't "
+"have time to understand everything themselves."
+
+#: web/templates/web/about.html:66
+msgid ""
+"Nous avons créé FitWell pour rassembler en un seul endroit ce qu'il faut "
+"savoir : les bons exercices, les recettes saines, les principes de "
+"récupération, et les conseils mentaux."
+msgstr ""
+"We created FitWell to gather in one place what you need to know: the right "
+"exercises, healthy recipes, recovery principles, and mental advice."
+
+#: web/templates/web/about.html:69
+msgid ""
+"Tout est gratuit. Tout est accessible. Tout est expliqué pour les débutants,"
+" mais assez précis pour les sportifs avancés."
+msgstr ""
+"Everything is free. Everything is accessible. Everything is explained for "
+"beginners, but precise enough for advanced athletes."
+
+#: web/templates/web/about.html:80
+msgid "03."
+msgstr "03."
+
+#: web/templates/web/about.html:82
+msgid "Nos valeurs"
+msgstr "Our values"
+
+#: web/templates/web/about.html:85
+msgid ""
+"Quatre principes qui guident chaque ligne de contenu publiée sur FitWell."
+msgstr ""
+"Four principles that guide every line of content published on FitWell."
+
+#: web/templates/web/about.html:91
+msgid "Honnêteté radicale"
+msgstr "Radical honesty"
+
+#: web/templates/web/about.html:93
+msgid ""
+"Si quelque chose ne marche pas, on te le dit. Si une étude est faible, on te"
+" le précise. On ne vendra jamais de complément alimentaire ni de programme à"
+" 297€ qui te promet la lune."
+msgstr ""
+"If something doesn't work, we tell you. If a study is weak, we say so. We "
+"will never sell food supplements or a 297€ program promising you the moon."
+
+#: web/templates/web/about.html:98
+msgid "Simplicité"
+msgstr "Simplicity"
+
+#: web/templates/web/about.html:100
+msgid ""
+"Le fitness n'est pas compliqué. C'est l'industrie qui le rend compliqué pour"
+" te vendre des solutions. Nos contenus sont écrits pour être compris en 5 "
+"minutes, applicables tout de suite."
+msgstr ""
+"Fitness is not complicated. The industry makes it complicated to sell you "
+"solutions. Our content is written to be understood in 5 minutes, applicable "
+"right away."
+
+#: web/templates/web/about.html:105
+#, fuzzy
+#| msgid "Activité"
+msgid "Inclusivité"
+msgstr "Activity"
+
+#: web/templates/web/about.html:107
+msgid ""
+"Que tu sois jeune ou senior, débutant complet ou athlète expérimenté, en "
+"surpoids ou maigre, FitWell est pour toi. Le sport ne devrait pas être "
+"réservé à une élite."
+msgstr ""
+"Whether you're young or senior, complete beginner or experienced athlete, "
+"overweight or thin, FitWell is for you. Sport should not be reserved for an "
+"elite."
+
+#: web/templates/web/about.html:112
+msgid "Long terme"
+msgstr "Long term"
+
+#: web/templates/web/about.html:114
+msgid ""
+"On ne cherche pas à te faire perdre 10 kilos en 3 semaines. On veut te "
+"construire une santé qui dure 50 ans. Chaque conseil est pensé pour être "
+"tenable durablement."
+msgstr ""
+"We don't aim to make you lose 10 kilos in 3 weeks. We want to build you "
+"health that lasts 50 years. Each piece of advice is designed to be "
+"sustainable."
+
+#: web/templates/web/about.html:126
+msgid "04."
+msgstr "04."
+
+#: web/templates/web/about.html:128
+msgid "Ce qui nous différencie"
+msgstr "What sets us apart"
+
+#: web/templates/web/about.html:135
+msgid "Du contenu créé par des gens qui pratiquent"
+msgstr "Content created by people who actually train"
+
+#: web/templates/web/about.html:137
+msgid ""
+"Nos articles ne sont pas générés à la chaîne. Ils sont écrits par des "
+"passionnés de sport et de nutrition qui appliquent eux-mêmes ce qu'ils "
+"recommandent."
+msgstr ""
+"Our articles are not mass-produced. They are written by sport and nutrition "
+"enthusiasts who apply themselves what they recommend."
+
+#: web/templates/web/about.html:145
+msgid "Tu progresses à ton rythme"
+msgstr "You progress at your own pace"
+
+#: web/templates/web/about.html:147
+msgid ""
+"Pas de coach virtuel qui te juge. Tu choisis ce que tu lis, ce que tu fais, "
+"quand tu le fais. C'est ton parcours, on est juste là pour t'éclairer."
+msgstr ""
+"No virtual coach to judge you. You choose what to read, what to do, when to "
+"do it. It's your journey, we're just here to enlighten you."
+
+#: web/templates/web/about.html:155
+msgid "Une plateforme évolutive"
+msgstr "An evolving platform"
+
+#: web/templates/web/about.html:157
+msgid ""
+"FitWell s'enrichit chaque semaine de nouveaux articles, exercices, recettes."
+" Inscris-toi gratuitement et reviens quand tu veux : il y aura toujours du "
+"nouveau contenu utile."
+msgstr ""
+"FitWell enriches itself every week with new articles, exercises, recipes. "
+"Register for free and come back whenever you want: there will always be new "
+"useful content."
+
+#: web/templates/web/about.html:165
+msgid "Open source dans l'esprit"
+msgstr "Open source in spirit"
+
+#: web/templates/web/about.html:167
+msgid ""
+"Aucune information cachée derrière un paywall. Tout est gratuit, tout est "
+"documenté, tout est partageable. Le savoir doit circuler."
+msgstr ""
+"No information hidden behind a paywall. Everything is free, everything is "
+"documented, everything is shareable. Knowledge must circulate."
+
+#: web/templates/web/about.html:179
+msgid "Notre promesse"
+msgstr "Our promise"
+
+#: web/templates/web/about.html:181
+msgid "On ne te promet pas de te transformer."
+msgstr "We don't promise to transform you."
+
+#: web/templates/web/about.html:182
+msgid "On te donne les outils pour le faire toi-même."
+msgstr "We give you the tools to do it yourself."
+
+#: web/templates/web/about.html:185
+msgid ""
+"Le changement vient de toi, pas de nous. Mais avec les bons conseils, les "
+"bonnes méthodes, et un peu de constance, tu peux faire des choses "
+"incroyables. C'est pour ça que FitWell existe."
+msgstr ""
+"Change comes from you, not from us. But with the right advice, the right "
+"methods, and a bit of consistency, you can do incredible things. That's why "
+"FitWell exists."
+
+#: web/templates/web/about.html:188
+#, fuzzy
+#| msgid "Rejoindre l'élite"
+msgid "Rejoindre l'aventure (gratuit)"
+msgstr "Join the Elite"
+
+#: web/templates/web/admin_panel.html:4
+#, fuzzy
+#| msgid "Mon agenda - FitWell"
+msgid "Admin Panel - FitWell"
+msgstr "My Agenda - FitWell"
+
+#: web/templates/web/admin_panel.html:13
+msgid "Admin"
+msgstr "Admin"
+
+#: web/templates/web/admin_panel.html:13
+msgid "Panel"
+msgstr "Panel"
+
+#: web/templates/web/admin_panel.html:17
+msgid "Surveillance temps réel des utilisateurs"
+msgstr "Real-time user monitoring"
+
+#: web/templates/web/admin_panel.html:35
+msgid "Total"
+msgstr "Total"
+
+#: web/templates/web/admin_panel.html:41
+msgid "En ligne"
+msgstr "Online"
+
+#: web/templates/web/admin_panel.html:46
+msgid "Actifs aujourd'hui"
+msgstr "Active today"
+
+#: web/templates/web/admin_panel.html:50
+msgid "Vérifiés"
+msgstr "Verified"
+
+#: web/templates/web/admin_panel.html:54
+msgid "Staff"
+msgstr "Staff"
+
+#: web/templates/web/admin_panel.html:58
+msgid "Masqués"
+msgstr "Hidden"
+
+#: web/templates/web/admin_panel.html:69
+msgid "Rechercher par nom, email ou IP…"
+msgstr "Search by name, email or IP…"
+
+#: web/templates/web/admin_panel.html:74
+msgid "Afficher masqués"
+msgstr "Show hidden"
+
+#: web/templates/web/admin_panel.html:76
+msgid "Filtrer"
+msgstr "Filter"
+
+#: web/templates/web/admin_panel.html:85
+msgid "Utilisateur"
+msgstr "User"
+
+#: web/templates/web/admin_panel.html:87
+msgid "Statut"
+msgstr "Status"
+
+#: web/templates/web/admin_panel.html:88
+#, fuzzy
+#| msgid "Déconnexion"
+msgid "Dernière connexion"
+msgstr "Logout"
+
+#: web/templates/web/admin_panel.html:89
+msgid "IP"
+msgstr "IP"
+
+#: web/templates/web/admin_panel.html:90
+msgid "Logins"
+msgstr "Logins"
+
+#: web/templates/web/admin_panel.html:91
+msgid "Inscrit le"
+msgstr "Joined on"
+
+#: web/templates/web/admin_panel.html:92
+#, fuzzy
+#| msgid "Objectif"
+msgid "Actions"
+msgstr "Goal"
+
+#: web/templates/web/admin_panel.html:132
+#, fuzzy
+#| msgid "S'affiner"
+msgid "Réafficher"
+msgstr "Get Lean"
+
+#: web/templates/web/admin_panel.html:132
+msgid "Masquer"
+msgstr "Hide"
+
+#: web/templates/web/admin_panel.html:136
+msgid "Supprimer définitivement cet utilisateur ?"
+msgstr "Permanently delete this user?"
+
+#: web/templates/web/admin_panel.html:139
+#: web/templates/web/article_detail.html:133
+#: web/templates/web/delete_account.html:14
+msgid "Supprimer"
+msgstr "Delete"
+
+#: web/templates/web/admin_panel.html:148
+#, fuzzy
+#| msgid "Aucun exercice trouvé dans cette catégorie."
+msgid "Aucun utilisateur trouvé."
+msgstr "No exercises found in this category."
+
+#: web/templates/web/admin_panel.html:160
+msgid "Voir les User-Agents (informations techniques)"
+msgstr "View User-Agents (technical information)"
+
+#: web/templates/web/admin_panel.html:175
+msgid ""
+"Auto-rafraîchi à chaque chargement. Indicateur vert = session active "
+"maintenant."
+msgstr "Auto-refreshed on each load. Green indicator = session active now."
 
 #: web/templates/web/analytics.html:5
 #, fuzzy
@@ -531,7 +926,7 @@ msgid "Temps"
 msgstr "Total Time"
 
 #: web/templates/web/analytics.html:37 web/templates/web/leaderboard.html:42
-#: web/templates/web/leaderboard.html:92 web/templates/web/profile.html:41
+#: web/templates/web/leaderboard.html:92 web/templates/web/profile.html:54
 msgid "Régularité"
 msgstr "Consistency"
 
@@ -588,9 +983,11 @@ msgid ""
 "Ne te contente pas de lire. Applique ces conseils et commence ta "
 "transformation dès aujourd'hui avec nos programmes sur-mesure."
 msgstr ""
+"Don't just read. Apply these tips and start your transformation today with "
+"our tailored programs."
 
 #: web/templates/web/article_detail.html:92
-#: web/templates/web/exercise_library.html:69
+#: web/templates/web/exercise_library.html:76
 msgid "Rejoindre l'élite"
 msgstr "Join the Elite"
 
@@ -606,14 +1003,10 @@ msgstr "Publish"
 msgid "Connecte-toi pour participer"
 msgstr "Log in to participate"
 
-#: web/templates/web/article_detail.html:114 web/templates/web/base.html:64
-#: web/templates/web/base.html:105 web/templates/web/register.html:68
+#: web/templates/web/article_detail.html:114 web/templates/web/base.html:71
+#: web/templates/web/base.html:119 web/templates/web/register.html:68
 msgid "Connexion"
 msgstr "Login"
-
-#: web/templates/web/article_detail.html:133
-msgid "Supprimer"
-msgstr "Delete"
 
 #: web/templates/web/article_detail.html:147
 msgid "Lien copié !"
@@ -623,14 +1016,13 @@ msgstr "Link copied!"
 msgid "Confirmer la suppression du message ?"
 msgstr "Confirm message deletion?"
 
-#: web/templates/web/base.html:49 web/templates/web/base.html:94
-#: web/templates/web/base.html:157 web/templates/web/profile.html:94
+#: web/templates/web/base.html:50 web/templates/web/base.html:102
+#: web/templates/web/base.html:171 web/templates/web/profile.html:107
 msgid "Lifestyle"
 msgstr "Lifestyle"
 
-#: web/templates/web/base.html:50 web/templates/web/base.html:95
-#: web/templates/web/base.html:158 web/templates/web/exercise_library.html:9
-#: web/templates/web/workout/session.html:14
+#: web/templates/web/base.html:51 web/templates/web/base.html:103
+#: web/templates/web/base.html:172 web/templates/web/workout/session.html:14
 #: web/templates/web/workout/start.html:5
 #: web/templates/web/workout/start.html:13
 #: web/templates/web/workout_session.html:18
@@ -638,67 +1030,77 @@ msgstr "Lifestyle"
 msgid "Studio"
 msgstr "Studio"
 
-#: web/templates/web/base.html:52 web/templates/web/base.html:97
-#: web/templates/web/base.html:160
+#: web/templates/web/base.html:55 web/templates/web/base.html:107
+#: web/templates/web/base.html:174
 #, fuzzy
 #| msgid "Planifier"
 msgid "Planning"
 msgstr "Plan"
 
-#: web/templates/web/base.html:53 web/templates/web/base.html:98
-#: web/templates/web/base.html:161
+#: web/templates/web/base.html:56 web/templates/web/base.html:108
+#: web/templates/web/base.html:175
 #, fuzzy
 #| msgid "Commentaire ajouté."
 msgid "Communauté"
 msgstr "Comment added."
 
-#: web/templates/web/base.html:54 web/templates/web/base.html:99
+#: web/templates/web/base.html:57 web/templates/web/base.html:109
 #: web/templates/web/tools.html:15
 msgid "Outils"
 msgstr "Tools"
 
-#: web/templates/web/base.html:61 web/templates/web/base.html:102
+#: web/templates/web/base.html:65 web/templates/web/base.html:113
 msgid "Mon Espace"
-msgstr ""
+msgstr "My Space"
 
-#: web/templates/web/base.html:62 web/templates/web/base.html:103
+#: web/templates/web/base.html:69 web/templates/web/base.html:117
 msgid "Déconnexion"
 msgstr "Logout"
 
-#: web/templates/web/base.html:65
+#: web/templates/web/base.html:72
 msgid "Rejoindre"
 msgstr "Join"
 
-#: web/templates/web/base.html:106 web/templates/web/home.html:117
+#: web/templates/web/base.html:120
 #, fuzzy
 #| msgid "Rejoindre l'élite"
 msgid "Rejoindre l'aventure"
 msgstr "Join the Elite"
 
-#: web/templates/web/base.html:151
+#: web/templates/web/base.html:165
 msgid ""
 "Ton compagnon quotidien pour une vie plus saine, plus forte et plus sereine."
-msgstr ""
+msgstr "Your daily companion for a healthier, stronger and more serene life."
 
-#: web/templates/web/base.html:155
+#: web/templates/web/base.html:169
 #, fuzzy
 #| msgid "Nutrition"
 msgid "Navigation"
 msgstr "Nutrition"
 
-#: web/templates/web/base.html:165
-msgid "Légal"
-msgstr "Legal"
+#: web/templates/web/base.html:179 web/templates/web/leaderboard.html:11
+#, fuzzy
+#| msgid "Blog - FitWell"
+msgid "FitWell"
+msgstr "Blog - FitWell"
 
-#: web/templates/web/base.html:167
+#: web/templates/web/base.html:181
+msgid "À propos"
+msgstr "About"
+
+#: web/templates/web/base.html:182
 msgid "Confidentialité"
 msgstr "Privacy"
 
-#: web/templates/web/base.html:168
-msgid "Conditions"
-msgstr "Terms"
+#: web/templates/web/base.html:183 web/templates/web/legal.html:74
+msgid "Cookies"
+msgstr "Cookies"
 
-#: web/templates/web/base.html:169
+#: web/templates/web/base.html:184
+msgid "Avertissement"
+msgstr "Disclaimer"
+
+#: web/templates/web/base.html:185
 msgid "Contact"
 msgstr "Contact"
 
@@ -707,26 +1109,46 @@ msgid "Blog - FitWell"
 msgstr "Blog - FitWell"
 
 #: web/templates/web/blog_list.html:12
-msgid "L'Art de"
-msgstr "The Art of"
-
-#: web/templates/web/blog_list.html:12
-msgid "Vivre"
-msgstr "Living"
+msgid "Articles & conseils"
+msgstr "Articles & advice"
 
 #: web/templates/web/blog_list.html:15
-msgid ""
-"Mindset, nutrition et secrets d'experts. Découvre les clés d'un "
-"épanouissement total."
-msgstr ""
+#, fuzzy
+#| msgid "te Revoir"
+msgid "Le savoir,"
+msgstr "see you again"
 
-#: web/templates/web/blog_list.html:22
-#: web/templates/web/exercise_library.html:19
-#: web/templates/web/recipe_list.html:21
+#: web/templates/web/blog_list.html:15
+msgid "ton allié"
+msgstr "your ally"
+
+#: web/templates/web/blog_list.html:18
+msgid ""
+"Bienvenue dans la bibliothèque de FitWell. Ici, tu trouves des articles "
+"écrits par des passionnés qui pratiquent le sport et la nutrition tous les "
+"jours."
+msgstr ""
+"Welcome to FitWell's library. Here you find articles written by passionate "
+"people who practice sport and nutrition every day."
+
+#: web/templates/web/blog_list.html:21
+msgid ""
+"Pas de blabla, pas de promesses miracles. Chaque article répond à une "
+"question concrète : comment progresser sans se blesser, comment manger sans "
+"se priver, comment rester motivé même quand c'est dur. Lis, applique, "
+"progresse."
+msgstr ""
+"No fluff, no miracle promises. Each article answers a concrete question: how"
+" to progress without injury, how to eat without depriving yourself, how to "
+"stay motivated even when it's hard. Read, apply, progress."
+
+#: web/templates/web/blog_list.html:28
+#: web/templates/web/exercise_library.html:25
+#: web/templates/web/recipe_list.html:27
 msgid "Tous"
 msgstr "All"
 
-#: web/templates/web/blog_list.html:59
+#: web/templates/web/blog_list.html:65
 #, fuzzy
 #| msgid "Aucune recette disponible pour le moment."
 msgid "Aucun article pour le moment"
@@ -737,8 +1159,9 @@ msgid "Changer mot de passe - FitWell"
 msgstr "Change password - FitWell"
 
 #: web/templates/web/change_password.html:18
-#: web/templates/web/custom_planner.html:16 web/templates/web/dashboard.html:17
-#: web/templates/web/edit_profile.html:18 web/templates/web/planner.html:15
+#: web/templates/web/custom_planner.html:16
+#: web/templates/web/dashboard.html:17 web/templates/web/edit_profile.html:18
+#: web/templates/web/planner.html:15
 msgid "Ma"
 msgstr "My"
 
@@ -904,6 +1327,65 @@ msgstr "Analyze my progress"
 msgid "Sommeil & Énergie"
 msgstr "Sleep & Mood"
 
+#: web/templates/web/delete_account.html:4
+#, fuzzy
+#| msgid "Nutrition & recettes - FitWell"
+msgid "Supprimer mon compte - FitWell"
+msgstr "Nutrition & Recipes - FitWell"
+
+#: web/templates/web/delete_account.html:14
+#, fuzzy
+#| msgid "Déjà un compte ?"
+msgid "mon compte"
+msgstr "Already have an account?"
+
+#: web/templates/web/delete_account.html:17
+msgid "Cette action est définitive et irréversible"
+msgstr "This action is final and irreversible"
+
+#: web/templates/web/delete_account.html:35
+msgid "Ce qui sera supprimé"
+msgstr "What will be deleted"
+
+#: web/templates/web/delete_account.html:38
+msgid "Ton profil et tes informations"
+msgstr "Your profile and information"
+
+#: web/templates/web/delete_account.html:39
+msgid "Tes articles, commentaires et likes"
+msgstr "Your articles, comments and likes"
+
+#: web/templates/web/delete_account.html:40
+msgid "Tes plans bien-être et historiques d'entraînement"
+msgstr "Your wellness plans and training history"
+
+#: web/templates/web/delete_account.html:41
+msgid "Toutes tes données associées"
+msgstr "All your associated data"
+
+#: web/templates/web/delete_account.html:44
+msgid "Cette action ne peut pas être annulée. Aucune restauration possible."
+msgstr "This action cannot be undone. No restoration possible."
+
+#: web/templates/web/delete_account.html:54
+#, fuzzy
+#| msgid "Changer mot de passe - FitWell"
+msgid "Confirme ton mot de passe"
+msgstr "Change password - FitWell"
+
+#: web/templates/web/delete_account.html:68
+msgid "Tape \"SUPPRIMER\" pour confirmer"
+msgstr "Type \"DELETE\" to confirm"
+
+#: web/templates/web/delete_account.html:82
+#: web/templates/web/edit_profile.html:60
+msgid "Annuler"
+msgstr "Cancel"
+
+#: web/templates/web/delete_account.html:85
+msgid "Supprimer définitivement"
+msgstr "Delete permanently"
+
 #: web/templates/web/edit_profile.html:4
 #, fuzzy
 #| msgid "Outils - FitWell"
@@ -924,10 +1406,6 @@ msgstr "Optimize your FitWell experience"
 msgid "Enregistrer"
 msgstr "Save"
 
-#: web/templates/web/edit_profile.html:60
-msgid "Annuler"
-msgstr "Cancel"
-
 #: web/templates/web/edit_profile.html:66
 #, fuzzy
 #| msgid "Changer mot de passe - FitWell"
@@ -935,126 +1413,428 @@ msgid "Changer mon mot de passe"
 msgstr "Change password - FitWell"
 
 #: web/templates/web/exercise_library.html:9
-#: web/templates/web/workout/start.html:13
-#: web/templates/web/workout_session.html:18
-#: web/templates/web/workout_setup.html:11
-msgid "Live"
-msgstr "Live"
+#, fuzzy
+#| msgid "Bibliothèque"
+msgid "Bibliothèque d'exercices"
+msgstr "Library"
 
 #: web/templates/web/exercise_library.html:12
-msgid ""
-"L'art du mouvement. Des séances immersives pour sculpter ton corps et "
-"libérer ton esprit."
-msgstr ""
+msgid "Apprends"
+msgstr "Learn"
 
-#: web/templates/web/exercise_library.html:59
+#: web/templates/web/exercise_library.html:12
+msgid "à bouger"
+msgstr "to move"
+
+#: web/templates/web/exercise_library.html:15
+msgid ""
+"Plus de 100 exercices détaillés, classés par groupe musculaire et niveau. "
+"Que tu sois débutant complet ou pratiquant avancé, tu trouveras toujours du "
+"nouveau à apprendre."
+msgstr ""
+"Over 100 detailed exercises, sorted by muscle group and level. Whether "
+"you're a complete beginner or an advanced practitioner, you'll always find "
+"something new to learn."
+
+#: web/templates/web/exercise_library.html:18
+msgid ""
+"Chaque exercice est expliqué : muscles ciblés, technique correcte, erreurs "
+"courantes à éviter. Filtre par muscle pour construire tes propres séances ou"
+" explore par difficulté pour progresser à ton rythme."
+msgstr ""
+"Each exercise is explained: target muscles, correct technique, common "
+"mistakes to avoid. Filter by muscle to build your own sessions or explore by"
+" difficulty to progress at your own pace."
+
+#: web/templates/web/exercise_library.html:66
 #, fuzzy
 #| msgid "Aucun exercice trouvé dans cette catégorie."
 msgid "Aucun exercice trouvé"
 msgstr "No exercises found in this category."
 
-#: web/templates/web/exercise_library.html:66
+#: web/templates/web/exercise_library.html:73
 msgid "Révèle ton plein potentiel"
 msgstr "Reveal your full potential"
 
-#: web/templates/web/exercise_library.html:67
+#: web/templates/web/exercise_library.html:74
 msgid ""
 "Accède à l'intégralité de notre Studio et commence ta transformation dès "
 "aujourd'hui."
-msgstr ""
+msgstr "Access our full Studio and start your transformation today."
 
-#: web/templates/web/exercise_library.html:70 web/templates/web/login.html:62
+#: web/templates/web/exercise_library.html:77 web/templates/web/login.html:62
 #: web/templates/web/password_reset_complete.html:23
 msgid "Me connecter"
 msgstr "Log in"
 
 #: web/templates/web/home.html:10
-msgid "Révèle"
-msgstr "Reveal"
-
-#: web/templates/web/home.html:11 web/templates/web/home.html:67
 #, fuzzy
-#| msgid "Mon"
-msgid "Ton"
-msgstr "My"
+#| msgid "Connexion - FitWell"
+msgid "Bienvenue sur FitWell"
+msgstr "Login - FitWell"
 
-#: web/templates/web/home.html:12
-msgid "Potentiel"
-msgstr "Potential"
+#: web/templates/web/home.html:13
+msgid "Bouge mieux."
+msgstr "Move better."
 
-#: web/templates/web/home.html:16
+#: web/templates/web/home.html:14
+msgid "Mange bien."
+msgstr "Eat well."
+
+#: web/templates/web/home.html:15
+msgid "Vis plus fort."
+msgstr "Live stronger."
+
+#: web/templates/web/home.html:19
 msgid ""
-"L'expérience fitness ultime pour transformer ton corps et ton esprit. "
-"Rejoins une communauté de passionnés."
+"FitWell réunit deux idées simples : <strong>Fit</strong>, être en forme "
+"physiquement, et <strong>Well</strong>, se sentir bien mentalement. C'est un"
+" site de sport et de bien-être qui t'accompagne jour après jour avec des "
+"conseils concrets, des entraînements guidés et une nutrition intelligente."
 msgstr ""
+"FitWell brings together two simple ideas: <strong>Fit</strong>, being in "
+"physical shape, and <strong>Well</strong>, feeling mentally good. It's a "
+"sport and wellness site that supports you day after day with concrete "
+"advice, guided workouts and smart nutrition."
 
-#: web/templates/web/home.html:21 web/templates/web/workout/history.html:116
-msgid "Commencer maintenant"
-msgstr "Start now"
+#: web/templates/web/home.html:22
+msgid ""
+"Pas de promesses miracles. Juste des méthodes éprouvées, du contenu créé par"
+" des passionnés, et des outils qui marchent vraiment pour améliorer ta vie, "
+"un petit pas à la fois."
+msgstr ""
+"No miracle promises. Just proven methods, content created by passionate "
+"people, and tools that really work to improve your life, one small step at a"
+" time."
 
-#: web/templates/web/home.html:24
-msgid "Explorer le Studio"
-msgstr "Explore the Studio"
-
-#: web/templates/web/home.html:44
-msgid "Outils de Progression"
-msgstr "Progress Tools"
-
-#: web/templates/web/home.html:48
-msgid "Plaisirs Sains"
-msgstr "Healthy Pleasures"
-
-#: web/templates/web/home.html:52
-msgid "Passionnés"
-msgstr "Enthusiasts"
-
-#: web/templates/web/home.html:56
-msgid "Ton Studio Partout"
-msgstr "Your Studio Everywhere"
-
-#: web/templates/web/home.html:67
+#: web/templates/web/home.html:27 web/templates/web/home.html:291
 #, fuzzy
-#| msgid "Nouveau"
-msgid "Nouveau Départ"
-msgstr "New"
+#| msgid "Déjà un compte ?"
+msgid "Créer mon compte gratuit"
+msgstr "Already have an account?"
 
-#: web/templates/web/home.html:69
-msgid "Tout ce dont tu as besoin pour une transformation durable"
-msgstr "Everything you need for lasting transformation"
+#: web/templates/web/home.html:30
+#, fuzzy
+#| msgid "Retour aux Renseignements"
+msgid "Lire nos conseils"
+msgstr "Back to Intel"
+
+#: web/templates/web/home.html:38
+msgid "Personne en pleine séance de sport"
+msgstr "Person during a workout session"
+
+#: web/templates/web/home.html:50
+msgid "Le sport n'est pas une punition."
+msgstr "Sport is not a punishment."
+
+#: web/templates/web/home.html:51
+msgid "C'est un cadeau que tu te fais."
+msgstr "It's a gift you give yourself."
+
+#: web/templates/web/home.html:55
+msgid ""
+"Trop de gens abandonnent le sport parce qu'ils ne savent pas par où "
+"commencer, ils se blessent, ou ils n'ont pas le temps. FitWell existe pour "
+"résoudre ça."
+msgstr ""
+"Too many people give up on sport because they don't know where to start, "
+"they get injured, or they don't have time. FitWell exists to solve that."
+
+#: web/templates/web/home.html:58
+msgid ""
+"Ici, tu trouves des exercices expliqués clairement, des recettes équilibrées"
+" pour manger sans te priver, des plans d'entraînement adaptés à ton niveau, "
+"et des articles qui démystifient ce qui marche vraiment pour être en bonne "
+"santé."
+msgstr ""
+"Here, you find clearly explained exercises, balanced recipes to eat without "
+"deprivation, training plans adapted to your level, and articles that "
+"demystify what really works for good health."
+
+#: web/templates/web/home.html:61
+msgid ""
+"Parce que se sentir bien dans son corps change tout : ton énergie, ton "
+"sommeil, ton humeur, ta confiance."
+msgstr ""
+"Because feeling good in your body changes everything: your energy, your "
+"sleep, your mood, your confidence."
+
+#: web/templates/web/home.html:72
+msgid "Des chiffres, mais surtout des résultats concrets"
+msgstr "Numbers that translate into real results"
 
 #: web/templates/web/home.html:78
-msgid "Studio Live"
-msgstr "Live Studio"
+msgid "Exercices expliqués"
+msgstr "Explained exercises"
 
-#: web/templates/web/home.html:80
-msgid ""
-"Accède à des centaines de séances immersives conçues par des experts pour "
-"des résultats visibles."
-msgstr ""
+#: web/templates/web/home.html:79
+msgid "Technique, muscles ciblés, niveau"
+msgstr "Technique, target muscles, level"
+
+#: web/templates/web/home.html:83 web/templates/web/recipe_list.html:11
+msgid "Recettes saines"
+msgstr "Healthy recipes"
+
+#: web/templates/web/home.html:84
+msgid "Simples, rapides, délicieuses"
+msgstr "Simple, fast, delicious"
+
+#: web/templates/web/home.html:88
+msgid "Articles conseils"
+msgstr "Advice articles"
 
 #: web/templates/web/home.html:89
-msgid "Cuisine Plaisir"
-msgstr "Pleasure Cooking"
+msgid "Nutrition, motivation, progression"
+msgstr "Nutrition, motivation, progress"
 
-#: web/templates/web/home.html:91
+#: web/templates/web/home.html:93
+msgid "Accessible partout"
+msgstr "Available everywhere"
+
+#: web/templates/web/home.html:94
+msgid "Sur ton téléphone, ton ordi, où tu veux"
+msgstr "On your phone, your computer, anywhere"
+
+#: web/templates/web/home.html:104
+#, fuzzy
+#| msgid "Générer un nouveau plan"
+msgid "Trois piliers, un équilibre"
+msgstr "Generate New Plan"
+
+#: web/templates/web/home.html:106
+msgid "Ce que FitWell t'apporte"
+msgstr "What FitWell brings you"
+
+#: web/templates/web/home.html:109
 msgid ""
-"Nourris tes ambitions avec des recettes gourmandes et saines. Parce que bien "
-"manger est un plaisir."
+"Une vie saine repose sur trois piliers indissociables. Négliger un seul "
+"déséquilibre tout le reste. C'est pourquoi nous t'accompagnons sur chacun."
 msgstr ""
+"A healthy life rests on three inseparable pillars. Neglecting just one "
+"unbalances everything else. That's why we support you on each one."
 
-#: web/templates/web/home.html:100
-msgid "Art de Vivre"
-msgstr "Art of Living"
+#: web/templates/web/home.html:121
+#, fuzzy
+#| msgid "Publier"
+msgid "Pilier 1"
+msgstr "Publish"
 
-#: web/templates/web/home.html:102
+#: web/templates/web/home.html:122
+msgid "Bouger avec intelligence"
+msgstr "Move smart"
+
+#: web/templates/web/home.html:124
 msgid ""
-"Plus qu'un sport, une discipline pour forger un mental d'acier et rayonner "
-"au quotidien."
+"Pas besoin de 2h de salle par jour. 30 minutes ciblées, 3 fois par semaine, "
+"changent déjà ta vie. On t'apprend les bons mouvements."
 msgstr ""
+"No need for 2 hours of gym per day. 30 targeted minutes, 3 times a week, "
+"already change your life. We teach you the right movements."
 
-#: web/templates/web/home.html:113
-msgid "Fais de toi ta"
-msgstr "Make yourself your"
+#: web/templates/web/home.html:126
+msgid "Voir les exercices →"
+msgstr "View exercises →"
+
+#: web/templates/web/home.html:136
+#, fuzzy
+#| msgid "Publier"
+msgid "Pilier 2"
+msgstr "Publish"
+
+#: web/templates/web/home.html:137
+msgid "Manger pour se nourrir"
+msgstr "Eat to nourish"
+
+#: web/templates/web/home.html:139
+msgid ""
+"Fini les régimes restrictifs qui ne tiennent pas. Nos recettes sont simples,"
+" complètes, et rassasiantes. Le plaisir de manger, sans la culpabilité."
+msgstr ""
+"No more restrictive diets that don't last. Our recipes are simple, complete,"
+" and filling. The pleasure of eating, without guilt."
+
+#: web/templates/web/home.html:141
+msgid "Voir les recettes →"
+msgstr "View recipes →"
+
+#: web/templates/web/home.html:151
+#, fuzzy
+#| msgid "Publier"
+msgid "Pilier 3"
+msgstr "Publish"
+
+#: web/templates/web/home.html:152
+msgid "Comprendre son corps"
+msgstr "Understand your body"
+
+#: web/templates/web/home.html:154
+msgid ""
+"Le savoir est ton meilleur entraîneur. Nos articles décryptent la science du"
+" sport, la nutrition, la récupération, et le mental."
+msgstr ""
+"Knowledge is your best coach. Our articles decode the science of sport, "
+"nutrition, recovery, and mindset."
+
+#: web/templates/web/home.html:156
+msgid "Lire les articles →"
+msgstr "Read articles →"
+
+#: web/templates/web/home.html:166
+msgid "Nos conseils de base"
+msgstr "Our core advice"
+
+#: web/templates/web/home.html:168
+#, fuzzy
+#| msgid "Points d'expérience"
+msgid "Commence par ces"
+msgstr "Experience Points"
+
+#: web/templates/web/home.html:168
+msgid "4 habitudes"
+msgstr "4 habits"
+
+#: web/templates/web/home.html:171
+msgid ""
+"Tu n'as pas besoin de tout révolutionner d'un coup. Adopte ces 4 habitudes "
+"simples et tu sentiras la différence en moins de 30 jours."
+msgstr ""
+"You don't need to revolutionize everything at once. Adopt these 4 simple "
+"habits and you'll feel the difference in less than 30 days."
+
+#: web/templates/web/home.html:180
+msgid "Bouge 30 minutes par jour"
+msgstr "Move 30 minutes a day"
+
+#: web/templates/web/home.html:182
+msgid ""
+"Marche, vélo, étirements, montée d'escaliers. Peu importe la forme, "
+"l'important c'est la régularité. Ton corps est fait pour le mouvement."
+msgstr ""
+"Walking, biking, stretching, climbing stairs. Whatever the form, what "
+"matters is regularity. Your body is made for movement."
+
+#: web/templates/web/home.html:192
+msgid "Bois 1,5 litre d'eau"
+msgstr "Drink 1.5 liters of water"
+
+#: web/templates/web/home.html:194
+#, python-format
+msgid ""
+"80 %% des gens sont déshydratés sans le savoir. Fatigue, faim, mal de tête :"
+" souvent c'est un simple manque d'eau. Garde une bouteille avec toi."
+msgstr ""
+"80%% of people are dehydrated without knowing it. Fatigue, hunger, "
+"headaches: often it's a simple lack of water. Keep a bottle with you."
+
+#: web/templates/web/home.html:204
+msgid "Dors 7 à 8 heures"
+msgstr "Sleep 7 to 8 hours"
+
+#: web/templates/web/home.html:206
+msgid ""
+"C'est pendant la nuit que ton corps se répare, que ton esprit consolide ce "
+"que tu as appris, que tes muscles grandissent. Le sommeil n'est pas une "
+"perte de temps."
+msgstr ""
+"It's at night that your body repairs, your mind consolidates what you've "
+"learned, your muscles grow. Sleep is not a waste of time."
+
+#: web/templates/web/home.html:216
+msgid "Mange des vrais aliments"
+msgstr "Eat real foods"
+
+#: web/templates/web/home.html:218
+msgid ""
+"Fruits, légumes, viandes, poissons, céréales complètes, légumineuses. Si ça "
+"a été transformé en usine, c'est rarement un ami. Simplifie ton assiette."
+msgstr ""
+"Fruits, vegetables, meat, fish, whole grains, legumes. If it was processed "
+"in a factory, it's rarely a friend. Simplify your plate."
+
+#: web/templates/web/home.html:231
+#, fuzzy
+#| msgid "Nouvel Engagement"
+msgid "Notre engagement"
+msgstr "New Commitment"
+
+#: web/templates/web/home.html:233
+msgid "Pourquoi FitWell est différent"
+msgstr "Why FitWell is different"
+
+#: web/templates/web/home.html:243
+msgid "Pas de publicités déguisées"
+msgstr "No disguised advertising"
+
+#: web/templates/web/home.html:244
+msgid ""
+"On ne te vend pas de compléments miracles ni de bruléurs de graisse. "
+"Uniquement des conseils honnêtes."
+msgstr ""
+"We don't sell you miracle supplements or fat burners. Only honest advice."
+
+#: web/templates/web/home.html:252
+msgid "Du contenu pour tous les niveaux"
+msgstr "Content for every level"
+
+#: web/templates/web/home.html:253
+msgid ""
+"Débutant complet ou sportif expérimenté, tu trouveras toujours du contenu "
+"adapté à ton niveau et tes objectifs."
+msgstr ""
+"Complete beginner or experienced athlete, you'll always find content adapted"
+" to your level and goals."
+
+#: web/templates/web/home.html:261
+msgid "Des méthodes basées sur la science"
+msgstr "Science-based methods"
+
+#: web/templates/web/home.html:262
+msgid ""
+"Chaque conseil s'appuie sur des études reconnues et l'expérience de "
+"professionnels du sport et de la santé."
+msgstr ""
+"Each piece of advice is based on recognized studies and the experience of "
+"sport and health professionals."
+
+#: web/templates/web/home.html:270
+msgid "Gratuit pour commencer"
+msgstr "Free to start"
+
+#: web/templates/web/home.html:271
+msgid ""
+"Crée ton compte sans payer. Accède à la bibliothèque, aux recettes, au blog,"
+" à ton planning personnalisé."
+msgstr ""
+"Create your account without paying. Access the library, recipes, blog, and "
+"your personalized planning."
+
+#: web/templates/web/home.html:281
+msgid "Commence aujourd'hui"
+msgstr "Start today"
+
+#: web/templates/web/home.html:283
+msgid "Ton corps te dira merci"
+msgstr "Your body will thank you"
+
+#: web/templates/web/home.html:284
+msgid "dans 30 jours."
+msgstr "in 30 days."
+
+#: web/templates/web/home.html:287
+msgid ""
+"Chaque journée passée à attendre est une journée perdue. Rejoins des "
+"milliers de personnes qui ont décidé de reprendre leur santé en main avec "
+"FitWell. C'est gratuit, c'est simple, et ça peut changer ta vie."
+msgstr ""
+"Every day spent waiting is a lost day. Join thousands of people who decided "
+"to take their health back in hand with FitWell. It's free, it's simple, and "
+"it can change your life."
+
+#: web/templates/web/home.html:294
+#, fuzzy
+#| msgid "Déjà un compte ?"
+msgid "J'ai déjà un compte"
+msgstr "Already have an account?"
 
 #: web/templates/web/leaderboard.html:4
 #, fuzzy
@@ -1066,12 +1846,6 @@ msgstr "Login - FitWell"
 msgid "L'Élite"
 msgstr "The Elite"
 
-#: web/templates/web/leaderboard.html:11
-#, fuzzy
-#| msgid "Blog - FitWell"
-msgid "FitWell"
-msgstr "Blog - FitWell"
-
 #: web/templates/web/leaderboard.html:14
 msgid "Inspire-toi de la communauté et dépasse tes limites chaque jour"
 msgstr "Be inspired by the community and push your limits every day"
@@ -1080,7 +1854,7 @@ msgstr "Be inspired by the community and push your limits every day"
 msgid "Progression"
 msgstr "Progression"
 
-#: web/templates/web/leaderboard.html:63 web/templates/web/legal.html:35
+#: web/templates/web/leaderboard.html:63
 #: web/templates/web/onboarding/step2_level.html:13
 msgid "Engagement"
 msgstr "Commitment"
@@ -1089,7 +1863,7 @@ msgstr "Commitment"
 msgid "Mon Classement"
 msgstr "My Ranking"
 
-#: web/templates/web/leaderboard.html:88 web/templates/web/profile.html:37
+#: web/templates/web/leaderboard.html:88 web/templates/web/profile.html:50
 #: web/templates/web/workout/detail.html:54
 #: web/templates/web/workout/session.html:33
 msgid "Énergie"
@@ -1107,55 +1881,254 @@ msgstr "Legal - FitWell"
 msgid "Confidentialité, transparence et confiance pour ton quotidien"
 msgstr "Privacy, transparency and trust for your daily life"
 
-#: web/templates/web/legal.html:21
+#: web/templates/web/legal.html:23
 #, fuzzy
-#| msgid "Transmission de Données"
-msgid "Tes Données"
-msgstr "Data Transmission"
+#| msgid "Mentions légales - FitWell"
+msgid "Mentions légales"
+msgstr "Legal - FitWell"
 
-#: web/templates/web/legal.html:25
-msgid ""
-"Ta vie privée est sacrée. Chez FitWell, nous protégeons tes données "
-"personnelles avec la plus grande rigueur. Elles ne servent qu'à une chose : "
-"t'offrir l'expérience la plus personnalisée possible."
-msgstr ""
+#: web/templates/web/legal.html:27
+msgid "Éditeur du site :"
+msgstr "Site publisher:"
 
-#: web/templates/web/legal.html:28
-msgid ""
-"Aucune revente, aucun partage non sollicité. Tes mesures et tes progrès "
-"t'appartiennent, nous ne sommes que les outils de ta réussite."
-msgstr ""
+#: web/templates/web/legal.html:27
+msgid "FitWell — projet pédagogique de développement web"
+msgstr "FitWell — educational web development project"
 
-#: web/templates/web/legal.html:39
-msgid ""
-"En utilisant FitWell, tu rejoins une communauté basée sur le respect et "
-"l'amélioration de soi. Nous demandons à chacun de nos membres de cultiver "
-"cet esprit positif."
-msgstr ""
+#: web/templates/web/legal.html:30
+msgid "Responsable de la publication :"
+msgstr "Publication manager:"
 
-#: web/templates/web/legal.html:42
+#: web/templates/web/legal.html:30
 #, fuzzy
-#| msgid ""
-#| "FitWell n'est pas un dispositif médical. Consultez toujours un "
-#| "professionnel de santé avant de commencer un nouveau programme "
-#| "d'entraînement ou de nutrition."
-msgid ""
-"Attention : FitWell est un guide, pas un médecin. Consulte toujours un "
-"professionnel de santé pour valider que ton nouveau rythme de vie est adapté "
-"à ta condition physique."
-msgstr ""
-"FitWell is not a medical device. Always consult a healthcare professional "
-"before starting a new training or nutrition program."
+#| msgid "Outils - FitWell"
+msgid "Équipe FitWell"
+msgstr "Tools - FitWell"
 
-#: web/templates/web/legal.html:49
+#: web/templates/web/legal.html:33
+msgid "Hébergement :"
+msgstr "Hosting:"
+
+#: web/templates/web/legal.html:33
+msgid "Render.com (San Francisco, États-Unis)"
+msgstr "Render.com (San Francisco, USA)"
+
+#: web/templates/web/legal.html:36
+#, fuzzy
+#| msgid "Contact"
+msgid "Contact :"
+msgstr "Contact"
+
+#: web/templates/web/legal.html:44
+msgid "Données personnelles & RGPD"
+msgstr "Personal data & GDPR"
+
+#: web/templates/web/legal.html:48
+msgid ""
+"Conformément au Règlement Général sur la Protection des Données (RGPD), "
+"FitWell collecte uniquement les informations strictement nécessaires au "
+"fonctionnement du service."
+msgstr ""
+"In accordance with the General Data Protection Regulation (GDPR), FitWell "
+"only collects information strictly necessary for the operation of the "
+"service."
+
+#: web/templates/web/legal.html:50
+msgid "Données collectées :"
+msgstr "Data collected:"
+
+#: web/templates/web/legal.html:52
+msgid "Identifiants de connexion (nom d'utilisateur, email)"
+msgstr "Login credentials (username, email)"
+
+#: web/templates/web/legal.html:53
+msgid ""
+"Informations de profil que tu choisis de fournir (âge, poids, objectif "
+"sportif)"
+msgstr "Profile information you choose to provide (age, weight, fitness goal)"
+
+#: web/templates/web/legal.html:54
+msgid "Historique de tes sessions d'entraînement"
+msgstr "Your training session history"
+
+#: web/templates/web/legal.html:55
+msgid "Adresse IP et type de navigateur (sécurité, statistiques anonymes)"
+msgstr "IP address and browser type (security, anonymous statistics)"
+
+#: web/templates/web/legal.html:57
+msgid "Tes droits :"
+msgstr "Your rights:"
+
+#: web/templates/web/legal.html:59
+msgid "Accès à tes données : visibles dans ton profil à tout moment"
+msgstr "Data access: visible in your profile at any time"
+
+#: web/templates/web/legal.html:60
+msgid "Rectification : tu peux modifier ton profil quand tu veux"
+msgstr "Rectification: you can edit your profile anytime"
+
+#: web/templates/web/legal.html:61
+msgid "Suppression : bouton 'Supprimer mon compte' dans les paramètres"
+msgstr "Deletion: 'Delete my account' button in settings"
+
+#: web/templates/web/legal.html:62
+msgid "Portabilité : tes données peuvent t'être envoyées sur demande"
+msgstr "Portability: your data can be sent to you on request"
+
+#: web/templates/web/legal.html:65
+msgid "Aucune revente, aucun partage commercial."
+msgstr "No reselling, no commercial sharing."
+
+#: web/templates/web/legal.html:66
+msgid "Tes données restent privées et ne sont jamais cédées à des tiers."
+msgstr "Your data remains private and is never given to third parties."
+
+#: web/templates/web/legal.html:78
+msgid ""
+"FitWell utilise uniquement des cookies techniques essentiels au "
+"fonctionnement du site :"
+msgstr ""
+"FitWell only uses essential technical cookies necessary for the site to "
+"function:"
+
+#: web/templates/web/legal.html:81
+msgid "garde ta session active après connexion"
+msgstr "keeps your session active after login"
+
+#: web/templates/web/legal.html:82
+msgid "protège contre les attaques CSRF (sécurité)"
+msgstr "protects against CSRF attacks (security)"
+
+#: web/templates/web/legal.html:83
+msgid "mémorise ta langue préférée"
+msgstr "remembers your preferred language"
+
+#: web/templates/web/legal.html:86
+msgid "Aucun cookie publicitaire, aucun tracker tiers."
+msgstr "No advertising cookies, no third-party trackers."
+
+#: web/templates/web/legal.html:87
+msgid "Pas de Google Analytics, pas de Facebook Pixel, pas de remarketing."
+msgstr "No Google Analytics, no Facebook Pixel, no remarketing."
+
+#: web/templates/web/legal.html:95
+msgid "Propriété intellectuelle"
+msgstr "Intellectual property"
+
+#: web/templates/web/legal.html:99
+msgid ""
+"Tous les textes, articles, recettes, descriptions d'exercices et plans "
+"d'entraînement présents sur FitWell sont la propriété de leurs auteurs "
+"respectifs."
+msgstr ""
+"All texts, articles, recipes, exercise descriptions and training plans on "
+"FitWell are the property of their respective authors."
+
+#: web/templates/web/legal.html:102
+msgid ""
+"Tu peux librement consulter et partager nos articles avec un lien retour. La"
+" reproduction commerciale ou la republication sans accord est interdite."
+msgstr ""
+"You can freely read and share our articles with a link back. Commercial "
+"reproduction or republishing without agreement is prohibited."
+
+#: web/templates/web/legal.html:105
+msgid ""
+"Les images proviennent de Unsplash sous licence libre, ou ont été générées "
+"spécifiquement pour ce site."
+msgstr ""
+"Images come from Unsplash under free license, or were generated specifically"
+" for this site."
+
+#: web/templates/web/legal.html:113
+msgid "Avertissement médical important"
+msgstr "Important medical disclaimer"
+
+#: web/templates/web/legal.html:117
+msgid ""
+"FitWell n'est pas un service médical. Nos contenus sont éducatifs, pas "
+"thérapeutiques."
+msgstr ""
+"FitWell is not a medical service. Our content is educational, not "
+"therapeutic."
+
+#: web/templates/web/legal.html:120
+msgid "Avant de commencer un nouveau programme sportif ou nutritionnel :"
+msgstr "Before starting a new fitness or nutrition program:"
+
+#: web/templates/web/legal.html:123
+msgid ""
+"Consulte ton médecin si tu as une condition médicale (diabète, hypertension,"
+" etc.)"
+msgstr ""
+"Consult your doctor if you have a medical condition (diabetes, hypertension,"
+" etc.)"
+
+#: web/templates/web/legal.html:124
+msgid ""
+"Demande l'avis d'un kinésithérapeute si tu as des douleurs articulaires"
+msgstr "Ask a physiotherapist if you have joint pain"
+
+#: web/templates/web/legal.html:125
+msgid "Va voir un nutritionniste pour les régimes spécifiques"
+msgstr "See a nutritionist for specific diets"
+
+#: web/templates/web/legal.html:126
+msgid "Arrête immédiatement et consulte en cas de douleur aiguë"
+msgstr "Stop immediately and consult in case of acute pain"
+
+#: web/templates/web/legal.html:129
+msgid ""
+"FitWell décline toute responsabilité en cas de blessure consécutive à une "
+"mauvaise application des conseils. Le sport doit toujours être pratiqué avec"
+" bon sens et progression."
+msgstr ""
+"FitWell disclaims all responsibility for injury resulting from "
+"misapplication of advice. Sport should always be practiced with common sense"
+" and progression."
+
+#: web/templates/web/legal.html:137
+msgid "Limites de responsabilité"
+msgstr "Liability limits"
+
+#: web/templates/web/legal.html:141
+msgid ""
+"FitWell est fourni « tel quel ». Bien que nous mettions tout en œuvre pour "
+"publier des informations fiables et vérifiées, nous ne pouvons garantir leur"
+" exactitude absolue ni leur applicabilité à ta situation personnelle."
+msgstr ""
+"FitWell is provided \"as is\". Although we make every effort to publish "
+"reliable and verified information, we cannot guarantee its absolute accuracy"
+" or applicability to your personal situation."
+
+#: web/templates/web/legal.html:144
+msgid ""
+"Le service peut être indisponible temporairement pour maintenance. Nous nous"
+" efforçons de minimiser ces interruptions."
+msgstr ""
+"The service may be temporarily unavailable for maintenance. We strive to "
+"minimize these interruptions."
+
+#: web/templates/web/legal.html:152
 msgid "Nous Contacter"
 msgstr "Contact Us"
 
-#: web/templates/web/legal.html:52
+#: web/templates/web/legal.html:155
 msgid ""
-"Une question, une suggestion ou juste envie de partager ton succès ? Notre "
-"équipe est là pour toi."
+"Une question juridique, un signalement, une demande de suppression de "
+"données, ou simplement envie de discuter ?"
 msgstr ""
+"A legal question, a report, a data deletion request, or just want to chat?"
+
+#: web/templates/web/legal.html:158
+msgid "Notre équipe répond sous 72 heures ouvrées."
+msgstr "Our team responds within 72 business hours."
+
+#: web/templates/web/legal.html:167
+#, fuzzy
+#| msgid "Mise à jour"
+msgid "Dernière mise à jour : avril 2026"
+msgstr "Update"
 
 #: web/templates/web/login.html:4
 msgid "Connexion - FitWell"
@@ -1181,8 +2154,9 @@ msgstr "Forgot Password?"
 msgid "Pas encore membre ?"
 msgstr "Not a member yet?"
 
-#: web/templates/web/login.html:68 web/templates/web/onboarding/welcome.html:38
-#: web/templates/web/recipe_list.html:40
+#: web/templates/web/login.html:68
+#: web/templates/web/onboarding/welcome.html:38
+#: web/templates/web/recipe_list.html:46
 #, fuzzy
 #| msgid "Points d'expérience"
 msgid "Commencer l'expérience"
@@ -1243,11 +2217,11 @@ msgstr "Balance"
 
 #: web/templates/web/onboarding/step1_goal.html:45
 msgid "Santé & Énergie"
-msgstr ""
+msgstr "Health & Energy"
 
 #: web/templates/web/onboarding/step1_goal.html:55
 msgid "Continuer"
-msgstr ""
+msgstr "Continue"
 
 #: web/templates/web/onboarding/step2_level.html:11
 msgid "ÉTAPE 2/4"
@@ -1255,15 +2229,15 @@ msgstr "STEP 2/4"
 
 #: web/templates/web/onboarding/step2_level.html:15
 msgid "Quelle place souhaites-tu accorder à ton bien-être ?"
-msgstr ""
+msgstr "What place do you want to give to your well-being?"
 
 #: web/templates/web/onboarding/step2_level.html:28
 msgid "Calme"
-msgstr ""
+msgstr "Calm"
 
 #: web/templates/web/onboarding/step2_level.html:29
 msgid "Journées de bureau, peu de mouvement"
-msgstr ""
+msgstr "Office days, little movement"
 
 #: web/templates/web/onboarding/step2_level.html:41
 #, fuzzy
@@ -1279,7 +2253,7 @@ msgstr "Moderate (1-3 times per week)"
 
 #: web/templates/web/onboarding/step2_level.html:54
 msgid "Régulier"
-msgstr ""
+msgstr "Regular"
 
 #: web/templates/web/onboarding/step2_level.html:55
 #, fuzzy
@@ -1308,7 +2282,7 @@ msgstr "Next."
 #: web/templates/web/onboarding/step3_data.html:4
 #: web/templates/web/onboarding/welcome.html:29
 msgid "Données"
-msgstr ""
+msgstr "Data"
 
 #: web/templates/web/onboarding/step3_data.html:11
 msgid "ÉTAPE 3/4"
@@ -1320,7 +2294,7 @@ msgstr "Profile"
 
 #: web/templates/web/onboarding/step3_data.html:15
 msgid "Tes métriques personnelles pour une expérience sur-mesure"
-msgstr ""
+msgstr "Your personal metrics for a tailored experience"
 
 #: web/templates/web/onboarding/step3_data.html:22
 #, fuzzy
@@ -1348,21 +2322,23 @@ msgstr "Generate New Plan"
 
 #: web/templates/web/onboarding/welcome.html:4
 msgid "Bienvenue"
-msgstr ""
+msgstr "Welcome"
 
 #: web/templates/web/onboarding/welcome.html:12
 msgid "Prêt pour ta"
-msgstr ""
+msgstr "Ready for your"
 
 #: web/templates/web/onboarding/welcome.html:12
 msgid "Métamorphose"
-msgstr ""
+msgstr "Metamorphosis"
 
 #: web/templates/web/onboarding/welcome.html:15
 msgid ""
 "Oublie les régimes, adopte un style de vie. Configurons ton accès exclusif "
 "en quelques secondes."
 msgstr ""
+"Forget diets, adopt a lifestyle. Let's set up your exclusive access in "
+"seconds."
 
 #: web/templates/web/password_reset_complete.html:4
 msgid "Mot de passe réinitialisé - FitWell"
@@ -1373,6 +2349,7 @@ msgid ""
 "Ton mot de passe est mis à jour. Reprends ton ascension vers tes objectifs "
 "dès maintenant."
 msgstr ""
+"Your password is updated. Resume your ascent toward your goals right now."
 
 #: web/templates/web/password_reset_confirm.html:4
 msgid "Nouveau Mot de Passe - FitWell"
@@ -1380,7 +2357,7 @@ msgstr "New Password - FitWell"
 
 #: web/templates/web/password_reset_confirm.html:17
 msgid "Sécurise ton accès exclusif avec un nouveau mot de passe."
-msgstr ""
+msgstr "Secure your exclusive access with a new password."
 
 #: web/templates/web/password_reset_done.html:4
 msgid "Email envoyé - FitWell"
@@ -1389,14 +2366,14 @@ msgstr "Email Sent - FitWell"
 #: web/templates/web/password_reset_done.html:19
 #, fuzzy
 #| msgid ""
-#| "Si un compte existe avec cet email, nous vous avons envoyé les "
-#| "instructions pour réinitialiser votre mot de passe."
+#| "Si un compte existe avec cet email, nous vous avons envoyé les instructions "
+#| "pour réinitialiser votre mot de passe."
 msgid ""
 "Si ton compte existe, tu vas recevoir les instructions pour réinitialiser "
 "ton mot de passe d'ici quelques instants."
 msgstr ""
-"If an account exists with this email, we have sent you instructions to reset "
-"your password."
+"If an account exists with this email, we have sent you instructions to reset"
+" your password."
 
 #: web/templates/web/password_reset_done.html:23
 msgid "Retour à la connexion"
@@ -1422,13 +2399,13 @@ msgstr ""
 msgid ""
 "Pour choisir un nouveau mot de passe, clique simplement sur le lien ci-"
 "dessous :"
-msgstr ""
+msgstr "To choose a new password, simply click on the link below:"
 
 #: web/templates/web/password_reset_email.html:9
 #, fuzzy
 #| msgid ""
-#| "Si vous n'êtes pas à l'origine de cette demande, ignorez ce message. "
-#| "Votre compte reste sécurisé."
+#| "Si vous n'êtes pas à l'origine de cette demande, ignorez ce message. Votre "
+#| "compte reste sécurisé."
 msgid ""
 "Si tu n'es pas à l'origine de cette demande, ignore simplement ce message. "
 "Ton compte reste en sécurité."
@@ -1444,7 +2421,7 @@ msgstr "Tools - FitWell"
 
 #: web/templates/web/password_reset_email.html:13
 msgid "Ton mouvement, ton équilibre."
-msgstr ""
+msgstr "Your movement, your balance."
 
 #: web/templates/web/password_reset_form.html:4
 msgid "Réinitialisation mot de passe - FitWell"
@@ -1453,7 +2430,7 @@ msgstr "Password Reset - FitWell"
 #: web/templates/web/password_reset_form.html:17
 msgid ""
 "Pas d'inquiétude, entre ton email pour recevoir un lien de réinitialisation."
-msgstr ""
+msgstr "Don't worry, enter your email to receive a reset link."
 
 #: web/templates/web/password_reset_form.html:35
 msgid "Envoyer le lien"
@@ -1469,15 +2446,15 @@ msgstr "Planner - FitWell"
 
 #: web/templates/web/planner.html:15
 msgid "Stratégie"
-msgstr ""
+msgstr "Strategy"
 
 #: web/templates/web/planner.html:19
 msgid "Ton architecture sur-mesure pour une vie plus forte"
-msgstr ""
+msgstr "Your tailored architecture for a stronger life"
 
 #: web/templates/web/planner.html:38
 msgid "Ma Stratégie de Vie"
-msgstr ""
+msgstr "My Life Strategy"
 
 #: web/templates/web/planner.html:39
 #, fuzzy
@@ -1487,19 +2464,19 @@ msgstr "Update"
 
 #: web/templates/web/planner.html:45
 msgid "Action & Mouvement"
-msgstr ""
+msgstr "Action & Movement"
 
 #: web/templates/web/planner.html:52
 msgid "Focus"
-msgstr ""
+msgstr "Focus"
 
 #: web/templates/web/planner.html:56
 msgid "Tes séances"
-msgstr ""
+msgstr "Your sessions"
 
 #: web/templates/web/planner.html:71
 msgid "Carburant & Plaisir"
-msgstr ""
+msgstr "Fuel & Pleasure"
 
 #: web/templates/web/planner.html:74
 #, fuzzy
@@ -1509,7 +2486,7 @@ msgstr "Goal"
 
 #: web/templates/web/planner.html:98
 msgid "Lecture de ton Potentiel"
-msgstr ""
+msgstr "Reading your Potential"
 
 #: web/templates/web/planner.html:103
 #, fuzzy
@@ -1517,25 +2494,26 @@ msgstr ""
 msgid "Score Vitalité"
 msgstr "Health Score:"
 
-#: web/templates/web/planner.html:111 web/templates/web/workout/detail.html:110
+#: web/templates/web/planner.html:111
+#: web/templates/web/workout/detail.html:110
 msgid "Repos"
-msgstr ""
+msgstr "Rest"
 
 #: web/templates/web/planner.html:115
 msgid "Style de vie"
-msgstr ""
+msgstr "Lifestyle"
 
 #: web/templates/web/planner.html:119
 msgid "IMC"
-msgstr ""
+msgstr "BMI"
 
 #: web/templates/web/planner.html:128
 msgid "Redéfinir ma Stratégie"
-msgstr ""
+msgstr "Redefine my Strategy"
 
 #: web/templates/web/planner.html:135
 msgid "Mon Historique d'Évolution"
-msgstr ""
+msgstr "My Evolution History"
 
 #: web/templates/web/planner.html:145
 #, fuzzy
@@ -1545,11 +2523,11 @@ msgstr "Wellness"
 
 #: web/templates/web/planner.html:160
 msgid "Forger ma Stratégie"
-msgstr ""
+msgstr "Forge my Strategy"
 
 #: web/templates/web/planner.html:161
 msgid "Quelques métriques pour une architecture sur-mesure."
-msgstr ""
+msgstr "A few metrics for a tailored architecture."
 
 #: web/templates/web/planner.html:184
 #, fuzzy
@@ -1573,11 +2551,11 @@ msgstr "Profile - FitWell"
 
 #: web/templates/web/profile.html:17
 msgid "Univers"
-msgstr ""
+msgstr "Universe"
 
 #: web/templates/web/profile.html:21
 msgid "Ton évolution, tes victoires, ton héritage quotidien."
-msgstr ""
+msgstr "Your evolution, your victories, your daily legacy."
 
 #: web/templates/web/profile.html:25
 #, fuzzy
@@ -1585,46 +2563,62 @@ msgstr ""
 msgid "Modifier mon profil"
 msgstr "Password"
 
-#: web/templates/web/profile.html:29
+#: web/templates/web/profile.html:28
+#, fuzzy
+#| msgid "Changer mot de passe - FitWell"
+msgid "Changer mot de passe"
+msgstr "Change password - FitWell"
+
+#: web/templates/web/profile.html:32
+msgid "Admin Panel"
+msgstr "Admin Panel"
+
+#: web/templates/web/profile.html:37
+#, fuzzy
+#| msgid "Déjà un compte ?"
+msgid "Supprimer mon compte"
+msgstr "Already have an account?"
+
+#: web/templates/web/profile.html:42
 msgid "Objectif:"
 msgstr "Goal:"
 
-#: web/templates/web/profile.html:49
+#: web/templates/web/profile.html:62
 msgid "Vers le niveau"
-msgstr ""
+msgstr "Toward level"
 
-#: web/templates/web/profile.html:61
+#: web/templates/web/profile.html:74
 msgid "Bien-être"
 msgstr "Wellness"
 
-#: web/templates/web/profile.html:72
+#: web/templates/web/profile.html:85
 msgid "Fitness"
-msgstr ""
+msgstr "Fitness"
 
-#: web/templates/web/profile.html:83 web/templates/web/workout/session.html:88
+#: web/templates/web/profile.html:96 web/templates/web/workout/session.html:88
 #: web/views/workout.py:112
 msgid "Récupération"
 msgstr "Recovery"
 
-#: web/templates/web/profile.html:119
+#: web/templates/web/profile.html:132
 msgid "Optimiser"
-msgstr ""
+msgstr "Optimize"
 
-#: web/templates/web/profile.html:120
+#: web/templates/web/profile.html:133
 msgid "Ton équilibre et ta nutrition sur-mesure"
-msgstr ""
-
-#: web/templates/web/profile.html:129
-msgid "Propulser"
-msgstr ""
-
-#: web/templates/web/profile.html:130
-msgid "Tes outils de mesure et de performance"
-msgstr ""
+msgstr "Your tailored balance and nutrition"
 
 #: web/templates/web/profile.html:142
+msgid "Propulser"
+msgstr "Propel"
+
+#: web/templates/web/profile.html:143
+msgid "Tes outils de mesure et de performance"
+msgstr "Your measurement and performance tools"
+
+#: web/templates/web/profile.html:155
 msgid "Mes Succès"
-msgstr ""
+msgstr "My Successes"
 
 #: web/templates/web/recipe_detail.html:17
 #, fuzzy
@@ -1640,27 +2634,27 @@ msgstr "AI Protocol Analysis"
 
 #: web/templates/web/recipe_detail.html:56
 msgid "Énergie (Prot)"
-msgstr ""
+msgstr "Energy (Prot)"
 
 #: web/templates/web/recipe_detail.html:65
 msgid "Carburant (Glu)"
-msgstr ""
+msgstr "Fuel (Carb)"
 
 #: web/templates/web/recipe_detail.html:74
 msgid "Structure (Lip)"
-msgstr ""
+msgstr "Structure (Fat)"
 
 #: web/templates/web/recipe_detail.html:85
 msgid "Optimise tes résultats avec un plan nutritionnel sur-mesure."
-msgstr ""
+msgstr "Optimize your results with a tailored nutrition plan."
 
 #: web/templates/web/recipe_detail.html:88
 msgid "Personnaliser mon plan"
-msgstr ""
+msgstr "Customize my plan"
 
 #: web/templates/web/recipe_detail.html:97
 msgid "Ingrédients"
-msgstr ""
+msgstr "Ingredients"
 
 #: web/templates/web/recipe_detail.html:111
 msgid "Préparation"
@@ -1670,30 +2664,45 @@ msgstr "Preparation"
 msgid "Nutrition & recettes - FitWell"
 msgstr "Nutrition & Recipes - FitWell"
 
-#: web/templates/web/recipe_list.html:11
-msgid "Cuisine"
-msgstr ""
-
-#: web/templates/web/recipe_list.html:11
-msgid "Plaisir"
-msgstr ""
+#: web/templates/web/recipe_list.html:14
+msgid "Mange"
+msgstr "Eat"
 
 #: web/templates/web/recipe_list.html:14
+msgid "intelligent"
+msgstr "smart"
+
+#: web/templates/web/recipe_list.html:17
 msgid ""
-"Nourris tes ambitions. Des recettes exclusives pour allier gourmandise et "
-"résultats."
+"Bien manger n'est pas se priver. C'est nourrir ton corps avec ce dont il a "
+"besoin pour fonctionner au mieux : énergie stable, récupération efficace, "
+"plaisir intact."
 msgstr ""
+"Eating well is not depriving yourself. It's feeding your body what it needs "
+"to function at its best: stable energy, effective recovery, intact pleasure."
 
-#: web/templates/web/recipe_list.html:38
+#: web/templates/web/recipe_list.html:20
+msgid ""
+"Toutes nos recettes affichent leurs valeurs nutritionnelles (calories, "
+"protéines, glucides, lipides). Filtre par catégorie pour trouver ton repas "
+"du jour : petit-déj énergisant, plat principal complet, snack pré-"
+"entraînement, shake de récupération."
+msgstr ""
+"All our recipes show their nutritional values (calories, protein, carbs, "
+"fats). Filter by category to find your meal of the day: energizing "
+"breakfast, complete main course, pre-workout snack, recovery shake."
+
+#: web/templates/web/recipe_list.html:44
 msgid "Accès Privé"
-msgstr ""
+msgstr "Private Access"
 
-#: web/templates/web/recipe_list.html:39
+#: web/templates/web/recipe_list.html:45
 msgid ""
 "Rejoins l'élite et débloque plus de 100 recettes optimisées pour ton succès."
 msgstr ""
+"Join the elite and unlock over 100 recipes optimized for your success."
 
-#: web/templates/web/recipe_list.html:91
+#: web/templates/web/recipe_list.html:97
 #, fuzzy
 #| msgid "Aucune transmission pour le moment."
 msgid "Cuisine fermée pour le moment"
@@ -1711,11 +2720,11 @@ msgstr "Male"
 
 #: web/templates/web/register.html:18
 msgid "l'Aventure"
-msgstr ""
+msgstr "the Adventure"
 
 #: web/templates/web/register.html:21
 msgid "Rejoins l'élite et transforme ton quotidien dès aujourd'hui"
-msgstr ""
+msgstr "Join the elite and transform your daily life today"
 
 #: web/templates/web/register.html:56
 #, fuzzy
@@ -1725,7 +2734,7 @@ msgstr "Already have an account?"
 
 #: web/templates/web/register.html:62
 msgid "En t'inscrivant, tu fais le choix d'une transformation sans limite."
-msgstr ""
+msgstr "By signing up, you choose a transformation without limits."
 
 #: web/templates/web/register.html:68
 msgid "Déjà un compte ?"
@@ -1737,15 +2746,15 @@ msgstr "Tools - FitWell"
 
 #: web/templates/web/tools.html:15
 msgid "Mes"
-msgstr ""
+msgstr "My"
 
 #: web/templates/web/tools.html:19
 msgid "La précision au service de ta progression"
-msgstr ""
+msgstr "Precision serving your progress"
 
 #: web/templates/web/tools.html:26
 msgid "Indice de Forme"
-msgstr ""
+msgstr "Fitness Index"
 
 #: web/templates/web/tools.html:37 web/templates/web/tools.html:68
 msgid "Calculer"
@@ -1753,31 +2762,31 @@ msgstr "Calculate"
 
 #: web/templates/web/tools.html:40
 msgid "Ton résultat"
-msgstr ""
+msgstr "Your result"
 
 #: web/templates/web/tools.html:49
 msgid "Mes Besoins"
-msgstr ""
+msgstr "My Needs"
 
 #: web/templates/web/tools.html:50
 msgid "Calcule tes besoins énergétiques pour une transformation maîtrisée."
-msgstr ""
+msgstr "Calculate your energy needs for a controlled transformation."
 
 #: web/templates/web/tools.html:60
 msgid "Calme (bureau)"
-msgstr ""
+msgstr "Calm (office)"
 
 #: web/templates/web/tools.html:61
 msgid "Actif (1-3 séances/sem)"
-msgstr ""
+msgstr "Active (1-3 sessions/wk)"
 
 #: web/templates/web/tools.html:62
 msgid "Très actif (4-5 séances/sem)"
-msgstr ""
+msgstr "Very active (4-5 sessions/wk)"
 
 #: web/templates/web/tools.html:63
 msgid "Athlète (6+ séances/sem)"
-msgstr ""
+msgstr "Athlete (6+ sessions/wk)"
 
 #: web/templates/web/tools.html:74
 #, fuzzy
@@ -1793,7 +2802,7 @@ msgstr "Total Expenditure (TDEE)"
 
 #: web/templates/web/tools.html:86
 msgid "Focus & Temps"
-msgstr ""
+msgstr "Focus & Time"
 
 #: web/templates/web/tools.html:89
 msgid "Chronomètre"
@@ -1814,15 +2823,15 @@ msgstr "Reset"
 
 #: web/templates/web/tools.html:122
 msgid "Veuillez remplir tous les champs."
-msgstr ""
+msgstr "Please fill in all fields."
 
 #: web/templates/web/tools.html:123
 msgid "Maigreur"
-msgstr ""
+msgstr "Underweight"
 
 #: web/templates/web/tools.html:124
 msgid "Corpulence normale"
-msgstr ""
+msgstr "Normal weight"
 
 #: web/templates/web/tools.html:125
 msgid "Surpoids"
@@ -1830,7 +2839,7 @@ msgstr "Overweight"
 
 #: web/templates/web/tools.html:126
 msgid "Obésité"
-msgstr ""
+msgstr "Obesity"
 
 #: web/templates/web/tools.html:127
 msgid "Pause"
@@ -1846,7 +2855,7 @@ msgstr "Time's up!"
 
 #: web/templates/web/workout/detail.html:5
 msgid "Détails Séance"
-msgstr ""
+msgstr "Session Details"
 
 #: web/templates/web/workout/detail.html:15
 #, fuzzy
@@ -1856,33 +2865,33 @@ msgstr "Human Performance"
 
 #: web/templates/web/workout/detail.html:33
 msgid "Mes Notes"
-msgstr ""
+msgstr "My Notes"
 
 #: web/templates/web/workout/detail.html:42
 msgid "Durée"
-msgstr ""
+msgstr "Duration"
 
 #: web/templates/web/workout/detail.html:46
 msgid "Total Séries"
-msgstr ""
+msgstr "Total Sets"
 
 #: web/templates/web/workout/detail.html:62
 msgid "Analyse de la Performance"
-msgstr ""
+msgstr "Performance Analysis"
 
 #: web/templates/web/workout/detail.html:106
 #: web/templates/web/workout/detail.html:116
 #: web/templates/web/workout/session.html:110
 msgid "Série"
-msgstr ""
+msgstr "Set"
 
 #: web/templates/web/workout/detail.html:107
 msgid "Reps"
-msgstr ""
+msgstr "Reps"
 
 #: web/templates/web/workout/detail.html:108
 msgid "Charge"
-msgstr ""
+msgstr "Load"
 
 #: web/templates/web/workout/detail.html:131
 #, fuzzy
@@ -1892,7 +2901,7 @@ msgstr "No transmission yet."
 
 #: web/templates/web/workout/detail.html:139
 msgid "Nouvelle Séance"
-msgstr ""
+msgstr "New Session"
 
 #: web/templates/web/workout/detail.html:142
 #, fuzzy
@@ -1902,15 +2911,15 @@ msgstr "View All"
 
 #: web/templates/web/workout/history.html:5
 msgid "Historique Entraînements"
-msgstr ""
+msgstr "Workout History"
 
 #: web/templates/web/workout/history.html:16
 msgid "Retrace ton parcours et visualise chaque victoire vers ton sommet"
-msgstr ""
+msgstr "Track your journey and visualize each victory toward your peak"
 
 #: web/templates/web/workout/history.html:47
 msgid "Volume par séance"
-msgstr ""
+msgstr "Volume per session"
 
 #: web/templates/web/workout/history.html:51
 #, fuzzy
@@ -1920,15 +2929,15 @@ msgstr "Start"
 
 #: web/templates/web/workout/history.html:61
 msgid "Dernières Performances"
-msgstr ""
+msgstr "Latest Performances"
 
 #: web/templates/web/workout/history.html:64
 msgid "Nouvelle Ascension"
-msgstr ""
+msgstr "New Ascent"
 
 #: web/templates/web/workout/history.html:102
 msgid "Détails"
-msgstr ""
+msgstr "Details"
 
 #: web/templates/web/workout/history.html:113
 #, fuzzy
@@ -1936,9 +2945,13 @@ msgstr ""
 msgid "Aucune séance enregistrée pour le moment"
 msgstr "No transmission yet."
 
+#: web/templates/web/workout/history.html:116
+msgid "Commencer maintenant"
+msgstr "Start now"
+
 #: web/templates/web/workout/history.html:159
 msgid "Volume (kg)"
-msgstr ""
+msgstr "Volume (kg)"
 
 #: web/templates/web/workout/history.html:177
 #, fuzzy
@@ -1960,15 +2973,15 @@ msgstr "Current Streak"
 
 #: web/templates/web/workout/session.html:44
 msgid "Nouvelle Série"
-msgstr ""
+msgstr "New Set"
 
 #: web/templates/web/workout/session.html:51
 msgid "Ton Mouvement"
-msgstr ""
+msgstr "Your Movement"
 
 #: web/templates/web/workout/session.html:53
 msgid "Choisir un mouvement"
-msgstr ""
+msgstr "Choose a movement"
 
 #: web/templates/web/workout/session.html:67
 #, fuzzy
@@ -1978,7 +2991,7 @@ msgstr "Recovery"
 
 #: web/templates/web/workout/session.html:71
 msgid "Charge (kg)"
-msgstr ""
+msgstr "Load (kg)"
 
 #: web/templates/web/workout/session.html:77
 #, fuzzy
@@ -1988,7 +3001,7 @@ msgstr "Rest duration (sec)"
 
 #: web/templates/web/workout/session.html:82
 msgid "Valider la série"
-msgstr ""
+msgstr "Validate the set"
 
 #: web/templates/web/workout/session.html:91
 #: web/templates/web/workout_session.html:82
@@ -1997,39 +3010,45 @@ msgstr "Skip"
 
 #: web/templates/web/workout/session.html:99
 msgid "Séries Réalisées"
-msgstr ""
+msgstr "Sets Completed"
 
 #: web/templates/web/workout/session.html:120
 msgid "Ta progression commence ici"
-msgstr ""
+msgstr "Your progress starts here"
 
 #: web/templates/web/workout/session.html:130
 msgid "Finaliser ma Performance"
-msgstr ""
+msgstr "Finalize my Performance"
 
 #: web/templates/web/workout/session.html:196
 msgid "Série ajoutée !"
-msgstr ""
+msgstr "Set added!"
 
 #: web/templates/web/workout/session.html:199
 msgid "Erreur lors de l\\'ajout de la série"
-msgstr ""
+msgstr "Error adding the set"
 
 #: web/templates/web/workout/session.html:251
 msgid "Terminer la séance maintenant ?"
-msgstr ""
+msgstr "End the session now?"
 
 #: web/templates/web/workout/session.html:269
 msgid "Erreur lors de la finalisation"
-msgstr ""
+msgstr "Error during finalization"
+
+#: web/templates/web/workout/start.html:13
+#: web/templates/web/workout_session.html:18
+#: web/templates/web/workout_setup.html:11
+msgid "Live"
+msgstr "Live"
 
 #: web/templates/web/workout/start.html:16
 msgid "Libère ton plein potentiel. Ta séance commence maintenant."
-msgstr ""
+msgstr "Unleash your full potential. Your session starts now."
 
 #: web/templates/web/workout/start.html:27
 msgid "Notes personnelles"
-msgstr ""
+msgstr "Personal notes"
 
 #: web/templates/web/workout/start.html:27
 #, fuzzy
@@ -2038,12 +3057,12 @@ msgid "optionnel"
 msgstr "Operational Contact"
 
 #: web/templates/web/workout/start.html:33
-msgid "Tes objectifs du jour, ton état d\\"
-msgstr ""
+msgid "Tes objectifs du jour, ton état d'esprit..."
+msgstr "Your goals for today, your mindset..."
 
 #: web/templates/web/workout/start.html:43
 msgid "Entrer dans le Studio"
-msgstr ""
+msgstr "Enter the Studio"
 
 #: web/templates/web/workout/start.html:53
 #, fuzzy
@@ -2065,11 +3084,11 @@ msgstr "Library"
 
 #: web/templates/web/workout_session.html:4
 msgid "Studio Live - Ton Mouvement"
-msgstr ""
+msgstr "Live Studio - Your Movement"
 
 #: web/templates/web/workout_session.html:22
 msgid "Mode Vie : Activé"
-msgstr ""
+msgstr "Life Mode: Activated"
 
 #: web/templates/web/workout_session.html:22
 #, fuzzy
@@ -2089,7 +3108,7 @@ msgstr "Seconds"
 
 #: web/templates/web/workout_session.html:90
 msgid "Prêt pour ton mouvement."
-msgstr ""
+msgstr "Ready for your movement."
 
 #: web/templates/web/workout_session.html:102
 #, fuzzy
@@ -2099,23 +3118,23 @@ msgstr "Human Performance"
 
 #: web/templates/web/workout_session.html:102
 msgid "Validée"
-msgstr ""
+msgstr "Validated"
 
 #: web/templates/web/workout_session.html:106
 msgid "Ton ascension continue. Félicitations."
-msgstr ""
+msgstr "Your ascent continues. Congratulations."
 
 #: web/templates/web/workout_session.html:112
 msgid "Post-Workout Idéal"
-msgstr ""
+msgstr "Ideal Post-Workout"
 
 #: web/templates/web/workout_session.html:129
 msgid "Optimisé pour ta récupération et ton énergie quotidienne."
-msgstr ""
+msgstr "Optimized for your recovery and daily energy."
 
 #: web/templates/web/workout_session.html:141
 msgid "Voir la recette"
-msgstr ""
+msgstr "View recipe"
 
 #: web/templates/web/workout_session.html:148
 #, fuzzy
@@ -2128,12 +3147,15 @@ msgid "Récupération."
 msgstr "Recovery."
 
 #: web/templates/web/workout_session.html:163
-msgid "C\\"
-msgstr ""
+#, fuzzy
+#| msgid "C'est fait ! +%(xp)s"
+msgid "C'est fait."
+msgstr "Done! +%(xp)s"
 
 #: web/templates/web/workout_session.html:164
 #, fuzzy
-#| msgid "Session terminée. Excellent travail. Analyse de récupération prête."
+#| msgid ""
+#| "Session terminée. Excellent travail. Analyse de récupération prête."
 msgid ""
 "Session terminée. Excellent travail. Ton bilan de récupération est prêt."
 msgstr "Session complete. Excellent work. Recovery analysis ready."
@@ -2164,17 +3186,50 @@ msgstr "Profile - FitWell"
 
 #: web/templates/web/workout_setup.html:14
 msgid "Configure ton expérience et dépasse tes limites dès maintenant"
-msgstr ""
+msgstr "Configure your experience and exceed your limits right now"
 
 #: web/templates/web/workout_setup.html:33
 msgid "Ta Sélection de Mouvements"
-msgstr ""
+msgstr "Your Movement Selection"
 
 #: web/templates/web/workout_setup.html:49
 #, fuzzy
 #| msgid "Points d'expérience"
 msgid "Lancer l'Expérience"
 msgstr "Experience Points"
+
+#: web/views/admin_panel.py:96
+msgid "Impossible de masquer un autre super-utilisateur."
+msgstr "Cannot hide another superuser."
+
+#: web/views/admin_panel.py:100
+msgid "masqué"
+msgstr "hidden"
+
+#: web/views/admin_panel.py:100
+msgid "réaffiché"
+msgstr "shown again"
+
+#: web/views/admin_panel.py:101
+#, python-format
+msgid "L'utilisateur %(u)s a été %(s)s."
+msgstr "User %(u)s has been %(s)s."
+
+#: web/views/admin_panel.py:112
+msgid "Impossible de supprimer un autre super-utilisateur."
+msgstr "Cannot delete another superuser."
+
+#: web/views/admin_panel.py:115
+msgid ""
+"Tu ne peux pas te supprimer toi-même via le dashboard admin. Utilise la page"
+" profil."
+msgstr ""
+"You cannot delete yourself via the admin dashboard. Use the profile page."
+
+#: web/views/admin_panel.py:119
+#, python-format
+msgid "L'utilisateur %(u)s a été supprimé définitivement."
+msgstr "User %(u)s has been permanently deleted."
 
 #: web/views/auth.py:28
 msgid "Identifiants invalides."
@@ -2191,34 +3246,61 @@ msgstr "Login - FitWell"
 msgid ""
 "Salut %(username)s,\n"
 "\n"
-"Heureux de te compter parmi nous. Ton voyage vers un meilleur quotidien "
-"commence maintenant.\n"
+"Heureux de te compter parmi nous. Ton voyage vers un meilleur quotidien commence maintenant.\n"
 "\n"
 "Accède à ton espace : %(url)s\n"
 "\n"
 "À très vite,\n"
 "L'équipe FitWell"
 msgstr ""
+"Hi %(username)s,\n"
+"\n"
+"Glad to have you with us. Your journey toward a better daily life starts now.\n"
+"\n"
+"Access your space: %(url)s\n"
+"\n"
+"See you very soon,\n"
+"The FitWell team"
 
 #: web/views/auth.py:72
 msgid "Heureux de te rencontrer ! Ton compte est prêt."
-msgstr ""
+msgstr "Nice to meet you! Your account is ready."
 
 #: web/views/auth.py:97
 msgid "Tes réglages ont été enregistrés ! ✨"
-msgstr ""
+msgstr "Your settings have been saved! ✨"
 
 #: web/views/auth.py:110
 msgid "Ton nouveau mot de passe est actif. Ta sécurité est assurée. 🔒"
-msgstr ""
+msgstr "Your new password is active. Your security is ensured. 🔒"
 
 #: web/views/auth.py:113
 msgid "Oups, vérifie les informations saisies."
-msgstr ""
+msgstr "Oops, check the information entered."
+
+#: web/views/auth.py:136
+msgid ""
+"Le super-utilisateur ne peut pas se supprimer via cette page (sécurité)."
+msgstr "The superuser cannot delete themselves via this page (security)."
+
+#: web/views/auth.py:140
+msgid "Tape exactement SUPPRIMER pour confirmer."
+msgstr "Type exactly DELETE to confirm."
+
+#: web/views/auth.py:144
+#, fuzzy
+#| msgid "Mot de passe oublié ?"
+msgid "Mot de passe incorrect."
+msgstr "Forgot Password?"
+
+#: web/views/auth.py:151
+#, python-format
+msgid "Ton compte %(u)s a été supprimé définitivement. À bientôt peut-être."
+msgstr "Your account %(u)s has been permanently deleted. See you maybe."
 
 #: web/views/content.py:134
 msgid "Ton avis a été partagé ! ✨"
-msgstr ""
+msgstr "Your review has been shared! ✨"
 
 #: web/views/content.py:168
 #, fuzzy
@@ -2234,16 +3316,16 @@ msgstr "You are not authorized to delete this comment."
 
 #: web/views/dashboard.py:33
 msgid "Bien joué ! Ta journée est enregistrée. +20 d'énergie"
-msgstr ""
+msgstr "Well done! Your day is logged. +20 energy"
 
-#: web/views/onboarding.py:85
+#: web/views/onboarding.py:86
 #, python-format
 msgid "Félicitations ! Ton équilibre est prêt. +%(xp)s"
-msgstr ""
+msgstr "Congratulations! Your balance is ready. +%(xp)s"
 
 #: web/views/planner.py:58
 msgid "Ton programme est prêt ! +100 d'énergie"
-msgstr ""
+msgstr "Your program is ready! +100 energy"
 
 #: web/views/planner.py:99
 #, fuzzy
@@ -2258,7 +3340,7 @@ msgstr "Activity deleted."
 #: web/views/planner.py:140
 #, python-format
 msgid "C'est fait ! +%(xp)s"
-msgstr ""
+msgstr "Done! +%(xp)s"
 
 #: web/views/workout.py:95
 msgid "Échauffement articulaire"
@@ -2278,25 +3360,25 @@ msgstr "Light stretching and breathing."
 
 #: web/views/workout.py:152
 msgid "Session Studio terminée"
-msgstr ""
+msgstr "Studio session completed"
 
 #: web/views/workout.py:165
 #, python-format
 msgid "Bien joué ! +%(xp)s d'énergie"
-msgstr ""
+msgstr "Well done! +%(xp)s energy"
 
 #: web/views/workout.py:177
 msgid "Vous avez déjà une séance en cours. Terminez-la d'abord."
-msgstr ""
+msgstr "You already have an ongoing session. Finish it first."
 
 #: web/views/workout.py:183
 msgid "C'est parti ! Profite de ton mouvement ! ✨"
-msgstr ""
+msgstr "Let's go! Enjoy your movement! ✨"
 
 #: web/views/workout.py:203
 msgid "Cette séance est déjà terminée."
-msgstr ""
+msgstr "This session is already completed."
 
 #: web/views/workout.py:295
 msgid "Séance terminée avec succès ! 🎉"
-msgstr ""
+msgstr "Session completed successfully! 🎉"
