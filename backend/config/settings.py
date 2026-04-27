@@ -13,7 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-fitwell-dev-key-change-in-production-2026-very-long-secret-key-for-security')
 
 # Mode Debug : True pour le dév, False pour la prod
-DEBUG = config('DEBUG', default=True, cast=bool)
+# Force DEBUG=False sur Render quoi qu'il arrive (sécurité : jamais de traceback en prod)
+_FORCE_PRODUCTION = bool(os.environ.get('RENDER'))
+DEBUG = False if _FORCE_PRODUCTION else config('DEBUG', default=True, cast=bool)
 
 # -----------------------------------------------------------------------------
 # SÉCURITÉ, CORS & CSRF
