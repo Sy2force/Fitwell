@@ -5,22 +5,25 @@
 # ==============================================================================
 set -o errexit
 
-echo "==> [1/5] Installation des dépendances..."
+echo "==> [1/6] Installation des dépendances..."
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 
-echo "==> [2/5] Collecte des fichiers statiques..."
+echo "==> [2/6] Collecte des fichiers statiques..."
 python manage.py collectstatic --noinput
 
-echo "==> [3/5] Compilation des traductions (si gettext disponible)..."
+echo "==> [3/6] Compilation des traductions (si gettext disponible)..."
 python manage.py compilemessages || echo "Info: compilemessages skipped (gettext absent)"
 
-echo "==> [4/5] Migrations base de données..."
+echo "==> [4/6] Migrations base de données..."
 python manage.py migrate --noinput
 
-echo "==> [5/5] Seeding (idempotent)..."
+echo "==> [5/6] Seeding (idempotent)..."
 python manage.py seed_db || echo "Info: seed_db a échoué (peut-être déjà fait)"
 python manage.py seed_badges || echo "Info: seed_badges a échoué"
 python manage.py seed_assignment || echo "Info: seed_assignment a échoué"
+
+echo "==> [6/6] Garantir des images uniques (articles/recettes/exercices)..."
+python manage.py fix_unique_images || echo "Info: fix_unique_images a échoué"
 
 echo "==> Build terminé avec succès."
