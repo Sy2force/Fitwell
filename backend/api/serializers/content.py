@@ -1,5 +1,14 @@
 from rest_framework import serializers
-from api.models import Article, Comment, Category, Tag
+from api.models import Article, Comment, Category, Tag, Recipe
+
+
+class RecipeSerializer(serializers.ModelSerializer):
+    """Sérializer pour les recettes nutrition."""
+
+    class Meta:
+        model = Recipe
+        fields = '__all__'
+        read_only_fields = ('slug', 'created_at')
 
 
 class TagSerializer(serializers.ModelSerializer):

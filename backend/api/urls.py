@@ -6,7 +6,7 @@ from rest_framework_simplejwt.views import (
 )
 from .views import (ArticleViewSet, CommentViewSet, CategoryViewSet, UserViewSet,
                     WellnessPlanViewSet, EmailTokenObtainPairView, WorkoutSessionViewSet,
-                    ExerciseSetViewSet, ExerciseViewSet, TagViewSet)
+                    ExerciseSetViewSet, ExerciseViewSet, TagViewSet, RecipeViewSet)
 
 app_name = 'api'
 
@@ -20,6 +20,7 @@ router.register(r'wellness/plans', WellnessPlanViewSet, basename='wellness-plans
 router.register(r'workouts/sessions', WorkoutSessionViewSet, basename='workout-sessions')
 router.register(r'workouts/sets', ExerciseSetViewSet, basename='exercise-sets')
 router.register(r'exercises', ExerciseViewSet, basename='exercises')
+router.register(r'recipes', RecipeViewSet, basename='recipes')
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -2,9 +2,27 @@ from rest_framework import viewsets, permissions, status, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
-from api.models import Article, Category, Comment, Tag
-from api.serializers import ArticleSerializer, CategorySerializer, CommentSerializer, TagSerializer
+from api.models import Article, Category, Comment, Tag, Recipe
+from api.serializers import ArticleSerializer, CategorySerializer, CommentSerializer, TagSerializer, RecipeSerializer
 from api.permissions import IsAdminOrReadOnly, IsAuthorOrReadOnly
+
+
+class RecipeViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Liste les recettes de la base de données nutrition.
+    Lecture seule (les recettes sont gérées par les seeds).
+    URL: /api/recipes/
+    Filtres: ?category=lunch&difficulty=easy
+    Recherche: ?search=protein
+    """
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSerializer
+    permission_classes = [permissions.AllowAny]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['category', 'difficulty']
+    search_fields = ['title', 'ingredients']
+    ordering_fields = ['title', 'calories', 'prep_time_minutes', 'created_at']
+    ordering = ['-created_at']
 
 
 class TagViewSet(viewsets.ReadOnlyModelViewSet):
