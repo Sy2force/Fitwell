@@ -6,7 +6,6 @@ import os
 import sys
 
 # Ajouter le répertoire backend au path
-sys.path.insert(0, os.path.dirname(__file__))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'backend'))
 
 # Configuration Django
