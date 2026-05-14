@@ -13,8 +13,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-fitwell-dev-key-change-in-production-2026-very-long-secret-key-for-security')
 
 # Mode Debug : True pour le dév, False pour la prod
-# Force DEBUG=False sur Render ou Vercel quoi qu'il arrive (sécurité : jamais de traceback en prod)
-_FORCE_PRODUCTION = bool(os.environ.get('RENDER')) or bool(os.environ.get('VERCEL'))
+# Force DEBUG=False sur Render quoi qu'il arrive (sécurité : jamais de traceback en prod)
+_FORCE_PRODUCTION = bool(os.environ.get('RENDER'))
 DEBUG = False if _FORCE_PRODUCTION else config('DEBUG', default=True, cast=bool)
 
 # -----------------------------------------------------------------------------
@@ -29,27 +29,16 @@ RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-# Support automatique pour Vercel
-VERCEL_URL = os.environ.get('VERCEL_URL')
-if VERCEL_URL:
-    ALLOWED_HOSTS.append(VERCEL_URL)
-    ALLOWED_HOSTS.append(f'.{VERCEL_URL}')
-
 # 2. CSRF & CORS Base Configuration
-# Liste de base via variable d'environnement ou défauts complets (Local + Render + Vercel)
+# Liste de base via variable d'environnement ou défauts complets (Local + Render)
 CSRF_TRUSTED_ORIGINS = config(
     'CSRF_TRUSTED_ORIGINS', 
-    default='http://localhost:8000,http://127.0.0.1:8000,https://*.onrender.com,https://*.vercel.app'
+    default='http://localhost:8000,http://127.0.0.1:8000,https://*.onrender.com'
 ).split(',')
 
 # Ajout explicite du hostname Render s'il existe
 if RENDER_EXTERNAL_HOSTNAME:
     CSRF_TRUSTED_ORIGINS.append(f'https://{RENDER_EXTERNAL_HOSTNAME}')
-
-# Ajout explicite du hostname Vercel s'il existe
-if VERCEL_URL:
-    CSRF_TRUSTED_ORIGINS.append(f'https://{VERCEL_URL}')
-    CSRF_TRUSTED_ORIGINS.append(f'https://*.vercel.app')
 
 # 3. Mode Debug : Ports dynamiques
 if DEBUG:

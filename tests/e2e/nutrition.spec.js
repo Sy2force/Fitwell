@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 test.describe('Nutrition Features', () => {
   test.beforeEach(async ({ page }) => {
     // Login before each test
-    await page.goto('/fr/login/');
+    await page.goto('/en/login/');
     await page.waitForLoadState('domcontentloaded');
     await page.fill('input[name="username"]', 'admin');
     await page.fill('input[name="password"]', 'adminpassword');
@@ -12,13 +12,13 @@ test.describe('Nutrition Features', () => {
   });
 
   test('should load recipe list', async ({ page }) => {
-    await page.goto('/fr/nutrition/', { waitUntil: 'networkidle' });
+    await page.goto('/en/nutrition/', { waitUntil: 'networkidle' });
     await expect(page.locator('body')).toBeVisible();
     await expect(page.locator('h1')).toBeVisible();
   });
 
   test('should display recipe cards', async ({ page }) => {
-    await page.goto('/fr/nutrition/');
+    await page.goto('/en/nutrition/');
     
     // Wait for recipes to load
     await page.waitForTimeout(500);
@@ -32,7 +32,7 @@ test.describe('Nutrition Features', () => {
   });
 
   test('should filter recipes by category', async ({ page }) => {
-    await page.goto('/fr/nutrition/');
+    await page.goto('/en/nutrition/');
     
     // Check if filter buttons exist
     const filterButton = page.locator('button').filter({ hasText: /breakfast|petit/i }).first();
@@ -47,7 +47,7 @@ test.describe('Nutrition Features', () => {
   });
 
   test('should open recipe detail page', async ({ page }) => {
-    await page.goto('/fr/nutrition/');
+    await page.goto('/en/nutrition/');
     await page.waitForTimeout(500);
     
     // Click on first recipe link
@@ -62,7 +62,7 @@ test.describe('Nutrition Features', () => {
   });
 
   test('should display recipe macros', async ({ page }) => {
-    await page.goto('/fr/nutrition/');
+    await page.goto('/en/nutrition/');
     await page.waitForTimeout(500);
     
     // Check for macro information

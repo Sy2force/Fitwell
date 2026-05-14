@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+from django.utils.translation import gettext as _
 from api.models import User, Exercise, WellnessPlan, Recipe
 
 class FlowTests(TestCase):
@@ -19,7 +20,8 @@ class FlowTests(TestCase):
         # 1. Unauthenticated
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Créer mon compte gratuit")
+        # Language-agnostic: checks that the translated "Create my free account" CTA is present
+        self.assertContains(response, _("Créer mon compte gratuit"))
         
         # 2. Authenticated, No Plan
         self.client.force_login(self.user)
@@ -133,4 +135,10 @@ class FlowTests(TestCase):
         from api.models import DailyLog
         from django.utils import timezone
         log = DailyLog.objects.get(user=self.user, date=timezone.now().date())
-        self.assertIn("Session Studio terminée", log.notes)
+        # Language-agnostic: checks the log entry contains the XP gain marker (+100)
+        self.assertIn("+100", log.notes)
+        # Also verify it contains either the French or English translation of the session message
+        self.assertTrue(
+            _("Session Studio terminée") in log.notes,
+            f"Expected translated session-complete message in: {log.notes}"
+        )

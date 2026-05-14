@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 test.describe('Workout Features', () => {
   test.beforeEach(async ({ page }) => {
     // Login before each test
-    await page.goto('/fr/login/');
+    await page.goto('/en/login/');
     await page.waitForLoadState('domcontentloaded');
     await page.fill('input[name="username"]', 'admin');
     await page.fill('input[name="password"]', 'adminpassword');
@@ -12,13 +12,13 @@ test.describe('Workout Features', () => {
   });
 
   test('should load exercise library', async ({ page }) => {
-    await page.goto('/fr/exercises/', { waitUntil: 'networkidle' });
+    await page.goto('/en/exercises/', { waitUntil: 'networkidle' });
     await expect(page.locator('body')).toBeVisible();
     await expect(page.locator('h1')).toBeVisible();
   });
 
   test('should filter exercises by muscle group', async ({ page }) => {
-    await page.goto('/fr/exercises/');
+    await page.goto('/en/exercises/');
     
     // Check if filter buttons exist
     const filterButton = page.locator('button').filter({ hasText: /chest|pectoraux/i }).first();
@@ -33,7 +33,7 @@ test.describe('Workout Features', () => {
   });
 
   test('should load workout session page', async ({ page }) => {
-    await page.goto('/fr/workout/');
+    await page.goto('/en/workout/');
     await expect(page.locator('body')).toBeVisible();
     
     // Check for workout-related content
@@ -42,18 +42,18 @@ test.describe('Workout Features', () => {
   });
 
   test('should load workout setup page', async ({ page }) => {
-    await page.goto('/fr/workout/setup/');
+    await page.goto('/en/workout/setup/');
     await expect(page.locator('body')).toBeVisible();
   });
 
   test('should load workout history', async ({ page }) => {
-    await page.goto('/fr/workout/history/', { waitUntil: 'networkidle' });
+    await page.goto('/en/workout/history/', { waitUntil: 'networkidle' });
     await expect(page.locator('body')).toBeVisible();
     await expect(page.locator('h1')).toBeVisible();
   });
 
   test('should start a new workout session', async ({ page }) => {
-    await page.goto('/fr/workout/start/');
+    await page.goto('/en/workout/start/');
     await expect(page.locator('h1')).toBeVisible();
     
     // Check if form exists

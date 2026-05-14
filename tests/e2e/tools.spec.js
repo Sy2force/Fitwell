@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 test.describe('Tools & Calculators', () => {
   test.beforeEach(async ({ page }) => {
     // Login before each test
-    await page.goto('/fr/login/');
+    await page.goto('/en/login/');
     await page.waitForLoadState('domcontentloaded');
     await page.fill('input[name="username"]', 'admin');
     await page.fill('input[name="password"]', 'adminpassword');
@@ -12,13 +12,13 @@ test.describe('Tools & Calculators', () => {
   });
 
   test('should load tools page', async ({ page }) => {
-    await page.goto('/fr/tools/', { waitUntil: 'networkidle' });
+    await page.goto('/en/tools/', { waitUntil: 'networkidle' });
     await expect(page.locator('body')).toBeVisible();
     await expect(page.locator('h1')).toBeVisible();
   });
 
   test('should display BMI calculator', async ({ page }) => {
-    await page.goto('/fr/tools/');
+    await page.goto('/en/tools/');
     
     // Check for BMI calculator
     const pageContent = await page.content();
@@ -26,7 +26,7 @@ test.describe('Tools & Calculators', () => {
   });
 
   test('should display macro calculator', async ({ page }) => {
-    await page.goto('/fr/tools/');
+    await page.goto('/en/tools/');
     
     // Check for macro calculator
     const pageContent = await page.content();
@@ -34,7 +34,7 @@ test.describe('Tools & Calculators', () => {
   });
 
   test('should calculate BMI', async ({ page }) => {
-    await page.goto('/fr/tools/');
+    await page.goto('/en/tools/');
     
     // Find BMI inputs
     const heightInput = page.locator('input[id*="bmi"][id*="height"]').first();
@@ -58,12 +58,12 @@ test.describe('Tools & Calculators', () => {
   });
 
   test('should load agenda page', async ({ page }) => {
-    await page.goto('/fr/agenda/');
+    await page.goto('/en/agenda/');
     await expect(page.locator('h1')).toBeVisible();
   });
 
   test('should display weekly calendar', async ({ page }) => {
-    await page.goto('/fr/agenda/');
+    await page.goto('/en/agenda/');
     
     // Check for calendar/schedule elements
     const pageContent = await page.content();

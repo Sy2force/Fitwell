@@ -2,19 +2,19 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('Authentication Flow', () => {
   test('should display login page', async ({ page }) => {
-    await page.goto('/fr/login/', { waitUntil: 'networkidle' });
+    await page.goto('/en/login/', { waitUntil: 'networkidle' });
     await expect(page.locator('body')).toBeVisible();
     await expect(page.locator('h1')).toBeVisible();
   });
 
   test('should display register page', async ({ page }) => {
-    await page.goto('/fr/register/', { waitUntil: 'networkidle' });
+    await page.goto('/en/register/', { waitUntil: 'networkidle' });
     await expect(page.locator('body')).toBeVisible();
     await expect(page.locator('h1')).toBeVisible();
   });
 
   test('should login with existing user', async ({ page }) => {
-    await page.goto('/fr/login/', { waitUntil: 'networkidle' });
+    await page.goto('/en/login/', { waitUntil: 'networkidle' });
     
     await page.fill('input[name="username"]', 'admin');
     await page.fill('input[name="password"]', 'adminpassword');
@@ -27,7 +27,7 @@ test.describe('Authentication Flow', () => {
 
   test('should logout successfully', async ({ page }) => {
     // Login first
-    await page.goto('/fr/login/', { waitUntil: 'networkidle' });
+    await page.goto('/en/login/', { waitUntil: 'networkidle' });
     await page.fill('input[name="username"]', 'admin');
     await page.fill('input[name="password"]', 'adminpassword');
     await page.click('button[type="submit"]');
@@ -35,11 +35,11 @@ test.describe('Authentication Flow', () => {
     await page.waitForTimeout(2000);
     
     // Logout
-    await page.goto('/fr/logout/', { waitUntil: 'networkidle' });
+    await page.goto('/en/logout/', { waitUntil: 'networkidle' });
     await page.waitForTimeout(1000);
     
     // Try to access protected page - should redirect to login
-    await page.goto('/fr/dashboard/');
+    await page.goto('/en/dashboard/');
     await page.waitForTimeout(1000);
     await expect(page.url()).toContain('/login/');
   });
@@ -49,7 +49,7 @@ test.describe('Authentication Flow', () => {
     const username = `testuser${timestamp}`;
     const email = `test${timestamp}@example.com`;
     
-    await page.goto('/fr/register/', { waitUntil: 'networkidle' });
+    await page.goto('/en/register/', { waitUntil: 'networkidle' });
     
     await page.fill('input[name="username"]', username);
     await page.fill('input[name="email"]', email);

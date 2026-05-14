@@ -185,7 +185,7 @@ python3 manage.py runserver
 
 **Accès :**
 - **Application** : http://127.0.0.1:8000
-- **Admin** : http://127.0.0.1:8000/fr/admin/
+- **Admin** : http://127.0.0.1:8000/en/admin/
 - **API** : http://127.0.0.1:8000/api/
 - **Swagger** : http://127.0.0.1:8000/swagger/
 
@@ -200,39 +200,39 @@ python3 manage.py runserver
 ### Pages Disponibles
 
 #### 🏠 Pages Publiques
-- **Home** (`/fr/`) - Page d'accueil
-- **Blog** (`/fr/blog/`) - Articles de fitness
-- **Login/Register** (`/fr/login/`, `/fr/register/`)
-- **Legal** (`/fr/legal/`) - Mentions légales
+- **Home** (`/en/`) - Page d'accueil
+- **Blog** (`/en/blog/`) - Articles de fitness
+- **Login/Register** (`/en/login/`, `/en/register/`)
+- **Legal** (`/en/legal/`) - Mentions légales
 
 #### 👤 Espace Membre (Connexion requise)
-- **Dashboard** (`/fr/dashboard/`) - Tableau de bord avec stats
-- **Profile** (`/fr/profile/`) - Profil avec XP/Level/Badges
-- **Edit Profile** (`/fr/profile/edit/`) - Édition profil
-- **Change Password** (`/fr/profile/password/`) - Changement mot de passe
-- **Planner** (`/fr/planner/`) - Générateur de plan AI
-- **Agenda** (`/fr/agenda/`) - Planning hebdomadaire
-- **Tools** (`/fr/tools/`) - Calculateurs BMI et Macros
+- **Dashboard** (`/en/dashboard/`) - Tableau de bord avec stats
+- **Profile** (`/en/profile/`) - Profil avec XP/Level/Badges
+- **Edit Profile** (`/en/profile/edit/`) - Édition profil
+- **Change Password** (`/en/profile/password/`) - Changement mot de passe
+- **Planner** (`/en/planner/`) - Générateur de plan AI
+- **Agenda** (`/en/agenda/`) - Planning hebdomadaire
+- **Tools** (`/en/tools/`) - Calculateurs BMI et Macros
 
 #### 🏋️ Entraînement
-- **Exercise Library** (`/fr/exercises/`) - 101 exercices avec filtres
-- **Workout Session** (`/fr/workout/`) - Session AI Coach temps réel
-- **Workout Setup** (`/fr/workout/setup/`) - Configuration personnalisée
-- **Workout Start** (`/fr/workout/start/`) - Démarrer séance tracking
-- **Workout History** (`/fr/workout/history/`) - Historique complet
+- **Exercise Library** (`/en/exercises/`) - 101 exercices avec filtres
+- **Workout Session** (`/en/workout/`) - Session AI Coach temps réel
+- **Workout Setup** (`/en/workout/setup/`) - Configuration personnalisée
+- **Workout Start** (`/en/workout/start/`) - Démarrer séance tracking
+- **Workout History** (`/en/workout/history/`) - Historique complet
 
 #### 🍽️ Nutrition
-- **Recipe List** (`/fr/nutrition/`) - 39 recettes avec macros
-- **Recipe Detail** (`/fr/nutrition/<id>/`) - Détails complets
+- **Recipe List** (`/en/nutrition/`) - 39 recettes avec macros
+- **Recipe Detail** (`/en/nutrition/<id>/`) - Détails complets
 
 #### 📊 Analytics & Social
-- **Analytics** (`/fr/analytics/`) - 6 graphiques de progression
-- **Leaderboard** (`/fr/leaderboard/`) - Classement global
+- **Analytics** (`/en/analytics/`) - 6 graphiques de progression
+- **Leaderboard** (`/en/leaderboard/`) - Classement global
 
 ### Utilisation des Fonctionnalités
 
 #### 🧠 AI Planner
-1. Aller sur `/fr/planner/`
+1. Aller sur `/en/planner/`
 2. Remplir le formulaire (âge, poids, taille, objectif, niveau)
 3. Recevoir un plan personnalisé avec :
    - Programme d'entraînement adapté
@@ -242,13 +242,13 @@ python3 manage.py runserver
 #### 🏋️ Workout Tracking
 
 **Mode 1 : AI Coach (Session Guidée)**
-1. `/fr/workout/` - Génération automatique selon profil
+1. `/en/workout/` - Génération automatique selon profil
 2. Interface HUD avec timer et séquence
 3. Échauffement → Exercices → Repos → Cooldown
 4. Récompense XP automatique
 
 **Mode 2 : Tracking Manuel**
-1. `/fr/workout/start/` - Démarrer une session
+1. `/en/workout/start/` - Démarrer une session
 2. Ajouter des sets en temps réel
 3. Calcul automatique volume et durée
 4. Compléter pour gagner XP
@@ -724,7 +724,7 @@ python3 manage.py check --deploy
 
 ### Documentation
 - **API :** `/swagger/`
-- **Admin :** `/fr/admin/`
+- **Admin :** `/en/admin/`
 - **Docs :** `/docs/`
 
 ### Contribution

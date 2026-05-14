@@ -2,7 +2,7 @@
 Dashboard Admin custom (séparé de Django admin /admin/).
 
 Accessible aux super-utilisateurs uniquement (is_superuser=True).
-URL: /fr/admin-panel/
+URL: /en/admin-panel/
 
 Features:
 - Liste tous les utilisateurs avec : last_login, last_login_ip, user_agent, login_count, sessions actives

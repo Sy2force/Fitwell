@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+from django.utils.translation import gettext as _
 from api.models import User, Article, Category, Comment
 
 class WebTests(TestCase):
@@ -31,7 +32,8 @@ class WebTests(TestCase):
         self.client.force_login(self.user)
         response = self.client.get(reverse('planner'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Stratégie")
+        # Language-agnostic: checks for the translated "Strategy" heading
+        self.assertContains(response, _("Stratégie"))
 
     def test_blog_comment_submission(self):
         """

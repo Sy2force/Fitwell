@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 test.describe('AI Planner', () => {
   test.beforeEach(async ({ page }) => {
     // Login before each test
-    await page.goto('/fr/login/');
+    await page.goto('/en/login/');
     await page.waitForLoadState('domcontentloaded');
     await page.fill('input[name="username"]', 'admin');
     await page.fill('input[name="password"]', 'adminpassword');
@@ -12,13 +12,13 @@ test.describe('AI Planner', () => {
   });
 
   test('should load planner page', async ({ page }) => {
-    await page.goto('/fr/planner/', { waitUntil: 'networkidle' });
+    await page.goto('/en/planner/', { waitUntil: 'networkidle' });
     await expect(page.locator('body')).toBeVisible();
     await expect(page.locator('h1')).toBeVisible();
   });
 
   test('should generate wellness plan', async ({ page }) => {
-    await page.goto('/fr/planner/');
+    await page.goto('/en/planner/');
     
     // Fill the form
     await page.fill('input[name="age"]', '30');
@@ -40,7 +40,7 @@ test.describe('AI Planner', () => {
   });
 
   test('should display plan history', async ({ page }) => {
-    await page.goto('/fr/planner/');
+    await page.goto('/en/planner/');
     
     // Check if history section exists
     const historySection = page.locator('text=/Archives|History/i');

@@ -37,7 +37,7 @@ Render va automatiquement :
 
 Le premier build prend 8 à 12 minutes sur le plan free.
 Quand le statut passe à **Live** (point vert), l'URL est :
-`https://fitwell-monolith.onrender.com/fr/`
+`https://fitwell-monolith.onrender.com/en/`
 
 ## Variables d'environnement
 
@@ -48,7 +48,7 @@ Toutes définies par `render.yaml` — ne pas les modifier manuellement sauf bes
 | `SECRET_KEY` | générée par Render | aléatoire |
 | `DEBUG` | render.yaml | `False` |
 | `ALLOWED_HOSTS` | render.yaml | `.onrender.com` |
-| `LANGUAGE_CODE` | render.yaml | `fr` |
+| `LANGUAGE_CODE` | render.yaml | `en` |
 | `TIME_ZONE` | render.yaml | `UTC` |
 | `PYTHON_VERSION` | render.yaml | `3.11.9` |
 | `DATABASE_URL` | lié auto à `fitwell-db` | `postgresql://...` |
@@ -71,7 +71,7 @@ Ajouter le paquet manquant dans `backend/requirements.txt` puis push.
 
 ### Page d'accueil 404
 
-Vérifier que `healthCheckPath` (défaut `/fr/`) est accessible et que `LANGUAGE_CODE=fr`.
+Vérifier que `healthCheckPath` (défaut `/en/`) est accessible et que `LANGUAGE_CODE=en`.
 
 ### Build n'exécute pas le script
 
@@ -103,4 +103,4 @@ python manage.py seed_badges
 python manage.py runserver
 ```
 
-Site disponible sur http://localhost:8000/fr/
+Site disponible sur http://localhost:8000/en/

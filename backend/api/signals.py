@@ -1,7 +1,7 @@
 """
 Signals — capture l'IP et le User-Agent à chaque connexion utilisateur,
 incrémente le compteur de connexions. Ces infos s'affichent dans le
-dashboard admin custom (/fr/admin-panel/).
+dashboard admin custom (/en/admin-panel/).
 """
 from django.contrib.auth.signals import user_logged_in
 from django.dispatch import receiver
