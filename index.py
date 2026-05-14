@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Entry point pour Vercel - Django WSGI Application
+Entry point pour Vercel - Django ASGI Application
 """
 import os
 import sys
 
 # Ajouter le répertoire backend au path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'backend'))
+backend_path = os.path.join(os.path.dirname(__file__), 'backend')
+sys.path.insert(0, backend_path)
 
 # Configuration Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
@@ -15,12 +16,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 import django
 django.setup()
 
-# Importer l'application WSGI
-from config.wsgi import application
+# Importer l'application ASGI
+from config.asgi import application
 
 # Exposer l'application pour Vercel
 app = application
-
-if __name__ == '__main__':
-    from django.core.management import execute_from_command_line
-    execute_from_command_line(sys.argv)
